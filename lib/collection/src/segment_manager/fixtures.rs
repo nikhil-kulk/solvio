@@ -11,8 +11,7 @@ use std::sync::{RwLock, Arc};
 
 
 pub fn empty_segment() -> Segment {
-    let tmp_path = Path::new("/tmp/solvio/segment");
-    let segment = build_simple_segment(tmp_path, 4, Distance::Dot);
+    let segment = build_simple_segment( 4, Distance::Dot);
     return segment;
 }
 

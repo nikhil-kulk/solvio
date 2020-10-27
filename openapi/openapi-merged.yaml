@@ -12,7 +12,7 @@ externalDocs:
   description: Find out more about Solvio
   url: https://github.com/generall/solvio
 servers:
-  - url: http://localhost:6333/
+  - url: http://localhost:6333
 tags:
   - name: collections
     description: Searchable collections of points.

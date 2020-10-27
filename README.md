@@ -9,10 +9,10 @@ Solvio is written in Rust, which makes it reliable even under high load.
 
 # API [![OpenAPI docs](https://img.shields.io/badge/docs-OpenAP3.0-success)](https://solvio.github.io/solvio/redoc/index.html)
 
-OpenAPI 3.0 documentation is available [here](openapi).
+Online OpenAPI 3.0 documentation is available [here](https://solvio.github.io/solvio/redoc/index.html).
 OpenAPI makes it easy to generate client for virtually any framework or programing language.
 
-You can also browse [online documentation](https://solvio.github.io/solvio/redoc/index.html).
+You can also download raw OpenAPI [definitions](openapi/openapi.yaml).
 
 # Features
 

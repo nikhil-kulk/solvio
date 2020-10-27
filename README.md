@@ -38,13 +38,13 @@ Solvio does not rely on any external database or orchestration controller, which
 Build your own from source
 
 ```bash
-docker build . --tag=solvio/solvio
+docker build . --tag=solvio
 ```
 
-Or use latest pre-built image from DockerHub
+Or use latest pre-built image from [DockerHub](https://hub.docker.com/r/generall/solvio)
 
 ```bash
-docker pull ... todo
+docker pull generall/solvio
 ```
 
 To run container use command:
@@ -53,7 +53,7 @@ To run container use command:
 docker run -p 6333:6333 \
     -v $(pwd)/path/to/data:/solvio/storage \
     -v $(pwd)/path/to/custom_config.yaml:/solvio/config/production.yaml \
-    solvio/solvio
+    solvio
 ```
 
 * `/solvio/storage` - is a place where Solvio persists all your data. 

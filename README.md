@@ -1,5 +1,7 @@
 # :black_square_button: Solvio
 
+![Tests](https://github.com/solvio/solvio/workflows/Tests/badge.svg)
+
 Solvio (read: _quadrant_ ) is a vector similarity search engine.
 It provides a production-ready service with a convenient API to store, search, and manage points (vectors with additional payload).
 

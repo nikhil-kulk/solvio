@@ -9,7 +9,7 @@ It is tailored on extended support of filtering, which makes it useful for all s
 
 Solvio is written in Rust :crab:, which makes it reliable even under high load.
 
-# API [![OpenAPI docs](https://img.shields.io/badge/docs-OpenAP3.0-success)](https://solvio.github.io/solvio/redoc/index.html)
+# API [![OpenAPI docs](https://img.shields.io/badge/docs-OpenAPI3.0-success)](https://solvio.github.io/solvio/redoc/index.html)
 
 Online OpenAPI 3.0 documentation is available [here](https://solvio.github.io/solvio/redoc/index.html).
 OpenAPI makes it easy to generate client for virtually any framework or programing language.

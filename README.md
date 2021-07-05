@@ -6,8 +6,9 @@
     <b>Vector Similarity Search Engine with extended filtering support</b>
 </p>
 
+
 <p align=center>
-    <a href="https://slack.jina.ai"><img src="https://github.com/solvio/solvio/workflows/Tests/badge.svg"></a>
+    <a href="https://github.com/solvio/solvio/actions/workflows/rust.yml"><img src="https://github.com/solvio/solvio/workflows/Tests/badge.svg"></a>
     <a href="https://solvio.github.io/solvio/redoc/index.html"><img src="https://img.shields.io/badge/Docs-OpenAPI%203.0-success"></a>
     <a href="https://github.com/solvio/solvio/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-success"></a>
     <a href="https://t.me/joinchat/sIuUArGQRp9kMTUy"><img src="https://img.shields.io/badge/Telegram-Solvio-blue.svg?logo=telegram" alt="Telegram"></a>

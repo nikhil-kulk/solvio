@@ -198,6 +198,7 @@ Thanks to the people who contributed to Solvio:
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/galibey"><img src="https://avatars.githubusercontent.com/u/48586936?v=4?s=50" width="50px;" alt=""/><br /><sub><b>Alexander Galibey</b></sub></a><br /><a href="https://github.com/solvio/solvio/commits?author=galibey" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/HaiCheViet"><img src="https://avatars.githubusercontent.com/u/37202591?v=4?s=50" width="50px;" alt=""/><br /><sub><b>HaiCheViet</b></sub></a><br /><a href="https://github.com/solvio/solvio/commits?author=HaiCheViet" title="Code">💻</a></td>
   </tr>
 </table>
 

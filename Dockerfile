@@ -4,7 +4,7 @@ COPY . ./solvio
 WORKDIR ./solvio
 
 ENV OPENBLAS_DYNAMIC_ARCH="1"
-RUN apt-get update ; apt-get install -y clang libopenblas-dev libgfortran-8-dev gfortran
+RUN apt-get update ; apt-get install -y clang libopenblas-dev libgfortran-10-dev gfortran
 
 # Build actual target here
 RUN cargo build --release --bin solvio

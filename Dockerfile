@@ -9,7 +9,7 @@ RUN apt-get update ; apt-get install -y clang libopenblas-dev libgfortran-10-dev
 # Build actual target here
 RUN cargo build --release --bin solvio
 
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 ARG APP=/solvio
 
 RUN apt-get update \

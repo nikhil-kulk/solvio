@@ -1,14 +1,14 @@
 mod api;
-pub mod proto;
+pub mod solvio;
 
 use crate::common::models::VersionInfo;
 use crate::settings::Settings;
 use crate::tonic::api::collections_api::CollectionsService;
 use crate::tonic::api::points_api::PointsService;
-use proto::collections_server::CollectionsServer;
-use proto::points_server::PointsServer;
-use proto::solvio_server::{Solvio, SolvioServer};
-use proto::{HealthCheckReply, HealthCheckRequest};
+use solvio::collections_server::CollectionsServer;
+use solvio::points_server::PointsServer;
+use solvio::solvio_server::{Solvio, SolvioServer};
+use solvio::{HealthCheckReply, HealthCheckRequest};
 use std::net::{IpAddr, SocketAddr};
 use std::sync::Arc;
 use storage::content_manager::toc::TableOfContent;

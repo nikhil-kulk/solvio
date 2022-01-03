@@ -207,6 +207,7 @@ Thanks to the people who contributed to Solvio:
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/daniilsunyaev"><img src="https://avatars.githubusercontent.com/u/3955599?v=4?s=50" width="50px;" alt=""/><br /><sub><b>Daniil</b></sub></a><br /><a href="https://github.com/solvio/solvio/commits?author=daniilsunyaev" title="Code">💻</a></td>
+    <td align="center"><a href="http://homeonrails.com"><img src="https://avatars.githubusercontent.com/u/1282182?v=4?s=50" width="50px;" alt=""/><br /><sub><b>Anton Kaliaev</b></sub></a><br /><a href="https://github.com/solvio/solvio/commits?author=melekes" title="Code">💻</a></td>
   </tr>
 </table>
 

@@ -8,10 +8,11 @@
 
 
 <p align=center>
-    <a href="https://github.com/solvio/solvio/actions/workflows/rust.yml"><img src="https://github.com/solvio/solvio/workflows/Tests/badge.svg"></a>
-    <a href="https://solvio.github.io/solvio/redoc/index.html"><img src="https://img.shields.io/badge/Docs-OpenAPI%203.0-success"></a>
-    <a href="https://github.com/solvio/solvio/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-success"></a>
+    <a href="https://github.com/solvio/solvio/actions/workflows/rust.yml"><img src="https://github.com/solvio/solvio/workflows/Tests/badge.svg" alt="Tests status"></a>
+    <a href="https://solvio.github.io/solvio/redoc/index.html"><img src="https://img.shields.io/badge/Docs-OpenAPI%203.0-success" alt="OpenAPI Docs"></a>
+    <a href="https://github.com/solvio/solvio/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-success" alt="Apache 2.0 License"></a>
     <a href="https://discord.gg/tdtYvXjC4h"><img src="https://img.shields.io/badge/Discord-Solvio-5865F2.svg?logo=discord" alt="Discord"></a>
+    <a href="./docs/roadmap/README.md"><img src="https://img.shields.io/badge/Roadmap-v1.0-bc1439.svg" alt="Roadmap v1.0"></a>
 </p>
 
 Solvio (read: _quadrant_ ) is a vector similarity search engine.
@@ -170,6 +171,7 @@ Now Solvio should be accessible at [localhost:6333](http://localhost:6333/)
 * The [Documentation](https://solvio.tech/documentation/)
 * Use the [OpenAPI specification](https://solvio.github.io/solvio/redoc/index.html) as a reference
 * Follow our [Step-by-Step Tutorial](https://blog.solvio.tech/neural-search-tutorial-3f034ab13adc) to create your first neural network project with Solvio
+* Check out our further plans in [v1.0 Roadmap](./docs/roadmap/README.md)
 
 ## Contacts
 

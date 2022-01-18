@@ -58,7 +58,7 @@ Expected response:
 ### List all collections
 We can now view the list of collections to ensure that the collection was created:
 ```bash
-grpcurl -plaintext -import-path ./src/tonic/proto -proto solvio.proto [::]:6334 solvio.Collections/Get
+grpcurl -plaintext -import-path ./src/tonic/proto -proto solvio.proto [::]:6334 solvio.Collections/List
 ```
 
 Expected response:

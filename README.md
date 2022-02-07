@@ -101,7 +101,7 @@ So you can [play with it online!](https://categories.solvio.tech/)
 Online OpenAPI 3.0 documentation is available [here](https://solvio.github.io/solvio/redoc/index.html).
 OpenAPI makes it easy to generate a client for virtually any framework or programing language.
 
-You can also download raw OpenAPI [definitions](openapi/openapi-merged.yaml).
+You can also download raw OpenAPI [definitions](docs/redoc/master/openapi.json).
 
 ## Features
 

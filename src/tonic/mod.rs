@@ -1,4 +1,5 @@
 mod api;
+#[allow(clippy::all)]
 pub mod solvio;
 
 use crate::common::models::VersionInfo;

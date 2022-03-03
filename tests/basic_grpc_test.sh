@@ -11,22 +11,20 @@ solvio_HOST='localhost:6334'
 docker_grpcurl="docker run --rm --network=host -v ${PWD}/src/tonic/proto:/proto fullstorydev/grpcurl -plaintext -import-path /proto -proto solvio.proto"
 
 $docker_grpcurl -d '{
-   "name": "test_collection"
+   "collection_name": "test_collection"
 }' $solvio_HOST solvio.Collections/Delete
 
 
 $docker_grpcurl -d '{
-   "name": "test_collection",
+   "collection_name": "test_collection",
    "vector_size": 4,
    "distance": "Dot"
 }' $solvio_HOST solvio.Collections/Create
 
 $docker_grpcurl -d '{}' $solvio_HOST solvio.Collections/List
 
-$docker_grpcurl -d '{ "name": "test_collection" }' $solvio_HOST solvio.Collections/Get
-
 $docker_grpcurl -d '{
-  "collection": "test_collection",
+  "collection_name": "test_collection",
   "wait": true,
   "points": [
     {
@@ -48,14 +46,16 @@ $docker_grpcurl -d '{
   ]
 }' $solvio_HOST solvio.Points/Upsert
 
+$docker_grpcurl -d '{ "collection_name": "test_collection" }' $solvio_HOST solvio.Collections/Get
+
 $docker_grpcurl -d '{
-  "collection": "test_collection",
+  "collection_name": "test_collection",
   "vector": [0.2,0.1,0.9,0.7],
   "top": 3
 }' $solvio_HOST solvio.Points/Search
 
 $docker_grpcurl -d '{
-  "collection": "test_collection",
+  "collection_name": "test_collection",
   "filter": {
     "should": [
       {
@@ -73,7 +73,7 @@ $docker_grpcurl -d '{
 }' $solvio_HOST solvio.Points/Search
 
 $docker_grpcurl -d '{
-  "collection": "test_collection",
+  "collection_name": "test_collection",
   "limit": 2,
   "with_vector": true,
   "filter": {
@@ -91,7 +91,7 @@ $docker_grpcurl -d '{
 }' $solvio_HOST solvio.Points/Scroll
 
 $docker_grpcurl -d '{
-  "collection": "test_collection",
+  "collection_name": "test_collection",
   "with_vector": true,
   "ids": [{ "num": 2 }, { "num": 3 }, { "num": 4 }]
 }' $solvio_HOST solvio.Points/Get

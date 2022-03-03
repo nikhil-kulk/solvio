@@ -96,6 +96,14 @@ $docker_grpcurl -d '{
   "ids": [{ "num": 2 }, { "num": 3 }, { "num": 4 }]
 }' $solvio_HOST solvio.Points/Get
 
+$docker_grpcurl -d '{
+  "collection_name": "test_collection",
+  "positive": [{ "num": 1 }],
+  "negative": [{ "num": 2 }]
+}' $solvio_HOST solvio.Points/Recommend
+
+
+
 
 #SAVED_VECTORS_COUNT=$(curl --fail -s "http://$solvio_HOST/collections/test_collection" | jq '.result.vectors_count')
 #[[ "$SAVED_VECTORS_COUNT" == "6" ]] || {

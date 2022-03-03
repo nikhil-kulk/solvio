@@ -59,6 +59,8 @@
     - [PointsOperationResponse](#solvio-PointsOperationResponse)
     - [PointsSelector](#solvio-PointsSelector)
     - [Range](#solvio-Range)
+    - [RecommendPoints](#solvio-RecommendPoints)
+    - [RecommendResponse](#solvio-RecommendResponse)
     - [RetrievedPoint](#solvio-RetrievedPoint)
     - [RetrievedPoint.PayloadEntry](#solvio-RetrievedPoint-PayloadEntry)
     - [ScoredPoint](#solvio-ScoredPoint)
@@ -947,6 +949,44 @@ If indexation speed have more priority for your - make this parameter lower. If 
 
 
 
+<a name="solvio-RecommendPoints"></a>
+
+### RecommendPoints
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | name of the collection |
+| positive | [PointId](#solvio-PointId) | repeated | Look for vectors closest to those |
+| negative | [PointId](#solvio-PointId) | repeated | Try to avoid vectors like this |
+| filter | [Filter](#solvio-Filter) |  | Filter conditions - return only those points that satisfy the specified conditions |
+| top | [uint64](#uint64) |  | Max number of result |
+| with_vector | [bool](#bool) | optional | Return point vector with the result. |
+| with_payload | [WithPayloadSelector](#solvio-WithPayloadSelector) |  | Options for specifying which payload to include or not |
+| params | [SearchParams](#solvio-SearchParams) |  | Search config |
+
+
+
+
+
+
+<a name="solvio-RecommendResponse"></a>
+
+### RecommendResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ScoredPoint](#solvio-ScoredPoint) | repeated |  |
+| time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
 <a name="solvio-RetrievedPoint"></a>
 
 ### RetrievedPoint
@@ -1224,6 +1264,7 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | DeleteFieldIndex | [DeleteFieldIndexCollection](#solvio-DeleteFieldIndexCollection) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Delete field index for collection |
 | Search | [SearchPoints](#solvio-SearchPoints) | [SearchResponse](#solvio-SearchResponse) | Retrieve closest points based on vector similarity and given filtering conditions |
 | Scroll | [ScrollPoints](#solvio-ScrollPoints) | [ScrollResponse](#solvio-ScrollResponse) | Iterate over all or filtered points points |
+| Recommend | [RecommendPoints](#solvio-RecommendPoints) | [RecommendResponse](#solvio-RecommendResponse) | Look for the points which are closer to stored positive examples and at the same time further to negative examples. |
 
  
 

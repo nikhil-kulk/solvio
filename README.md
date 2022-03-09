@@ -8,10 +8,11 @@
 
 
 <p align=center>
-    <a href="https://github.com/solvio/solvio/actions/workflows/rust.yml"><img src="https://github.com/solvio/solvio/workflows/Tests/badge.svg"></a>
-    <a href="https://solvio.github.io/solvio/redoc/index.html"><img src="https://img.shields.io/badge/Docs-OpenAPI%203.0-success"></a>
-    <a href="https://github.com/solvio/solvio/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-success"></a>
-    <a href="https://t.me/joinchat/sIuUArGQRp9kMTUy"><img src="https://img.shields.io/badge/Telegram-Solvio-blue.svg?logo=telegram" alt="Telegram"></a>
+    <a href="https://github.com/solvio/solvio/actions/workflows/rust.yml"><img src="https://github.com/solvio/solvio/workflows/Tests/badge.svg" alt="Tests status"></a>
+    <a href="https://solvio.github.io/solvio/redoc/index.html"><img src="https://img.shields.io/badge/Docs-OpenAPI%203.0-success" alt="OpenAPI Docs"></a>
+    <a href="https://github.com/solvio/solvio/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-success" alt="Apache 2.0 License"></a>
+    <a href="https://discord.gg/tdtYvXjC4h"><img src="https://img.shields.io/badge/Discord-Solvio-5865F2.svg?logo=discord" alt="Discord"></a>
+    <a href="./docs/roadmap/README.md"><img src="https://img.shields.io/badge/Roadmap-v1.0-bc1439.svg" alt="Roadmap v1.0"></a>
 </p>
 
 Solvio (read: _quadrant_ ) is a vector similarity search engine.
@@ -100,7 +101,7 @@ So you can [play with it online!](https://categories.solvio.tech/)
 Online OpenAPI 3.0 documentation is available [here](https://solvio.github.io/solvio/redoc/index.html).
 OpenAPI makes it easy to generate a client for virtually any framework or programing language.
 
-You can also download raw OpenAPI [definitions](openapi/openapi-merged.yaml).
+You can also download raw OpenAPI [definitions](docs/redoc/master/openapi.json).
 
 ## Features
 
@@ -140,13 +141,13 @@ Solvio does not rely on any external database or orchestration controller, which
 Build your own from source
 
 ```bash
-docker build . --tag=generall/solvio
+docker build . --tag=solvio/solvio
 ```
 
-Or use latest pre-built image from [DockerHub](https://hub.docker.com/r/generall/solvio)
+Or use latest pre-built image from [DockerHub](https://hub.docker.com/r/solvio/solvio)
 
 ```bash
-docker pull generall/solvio
+docker pull solvio/solvio
 ```
 
 To run container use command:
@@ -155,7 +156,7 @@ To run container use command:
 docker run -p 6333:6333 \
     -v $(pwd)/path/to/data:/solvio/storage \
     -v $(pwd)/path/to/custom_config.yaml:/solvio/config/production.yaml \
-    generall/solvio
+    solvio/solvio
 ```
 
 * `/solvio/storage` - is a place where Solvio persists all your data. 
@@ -170,10 +171,11 @@ Now Solvio should be accessible at [localhost:6333](http://localhost:6333/)
 * The [Documentation](https://solvio.tech/documentation/)
 * Use the [OpenAPI specification](https://solvio.github.io/solvio/redoc/index.html) as a reference
 * Follow our [Step-by-Step Tutorial](https://blog.solvio.tech/neural-search-tutorial-3f034ab13adc) to create your first neural network project with Solvio
+* Check out our further plans in [v1.0 Roadmap](./docs/roadmap/README.md)
 
 ## Contacts
 
-* Join our [Telegram group](https://t.me/joinchat/sIuUArGQRp9kMTUy)
+* Join our [Discord channel](https://discord.gg/tdtYvXjC4h)
 * Follow us on [Twitter](https://twitter.com/solvio_engine)
 * Subscribe to our [Newsletters](https://tech.us1.list-manage.com/subscribe/post?u=69617d79374ac6280dd2230b2&amp;id=acb2b876fc)
 * Write us an email [info@solvio.tech](mailto:info@solvio.tech)
@@ -208,6 +210,9 @@ Thanks to the people who contributed to Solvio:
   <tr>
     <td align="center"><a href="https://github.com/daniilsunyaev"><img src="https://avatars.githubusercontent.com/u/3955599?v=4?s=50" width="50px;" alt=""/><br /><sub><b>Daniil</b></sub></a><br /><a href="https://github.com/solvio/solvio/commits?author=daniilsunyaev" title="Code">💻</a></td>
     <td align="center"><a href="http://homeonrails.com"><img src="https://avatars.githubusercontent.com/u/1282182?v=4?s=50" width="50px;" alt=""/><br /><sub><b>Anton Kaliaev</b></sub></a><br /><a href="https://github.com/solvio/solvio/commits?author=melekes" title="Code">💻</a></td>
+    <td align="center"><a href="https://soundcloud.com/norom"><img src="https://avatars.githubusercontent.com/u/7762532?v=4?s=50" width="50px;" alt=""/><br /><sub><b>Andre Julius</b></sub></a><br /><a href="https://github.com/solvio/solvio/commits?author=NotNorom" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/prok20"><img src="https://avatars.githubusercontent.com/u/20628026?v=4?s=50" width="50px;" alt=""/><br /><sub><b>Prokudin Alexander</b></sub></a><br /><a href="https://github.com/solvio/solvio/commits?author=prok20" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/elbart"><img src="https://avatars.githubusercontent.com/u/48974?v=4?s=50" width="50px;" alt=""/><br /><sub><b>Tim Eggert</b></sub></a><br /><a href="https://github.com/solvio/solvio/commits?author=elbart" title="Code">💻</a></td>
   </tr>
 </table>
 

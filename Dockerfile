@@ -1,4 +1,4 @@
-FROM rust:1.56.1 as builder
+FROM rust:1.59 as builder
 
 COPY . ./solvio
 WORKDIR ./solvio

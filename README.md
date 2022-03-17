@@ -122,7 +122,7 @@ For example, if the search space limited by filters is small, it is more efficie
 
 ### SIMD Hardware Acceleration
 
-With the `BLAS` library, Solvio can take advantage of modern CPU architectures. 
+Solvio can take advantage of modern CPU x86-x64 architectures. 
 It allows you to search even faster on modern hardware.
 
 ### Write-ahead logging

@@ -9,7 +9,7 @@ WORKDIR ./solvio
 # Build actual target here
 RUN cargo build --release --bin solvio
 
-FROM debian:bullseye-slim
+FROM debian:11-slim
 ARG APP=/solvio
 
 RUN apt-get update \

@@ -38,18 +38,13 @@
     - [DeletePoints](#solvio-DeletePoints)
     - [FieldCondition](#solvio-FieldCondition)
     - [Filter](#solvio-Filter)
-    - [FloatPayload](#solvio-FloatPayload)
     - [GeoBoundingBox](#solvio-GeoBoundingBox)
-    - [GeoPayload](#solvio-GeoPayload)
     - [GeoPoint](#solvio-GeoPoint)
     - [GeoRadius](#solvio-GeoRadius)
     - [GetPoints](#solvio-GetPoints)
     - [GetResponse](#solvio-GetResponse)
     - [HasIdCondition](#solvio-HasIdCondition)
-    - [IntegerPayload](#solvio-IntegerPayload)
-    - [KeywordPayload](#solvio-KeywordPayload)
     - [Match](#solvio-Match)
-    - [Payload](#solvio-Payload)
     - [PayloadExcludeSelector](#solvio-PayloadExcludeSelector)
     - [PayloadIncludeSelector](#solvio-PayloadIncludeSelector)
     - [PointId](#solvio-PointId)
@@ -76,6 +71,7 @@
     - [UpsertPoints](#solvio-UpsertPoints)
     - [WithPayloadSelector](#solvio-WithPayloadSelector)
   
+    - [FieldType](#solvio-FieldType)
     - [UpdateStatus](#solvio-UpdateStatus)
   
     - [Points](#solvio-Points)
@@ -522,6 +518,7 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | collection_name | [string](#string) |  | name of the collection |
 | wait | [bool](#bool) | optional | Wait until the changes have been applied? |
 | field_name | [string](#string) |  | Field name to index |
+| field_type | [FieldType](#solvio-FieldType) | optional | Field type. |
 
 
 
@@ -616,21 +613,6 @@ If indexation speed have more priority for your - make this parameter lower. If 
 
 
 
-<a name="solvio-FloatPayload"></a>
-
-### FloatPayload
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| values | [double](#double) | repeated |  |
-
-
-
-
-
-
 <a name="solvio-GeoBoundingBox"></a>
 
 ### GeoBoundingBox
@@ -641,21 +623,6 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | ----- | ---- | ----- | ----------- |
 | top_left | [GeoPoint](#solvio-GeoPoint) |  | north-west corner |
 | bottom_right | [GeoPoint](#solvio-GeoPoint) |  | south-east corner |
-
-
-
-
-
-
-<a name="solvio-GeoPayload"></a>
-
-### GeoPayload
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| values | [GeoPoint](#solvio-GeoPoint) | repeated |  |
 
 
 
@@ -743,36 +710,6 @@ If indexation speed have more priority for your - make this parameter lower. If 
 
 
 
-<a name="solvio-IntegerPayload"></a>
-
-### IntegerPayload
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| values | [int64](#int64) | repeated |  |
-
-
-
-
-
-
-<a name="solvio-KeywordPayload"></a>
-
-### KeywordPayload
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| values | [string](#string) | repeated |  |
-
-
-
-
-
-
 <a name="solvio-Match"></a>
 
 ### Match
@@ -783,24 +720,6 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | ----- | ---- | ----- | ----------- |
 | keyword | [string](#string) |  | Match string keyword |
 | integer | [int64](#int64) |  | Match integer |
-
-
-
-
-
-
-<a name="solvio-Payload"></a>
-
-### Payload
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| keyword | [KeywordPayload](#solvio-KeywordPayload) |  |  |
-| integer | [IntegerPayload](#solvio-IntegerPayload) |  |  |
-| float | [FloatPayload](#solvio-FloatPayload) |  |  |
-| geo | [GeoPayload](#solvio-GeoPayload) |  |  |
 
 
 
@@ -879,7 +798,7 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
-| value | [Payload](#solvio-Payload) |  |  |
+| value | [google.protobuf.Value](#google-protobuf-Value) |  |  |
 
 
 
@@ -1015,7 +934,7 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
-| value | [Payload](#solvio-Payload) |  |  |
+| value | [google.protobuf.Value](#google-protobuf-Value) |  |  |
 
 
 
@@ -1050,7 +969,7 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
-| value | [Payload](#solvio-Payload) |  |  |
+| value | [google.protobuf.Value](#google-protobuf-Value) |  |  |
 
 
 
@@ -1173,7 +1092,7 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
-| value | [Payload](#solvio-Payload) |  |  |
+| value | [google.protobuf.Value](#google-protobuf-Value) |  |  |
 
 
 
@@ -1230,6 +1149,20 @@ If indexation speed have more priority for your - make this parameter lower. If 
 
 
  
+
+
+<a name="solvio-FieldType"></a>
+
+### FieldType
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| FieldTypeKeyword | 0 |  |
+| FieldTypeInteger | 1 |  |
+| FieldTypeFloat | 2 |  |
+| FieldTypeGeo | 3 |  |
+
 
 
 <a name="solvio-UpdateStatus"></a>

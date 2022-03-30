@@ -8,7 +8,7 @@ cd "$(dirname "$0")/../"
 
 solvio_HOST='localhost:6334'
 
-docker_grpcurl="docker run --rm --network=host -v ${PWD}/src/tonic/proto:/proto fullstorydev/grpcurl -plaintext -import-path /proto -proto solvio.proto"
+docker_grpcurl="docker run --rm --network=host -v ${PWD}/lib/api/src/grpc/proto:/proto fullstorydev/grpcurl -plaintext -import-path /proto -proto solvio.proto"
 
 $docker_grpcurl -d '{
    "collection_name": "test_collection"

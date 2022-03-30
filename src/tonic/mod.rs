@@ -1,14 +1,12 @@
 mod api;
-#[allow(clippy::all)]
-pub mod solvio;
 
-use crate::common::models::VersionInfo;
 use crate::tonic::api::collections_api::CollectionsService;
 use crate::tonic::api::points_api::PointsService;
-use solvio::collections_server::CollectionsServer;
-use solvio::points_server::PointsServer;
-use solvio::solvio_server::{Solvio, SolvioServer};
-use solvio::{HealthCheckReply, HealthCheckRequest};
+use ::api::grpc::models::VersionInfo;
+use ::api::grpc::solvio::collections_server::CollectionsServer;
+use ::api::grpc::solvio::points_server::PointsServer;
+use ::api::grpc::solvio::solvio_server::{Solvio, SolvioServer};
+use ::api::grpc::solvio::{HealthCheckReply, HealthCheckRequest};
 use std::net::{IpAddr, SocketAddr};
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
@@ -18,15 +16,6 @@ use tonic::{transport::Server, Request, Response, Status};
 
 #[derive(Default)]
 pub struct SolvioService {}
-
-impl From<VersionInfo> for HealthCheckReply {
-    fn from(info: VersionInfo) -> Self {
-        HealthCheckReply {
-            title: info.title,
-            version: info.version,
-        }
-    }
-}
 
 #[tonic::async_trait]
 impl Solvio for SolvioService {

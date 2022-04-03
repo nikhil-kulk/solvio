@@ -83,7 +83,7 @@ curl -L -X POST "http://$solvio_HOST/collections/test_collection/points/search" 
               {
                   "key": "city",
                   "match": {
-                      "keyword": "London"
+                      "value": "London"
                   }
               }
           ]

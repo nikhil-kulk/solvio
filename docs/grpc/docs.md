@@ -4,13 +4,17 @@
 ## Table of Contents
 
 - [collections.proto](#collections-proto)
+    - [AliasOperations](#solvio-AliasOperations)
+    - [ChangeAliases](#solvio-ChangeAliases)
     - [CollectionConfig](#solvio-CollectionConfig)
     - [CollectionDescription](#solvio-CollectionDescription)
     - [CollectionInfo](#solvio-CollectionInfo)
     - [CollectionInfo.PayloadSchemaEntry](#solvio-CollectionInfo-PayloadSchemaEntry)
     - [CollectionOperationResponse](#solvio-CollectionOperationResponse)
     - [CollectionParams](#solvio-CollectionParams)
+    - [CreateAlias](#solvio-CreateAlias)
     - [CreateCollection](#solvio-CreateCollection)
+    - [DeleteAlias](#solvio-DeleteAlias)
     - [DeleteCollection](#solvio-DeleteCollection)
     - [GetCollectionInfoRequest](#solvio-GetCollectionInfoRequest)
     - [GetCollectionInfoResponse](#solvio-GetCollectionInfoResponse)
@@ -20,6 +24,7 @@
     - [OptimizerStatus](#solvio-OptimizerStatus)
     - [OptimizersConfigDiff](#solvio-OptimizersConfigDiff)
     - [PayloadSchemaInfo](#solvio-PayloadSchemaInfo)
+    - [RenameAlias](#solvio-RenameAlias)
     - [UpdateCollection](#solvio-UpdateCollection)
     - [WalConfigDiff](#solvio-WalConfigDiff)
   
@@ -27,6 +32,7 @@
     - [Distance](#solvio-Distance)
     - [PayloadSchemaType](#solvio-PayloadSchemaType)
   
+- [collections_service.proto](#collections_service-proto)
     - [Collections](#solvio-Collections)
   
 - [points.proto](#points-proto)
@@ -74,6 +80,7 @@
     - [FieldType](#solvio-FieldType)
     - [UpdateStatus](#solvio-UpdateStatus)
   
+- [points_service.proto](#points_service-proto)
     - [Points](#solvio-Points)
   
 - [solvio.proto](#solvio-proto)
@@ -90,6 +97,38 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## collections.proto
+
+
+
+<a name="solvio-AliasOperations"></a>
+
+### AliasOperations
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| create_alias | [CreateAlias](#solvio-CreateAlias) |  |  |
+| rename_alias | [RenameAlias](#solvio-RenameAlias) |  |  |
+| delete_alias | [DeleteAlias](#solvio-DeleteAlias) |  |  |
+
+
+
+
+
+
+<a name="solvio-ChangeAliases"></a>
+
+### ChangeAliases
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| actions | [AliasOperations](#solvio-AliasOperations) | repeated | List of actions |
+
+
+
 
 
 
@@ -197,6 +236,22 @@
 
 
 
+<a name="solvio-CreateAlias"></a>
+
+### CreateAlias
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+| alias_name | [string](#string) |  | New name of the alias |
+
+
+
+
+
+
 <a name="solvio-CreateCollection"></a>
 
 ### CreateCollection
@@ -212,6 +267,21 @@
 | wal_config | [WalConfigDiff](#solvio-WalConfigDiff) | optional | Configuration of the Write-Ahead-Log |
 | optimizers_config | [OptimizersConfigDiff](#solvio-OptimizersConfigDiff) | optional | Configuration of the optimizers |
 | shard_number | [uint32](#uint32) | optional | Number of shards in the collection, default = 1 |
+
+
+
+
+
+
+<a name="solvio-DeleteAlias"></a>
+
+### DeleteAlias
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| alias_name | [string](#string) |  | Name of the alias |
 
 
 
@@ -361,7 +431,22 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | data_type | [PayloadSchemaType](#solvio-PayloadSchemaType) |  | Field data type |
-| indexed | [bool](#bool) |  | If this field is indexed |
+
+
+
+
+
+
+<a name="solvio-RenameAlias"></a>
+
+### RenameAlias
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| old_alias_name | [string](#string) |  | Name of the alias to rename |
+| new_alias_name | [string](#string) |  | Name of the alias |
 
 
 
@@ -448,6 +533,22 @@ If indexation speed have more priority for your - make this parameter lower. If 
 
  
 
+ 
+
+
+
+<a name="collections_service-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## collections_service.proto
+
+
+ 
+
+ 
+
+ 
+
 
 <a name="solvio-Collections"></a>
 
@@ -461,6 +562,7 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | Create | [CreateCollection](#solvio-CreateCollection) | [CollectionOperationResponse](#solvio-CollectionOperationResponse) | Create new collection with given parameters |
 | Update | [UpdateCollection](#solvio-UpdateCollection) | [CollectionOperationResponse](#solvio-CollectionOperationResponse) | Update parameters of the existing collection |
 | Delete | [DeleteCollection](#solvio-DeleteCollection) | [CollectionOperationResponse](#solvio-CollectionOperationResponse) | Drop collection and all associated data |
+| UpdateAliases | [ChangeAliases](#solvio-ChangeAliases) | [CollectionOperationResponse](#solvio-CollectionOperationResponse) | Update Aliases of the existing collection |
 
  
 
@@ -720,6 +822,7 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | ----- | ---- | ----- | ----------- |
 | keyword | [string](#string) |  | Match string keyword |
 | integer | [int64](#int64) |  | Match integer |
+| boolean | [bool](#bool) |  | Match boolean |
 
 
 
@@ -1176,6 +1279,22 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | Acknowledged | 1 | Update is received, but not processed yet |
 | Completed | 2 | Update is applied and ready for search |
 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="points_service-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## points_service.proto
+
+
+ 
 
  
 

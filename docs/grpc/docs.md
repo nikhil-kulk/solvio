@@ -50,6 +50,7 @@
     - [GetPoints](#solvio-GetPoints)
     - [GetResponse](#solvio-GetResponse)
     - [HasIdCondition](#solvio-HasIdCondition)
+    - [IsEmptyCondition](#solvio-IsEmptyCondition)
     - [Match](#solvio-Match)
     - [PayloadExcludeSelector](#solvio-PayloadExcludeSelector)
     - [PayloadIncludeSelector](#solvio-PayloadIncludeSelector)
@@ -601,6 +602,7 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | field | [FieldCondition](#solvio-FieldCondition) |  |  |
+| isEmpty | [IsEmptyCondition](#solvio-IsEmptyCondition) |  |  |
 | hasId | [HasIdCondition](#solvio-HasIdCondition) |  |  |
 | filter | [Filter](#solvio-Filter) |  |  |
 
@@ -806,6 +808,21 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | has_id | [PointId](#solvio-PointId) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-IsEmptyCondition"></a>
+
+### IsEmptyCondition
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
 
 
 

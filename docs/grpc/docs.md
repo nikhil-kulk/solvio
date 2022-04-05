@@ -76,10 +76,16 @@
     - [SetPayloadPoints.PayloadEntry](#solvio-SetPayloadPoints-PayloadEntry)
     - [UpdateResult](#solvio-UpdateResult)
     - [UpsertPoints](#solvio-UpsertPoints)
+    - [ValuesCount](#solvio-ValuesCount)
     - [WithPayloadSelector](#solvio-WithPayloadSelector)
   
     - [FieldType](#solvio-FieldType)
     - [UpdateStatus](#solvio-UpdateStatus)
+  
+- [points_internal_service.proto](#points_internal_service-proto)
+    - [UpsertPointsInternal](#solvio-UpsertPointsInternal)
+  
+    - [PointsInternal](#solvio-PointsInternal)
   
 - [points_service.proto](#points_service-proto)
     - [Points](#solvio-Points)
@@ -694,6 +700,7 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | range | [Range](#solvio-Range) |  | Check if points value lies in a given range |
 | geo_bounding_box | [GeoBoundingBox](#solvio-GeoBoundingBox) |  | Check if points geo location lies in a given area |
 | geo_radius | [GeoRadius](#solvio-GeoRadius) |  | Check if geo point is within a given radius |
+| values_count | [ValuesCount](#solvio-ValuesCount) |  | Check number of values for a specific field |
 
 
 
@@ -1252,6 +1259,24 @@ If indexation speed have more priority for your - make this parameter lower. If 
 
 
 
+<a name="solvio-ValuesCount"></a>
+
+### ValuesCount
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| lt | [uint64](#uint64) | optional |  |
+| gt | [uint64](#uint64) | optional |  |
+| gte | [uint64](#uint64) | optional |  |
+| lte | [uint64](#uint64) | optional |  |
+
+
+
+
+
+
 <a name="solvio-WithPayloadSelector"></a>
 
 ### WithPayloadSelector
@@ -1300,6 +1325,48 @@ If indexation speed have more priority for your - make this parameter lower. If 
  
 
  
+
+ 
+
+
+
+<a name="points_internal_service-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## points_internal_service.proto
+
+
+
+<a name="solvio-UpsertPointsInternal"></a>
+
+### UpsertPointsInternal
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| upsert_points | [UpsertPoints](#solvio-UpsertPoints) |  |  |
+| shard_id | [uint32](#uint32) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="solvio-PointsInternal"></a>
+
+### PointsInternal
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Upsert | [UpsertPointsInternal](#solvio-UpsertPointsInternal) | [PointsOperationResponse](#solvio-PointsOperationResponse) |  |
 
  
 

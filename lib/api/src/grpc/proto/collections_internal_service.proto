@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+import "collections.proto";
+
+option java_multiple_files = true;
+option java_package = "tech.solvio.grpc";
+option java_outer_classname = "SolvioProto";
+
+package solvio;
+
+service CollectionsInternal {
+  rpc Get (GetCollectionInfoRequestInternal) returns (GetCollectionInfoResponse) {}
+}
+
+message GetCollectionInfoRequestInternal {
+  GetCollectionInfoRequest get_collectionInfoRequest = 1;
+  uint32 shard_id = 2;
+}

@@ -1,9 +1,5 @@
 syntax = "proto3";
 
-option java_multiple_files = true;
-option java_package = "tech.solvio.grpc";
-option java_outer_classname = "SolvioProto";
-
 package solvio;
 
 import "google/protobuf/struct.proto";

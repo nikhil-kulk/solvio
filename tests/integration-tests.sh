@@ -9,6 +9,12 @@ cd "$(dirname "$0")/../"
 solvio_HOST='localhost:6333'
 export solvio__SERVICE__GRPC_PORT="6334"
 
+MODE=$1
+# Enable distributed mode on demand
+if [ $1 == "distributed" ]; then
+  export solvio__CLUSTER__ENABLED="true"
+fi
+
 # Run in background
 $(./target/debug/solvio) &
 

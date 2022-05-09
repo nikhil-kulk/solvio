@@ -82,11 +82,6 @@
     - [FieldType](#solvio-FieldType)
     - [UpdateStatus](#solvio-UpdateStatus)
   
-- [points_internal_service.proto](#points_internal_service-proto)
-    - [UpsertPointsInternal](#solvio-UpsertPointsInternal)
-  
-    - [PointsInternal](#solvio-PointsInternal)
-  
 - [points_service.proto](#points_service-proto)
     - [Points](#solvio-Points)
   
@@ -1017,6 +1012,7 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | with_vector | [bool](#bool) | optional | Return point vector with the result. |
 | with_payload | [WithPayloadSelector](#solvio-WithPayloadSelector) |  | Options for specifying which payload to include or not |
 | params | [SearchParams](#solvio-SearchParams) |  | Search config |
+| score_threshold | [float](#float) | optional | If provided - cut off results with worse scores |
 
 
 
@@ -1174,6 +1170,7 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | with_vector | [bool](#bool) | optional | Return point vector with the result. |
 | with_payload | [WithPayloadSelector](#solvio-WithPayloadSelector) |  | Options for specifying which payload to include or not |
 | params | [SearchParams](#solvio-SearchParams) |  | Search config |
+| score_threshold | [float](#float) | optional | If provided - cut off results with worse scores |
 
 
 
@@ -1329,48 +1326,6 @@ If indexation speed have more priority for your - make this parameter lower. If 
  
 
  
-
- 
-
-
-
-<a name="points_internal_service-proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## points_internal_service.proto
-
-
-
-<a name="solvio-UpsertPointsInternal"></a>
-
-### UpsertPointsInternal
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| upsert_points | [UpsertPoints](#solvio-UpsertPoints) |  |  |
-| shard_id | [uint32](#uint32) |  |  |
-
-
-
-
-
- 
-
- 
-
- 
-
-
-<a name="solvio-PointsInternal"></a>
-
-### PointsInternal
-
-
-| Method Name | Request Type | Response Type | Description |
-| ----------- | ------------ | ------------- | ------------|
-| Upsert | [UpsertPointsInternal](#solvio-UpsertPointsInternal) | [PointsOperationResponse](#solvio-PointsOperationResponse) |  |
 
  
 

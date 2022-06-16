@@ -3,6 +3,8 @@
 This example covers the most basic use-case - collection creation and basic vector search.
 For additional information please refer to the [API documentation](https://solvio.github.io/solvio/redoc/index.html).
 
+You can also try all Solvio REST API in our [Swagger UI](https://ui.solvio.tech/).
+
 ## Create collection
 First - let's create a collection with dot-production metric.
 ```bash

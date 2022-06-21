@@ -1,9 +1,9 @@
 <p align="center">
-  <img height="100" src="https://github.com/solvio/solvio/blob/master/docs/logo.svg?raw=true" alt="Solvio">
+  <img height="100" src="docs/logo.svg" alt="Solvio">
 </p>
 
 <p align="center">
-    <b>Vector Similarity Search Engine with extended filtering support</b>
+    <b>Vector Search Engine for the next generation of AI applications</b>
 </p>
 
 
@@ -11,15 +11,15 @@
     <a href="https://github.com/solvio/solvio/actions/workflows/rust.yml"><img src="https://github.com/solvio/solvio/workflows/Tests/badge.svg" alt="Tests status"></a>
     <a href="https://solvio.github.io/solvio/redoc/index.html"><img src="https://img.shields.io/badge/Docs-OpenAPI%203.0-success" alt="OpenAPI Docs"></a>
     <a href="https://github.com/solvio/solvio/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-success" alt="Apache 2.0 License"></a>
-    <a href="https://discord.gg/tdtYvXjC4h"><img src="https://img.shields.io/badge/Discord-Solvio-5865F2.svg?logo=discord" alt="Discord"></a>
-    <a href="https://github.com/solvio/solvio/blob/master/docs/roadmap/README.md"><img src="https://img.shields.io/badge/Roadmap-v1.0-bc1439.svg" alt="Roadmap v1.0"></a>
+    <a href="https://solvio.to/discord"><img src="https://img.shields.io/badge/Discord-Solvio-5865F2.svg?logo=discord" alt="Discord"></a>
+    <a href="https://solvio.to/roadmap"><img src="https://img.shields.io/badge/Roadmap-v1.0-bc1439.svg" alt="Roadmap v1.0"></a>
 </p>
 
 Solvio (read: _quadrant_ ) is a vector similarity search engine.
 It provides a production-ready service with a convenient API to store, search, and manage points - vectors with an additional payload.
 Solvio is tailored to extended filtering support.  It makes it useful for all sorts of neural-network or semantic-based matching, faceted search, and other applications. 
 
-Solvio is written in Rust 🦀, which makes it reliable even under high load.
+Solvio is written in Rust 🦀, which makes it fast and reliable even under high load.
 
 With Solvio, embeddings or neural network encoders can be turned into full-fledged applications for matching, searching, recommending, and much more!
 
@@ -29,14 +29,14 @@ With Solvio, embeddings or neural network encoders can be turned into full-fledg
 
 The neural search uses semantic embeddings instead of keywords and works best with short texts.
 With Solvio and a pre-trained neural network, you can build and deploy semantic neural search on your data in minutes.
-[Try it online!](https://demo.solvio.tech/)
+[Try it online!](https://solvio.to/semantic-search-demo)
 
 ### Similar Image Search - Food Discovery 🍕
 
 There are multiple ways to discover things, text search is not the only one.
 In the case of food, people rely more on appearance than description and ingredients.
 So why not let people choose their next lunch by its appearance, even if they don’t know the name of the dish?
-[Check it out!](https://food-discovery.solvio.tech/)
+[Check it out!](https://solvio.to/food-discovery)
 
 ### Extreme classification - E-commerce Product Categorization 📺
 
@@ -44,7 +44,7 @@ Extreme classification is a rapidly growing research area within machine learnin
 Sometimes it is millions and tens of millions classes.
 The most promising way to solve this problem is to use similarity learning models.
 We put together a demo example of how you could approach the problem with a pre-trained transformer model and Solvio.
-So you can [play with it online!](https://categories.solvio.tech/)
+So you can [play with it online!](https://solvio.to/extreme-classification-demo)
 
 
 <details>
@@ -75,13 +75,16 @@ So you can [play with it online!](https://categories.solvio.tech/)
     </tr>
 </table>
 
-<table align="center">
+<table>
     <tr>
         <td>
             <img width="300px" src="https://solvio.tech/content/images/chat_bots.png">
         </td>
         <td>
             <img width="300px" src="https://solvio.tech/content/images/matching_engines.png">
+        </td>
+        <td>
+            <img width="300px" src="https://solvio.tech/content/images/anomalies_detection.png">
         </td>
     </tr>
     <tr>
@@ -91,33 +94,41 @@ So you can [play with it online!](https://categories.solvio.tech/)
         <td>
             Matching Engines
         </td>
+        <td>
+            Anomaly Detection
+        </td>
     </tr>
 </table>
 
 </details>
 
 ## API
+### REST
 
 Online OpenAPI 3.0 documentation is available [here](https://solvio.github.io/solvio/redoc/index.html).
 OpenAPI makes it easy to generate a client for virtually any framework or programing language.
 
 You can also download raw OpenAPI [definitions](https://github.com/solvio/solvio/blob/master/docs/redoc/master/openapi.json).
 
+### gRPC
+
+For faster production-tier searches, Solvio also provides a gRPC interface. You can find gRPC documentation [here](https://solvio.tech/documentation/quick_start/#grpc).
+
 ## Features
 
-### Filtering
+### Filtering and Payload
 
-Solvio supports key-value payload associated with vectors. It does not only store payload but also allows filter results based on payload values.
+Solvio supports any JSON payload associated with vectors. It does not only store payload but also allows filter results based on payload values.
 It allows any combinations of `should`, `must`, and `must_not` conditions, but unlike ElasticSearch post-filtering, Solvio guarantees all relevant vectors are retrieved.
 
-### Rich data types
+### Rich Data Types
 
 Vector payload supports a large variety of data types and query conditions, including string matching, numerical ranges, geo-locations, and more.
 Payload filtering conditions allow you to build almost any custom business logic that should work on top of similarity matching.
 
-### Query planning and payload indexes
+### Query Planning and Payload Indexes
 
-Using the information about the stored key-value data, the `query planner` decides on the best way to execute the query.
+Using the information about the stored payload values, the `query planner` decides on the best way to execute the query.
 For example, if the search space limited by filters is small, it is more efficient to use a full brute force than an index.
 
 ### SIMD Hardware Acceleration
@@ -125,10 +136,16 @@ For example, if the search space limited by filters is small, it is more efficie
 Solvio can take advantage of modern CPU x86-x64 architectures. 
 It allows you to search even faster on modern hardware.
 
-### Write-ahead logging
+### Write-Ahead Logging
 
 Once the service confirmed an update - it won't lose data even in case of power shut down. 
 All operations are stored in the update journal and the latest database state could be easily reconstructed at any moment.
+
+### Distributed Deployment
+
+Since [v0.8.0](https://github.com/solvio/solvio/releases/tag/v0.8.0) Solvio supports distributed deployment.
+In this mode, multiple Solvio machines are joined into a cluster to provide horizontal scaling.
+Coordination with the distributed consensus is provided by the [Raft](https://raft.github.io/) protocol.
 
 ### Stand-alone
 
@@ -169,23 +186,24 @@ docker run -p 6333:6333 \
 Make sure to mount it as a volume, otherwise docker will drop it with the container. 
 * `/solvio/config/production.yaml` - is the file with engine configuration. You can override any value from the [reference config](https://github.com/solvio/solvio/blob/master/config/config.yaml) 
 
-Now Solvio should be accessible at [localhost:6333](http://localhost:6333/)
+Now Solvio should be accessible at [localhost:6333](http://localhost:6333/).
 
 ## Docs 📓
 
 * The best place to start is [Quick Start Guide](https://github.com/solvio/solvio/blob/master/QUICK_START.md)
 * The [Documentation](https://solvio.tech/documentation/)
 * Use the [OpenAPI specification](https://solvio.github.io/solvio/redoc/index.html) as a reference
-* Follow our [Step-by-Step Tutorial](https://blog.solvio.tech/neural-search-tutorial-3f034ab13adc) to create your first neural network project with Solvio
-* Check out our further plans in [v1.0 Roadmap](https://github.com/solvio/solvio/blob/master/docs/roadmap/README.md)
+* Follow our [Step-by-Step Tutorial](https://solvio.to/solvio-tutorial) to create your first neural network project with Solvio
+* Check out our further plans in [v1.0 Roadmap](https://solvio.to/roadmap)
 
 ## Contacts
 
-* Join our [Discord channel](https://discord.gg/tdtYvXjC4h)
-* Follow us on [Twitter](https://twitter.com/solvio_engine)
-* Subscribe to our [Newsletters](https://tech.us1.list-manage.com/subscribe/post?u=69617d79374ac6280dd2230b2&amp;id=acb2b876fc)
+* Join our [Discord channel](https://solvio.to/discord)
+* Follow us on [Twitter](https://solvio.to/twitter)
+* Subscribe to our [Newsletters](https://solvio.to/newsletter)
 * Write us an email [info@solvio.tech](mailto:info@solvio.tech)
 
+Building something special with Solvio? We can [help](https://solvio.tech/pricing/)!
 
 ## Contributors ✨
 

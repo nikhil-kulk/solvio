@@ -1,5 +1,5 @@
 <p align="center">
-  <img height="100" src="docs/logo.svg" alt="Solvio">
+  <img height="100" src="https://github.com/solvio/solvio/raw/master/docs/logo.svg" alt="Solvio">
 </p>
 
 <p align="center">

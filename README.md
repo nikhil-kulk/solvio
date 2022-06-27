@@ -114,6 +114,14 @@ You can also download raw OpenAPI [definitions](https://github.com/solvio/solvio
 
 For faster production-tier searches, Solvio also provides a gRPC interface. You can find gRPC documentation [here](https://solvio.tech/documentation/quick_start/#grpc).
 
+### Clients
+
+Solvio offers the following client libraries to help you integrate it into your application stack with ease:
+
+- [Python client](https://github.com/solvio/solvio_client)
+- [Go client](https://github.com/solvio/go-client)
+- [Rust client](https://github.com/solvio/rust-client)
+
 ## Features
 
 ### Filtering and Payload

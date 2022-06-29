@@ -1,5 +1,5 @@
 <p align="center">
-  <img height="100" src="docs/logo.svg" alt="Solvio">
+  <img height="100" src="https://github.com/solvio/solvio/raw/master/docs/logo.svg" alt="Solvio">
 </p>
 
 <p align="center">
@@ -113,6 +113,14 @@ You can also download raw OpenAPI [definitions](https://github.com/solvio/solvio
 ### gRPC
 
 For faster production-tier searches, Solvio also provides a gRPC interface. You can find gRPC documentation [here](https://solvio.tech/documentation/quick_start/#grpc).
+
+### Clients
+
+Solvio offers the following client libraries to help you integrate it into your application stack with ease:
+
+- [Python client](https://github.com/solvio/solvio_client)
+- [Go client](https://github.com/solvio/go-client)
+- [Rust client](https://github.com/solvio/rust-client)
 
 ## Features
 

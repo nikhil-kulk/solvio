@@ -99,6 +99,15 @@
   
     - [Solvio](#solvio-Solvio)
   
+- [snapshots_service.proto](#snapshots_service-proto)
+    - [CreateSnapshotRequest](#solvio-CreateSnapshotRequest)
+    - [CreateSnapshotResponse](#solvio-CreateSnapshotResponse)
+    - [ListSnapshotsRequest](#solvio-ListSnapshotsRequest)
+    - [ListSnapshotsResponse](#solvio-ListSnapshotsResponse)
+    - [SnapshotDescription](#solvio-SnapshotDescription)
+  
+    - [Snapshots](#solvio-Snapshots)
+  
 - [Scalar Value Types](#scalar-value-types)
 
 
@@ -192,6 +201,7 @@
 | ram_data_size | [uint64](#uint64) |  | Used RAM (not implemented) |
 | config | [CollectionConfig](#solvio-CollectionConfig) |  | Configuration |
 | payload_schema | [CollectionInfo.PayloadSchemaEntry](#solvio-CollectionInfo-PayloadSchemaEntry) | repeated | Collection data types |
+| points_count | [uint64](#uint64) |  | number of vectors in the collection |
 
 
 
@@ -360,6 +370,7 @@
 | m | [uint64](#uint64) | optional | Number of edges per node in the index graph. Larger the value - more accurate the search, more space required. |
 | ef_construct | [uint64](#uint64) | optional | Number of neighbours to consider during the index building. Larger the value - more accurate the search, more time required to build index. |
 | full_scan_threshold | [uint64](#uint64) | optional | Minimal size (in KiloBytes) of vectors for additional payload-based indexing. If payload chunk is smaller than `full_scan_threshold` additional indexing won&#39;t be used - in this case full-scan search should be preferred by query planner and additional indexing is not required. Note: 1Kb = 1 vector of size 256 |
+| max_indexing_threads | [uint64](#uint64) | optional | Number of parallel threads used for background index building. If 0 - auto selection. |
 
 
 
@@ -1536,6 +1547,112 @@ The JSON representation for `Value` is JSON value.
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | HealthCheck | [HealthCheckRequest](#solvio-HealthCheckRequest) | [HealthCheckReply](#solvio-HealthCheckReply) |  |
+
+ 
+
+
+
+<a name="snapshots_service-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## snapshots_service.proto
+
+
+
+<a name="solvio-CreateSnapshotRequest"></a>
+
+### CreateSnapshotRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+
+
+
+
+
+
+<a name="solvio-CreateSnapshotResponse"></a>
+
+### CreateSnapshotResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| snapshot_description | [SnapshotDescription](#solvio-SnapshotDescription) |  |  |
+| time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
+<a name="solvio-ListSnapshotsRequest"></a>
+
+### ListSnapshotsRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+
+
+
+
+
+
+<a name="solvio-ListSnapshotsResponse"></a>
+
+### ListSnapshotsResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| snapshot_descriptions | [SnapshotDescription](#solvio-SnapshotDescription) | repeated |  |
+| time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
+<a name="solvio-SnapshotDescription"></a>
+
+### SnapshotDescription
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Name of the snapshot |
+| creation_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Creation time of the snapshot |
+| size | [int64](#int64) |  | Size of the snapshot in bytes |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="solvio-Snapshots"></a>
+
+### Snapshots
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Create | [CreateSnapshotRequest](#solvio-CreateSnapshotRequest) | [CreateSnapshotResponse](#solvio-CreateSnapshotResponse) | Create snapshot |
+| List | [ListSnapshotsRequest](#solvio-ListSnapshotsRequest) | [ListSnapshotsResponse](#solvio-ListSnapshotsResponse) | List snapshots |
 
  
 

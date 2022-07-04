@@ -4,12 +4,14 @@ use crate::tonic::api::collections_api::CollectionsService;
 use crate::tonic::api::collections_internal_api::CollectionsInternalService;
 use crate::tonic::api::points_api::PointsService;
 use crate::tonic::api::points_internal_api::PointsInternalService;
+use crate::tonic::api::snapshots_api::SnapshotsService;
 use ::api::grpc::models::VersionInfo;
 use ::api::grpc::solvio::collections_internal_server::CollectionsInternalServer;
 use ::api::grpc::solvio::collections_server::CollectionsServer;
 use ::api::grpc::solvio::points_internal_server::PointsInternalServer;
 use ::api::grpc::solvio::points_server::PointsServer;
 use ::api::grpc::solvio::solvio_server::{Solvio, SolvioServer};
+use ::api::grpc::solvio::snapshots_server::SnapshotsServer;
 use ::api::grpc::solvio::{HealthCheckReply, HealthCheckRequest};
 use std::net::{IpAddr, SocketAddr};
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -48,6 +50,7 @@ pub fn init(dispatcher: Arc<Dispatcher>, host: String, grpc_port: u16) -> std::i
             let service = SolvioService::default();
             let collections_service = CollectionsService::new(dispatcher.clone());
             let points_service = PointsService::new(dispatcher.toc().clone());
+            let snapshot_service = SnapshotsService::new(dispatcher.toc().clone());
 
             log::info!("Solvio gRPC listening on {}", grpc_port);
 
@@ -55,6 +58,7 @@ pub fn init(dispatcher: Arc<Dispatcher>, host: String, grpc_port: u16) -> std::i
                 .add_service(SolvioServer::new(service))
                 .add_service(CollectionsServer::new(collections_service))
                 .add_service(PointsServer::new(points_service))
+                .add_service(SnapshotsServer::new(snapshot_service))
                 .serve_with_shutdown(socket, async {
                     signal::ctrl_c().await.unwrap();
                     log::debug!("Stopping gRPC");

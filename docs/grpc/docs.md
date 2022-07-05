@@ -46,6 +46,9 @@
 - [points.proto](#points-proto)
     - [ClearPayloadPoints](#solvio-ClearPayloadPoints)
     - [Condition](#solvio-Condition)
+    - [CountPoints](#solvio-CountPoints)
+    - [CountResponse](#solvio-CountResponse)
+    - [CountResult](#solvio-CountResult)
     - [CreateFieldIndexCollection](#solvio-CreateFieldIndexCollection)
     - [DeleteFieldIndexCollection](#solvio-DeleteFieldIndexCollection)
     - [DeletePayloadPoints](#solvio-DeletePayloadPoints)
@@ -741,6 +744,54 @@ The JSON representation for `Value` is JSON value.
 | isEmpty | [IsEmptyCondition](#solvio-IsEmptyCondition) |  |  |
 | hasId | [HasIdCondition](#solvio-HasIdCondition) |  |  |
 | filter | [Filter](#solvio-Filter) |  |  |
+
+
+
+
+
+
+<a name="solvio-CountPoints"></a>
+
+### CountPoints
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | name of the collection |
+| filter | [Filter](#solvio-Filter) |  | Filter conditions - return only those points that satisfy the specified conditions |
+| exact | [bool](#bool) | optional | If `true` - return exact count, if `false` - return approximate count |
+
+
+
+
+
+
+<a name="solvio-CountResponse"></a>
+
+### CountResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [CountResult](#solvio-CountResult) |  |  |
+| time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
+<a name="solvio-CountResult"></a>
+
+### CountResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| count | [uint64](#uint64) |  |  |
 
 
 
@@ -1495,6 +1546,7 @@ The JSON representation for `Value` is JSON value.
 | Search | [SearchPoints](#solvio-SearchPoints) | [SearchResponse](#solvio-SearchResponse) | Retrieve closest points based on vector similarity and given filtering conditions |
 | Scroll | [ScrollPoints](#solvio-ScrollPoints) | [ScrollResponse](#solvio-ScrollResponse) | Iterate over all or filtered points points |
 | Recommend | [RecommendPoints](#solvio-RecommendPoints) | [RecommendResponse](#solvio-RecommendResponse) | Look for the points which are closer to stored positive examples and at the same time further to negative examples. |
+| Count | [CountPoints](#solvio-CountPoints) | [CountResponse](#solvio-CountResponse) | Count points in collection with given filtering conditions |
 
  
 

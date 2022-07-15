@@ -1,7 +1,16 @@
+use std::collections::{HashMap, HashSet};
+use std::time::Instant;
+
+use chrono::{NaiveDateTime, Timelike};
+use segment::types::{PayloadSelector, WithPayloadInterface};
+use tonic::Status;
+use uuid::Uuid;
+
 use crate::grpc::models::{CollectionsResponse, VersionInfo};
 use crate::grpc::solvio::condition::ConditionOneOf;
 use crate::grpc::solvio::point_id::PointIdOptions;
 use crate::grpc::solvio::r#match::MatchValue;
+use crate::grpc::solvio::value::Kind;
 use crate::grpc::solvio::with_payload_selector::SelectorOptions;
 use crate::grpc::solvio::{
     CollectionDescription, CollectionOperationResponse, Condition, FieldCondition, Filter,
@@ -10,14 +19,6 @@ use crate::grpc::solvio::{
     PayloadIncludeSelector, PayloadSchemaInfo, PayloadSchemaType, PointId, Range, ScoredPoint,
     SearchParams, Struct, Value, ValuesCount, WithPayloadSelector,
 };
-
-use crate::grpc::solvio::value::Kind;
-use chrono::{NaiveDateTime, Timelike};
-use segment::types::{PayloadSelector, WithPayloadInterface};
-use std::collections::{HashMap, HashSet};
-use std::time::Instant;
-use tonic::Status;
-use uuid::Uuid;
 
 pub fn payload_to_proto(payload: segment::types::Payload) -> HashMap<String, Value> {
     payload

@@ -44,4 +44,4 @@ COPY --from=builder /solvio/config ${APP}/config
 
 WORKDIR ${APP}
 
-CMD ["./solvio"]
+ENTRYPOINT ["./solvio"]

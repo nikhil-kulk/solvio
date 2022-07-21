@@ -23,5 +23,17 @@ services:
     ports:
       - "6433:6333"
       - "6434:6334"
-    command: bash -c "sleep 20 && ./solvio --bootstrap 'http://solvio_node_1:6335'"
+    command: bash -c "sleep 5 && ./solvio --bootstrap 'http://solvio_node_1:6335' --uri 'http://solvio_node_follower:6335'"
 
+  solvio_node_follower_2:
+    image: solvio_consensus:latest
+    environment:
+      - solvio__SERVICE__GRPC_PORT=6334
+      - solvio__CLUSTER__ENABLED=true
+      - solvio__CLUSTER__P2P__PORT=6335
+    depends_on:
+      - solvio_node_1
+    ports:
+      - "6533:6333"
+      - "6534:6334"
+    command: bash -c "sleep 6 && ./solvio --bootstrap 'http://solvio_node_1:6335' --uri 'http://solvio_node_follower_2:6335'"

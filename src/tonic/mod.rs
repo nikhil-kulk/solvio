@@ -12,7 +12,7 @@ use ::api::grpc::solvio::points_server::PointsServer;
 use ::api::grpc::solvio::solvio_server::{Solvio, SolvioServer};
 use ::api::grpc::solvio::snapshots_server::SnapshotsServer;
 use ::api::grpc::solvio::{HealthCheckReply, HealthCheckRequest};
-use storage::Dispatcher;
+use storage::dispatcher::Dispatcher;
 use tokio::{runtime, signal};
 use tonic::transport::Server;
 use tonic::{Request, Response, Status};

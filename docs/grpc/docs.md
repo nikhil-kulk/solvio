@@ -103,8 +103,10 @@
     - [Solvio](#solvio-Solvio)
   
 - [snapshots_service.proto](#snapshots_service-proto)
+    - [CreateFullSnapshotRequest](#solvio-CreateFullSnapshotRequest)
     - [CreateSnapshotRequest](#solvio-CreateSnapshotRequest)
     - [CreateSnapshotResponse](#solvio-CreateSnapshotResponse)
+    - [ListFullSnapshotsRequest](#solvio-ListFullSnapshotsRequest)
     - [ListSnapshotsRequest](#solvio-ListSnapshotsRequest)
     - [ListSnapshotsResponse](#solvio-ListSnapshotsResponse)
     - [SnapshotDescription](#solvio-SnapshotDescription)
@@ -1611,6 +1613,16 @@ The JSON representation for `Value` is JSON value.
 
 
 
+<a name="solvio-CreateFullSnapshotRequest"></a>
+
+### CreateFullSnapshotRequest
+
+
+
+
+
+
+
 <a name="solvio-CreateSnapshotRequest"></a>
 
 ### CreateSnapshotRequest
@@ -1636,6 +1648,16 @@ The JSON representation for `Value` is JSON value.
 | ----- | ---- | ----- | ----------- |
 | snapshot_description | [SnapshotDescription](#solvio-SnapshotDescription) |  |  |
 | time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
+<a name="solvio-ListFullSnapshotsRequest"></a>
+
+### ListFullSnapshotsRequest
+
 
 
 
@@ -1703,8 +1725,10 @@ The JSON representation for `Value` is JSON value.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| Create | [CreateSnapshotRequest](#solvio-CreateSnapshotRequest) | [CreateSnapshotResponse](#solvio-CreateSnapshotResponse) | Create snapshot |
-| List | [ListSnapshotsRequest](#solvio-ListSnapshotsRequest) | [ListSnapshotsResponse](#solvio-ListSnapshotsResponse) | List snapshots |
+| Create | [CreateSnapshotRequest](#solvio-CreateSnapshotRequest) | [CreateSnapshotResponse](#solvio-CreateSnapshotResponse) | Create collection snapshot |
+| List | [ListSnapshotsRequest](#solvio-ListSnapshotsRequest) | [ListSnapshotsResponse](#solvio-ListSnapshotsResponse) | List collection snapshots |
+| CreateFull | [CreateFullSnapshotRequest](#solvio-CreateFullSnapshotRequest) | [CreateSnapshotResponse](#solvio-CreateSnapshotResponse) | Create full storage snapshot |
+| ListFull | [ListFullSnapshotsRequest](#solvio-ListFullSnapshotsRequest) | [ListSnapshotsResponse](#solvio-ListSnapshotsResponse) | List full storage snapshots |
 
  
 

@@ -44,6 +44,7 @@
     - [NullValue](#solvio-NullValue)
   
 - [points.proto](#points-proto)
+    - [BatchResult](#solvio-BatchResult)
     - [ClearPayloadPoints](#solvio-ClearPayloadPoints)
     - [Condition](#solvio-Condition)
     - [CountPoints](#solvio-CountPoints)
@@ -80,6 +81,8 @@
     - [ScoredPoint.PayloadEntry](#solvio-ScoredPoint-PayloadEntry)
     - [ScrollPoints](#solvio-ScrollPoints)
     - [ScrollResponse](#solvio-ScrollResponse)
+    - [SearchBatchPoints](#solvio-SearchBatchPoints)
+    - [SearchBatchResponse](#solvio-SearchBatchResponse)
     - [SearchParams](#solvio-SearchParams)
     - [SearchPoints](#solvio-SearchPoints)
     - [SearchResponse](#solvio-SearchResponse)
@@ -718,6 +721,21 @@ The JSON representation for `Value` is JSON value.
 
 
 
+<a name="solvio-BatchResult"></a>
+
+### BatchResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ScoredPoint](#solvio-ScoredPoint) | repeated |  |
+
+
+
+
+
+
 <a name="solvio-ClearPayloadPoints"></a>
 
 ### ClearPayloadPoints
@@ -1326,6 +1344,38 @@ The JSON representation for `Value` is JSON value.
 
 
 
+<a name="solvio-SearchBatchPoints"></a>
+
+### SearchBatchPoints
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+| search_points | [SearchPoints](#solvio-SearchPoints) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-SearchBatchResponse"></a>
+
+### SearchBatchResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [BatchResult](#solvio-BatchResult) | repeated |  |
+| time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
 <a name="solvio-SearchParams"></a>
 
 ### SearchParams
@@ -1547,6 +1597,7 @@ The JSON representation for `Value` is JSON value.
 | CreateFieldIndex | [CreateFieldIndexCollection](#solvio-CreateFieldIndexCollection) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Create index for field in collection |
 | DeleteFieldIndex | [DeleteFieldIndexCollection](#solvio-DeleteFieldIndexCollection) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Delete field index for collection |
 | Search | [SearchPoints](#solvio-SearchPoints) | [SearchResponse](#solvio-SearchResponse) | Retrieve closest points based on vector similarity and given filtering conditions |
+| SearchBatch | [SearchBatchPoints](#solvio-SearchBatchPoints) | [SearchBatchResponse](#solvio-SearchBatchResponse) | Retrieve closest points based on vector similarity and given filtering conditions |
 | Scroll | [ScrollPoints](#solvio-ScrollPoints) | [ScrollResponse](#solvio-ScrollResponse) | Iterate over all or filtered points points |
 | Recommend | [RecommendPoints](#solvio-RecommendPoints) | [RecommendResponse](#solvio-RecommendResponse) | Look for the points which are closer to stored positive examples and at the same time further to negative examples. |
 | Count | [CountPoints](#solvio-CountPoints) | [CountResponse](#solvio-CountResponse) | Count points in collection with given filtering conditions |

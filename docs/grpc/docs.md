@@ -73,6 +73,8 @@
     - [PointsOperationResponse](#solvio-PointsOperationResponse)
     - [PointsSelector](#solvio-PointsSelector)
     - [Range](#solvio-Range)
+    - [RecommendBatchPoints](#solvio-RecommendBatchPoints)
+    - [RecommendBatchResponse](#solvio-RecommendBatchResponse)
     - [RecommendPoints](#solvio-RecommendPoints)
     - [RecommendResponse](#solvio-RecommendResponse)
     - [RetrievedPoint](#solvio-RetrievedPoint)
@@ -1199,6 +1201,38 @@ The JSON representation for `Value` is JSON value.
 
 
 
+<a name="solvio-RecommendBatchPoints"></a>
+
+### RecommendBatchPoints
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+| recommend_points | [RecommendPoints](#solvio-RecommendPoints) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-RecommendBatchResponse"></a>
+
+### RecommendBatchResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [BatchResult](#solvio-BatchResult) | repeated |  |
+| time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
 <a name="solvio-RecommendPoints"></a>
 
 ### RecommendPoints
@@ -1600,6 +1634,7 @@ The JSON representation for `Value` is JSON value.
 | SearchBatch | [SearchBatchPoints](#solvio-SearchBatchPoints) | [SearchBatchResponse](#solvio-SearchBatchResponse) | Retrieve closest points based on vector similarity and given filtering conditions |
 | Scroll | [ScrollPoints](#solvio-ScrollPoints) | [ScrollResponse](#solvio-ScrollResponse) | Iterate over all or filtered points points |
 | Recommend | [RecommendPoints](#solvio-RecommendPoints) | [RecommendResponse](#solvio-RecommendResponse) | Look for the points which are closer to stored positive examples and at the same time further to negative examples. |
+| RecommendBatch | [RecommendBatchPoints](#solvio-RecommendBatchPoints) | [RecommendBatchResponse](#solvio-RecommendBatchResponse) | Look for the points which are closer to stored positive examples and at the same time further to negative examples. |
 | Count | [CountPoints](#solvio-CountPoints) | [CountResponse](#solvio-CountResponse) | Count points in collection with given filtering conditions |
 
  

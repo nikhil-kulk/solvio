@@ -202,6 +202,7 @@ Now Solvio should be accessible at [localhost:6333](http://localhost:6333/).
 * The [Documentation](https://solvio.tech/documentation/)
 * Use the [OpenAPI specification](https://solvio.github.io/solvio/redoc/index.html) as a reference
 * Follow our [Step-by-Step Tutorial](https://solvio.to/solvio-tutorial) to create your first neural network project with Solvio
+* Assess Solvio's performance in our [benchmarks](https://solvio.tech/benchmarks/)
 * Check out our further plans in [v1.0 Roadmap](https://solvio.to/roadmap)
 
 ## Contacts

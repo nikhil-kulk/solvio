@@ -1,6 +1,6 @@
 [package]
 name = "collection"
-version = "0.4.1"
+version = "0.4.2"
 authors = ["Solvio Team <info@solvio.tech>"]
 edition = "2021"
 

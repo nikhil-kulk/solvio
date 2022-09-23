@@ -12,7 +12,6 @@
     - [CollectionInfo.PayloadSchemaEntry](#solvio-CollectionInfo-PayloadSchemaEntry)
     - [CollectionOperationResponse](#solvio-CollectionOperationResponse)
     - [CollectionParams](#solvio-CollectionParams)
-    - [CollectionParamsDiff](#solvio-CollectionParamsDiff)
     - [CreateAlias](#solvio-CreateAlias)
     - [CreateCollection](#solvio-CreateCollection)
     - [DeleteAlias](#solvio-DeleteAlias)
@@ -274,22 +273,6 @@
 | shard_number | [uint32](#uint32) |  | Number of shards in collection |
 | on_disk_payload | [bool](#bool) |  | If true - point&#39;s payload will not be stored in memory |
 | vectors_config | [VectorsConfig](#solvio-VectorsConfig) | optional | Configuration for vectors |
-| replication_factor | [uint32](#uint32) |  | Number of replicas of each shard that network tries to maintain |
-
-
-
-
-
-
-<a name="solvio-CollectionParamsDiff"></a>
-
-### CollectionParamsDiff
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| replication_factor | [uint32](#uint32) | optional | Number of replicas of each shard that network tries to maintain |
 
 
 
@@ -328,7 +311,6 @@
 | on_disk_payload | [bool](#bool) | optional | If true - point&#39;s payload will not be stored in memory |
 | timeout | [uint64](#uint64) | optional | Wait timeout for operation commit in seconds, if not specified - default value will be supplied |
 | vectors_config | [VectorsConfig](#solvio-VectorsConfig) | optional | Configuration for vectors |
-| replication_factor | [uint32](#uint32) | optional | Number of replicas of each shard that network tries to maintain, default = 1 |
 
 
 
@@ -561,7 +543,6 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | collection_name | [string](#string) |  | Name of the collection |
 | optimizers_config | [OptimizersConfigDiff](#solvio-OptimizersConfigDiff) | optional | New configuration parameters for the collection |
 | timeout | [uint64](#uint64) | optional | Wait timeout for operation commit in seconds, if not specified - default value will be supplied |
-| params | [CollectionParamsDiff](#solvio-CollectionParamsDiff) | optional | New configuration parameters for the collection |
 
 
 

@@ -13,7 +13,7 @@ use ::api::grpc::solvio::points_server::PointsServer;
 use ::api::grpc::solvio::solvio_server::{Solvio, SolvioServer};
 use ::api::grpc::solvio::snapshots_server::SnapshotsServer;
 use ::api::grpc::solvio::{HealthCheckReply, HealthCheckRequest};
-use storage::content_manager::consensus_state::ConsensusStateRef;
+use storage::content_manager::consensus_manager::ConsensusStateRef;
 use storage::content_manager::toc::TableOfContent;
 use storage::dispatcher::Dispatcher;
 use tokio::{runtime, signal};

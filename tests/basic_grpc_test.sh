@@ -14,7 +14,6 @@ $docker_grpcurl -d '{
    "collection_name": "test_collection"
 }' $solvio_HOST solvio.Collections/Delete
 
-
 $docker_grpcurl -d '{
    "collection_name": "test_collection",
    "vectors_config": {

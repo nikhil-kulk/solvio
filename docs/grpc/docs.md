@@ -1013,7 +1013,8 @@ The JSON representation for `Value` is JSON value.
 | collection_name | [string](#string) |  | name of the collection |
 | wait | [bool](#bool) | optional | Wait until the changes have been applied? |
 | keys | [string](#string) | repeated | List of keys to delete |
-| points | [PointId](#solvio-PointId) | repeated | Affected points |
+| points | [PointId](#solvio-PointId) | repeated | Affected points, deprecated |
+| points_selector | [PointsSelector](#solvio-PointsSelector) | optional | Affected points |
 
 
 
@@ -1656,7 +1657,8 @@ The JSON representation for `Value` is JSON value.
 | collection_name | [string](#string) |  | name of the collection |
 | wait | [bool](#bool) | optional | Wait until the changes have been applied? |
 | payload | [SetPayloadPoints.PayloadEntry](#solvio-SetPayloadPoints-PayloadEntry) | repeated | New payload values |
-| points | [PointId](#solvio-PointId) | repeated | List of point to modify |
+| points | [PointId](#solvio-PointId) | repeated | List of point to modify, deprecated |
+| points_selector | [PointsSelector](#solvio-PointsSelector) | optional | Affected points |
 
 
 
@@ -1870,6 +1872,7 @@ The JSON representation for `Value` is JSON value.
 | Delete | [DeletePoints](#solvio-DeletePoints) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Delete points |
 | Get | [GetPoints](#solvio-GetPoints) | [GetResponse](#solvio-GetResponse) | Retrieve points |
 | SetPayload | [SetPayloadPoints](#solvio-SetPayloadPoints) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Set payload for points |
+| OverwritePayload | [SetPayloadPoints](#solvio-SetPayloadPoints) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Overwrite payload for points |
 | DeletePayload | [DeletePayloadPoints](#solvio-DeletePayloadPoints) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Delete specified key payload for points |
 | ClearPayload | [ClearPayloadPoints](#solvio-ClearPayloadPoints) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Remove all payload for specified points |
 | CreateFieldIndex | [CreateFieldIndexCollection](#solvio-CreateFieldIndexCollection) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Create index for field in collection |

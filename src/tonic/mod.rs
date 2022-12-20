@@ -134,9 +134,9 @@ pub fn init_internal(
             log::debug!("Solvio internal gRPC listening on {}", internal_grpc_port);
 
             Server::builder()
-                .layer(tonic_telemetry::TonicTelemetryLayer::new(
-                    telemetry_collector,
-                ))
+                // .layer(tonic_telemetry::TonicTelemetryLayer::new(
+                //     telemetry_collector,
+                // ))
                 .add_service(
                     SolvioServer::new(solvio_service)
                         .send_compressed(CompressionEncoding::Gzip)

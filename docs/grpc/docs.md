@@ -4,6 +4,7 @@
 ## Table of Contents
 
 - [collections.proto](#collections-proto)
+    - [AliasDescription](#solvio-AliasDescription)
     - [AliasOperations](#solvio-AliasOperations)
     - [ChangeAliases](#solvio-ChangeAliases)
     - [CollectionConfig](#solvio-CollectionConfig)
@@ -20,6 +21,9 @@
     - [GetCollectionInfoRequest](#solvio-GetCollectionInfoRequest)
     - [GetCollectionInfoResponse](#solvio-GetCollectionInfoResponse)
     - [HnswConfigDiff](#solvio-HnswConfigDiff)
+    - [ListAliasesRequest](#solvio-ListAliasesRequest)
+    - [ListAliasesResponse](#solvio-ListAliasesResponse)
+    - [ListCollectionAliasesRequest](#solvio-ListCollectionAliasesRequest)
     - [ListCollectionsRequest](#solvio-ListCollectionsRequest)
     - [ListCollectionsResponse](#solvio-ListCollectionsResponse)
     - [OptimizerStatus](#solvio-OptimizerStatus)
@@ -141,6 +145,22 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## collections.proto
+
+
+
+<a name="solvio-AliasDescription"></a>
+
+### AliasDescription
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| alias_name | [string](#string) |  | Name of the alias |
+| collection_name | [string](#string) |  | Name of the collection |
+
+
+
 
 
 
@@ -415,6 +435,47 @@
 | max_indexing_threads | [uint64](#uint64) | optional | Number of parallel threads used for background index building. If 0 - auto selection. |
 | on_disk | [bool](#bool) | optional | Store HNSW index on disk. If set to false, index will be stored in RAM. |
 | payload_m | [uint64](#uint64) | optional | Number of additional payload-aware links per node in the index graph. If not set - regular M parameter will be used. |
+
+
+
+
+
+
+<a name="solvio-ListAliasesRequest"></a>
+
+### ListAliasesRequest
+
+
+
+
+
+
+
+<a name="solvio-ListAliasesResponse"></a>
+
+### ListAliasesResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| aliases | [AliasDescription](#solvio-AliasDescription) | repeated |  |
+| time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
+<a name="solvio-ListCollectionAliasesRequest"></a>
+
+### ListCollectionAliasesRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
 
 
 
@@ -747,6 +808,8 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | Update | [UpdateCollection](#solvio-UpdateCollection) | [CollectionOperationResponse](#solvio-CollectionOperationResponse) | Update parameters of the existing collection |
 | Delete | [DeleteCollection](#solvio-DeleteCollection) | [CollectionOperationResponse](#solvio-CollectionOperationResponse) | Drop collection and all associated data |
 | UpdateAliases | [ChangeAliases](#solvio-ChangeAliases) | [CollectionOperationResponse](#solvio-CollectionOperationResponse) | Update Aliases of the existing collection |
+| ListCollectionAliases | [ListCollectionAliasesRequest](#solvio-ListCollectionAliasesRequest) | [ListAliasesResponse](#solvio-ListAliasesResponse) | Get list of all aliases for a collection |
+| ListAliases | [ListAliasesRequest](#solvio-ListAliasesRequest) | [ListAliasesResponse](#solvio-ListAliasesResponse) | Get list of all aliases for all existing collections |
 
  
 

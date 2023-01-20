@@ -130,6 +130,9 @@
     - [CreateFullSnapshotRequest](#solvio-CreateFullSnapshotRequest)
     - [CreateSnapshotRequest](#solvio-CreateSnapshotRequest)
     - [CreateSnapshotResponse](#solvio-CreateSnapshotResponse)
+    - [DeleteFullSnapshotRequest](#solvio-DeleteFullSnapshotRequest)
+    - [DeleteSnapshotRequest](#solvio-DeleteSnapshotRequest)
+    - [DeleteSnapshotResponse](#solvio-DeleteSnapshotResponse)
     - [ListFullSnapshotsRequest](#solvio-ListFullSnapshotsRequest)
     - [ListSnapshotsRequest](#solvio-ListSnapshotsRequest)
     - [ListSnapshotsResponse](#solvio-ListSnapshotsResponse)
@@ -2070,6 +2073,52 @@ The JSON representation for `Value` is JSON value.
 
 
 
+<a name="solvio-DeleteFullSnapshotRequest"></a>
+
+### DeleteFullSnapshotRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| snapshot_name | [string](#string) |  | Name of the full snapshot |
+
+
+
+
+
+
+<a name="solvio-DeleteSnapshotRequest"></a>
+
+### DeleteSnapshotRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+| snapshot_name | [string](#string) |  | Name of the collection snapshot |
+
+
+
+
+
+
+<a name="solvio-DeleteSnapshotResponse"></a>
+
+### DeleteSnapshotResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
 <a name="solvio-ListFullSnapshotsRequest"></a>
 
 ### ListFullSnapshotsRequest
@@ -2143,8 +2192,10 @@ The JSON representation for `Value` is JSON value.
 | ----------- | ------------ | ------------- | ------------|
 | Create | [CreateSnapshotRequest](#solvio-CreateSnapshotRequest) | [CreateSnapshotResponse](#solvio-CreateSnapshotResponse) | Create collection snapshot |
 | List | [ListSnapshotsRequest](#solvio-ListSnapshotsRequest) | [ListSnapshotsResponse](#solvio-ListSnapshotsResponse) | List collection snapshots |
+| Delete | [DeleteSnapshotRequest](#solvio-DeleteSnapshotRequest) | [DeleteSnapshotResponse](#solvio-DeleteSnapshotResponse) | Delete collection snapshots |
 | CreateFull | [CreateFullSnapshotRequest](#solvio-CreateFullSnapshotRequest) | [CreateSnapshotResponse](#solvio-CreateSnapshotResponse) | Create full storage snapshot |
 | ListFull | [ListFullSnapshotsRequest](#solvio-ListFullSnapshotsRequest) | [ListSnapshotsResponse](#solvio-ListSnapshotsResponse) | List full storage snapshots |
+| DeleteFull | [DeleteFullSnapshotRequest](#solvio-DeleteFullSnapshotRequest) | [DeleteSnapshotResponse](#solvio-DeleteSnapshotResponse) | List full storage snapshots |
 
  
 

@@ -15,7 +15,7 @@ use crate::config::{
 use crate::operations::config_diff::{HnswConfigDiff, OptimizersConfigDiff, WalConfigDiff};
 use crate::operations::point_ops::PointsSelector::PointIdsSelector;
 use crate::operations::point_ops::{
-    Batch, FilterSelector, PointIdsList, PointStruct, PointsSelector,
+    Batch, FilterSelector, PointIdsList, PointStruct, PointsSelector, WriteOrdering,
 };
 use crate::operations::types::{
     AliasDescription, CollectionInfo, CollectionStatus, CountResult, LookupLocation,
@@ -24,6 +24,41 @@ use crate::operations::types::{
 };
 use crate::optimizers_builder::OptimizersConfig;
 use crate::shards::remote_shard::CollectionSearchRequest;
+
+pub fn write_ordering_to_proto(ordering: WriteOrdering) -> api::grpc::solvio::WriteOrdering {
+    api::grpc::solvio::WriteOrdering {
+        r#type: match ordering {
+            WriteOrdering::Weak => api::grpc::solvio::WriteOrderingType::Weak as i32,
+            WriteOrdering::Medium => api::grpc::solvio::WriteOrderingType::Medium as i32,
+            WriteOrdering::Strong => api::grpc::solvio::WriteOrderingType::Strong as i32,
+        },
+    }
+}
+
+pub fn write_ordering_from_proto(
+    ordering: Option<api::grpc::solvio::WriteOrdering>,
+) -> Result<WriteOrdering, Status> {
+    let ordering_parsed = match ordering {
+        None => api::grpc::solvio::WriteOrderingType::Weak,
+        Some(write_ordering) => {
+            match api::grpc::solvio::WriteOrderingType::from_i32(write_ordering.r#type) {
+                None => {
+                    return Err(Status::invalid_argument(format!(
+                        "cannot convert ordering: {}",
+                        write_ordering.r#type
+                    )))
+                }
+                Some(res) => res,
+            }
+        }
+    };
+
+    Ok(match ordering_parsed {
+        api::grpc::solvio::WriteOrderingType::Weak => WriteOrdering::Weak,
+        api::grpc::solvio::WriteOrderingType::Medium => WriteOrdering::Medium,
+        api::grpc::solvio::WriteOrderingType::Strong => WriteOrdering::Strong,
+    })
+}
 
 impl From<api::grpc::solvio::HnswConfigDiff> for HnswConfigDiff {
     fn from(value: api::grpc::solvio::HnswConfigDiff) -> Self {

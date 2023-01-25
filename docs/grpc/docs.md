@@ -113,9 +113,11 @@
     - [VectorsSelector](#solvio-VectorsSelector)
     - [WithPayloadSelector](#solvio-WithPayloadSelector)
     - [WithVectorsSelector](#solvio-WithVectorsSelector)
+    - [WriteOrdering](#solvio-WriteOrdering)
   
     - [FieldType](#solvio-FieldType)
     - [UpdateStatus](#solvio-UpdateStatus)
+    - [WriteOrderingType](#solvio-WriteOrderingType)
   
 - [points_service.proto](#points_service-proto)
     - [Points](#solvio-Points)
@@ -963,6 +965,7 @@ The JSON representation for `Value` is JSON value.
 | collection_name | [string](#string) |  | name of the collection |
 | wait | [bool](#bool) | optional | Wait until the changes have been applied? |
 | points | [PointsSelector](#solvio-PointsSelector) |  | Affected points |
+| ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
 
 
 
@@ -1048,6 +1051,7 @@ The JSON representation for `Value` is JSON value.
 | field_name | [string](#string) |  | Field name to index |
 | field_type | [FieldType](#solvio-FieldType) | optional | Field type. |
 | field_index_params | [PayloadIndexParams](#solvio-PayloadIndexParams) | optional | Payload index params. |
+| ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
 
 
 
@@ -1065,6 +1069,7 @@ The JSON representation for `Value` is JSON value.
 | collection_name | [string](#string) |  | name of the collection |
 | wait | [bool](#bool) | optional | Wait until the changes have been applied? |
 | field_name | [string](#string) |  | Field name to delete |
+| ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
 
 
 
@@ -1084,6 +1089,7 @@ The JSON representation for `Value` is JSON value.
 | keys | [string](#string) | repeated | List of keys to delete |
 | points | [PointId](#solvio-PointId) | repeated | Affected points, deprecated |
 | points_selector | [PointsSelector](#solvio-PointsSelector) | optional | Affected points |
+| ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
 
 
 
@@ -1101,6 +1107,7 @@ The JSON representation for `Value` is JSON value.
 | collection_name | [string](#string) |  | name of the collection |
 | wait | [bool](#bool) | optional | Wait until the changes have been applied? |
 | points | [PointsSelector](#solvio-PointsSelector) |  | Affected points |
+| ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
 
 
 
@@ -1745,6 +1752,7 @@ The JSON representation for `Value` is JSON value.
 | payload | [SetPayloadPoints.PayloadEntry](#solvio-SetPayloadPoints-PayloadEntry) | repeated | New payload values |
 | points | [PointId](#solvio-PointId) | repeated | List of point to modify, deprecated |
 | points_selector | [PointsSelector](#solvio-PointsSelector) | optional | Affected points |
+| ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
 
 
 
@@ -1794,6 +1802,7 @@ The JSON representation for `Value` is JSON value.
 | collection_name | [string](#string) |  | name of the collection |
 | wait | [bool](#bool) | optional | Wait until the changes have been applied? |
 | points | [PointStruct](#solvio-PointStruct) | repeated |  |
+| ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
 
 
 
@@ -1896,6 +1905,21 @@ The JSON representation for `Value` is JSON value.
 
 
 
+
+<a name="solvio-WriteOrdering"></a>
+
+### WriteOrdering
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| type | [WriteOrderingType](#solvio-WriteOrderingType) |  | Write ordering guarantees |
+
+
+
+
+
  
 
 
@@ -1924,6 +1948,19 @@ The JSON representation for `Value` is JSON value.
 | UnknownUpdateStatus | 0 |  |
 | Acknowledged | 1 | Update is received, but not processed yet |
 | Completed | 2 | Update is applied and ready for search |
+
+
+
+<a name="solvio-WriteOrderingType"></a>
+
+### WriteOrderingType
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| Weak | 0 | Write operations may be reordered, works faster, default |
+| Medium | 1 | Write operations go through dynamically selected leader, may be inconsistent for a short period of time in case of leader change |
+| Strong | 2 | Write operations go through the permanent leader, consistent, but may be unavailable if leader is down |
 
 
  

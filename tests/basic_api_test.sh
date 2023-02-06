@@ -3,7 +3,7 @@
 
 set -ex
 
-solvio_HOST='localhost:6333'
+solvio_HOST=${solvio_HOST:-'localhost:6333'}
 
 # cleanup collection if it exists
 curl -X DELETE "http://$solvio_HOST/collections/test_collection" \
@@ -105,7 +105,7 @@ curl -L -X POST "http://$solvio_HOST/collections/test_collection/points/search" 
     }' | jq
 
 # search points batch
-curl -L -X POST "http://$solvio_HOST/collections/test_collection/points/search-batch" \
+curl -L -X POST "http://$solvio_HOST/collections/test_collection/points/search/batch" \
   -H 'Content-Type: application/json' \
   --fail -s \
   --data-raw '{

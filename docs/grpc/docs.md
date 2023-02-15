@@ -93,6 +93,8 @@
     - [RecommendBatchResponse](#solvio-RecommendBatchResponse)
     - [RecommendPoints](#solvio-RecommendPoints)
     - [RecommendResponse](#solvio-RecommendResponse)
+    - [RepeatedIntegers](#solvio-RepeatedIntegers)
+    - [RepeatedStrings](#solvio-RepeatedStrings)
     - [RetrievedPoint](#solvio-RetrievedPoint)
     - [RetrievedPoint.PayloadEntry](#solvio-RetrievedPoint-PayloadEntry)
     - [ScoredPoint](#solvio-ScoredPoint)
@@ -1293,6 +1295,8 @@ The JSON representation for `Value` is JSON value.
 | integer | [int64](#int64) |  | Match integer |
 | boolean | [bool](#bool) |  | Match boolean |
 | text | [string](#string) |  | Match text |
+| keywords | [RepeatedStrings](#solvio-RepeatedStrings) |  | Match multiple keywords |
+| integers | [RepeatedIntegers](#solvio-RepeatedIntegers) |  | Match multiple integers |
 
 
 
@@ -1560,6 +1564,36 @@ The JSON representation for `Value` is JSON value.
 | ----- | ---- | ----- | ----------- |
 | result | [ScoredPoint](#solvio-ScoredPoint) | repeated |  |
 | time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
+<a name="solvio-RepeatedIntegers"></a>
+
+### RepeatedIntegers
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| integers | [int64](#int64) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-RepeatedStrings"></a>
+
+### RepeatedStrings
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| strings | [string](#string) | repeated |  |
 
 
 

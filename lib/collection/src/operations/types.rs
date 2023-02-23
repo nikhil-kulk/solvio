@@ -1,5 +1,6 @@
 use std::backtrace::Backtrace;
 use std::collections::{BTreeMap, HashMap};
+use std::error::Error as _;
 use std::num::NonZeroU64;
 use std::time::SystemTimeError;
 
@@ -515,8 +516,13 @@ impl From<io::Error> for CollectionError {
 
 impl From<tonic::transport::Error> for CollectionError {
     fn from(err: tonic::transport::Error) -> Self {
+        let error = match err.source() {
+            Some(src) => format!("Tonic transport error: {err}: {src}"),
+            None => format!("Tonic transport error: {err}"),
+        };
+
         CollectionError::ServiceError {
-            error: format!("Tonic transport error: {err}"),
+            error,
             backtrace: Some(Backtrace::force_capture().to_string()),
         }
     }

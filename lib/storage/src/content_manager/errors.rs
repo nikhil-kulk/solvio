@@ -1,4 +1,5 @@
 use std::backtrace::Backtrace;
+use std::error::Error as _;
 use std::io::Error as IoError;
 
 use collection::operations::types::CollectionError;
@@ -206,8 +207,13 @@ impl<E: std::fmt::Display> From<atomicwrites::Error<E>> for StorageError {
 
 impl From<tonic::transport::Error> for StorageError {
     fn from(err: tonic::transport::Error) -> Self {
+        let description = match err.source() {
+            Some(src) => format!("Tonic transport error: {err}: {src}"),
+            None => format!("Tonic transport error: {err}"),
+        };
+
         StorageError::ServiceError {
-            description: format!("Tonic transport error: {err}"),
+            description,
             backtrace: Some(Backtrace::force_capture().to_string()),
         }
     }

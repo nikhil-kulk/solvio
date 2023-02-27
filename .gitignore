@@ -1,5 +1,6 @@
 /target
 /benches/search-points/target
+/echo/target
 /.idea
 /storage
 /snapshots

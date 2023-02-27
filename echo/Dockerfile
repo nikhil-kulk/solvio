@@ -1,9 +1,11 @@
 FROM --platform=${BUILDPLATFORM:-linux/amd64} lukemathwalker/cargo-chef:latest-rust-1.67.1 AS chef
 WORKDIR /echo
 
+
 FROM chef AS planner
 COPY . .
 RUN cargo chef prepare --recipe-path recipe.json
+
 
 FROM chef as builder
 
@@ -20,7 +22,6 @@ COPY --from=planner /echo/recipe.json recipe.json
 
 RUN apt-get update && apt-get install -y gcc-multilib && apt-get install -y clang cmake gcc-aarch64-linux-gnu g++-aarch64-linux-gnu protobuf-compiler && rustup component add rustfmt
 
-
 RUN rustup target add $(bash target_arch.sh)
 
 # Build dependencies - this is the caching Docker layer!
@@ -31,7 +32,8 @@ COPY . .
 # Build actual target here
 RUN cargo build --release --target $(bash target_arch.sh)
 
-RUN mv target/$(bash target_arch.sh)/release/echo /echo
+RUN mv target/$(bash target_arch.sh)/release/echo /echo-bin
+
 
 FROM debian:11-slim
 
@@ -42,7 +44,7 @@ RUN apt-get update \
     && apt-get install -y ca-certificates tzdata \
     && rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /echo /echo
+COPY --from=builder /echo-bin /echo
 
 WORKDIR /
 

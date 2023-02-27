@@ -1,9 +1,4 @@
-
-debug: false
-log_level: INFO
-
-service:
-  host: 0.0.0.0
-  http_port: 6333
-  # Uncomment to enable gRPC:
-  #grpc_port: 6334
+storage:
+  performance:
+    max_search_threads: 32
+    max_optimization_threads: 4

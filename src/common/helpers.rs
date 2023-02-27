@@ -67,7 +67,7 @@ pub fn create_general_purpose_runtime() -> std::io::Result<Runtime> {
     runtime::Builder::new_multi_thread()
         .enable_time()
         .enable_io()
-        .worker_threads(max(get_num_cpus(), 2))
+        .worker_threads(get_num_cpus() * 2)
         .thread_name_fn(|| {
             static ATOMIC_ID: AtomicUsize = AtomicUsize::new(0);
             let general_id = ATOMIC_ID.fetch_add(1, Ordering::SeqCst);

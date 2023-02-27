@@ -27,7 +27,7 @@ do
 
 	cat <<-EOF
 	  $SERVICE_NAME:
-	    image: solvio:latest
+	    image: echo:latest
 	    environment:
 	      - RUST_LOG=debug
 	    networks:

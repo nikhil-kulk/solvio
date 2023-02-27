@@ -138,12 +138,9 @@ fn main() -> anyhow::Result<()> {
 
     // Create and own search runtime out of the scope of async context to ensure correct
     // destruction of it
-    let search_runtime = create_search_runtime(settings.storage.performance.max_search_threads)
-        .expect("Can't search create runtime.");
+    let search_runtime = create_search_runtime(32).expect("Can't search create runtime.");
 
-    let update_runtime =
-        create_update_runtime(settings.storage.performance.max_optimization_threads)
-            .expect("Can't optimizer create runtime.");
+    let update_runtime = create_update_runtime(4).expect("Can't optimizer create runtime.");
 
     let general_runtime =
         create_general_purpose_runtime().expect("Can't optimizer general purpose runtime.");

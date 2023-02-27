@@ -3,6 +3,7 @@ WORKDIR /echo
 
 FROM chef AS planner
 COPY . .
+COPY ../tools .
 RUN cargo chef prepare --recipe-path recipe.json
 
 FROM chef as builder
@@ -13,7 +14,7 @@ ENV TARGETARCH=${TARGETARCH:-amd64}
 
 WORKDIR /echo
 
-COPY ../tools/target_arch.sh ./target_arch.sh
+COPY ./tools/target_arch.sh ./target_arch.sh
 RUN echo "Building for $TARGETARCH, arch: $(bash target_arch.sh)"
 
 COPY --from=planner /echo/recipe.json recipe.json

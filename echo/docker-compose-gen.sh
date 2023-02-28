@@ -28,13 +28,14 @@ do
 	cat <<-EOF
 	  $SERVICE_NAME:
 	    image: echo:latest
+	    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
 	    environment:
 	      - RUST_LOG=debug
 	    networks:
 	      echo:
 	        ipv4_address: $ADDRESS
 	    ports:
-	      - "$PORT:8080"
+	      - "127.0.0.1:$PORT:8080"
 	    restart: always
 
 	EOF

@@ -9,7 +9,7 @@ function main {
 
 	for ((node = 0; node < nodes; node++))
 	do
-		addrs+=( 127.0.0.1:$((9000 + node)) )
+		addrs+=( 69.42.0.$((1 + node)):8081 )
 	done
 
 	declare data=${(j:, :)${:-\"${^addrs}\"}}
@@ -19,7 +19,7 @@ function main {
 		curl 127.0.0.1:$((8000 + node)) \
 			-X POST \
 			-H 'Content-Type: application/json' \
-			--data-raw "{\"nodes\": [$data]}" | jq
+			--data-raw "{\"nodes\": [$data]}" | jq -Rr '. as $line | fromjson? // $line'
 	done
 }
 

@@ -1,26 +1,30 @@
 use std::{
     collections::HashMap,
     fmt,
-    net::{Ipv4Addr, SocketAddr},
+    net::SocketAddr,
     sync::Arc,
     time::Duration,
 };
+
+use clap::Parser as _;
 
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     env_logger::init();
 
+    let opts = Opts::parse();
+
     let router = axum::Router::new()
         .route("/", axum::routing::post(query))
         .with_state(GrpcClientsCache::default());
 
-    let http = axum::Server::bind(&([0, 0, 0, 0], 8080).into())
+    let http = axum::Server::bind(&opts.http)
         .serve(router.into_make_service());
 
     let grpc = tonic::transport::Server::builder()
         .add_service(rpc_service_server::RpcServiceServer::new(RpcServer))
-        .serve(([0, 0, 0, 0], 8081).into());
+        .serve(opts.grpc);
 
     let (http_res, grpc_res) = futures::future::join(http, grpc).await;
 
@@ -36,29 +40,35 @@ async fn main() -> anyhow::Result<()> {
 }
 
 
+#[derive(Copy, Clone, Debug, clap::Parser)]
+struct Opts {
+    #[arg(long, default_value = "127.0.0.1:8080")]
+    http: SocketAddr,
+
+    #[arg(long, default_value = "127.0.0.1:8081")]
+    grpc: SocketAddr,
+}
+
+
 async fn query(
     axum::extract::State(clients): axum::extract::State<GrpcClientsCache>,
     axum::extract::Json(params): axum::extract::Json<Params>,
 ) -> Result<axum::response::Json<Vec<SocketAddr>>, Error> {
     log::info!("POST /");
 
-    let mut response = Vec::new();
+    let mut resp = Vec::new();
 
-    for id in 0..params.count {
-        let mut addr = params.from.octets();
-        addr[3] += id;
-
-        let addr = clients.get_or_connect(addr).await?.lock().await.query(()).await?;
-        response.push(addr.into_inner());
+    for node in params.nodes {
+        let echo = clients.get_or_connect(node).await?.lock().await.query(()).await?;
+        resp.push(echo.into_inner());
     }
 
-    Ok(axum::response::Json(response))
+    Ok(axum::response::Json(resp))
 }
 
 #[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
 struct Params {
-    from: Ipv4Addr,
-    count: u8,
+    nodes: Vec<SocketAddr>,
 }
 
 #[derive(Clone, Debug, Default)]
@@ -69,7 +79,7 @@ struct GrpcClientsCache {
 impl GrpcClientsCache {
     pub async fn get_or_connect(
         &self,
-        addr: impl Into<Ipv4Addr>,
+        addr: impl Into<SocketAddr>,
     ) -> anyhow::Result<SharedRpcClient> {
         let addr = addr.into();
 
@@ -77,7 +87,7 @@ impl GrpcClientsCache {
             return Ok(client.clone());
         }
 
-        let endpoint = format!("http://{addr}:8081");
+        let endpoint = format!("http://{addr}");
         let endpoint = tonic::transport::channel::Endpoint::from_shared(endpoint)?
             .timeout(Duration::from_millis(200))
             .connect_timeout(Duration::from_millis(200));
@@ -93,7 +103,7 @@ impl GrpcClientsCache {
 
 #[derive(Debug, Default)]
 struct GrpcClientsCacheInner {
-    clients: HashMap<Ipv4Addr, SharedRpcClient>,
+    clients: HashMap<SocketAddr, SharedRpcClient>,
 }
 
 #[derive(Debug)]

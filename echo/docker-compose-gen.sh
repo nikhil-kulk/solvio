@@ -18,7 +18,7 @@ networks:
 services:
 EOF
 
-for ((node=0; node<NODES; node++))
+for ((node = 0; node < NODES; node++))
 do
 	declare SERVICE_NAME=echo-$node
 

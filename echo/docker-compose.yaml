@@ -1,0 +1,363 @@
+version: "3.7"
+
+networks:
+  echo:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 69.42.0.0/16
+         gateway: 69.42.0.255
+
+services:
+  echo-0:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.1
+    ports:
+      - "127.0.0.1:8000:8080"
+
+
+  echo-1:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.2
+    ports:
+      - "127.0.0.1:8001:8080"
+
+
+  echo-2:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.3
+    ports:
+      - "127.0.0.1:8002:8080"
+
+
+  echo-3:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.4
+    ports:
+      - "127.0.0.1:8003:8080"
+
+
+  echo-4:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.5
+    ports:
+      - "127.0.0.1:8004:8080"
+
+
+  echo-5:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.6
+    ports:
+      - "127.0.0.1:8005:8080"
+
+
+  echo-6:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.7
+    ports:
+      - "127.0.0.1:8006:8080"
+
+
+  echo-7:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.8
+    ports:
+      - "127.0.0.1:8007:8080"
+
+
+  echo-8:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.9
+    ports:
+      - "127.0.0.1:8008:8080"
+
+
+  echo-9:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.10
+    ports:
+      - "127.0.0.1:8009:8080"
+
+
+  echo-10:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.11
+    ports:
+      - "127.0.0.1:8010:8080"
+
+
+  echo-11:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.12
+    ports:
+      - "127.0.0.1:8011:8080"
+
+
+  echo-12:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.13
+    ports:
+      - "127.0.0.1:8012:8080"
+
+
+  echo-13:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.14
+    ports:
+      - "127.0.0.1:8013:8080"
+
+
+  echo-14:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.15
+    ports:
+      - "127.0.0.1:8014:8080"
+
+
+  echo-15:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.16
+    ports:
+      - "127.0.0.1:8015:8080"
+
+
+  echo-16:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.17
+    ports:
+      - "127.0.0.1:8016:8080"
+
+
+  echo-17:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.18
+    ports:
+      - "127.0.0.1:8017:8080"
+
+
+  echo-18:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.19
+    ports:
+      - "127.0.0.1:8018:8080"
+
+
+  echo-19:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.20
+    ports:
+      - "127.0.0.1:8019:8080"
+
+
+  echo-20:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.21
+    ports:
+      - "127.0.0.1:8020:8080"
+
+
+  echo-21:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.22
+    ports:
+      - "127.0.0.1:8021:8080"
+
+
+  echo-22:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.23
+    ports:
+      - "127.0.0.1:8022:8080"
+
+
+  echo-23:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.24
+    ports:
+      - "127.0.0.1:8023:8080"
+
+
+  echo-24:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.25
+    ports:
+      - "127.0.0.1:8024:8080"
+
+
+  echo-25:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.26
+    ports:
+      - "127.0.0.1:8025:8080"
+
+
+  echo-26:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.27
+    ports:
+      - "127.0.0.1:8026:8080"
+
+
+  echo-27:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.28
+    ports:
+      - "127.0.0.1:8027:8080"
+
+
+  echo-28:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.29
+    ports:
+      - "127.0.0.1:8028:8080"
+
+
+  echo-29:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.30
+    ports:
+      - "127.0.0.1:8029:8080"
+
+
+  echo-30:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.31
+    ports:
+      - "127.0.0.1:8030:8080"
+
+
+  echo-31:
+    image: echo:latest
+    command: ./echo --http 0.0.0.0:8080 --grpc 0.0.0.0:8081
+    restart: always
+    networks:
+      echo:
+        ipv4_address: 69.42.0.32
+    ports:
+      - "127.0.0.1:8031:8080"
+
+

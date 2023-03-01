@@ -17,7 +17,7 @@ async fn main() -> anyhow::Result<()> {
 
     let router = axum::Router::new()
         .route("/", axum::routing::post(query))
-        .with_state(GrpcClientsCache::default());
+        .with_state(GrpcClientsCache::new(opts.timeout, opts.connection_timeout));
 
     let http = axum::Server::bind(&opts.http)
         .serve(router.into_make_service());
@@ -47,6 +47,12 @@ struct Opts {
 
     #[arg(long, default_value = "127.0.0.1:8081")]
     grpc: SocketAddr,
+
+    #[arg(long, default_value = "200ms", value_parser = humantime::parse_duration)]
+    timeout: Duration,
+
+    #[arg(long, default_value = "200ms", value_parser = humantime::parse_duration)]
+    connection_timeout: Duration,
 }
 
 
@@ -71,12 +77,22 @@ struct Params {
     nodes: Vec<SocketAddr>,
 }
 
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug)]
 struct GrpcClientsCache {
     cache: Arc<tokio::sync::RwLock<GrpcClientsCacheInner>>,
+    timeout: Duration,
+    connection_timeout: Duration,
 }
 
 impl GrpcClientsCache {
+    pub fn new(timeout: Duration, connection_timeout: Duration) -> Self {
+        Self {
+            cache: Default::default(),
+            timeout,
+            connection_timeout,
+        }
+    }
+
     pub async fn get_or_connect(
         &self,
         addr: impl Into<SocketAddr>,
@@ -89,8 +105,8 @@ impl GrpcClientsCache {
 
         let endpoint = format!("http://{addr}");
         let endpoint = tonic::transport::channel::Endpoint::from_shared(endpoint)?
-            .timeout(Duration::from_millis(200))
-            .connect_timeout(Duration::from_millis(200));
+            .timeout(self.timeout)
+            .connect_timeout(self.connection_timeout);
 
         let client = rpc_service_client::RpcServiceClient::connect(endpoint).await?;
         let client = Arc::new(tokio::sync::Mutex::new(client));

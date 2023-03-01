@@ -10,6 +10,7 @@ axum = "0.6"
 clap = { version = "4.1", features = ["derive"] }
 env_logger = { version = "0.10", default-features = false, features = ["auto-color"] }
 futures = { version = "0.3", default-features = false, features = ["async-await", "std"] }
+humantime = "2.1"
 log = { version = "0.4", features = ["std"] }
 thiserror = "1.0"
 tokio = { version = "~1.25", features = ["full"] }

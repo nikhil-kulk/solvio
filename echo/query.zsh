@@ -52,7 +52,7 @@ function main {
 
 	for (( node = 0; node < opts[nodes]; node++))
 	do
-		echo curl 127.0.0.1:$((8000 + node)) \
+		curl -sS 127.0.0.1:$((8000 + node)) \
 			-X POST \
 			-H 'Content-Type: application/json' \
 			--data-raw "{\"nodes\": [$data]}" | jq -Rr '. as $line | (fromjson? | length) // $line'

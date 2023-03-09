@@ -30,7 +30,9 @@
     - [OptimizersConfigDiff](#solvio-OptimizersConfigDiff)
     - [PayloadIndexParams](#solvio-PayloadIndexParams)
     - [PayloadSchemaInfo](#solvio-PayloadSchemaInfo)
+    - [QuantizationConfig](#solvio-QuantizationConfig)
     - [RenameAlias](#solvio-RenameAlias)
+    - [ScalarQuantization](#solvio-ScalarQuantization)
     - [TextIndexParams](#solvio-TextIndexParams)
     - [UpdateCollection](#solvio-UpdateCollection)
     - [VectorParams](#solvio-VectorParams)
@@ -42,6 +44,7 @@
     - [CollectionStatus](#solvio-CollectionStatus)
     - [Distance](#solvio-Distance)
     - [PayloadSchemaType](#solvio-PayloadSchemaType)
+    - [QuantizationType](#solvio-QuantizationType)
     - [TokenizerType](#solvio-TokenizerType)
   
 - [collections_service.proto](#collections_service-proto)
@@ -87,6 +90,7 @@
     - [PointsIdsList](#solvio-PointsIdsList)
     - [PointsOperationResponse](#solvio-PointsOperationResponse)
     - [PointsSelector](#solvio-PointsSelector)
+    - [QuantizationSearchParams](#solvio-QuantizationSearchParams)
     - [Range](#solvio-Range)
     - [ReadConsistency](#solvio-ReadConsistency)
     - [RecommendBatchPoints](#solvio-RecommendBatchPoints)
@@ -218,6 +222,7 @@
 | hnsw_config | [HnswConfigDiff](#solvio-HnswConfigDiff) |  | Configuration of vector index |
 | optimizer_config | [OptimizersConfigDiff](#solvio-OptimizersConfigDiff) |  | Configuration of the optimizers |
 | wal_config | [WalConfigDiff](#solvio-WalConfigDiff) |  | Configuration of the Write-Ahead-Log |
+| quantization_config | [QuantizationConfig](#solvio-QuantizationConfig) | optional | Configuration of the vector quantization |
 
 
 
@@ -363,6 +368,7 @@
 | replication_factor | [uint32](#uint32) | optional | Number of replicas of each shard that network tries to maintain, default = 1 |
 | write_consistency_factor | [uint32](#uint32) | optional | How many replicas should apply the operation for us to consider it successful, default = 1 |
 | init_from_collection | [string](#string) | optional | Specify name of the other collection to copy data from |
+| quantization_config | [QuantizationConfig](#solvio-QuantizationConfig) | optional |  |
 
 
 
@@ -594,6 +600,21 @@ If indexation speed have more priority for your - make this parameter lower. If 
 
 
 
+<a name="solvio-QuantizationConfig"></a>
+
+### QuantizationConfig
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| scalar | [ScalarQuantization](#solvio-ScalarQuantization) |  |  |
+
+
+
+
+
+
 <a name="solvio-RenameAlias"></a>
 
 ### RenameAlias
@@ -604,6 +625,23 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | ----- | ---- | ----- | ----------- |
 | old_alias_name | [string](#string) |  | Name of the alias to rename |
 | new_alias_name | [string](#string) |  | Name of the alias |
+
+
+
+
+
+
+<a name="solvio-ScalarQuantization"></a>
+
+### ScalarQuantization
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| type | [QuantizationType](#solvio-QuantizationType) |  | Type of quantization |
+| quantile | [float](#float) | optional | Number of bits to use for quantization |
+| always_ram | [bool](#bool) | optional | If true - quantized vectors always will be stored in RAM, ignoring the config of main storage |
 
 
 
@@ -768,6 +806,18 @@ If indexation speed have more priority for your - make this parameter lower. If 
 | Float | 3 |  |
 | Geo | 4 |  |
 | Text | 5 |  |
+
+
+
+<a name="solvio-QuantizationType"></a>
+
+### QuantizationType
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| UnknownQuantization | 0 |  |
+| Int8 | 1 |  |
 
 
 
@@ -1460,6 +1510,22 @@ The JSON representation for `Value` is JSON value.
 
 
 
+<a name="solvio-QuantizationSearchParams"></a>
+
+### QuantizationSearchParams
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ignore | [bool](#bool) | optional | If set to true, search will ignore quantized vector data |
+| rescore | [bool](#bool) | optional | If true, use original vectors to re-score top-k results. Default is true. |
+
+
+
+
+
+
 <a name="solvio-Range"></a>
 
 ### Range
@@ -1749,6 +1815,7 @@ The JSON representation for `Value` is JSON value.
 | ----- | ---- | ----- | ----------- |
 | hnsw_ef | [uint64](#uint64) | optional | Params relevant to HNSW index. Size of the beam in a beam-search. Larger the value - more accurate the result, more time required for search. |
 | exact | [bool](#bool) | optional | Search without approximation. If set to true, search may run long but with exact results. |
+| quantization | [QuantizationSearchParams](#solvio-QuantizationSearchParams) | optional | If set to true, search will ignore quantized vector data |
 
 
 

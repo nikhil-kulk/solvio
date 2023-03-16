@@ -1,56 +1,47 @@
-# Leveraging the pre-built Docker images with
-# cargo-chef and the Rust toolchain
-# https://www.lpalmieri.com/posts/fast-rust-docker-builds/
-FROM --platform=${BUILDPLATFORM:-linux/amd64} lukemathwalker/cargo-chef:latest-rust-1.68.2 AS chef
-WORKDIR /solvio
+FROM --platform=${BUILDPLATFORM:-linux/amd64} tonistiigi/xx AS xx
+FROM --platform=${BUILDPLATFORM:-linux/amd64} lukemathwalker/cargo-chef:latest-rust-1.68.1 AS chef
+
 
 FROM chef AS planner
+WORKDIR /solvio
 COPY . .
 RUN cargo chef prepare --recipe-path recipe.json
 
+
 FROM chef as builder
-
-# based on https://github.com/docker/buildx/issues/510
-ARG TARGETARCH
-ENV TARGETARCH=${TARGETARCH:-amd64}
-
 WORKDIR /solvio
 
-COPY ./tools/target_arch.sh ./target_arch.sh
-RUN echo "Building for $TARGETARCH, arch: $(bash target_arch.sh)"
-
-COPY --from=planner /solvio/recipe.json recipe.json
+COPY --from=xx / /
 
 RUN apt-get update \
-    && ( apt-get install -y gcc-multilib || echo "Warning: not installing gcc-multilib" ) \
-    && apt-get install -y clang cmake gcc-aarch64-linux-gnu g++-aarch64-linux-gnu protobuf-compiler \
+    && apt-get install -y clang lld cmake protobuf-compiler \
     && rustup component add rustfmt
 
+ARG TARGETPLATFORM
+ENV TARGETPLATFORM=${TARGETPLATFORM:-linux/amd64}
 
-RUN rustup target add $(bash target_arch.sh)
+RUN xx-apt-get install -y gcc g++ libc6-dev
 
-# Build dependencies - this is the caching Docker layer!
-RUN cargo chef cook --release --target $(bash target_arch.sh) --recipe-path recipe.json
+ARG PROFILE=release
+ARG FEATURES
+ARG RUSTFLAGS
+
+COPY --from=planner /solvio/recipe.json recipe.json
+RUN xx-cargo chef cook --profile $PROFILE ${FEATURES:+--features} $FEATURES --recipe-path recipe.json
 
 COPY . .
+RUN xx-cargo build --profile $PROFILE ${FEATURES:+--features} $FEATURES --bin solvio \
+    && PROFILE_DIR=$(if [ "$PROFILE" = dev ]; then echo debug; else echo $PROFILE; fi) \
+    && mv target/$(xx-cargo --print-target-triple)/$PROFILE_DIR/solvio /solvio/solvio
 
-# Build actual target here
-RUN cargo build --release --target $(bash target_arch.sh) --bin solvio
 
-RUN mv target/$(bash target_arch.sh)/release/solvio /solvio/solvio
-
-FROM debian:11-slim
-ARG APP=/solvio
+FROM debian:11-slim AS solvio
 
 RUN apt-get update \
     && apt-get install -y ca-certificates tzdata \
     && rm -rf /var/lib/apt/lists/*
 
-EXPOSE 6333
-EXPOSE 6334
-
-ENV TZ=Etc/UTC \
-    RUN_MODE=production
+ARG APP=/solvio
 
 RUN mkdir -p ${APP}
 
@@ -58,5 +49,11 @@ COPY --from=builder /solvio/solvio ${APP}/solvio
 COPY --from=builder /solvio/config ${APP}/config
 
 WORKDIR ${APP}
+
+ENV TZ=Etc/UTC \
+    RUN_MODE=production
+
+EXPOSE 6333
+EXPOSE 6334
 
 CMD ["./solvio"]

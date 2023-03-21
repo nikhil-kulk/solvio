@@ -2,6 +2,85 @@
 # Developer's guide to Solvio
 
 
+## Build Solvio
+
+### Docker 🐳
+
+Build your own from source
+
+```bash
+docker build . --tag=solvio/solvio
+```
+
+Or use latest pre-built image from [DockerHub](https://hub.docker.com/r/solvio/solvio)
+
+```bash
+docker pull solvio/solvio
+```
+
+To run the container, use the command:
+
+```bash
+docker run -p 6333:6333 solvio/solvio
+```
+
+And once you need a fine-grained setup, you can also define a storage path and custom configuration:
+
+```bash
+docker run -p 6333:6333 \
+    -v $(pwd)/path/to/data:/solvio/storage \
+    -v $(pwd)/path/to/custom_config.yaml:/solvio/config/production.yaml \
+    solvio/solvio
+```
+
+* `/solvio/storage` - is a place where Solvio persists all your data. 
+Make sure to mount it as a volume, otherwise docker will drop it with the container. 
+* `/solvio/config/production.yaml` - is the file with engine configuration. You can override any value from the [reference config](https://github.com/solvio/solvio/blob/master/config/config.yaml) 
+
+Now Solvio should be accessible at [localhost:6333](http://localhost:6333/).
+
+
+### Local development
+#### Linux/Debian
+To run Solvio on local development environment you need to install below:
+- Install Rust, follow: [install rust](https://www.rust-lang.org/tools/install)
+- Install `rustfmt` toolchain for Rust 
+    ```shell
+    rustup component add rustfmt
+    ```
+- Install dependencies:
+    ```shell
+    sudo apt-get update -y 
+    sudo apt-get upgrade -y
+    sudo apt-get install -y curl unzip gcc-multilib \
+        clang cmake jq \
+        g++-9-aarch64-linux-gnu \
+        gcc-9-aarch64-linux-gnu
+    ```
+- Install `protoc` from source
+    ```shell
+    PROTOC_VERSION=22.2
+
+    # curl `proto` source file 
+    curl -LO https://github.com/protocolbuffers/protobuf/releases//download/v$PROTOC_VERSION/protoc-$PROTOC_VERSION-linux-x86_64.zip
+
+    unzip protoc-$PROTOC_VERSION-linux-x86_64.zip -d $HOME/.local
+
+    export PATH="$PATH:$HOME/.local/bin"
+
+    # remove source file if not needed
+    rm protoc-$PROTOC_VERSION-linux-x86_64.zip
+    
+    # check insalled `protoc` version
+    protoc --version
+    ```
+- Build and run the app
+    ```shell
+    cargo build --release --bin solvio
+
+    ./target/release/solvio
+    ```
+
 ## Profiling
 
 There are several benchmarks implemented in Solvio. Benchmarks are not included in CI/CD and might take some time to execute.

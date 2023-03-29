@@ -470,13 +470,18 @@ impl Consensus {
 
     /// Listens for the next proposal and sends it to the Raft node.
     /// Returns `true` if something happened and `false` if timeout was reached.
+    #[tracing::instrument(skip(self))]
     fn propose_updates(&mut self, timeout: Duration) -> anyhow::Result<bool> {
         // Poll the async. channel on the consensus runtime.
         // https://docs.rs/tokio/1.22.0/tokio/sync/mpsc/index.html#communicating-between-sync-and-async-code
+        let span = tracing::info_span!("wait for the next proposal").entered();
         let received = self.runtime.block_on(async {
             // Wait for the next proposal during `timeout`.
             tokio::time::timeout(timeout, self.receiver.recv()).await
         });
+        let _ = span.exit();
+
+        let _span = tracing::info_span!("process proposal").entered();
         match received {
             Ok(Some(Message::FromPeer(message))) => {
                 if message.get_msg_type() == MessageType::MsgHeartbeat
@@ -601,6 +606,7 @@ impl Consensus {
     }
 
     /// Returns `true` if consensus should be stopped, `false` otherwise.
+    #[tracing::instrument(skip(self))]
     fn on_ready(&mut self) -> anyhow::Result<bool> {
         if !self.node.has_ready() {
             // No updates to process
@@ -622,6 +628,7 @@ impl Consensus {
         }
     }
 
+    #[tracing::instrument(skip(self))]
     fn process_role_change(&self, role_change: StateRole) {
         // Explicit match here for better readability
         match role_change {
@@ -644,6 +651,7 @@ impl Consensus {
     ///
     /// Returns with err on failure to apply the state.
     /// If it receives message to stop the consensus - returns None instead of LightReady.
+    #[tracing::instrument(skip(self, ready))]
     fn process_ready(
         &mut self,
         mut ready: raft::Ready,
@@ -715,6 +723,7 @@ impl Consensus {
     ///
     /// Returns with err on failure to apply the state.
     /// If it receives message to stop the consensus - returns `true`, otherwise `false`.
+    #[tracing::instrument(skip(self, light_rd))]
     fn process_light_ready(&mut self, mut light_rd: raft::LightReady) -> anyhow::Result<bool> {
         let store = self.store();
         let peer_address_by_id = store.peer_address_by_id();
@@ -746,6 +755,7 @@ impl Consensus {
         store.set_raft_soft_state(state);
     }
 
+    #[tracing::instrument(skip(self, messages))]
     fn send_messages(
         &self,
         messages: Vec<RaftMessage>,
@@ -850,6 +860,7 @@ async fn who_is(
         .parse()?)
 }
 
+#[tracing::instrument(skip(message, transport_channel_pool, store))]
 async fn send_message(
     address: Uri,
     message: RaftMessage,

@@ -28,6 +28,7 @@ impl RaftService {
 
 #[async_trait]
 impl Raft for RaftService {
+    #[tracing::instrument(skip(self, request))]
     async fn send(&self, mut request: Request<RaftMessageBytes>) -> Result<Response<()>, Status> {
         let message = <RaftMessage as prost::Message>::decode(&request.get_mut().message[..])
             .map_err(|err| {
@@ -53,6 +54,7 @@ impl Raft for RaftService {
         }))
     }
 
+    #[tracing::instrument(skip(self))]
     async fn add_peer_to_known(
         &self,
         request: tonic::Request<AddPeerToKnownMessage>,

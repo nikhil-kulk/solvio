@@ -44,6 +44,7 @@ pub fn points_operation_response(
     }
 }
 
+#[tracing::instrument(skip(toc, upsert_points))]
 pub async fn upsert(
     toc: &TableOfContent,
     upsert_points: UpsertPoints,

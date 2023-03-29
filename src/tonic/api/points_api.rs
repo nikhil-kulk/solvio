@@ -29,6 +29,7 @@ impl PointsService {
 
 #[tonic::async_trait]
 impl Points for PointsService {
+    #[tracing::instrument(skip(self, request))]
     async fn upsert(
         &self,
         request: Request<UpsertPoints>,

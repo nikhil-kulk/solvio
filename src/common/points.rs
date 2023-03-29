@@ -23,6 +23,7 @@ pub struct CreateFieldIndex {
     pub field_schema: Option<PayloadFieldSchema>,
 }
 
+#[tracing::instrument(skip(toc, operation))]
 pub async fn do_upsert_points(
     toc: &TableOfContent,
     collection_name: &str,

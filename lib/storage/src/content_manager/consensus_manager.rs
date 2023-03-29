@@ -523,6 +523,7 @@ impl<C: CollectionContainer> ConsensusManager<C> {
         self.persistent.read().save()
     }
 
+    #[tracing::instrument]
     async fn await_receiver(
         receiver: Receiver<Result<bool, StorageError>>,
         wait_timeout: Duration,
@@ -580,6 +581,7 @@ impl<C: CollectionContainer> ConsensusManager<C> {
     ///   This is needed to ensure that the operation is committed and applied on majority of the nodes.
     ///   We can not wait for all nodes confirmation, because it is not guaranteed that all nodes will be online.
     ///
+    #[tracing::instrument(skip(self))]
     pub async fn propose_consensus_op_with_await(
         &self,
         operation: ConsensusOperations,

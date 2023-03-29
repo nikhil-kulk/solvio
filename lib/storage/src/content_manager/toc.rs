@@ -477,6 +477,7 @@ impl TableOfContent {
         Ok(())
     }
 
+    #[tracing::instrument(skip(proposal_sender))]
     fn send_set_replica_state_proposal_op(
         proposal_sender: &OperationSender,
         collection_name: String,
@@ -781,6 +782,7 @@ impl TableOfContent {
         Ok(true)
     }
 
+    #[tracing::instrument(skip(self))]
     pub fn perform_collection_meta_op_sync(
         &self,
         operation: CollectionMetaOperations,
@@ -789,6 +791,7 @@ impl TableOfContent {
             .block_on(self.perform_collection_meta_op(operation))
     }
 
+    #[tracing::instrument(skip(self))]
     pub async fn perform_collection_meta_op(
         &self,
         operation: CollectionMetaOperations,
@@ -1217,6 +1220,7 @@ impl TableOfContent {
             .map_err(|err| err.into())
     }
 
+    #[tracing::instrument(skip(self, operation))]
     pub async fn update(
         &self,
         collection_name: &str,
@@ -1594,6 +1598,7 @@ impl CollectionContainer for TableOfContent {
 
 // `TableOfContent` should not be dropped from async context.
 impl Drop for TableOfContent {
+    #[tracing::instrument(skip(self))]
     fn drop(&mut self) {
         self.general_runtime.block_on(async {
             for (_, mut collection) in self.collections.write().await.drain() {

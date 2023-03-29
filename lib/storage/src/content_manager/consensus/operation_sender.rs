@@ -12,6 +12,7 @@ impl OperationSender {
         OperationSender(Mutex::new(sender))
     }
 
+    #[tracing::instrument(skip(self))]
     pub fn send(&self, operation: ConsensusOperations) -> Result<(), StorageError> {
         self.0.lock().send(operation)?;
         Ok(())

@@ -4086,6 +4086,7 @@ dependencies = [
  "thiserror",
  "tokio",
  "tonic 0.9.1",
+ "tracing",
  "url",
  "uuid",
  "validator",

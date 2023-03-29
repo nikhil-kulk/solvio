@@ -154,21 +154,25 @@ impl TransportChannelPool {
         }
     }
 
+    #[tracing::instrument(skip(self))]
     pub async fn drop_pool(&self, uri: &Uri) {
         let mut guard = self.uri_to_pool.write().await;
         guard.remove(uri);
     }
 
+    #[tracing::instrument(skip(self))]
     async fn get_pooled_channel(&self, uri: &Uri) -> Option<Channel> {
         let guard = self.uri_to_pool.read().await;
         guard.get(uri).map(|channels| channels.choose())
     }
 
+    #[tracing::instrument(skip(self))]
     async fn get_fast_pooled_channel(&self, uri: &Uri) -> Option<Channel> {
         let guard = self.uri_to_pool.read().await;
         guard.get(uri).map(|channels| channels.fast_channel.clone())
     }
 
+    #[tracing::instrument(skip(self))]
     async fn get_or_create_pooled_channel(&self, uri: &Uri) -> Result<Channel, TonicError> {
         match self.get_pooled_channel(uri).await {
             None => self.init_pool_for_uri(uri.clone()).await,
@@ -187,6 +191,7 @@ impl TransportChannelPool {
     /// If it can't get healthcheck response in the timeout, it assumes the channel is dead.
     /// And we need to drop the pool for the uri and try again.
     /// For performance reasons, we start the check only after `SMART_CONNECT_TIMEOUT`.
+    #[tracing::instrument(skip(self))]
     async fn check_connectability(&self, uri: &Uri) -> Status {
         loop {
             tokio::time::sleep(SMART_CONNECT_TIMEOUT).await;
@@ -208,6 +213,7 @@ impl TransportChannelPool {
     }
 
     // Allows to use channel to `uri`. If there is no channels to specified uri - they will be created.
+    #[tracing::instrument(skip(self, f))]
     pub async fn with_channel_timeout<T, O: Future<Output = Result<T, Status>>>(
         &self,
         uri: &Uri,

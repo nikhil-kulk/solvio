@@ -443,6 +443,7 @@ dependencies = [
  "tonic 0.9.1",
  "tonic-build",
  "tower",
+ "tracing",
  "uuid",
 ]
 

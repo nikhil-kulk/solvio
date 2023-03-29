@@ -23,5 +23,8 @@ thiserror = "1.0"
 
 segment = {path = "../segment"}
 
+# Profiling
+tracing = { version = "0.1", features = ["async-await"] }
+
 [build-dependencies]
 tonic-build = { version = "0.9.1", features = ["prost"] }

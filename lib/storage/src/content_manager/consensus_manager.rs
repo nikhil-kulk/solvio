@@ -35,7 +35,7 @@ use crate::types::{
     PeerInfo, RaftInfo,
 };
 
-pub const DEFAULT_META_OP_WAIT: Duration = Duration::from_secs(10);
+pub const DEFAULT_META_OP_WAIT: Duration = Duration::from_secs(60);
 
 pub mod prelude {
     use crate::content_manager::toc::TableOfContent;

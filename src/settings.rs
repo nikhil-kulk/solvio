@@ -71,6 +71,8 @@ pub struct ConsensusConfig {
     pub bootstrap_timeout_sec: u64,
     #[serde(default = "default_message_timeout_tics")]
     pub message_timeout_ticks: u64,
+    #[serde(default)]
+    pub batch_append: bool,
 }
 
 impl Default for ConsensusConfig {
@@ -80,6 +82,7 @@ impl Default for ConsensusConfig {
             tick_period_ms: default_tick_period_ms(),
             bootstrap_timeout_sec: default_bootstrap_timeout_sec(),
             message_timeout_ticks: default_message_timeout_tics(),
+            batch_append: false,
         }
     }
 }

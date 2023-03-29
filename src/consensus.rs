@@ -165,6 +165,7 @@ impl Consensus {
         let raft_config = Config {
             id: state_ref.this_peer_id(),
             applied: last_applied,
+            batch_append: config.batch_append,
             ..Default::default()
         };
         raft_config.validate()?;

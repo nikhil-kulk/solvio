@@ -127,57 +127,59 @@ pub fn init_internal(
 
     use crate::tonic::api::raft_api::RaftService;
 
-    runtime
-        .block_on(async {
-            let socket = SocketAddr::from((host.parse::<IpAddr>().unwrap(), internal_grpc_port));
+    runtime.block_on(async {
+        let socket = SocketAddr::from((host.parse::<IpAddr>().unwrap(), internal_grpc_port));
 
-            let solvio_service = SolvioService::default();
-            let collections_internal_service = CollectionsInternalService::new(toc.clone());
-            let points_internal_service = PointsInternalService::new(toc.clone());
-            let raft_service = RaftService::new(to_consensus, consensus_state);
+        let solvio_service = SolvioService::default();
+        let collections_internal_service = CollectionsInternalService::new(toc.clone());
+        let points_internal_service = PointsInternalService::new(toc.clone());
+        let raft_service = RaftService::new(to_consensus, consensus_state);
 
-            log::debug!("Solvio internal gRPC listening on {}", internal_grpc_port);
+        log::debug!("Solvio internal gRPC listening on {}", internal_grpc_port);
 
-            let mut server = Server::builder();
+        let mut server = Server::builder();
 
-            if let Some(config) = tls_config {
-                server = server.tls_config(config)?;
-            };
+        if let Some(config) = tls_config {
+            server = server
+                .tls_config(config)
+                .map_err(helpers::tonic_error_to_io_error)?;
+        };
 
-            server
-                .layer(tonic_telemetry::TonicTelemetryLayer::new(
-                    telemetry_collector,
-                ))
-                .add_service(
-                    SolvioServer::new(solvio_service)
-                        .send_compressed(CompressionEncoding::Gzip)
-                        .accept_compressed(CompressionEncoding::Gzip)
-                        .max_decoding_message_size(usize::MAX),
-                )
-                .add_service(
-                    CollectionsInternalServer::new(collections_internal_service)
-                        .send_compressed(CompressionEncoding::Gzip)
-                        .accept_compressed(CompressionEncoding::Gzip)
-                        .max_decoding_message_size(usize::MAX),
-                )
-                .add_service(
-                    PointsInternalServer::new(points_internal_service)
-                        .send_compressed(CompressionEncoding::Gzip)
-                        .accept_compressed(CompressionEncoding::Gzip)
-                        .max_decoding_message_size(usize::MAX),
-                )
-                .add_service(
-                    RaftServer::new(raft_service)
-                        .send_compressed(CompressionEncoding::Gzip)
-                        .accept_compressed(CompressionEncoding::Gzip)
-                        .max_decoding_message_size(usize::MAX),
-                )
-                .serve_with_shutdown(socket, async {
-                    signal::ctrl_c().await.unwrap();
-                    log::debug!("Stopping internal gRPC");
-                })
-                .await
-        })
-        .unwrap();
+        server
+            .layer(tonic_telemetry::TonicTelemetryLayer::new(
+                telemetry_collector,
+            ))
+            .add_service(
+                SolvioServer::new(solvio_service)
+                    .send_compressed(CompressionEncoding::Gzip)
+                    .accept_compressed(CompressionEncoding::Gzip)
+                    .max_decoding_message_size(usize::MAX),
+            )
+            .add_service(
+                CollectionsInternalServer::new(collections_internal_service)
+                    .send_compressed(CompressionEncoding::Gzip)
+                    .accept_compressed(CompressionEncoding::Gzip)
+                    .max_decoding_message_size(usize::MAX),
+            )
+            .add_service(
+                PointsInternalServer::new(points_internal_service)
+                    .send_compressed(CompressionEncoding::Gzip)
+                    .accept_compressed(CompressionEncoding::Gzip)
+                    .max_decoding_message_size(usize::MAX),
+            )
+            .add_service(
+                RaftServer::new(raft_service)
+                    .send_compressed(CompressionEncoding::Gzip)
+                    .accept_compressed(CompressionEncoding::Gzip)
+                    .max_decoding_message_size(usize::MAX),
+            )
+            .serve_with_shutdown(socket, async {
+                signal::ctrl_c().await.unwrap();
+                log::debug!("Stopping internal gRPC");
+            })
+            .await
+            .map_err(helpers::tonic_error_to_io_error)
+    })?;
+
     Ok(())
 }

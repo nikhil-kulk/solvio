@@ -1,0 +1,65 @@
+version: "3.7"
+
+services:
+  solvio_1:
+    image: solvio-dev:latest
+    command: ./solvio --uri 'http://solvio_1:6335'
+    restart: always
+    environment:
+      - solvio__LOG_LEVEL=debug,raft=info
+      - solvio__SERVICE__GRPC_PORT=6334
+      - solvio__CLUSTER__P2P__PORT=6335
+      - solvio__CLUSTER__ENABLED=true
+      - solvio__CLUSTER__CONSENSUS__TICK_PERIOD_MS=100
+      - solvio__CLUSTER__CONSENSUS__BOOTSTRAP_TIMEOUT_SEC=15
+      - solvio__CLUSTER__CONSENSUS__MESSAGE_TIMEOUT_TICKS=2
+      - TOKIO_CONSOLE_BIND=0.0.0.0:6669
+    ports:
+      - "127.0.0.1:6333:6333"
+      - "127.0.0.1:6334:6334"
+      - "127.0.0.1:6669:6669" # Tokio Console
+      - "127.0.0.1:8086:8086" # Tracy
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: "0.2"
+
+  solvio_2:
+    image: solvio-dev:latest
+    command: bash -c "sleep 5 && ./solvio --bootstrap 'http://solvio_1:6335' --uri 'http://solvio_2:6335'"
+    restart: always
+    environment:
+      - solvio__LOG_LEVEL=debug,raft=info
+      - solvio__SERVICE__GRPC_PORT=6334
+      - solvio__CLUSTER__P2P__PORT=6335
+      - solvio__CLUSTER__ENABLED=true
+      - solvio__CLUSTER__CONSENSUS__TICK_PERIOD_MS=100
+      - solvio__CLUSTER__CONSENSUS__BOOTSTRAP_TIMEOUT_SEC=15
+      - solvio__CLUSTER__CONSENSUS__MESSAGE_TIMEOUT_TICKS=2
+    ports:
+      - "127.0.0.1:6343:6333"
+      - "127.0.0.1:6344:6334"
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: "0.2"
+
+  solvio_3:
+    image: solvio-dev:latest
+    command: bash -c "sleep 10 && ./solvio --bootstrap 'http://solvio_1:6335' --uri 'http://solvio_3:6335'"
+    restart: always
+    environment:
+      - solvio__LOG_LEVEL=debug,raft=info
+      - solvio__SERVICE__GRPC_PORT=6334
+      - solvio__CLUSTER__P2P__PORT=6335
+      - solvio__CLUSTER__ENABLED=true
+      - solvio__CLUSTER__CONSENSUS__TICK_PERIOD_MS=100
+      - solvio__CLUSTER__CONSENSUS__BOOTSTRAP_TIMEOUT_SEC=15
+      - solvio__CLUSTER__CONSENSUS__MESSAGE_TIMEOUT_TICKS=2
+    ports:
+      - "127.0.0.1:6353:6333"
+      - "127.0.0.1:6354:6334"
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: "0.2"

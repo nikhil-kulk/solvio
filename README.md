@@ -120,7 +120,7 @@ For faster production-tier searches, Solvio also provides a gRPC interface. You 
 
 Solvio offers the following client libraries to help you integrate it into your application stack with ease:
 
-- [Python client](https://github.com/solvio/solvio_client)
+- [Python client](https://github.com/solvio/solvio-client)
 - [Go client](https://github.com/solvio/go-client)
 - [Rust client](https://github.com/solvio/rust-client)
 

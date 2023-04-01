@@ -78,6 +78,7 @@
     - [GetResponse](#solvio-GetResponse)
     - [HasIdCondition](#solvio-HasIdCondition)
     - [IsEmptyCondition](#solvio-IsEmptyCondition)
+    - [IsNullCondition](#solvio-IsNullCondition)
     - [LookupLocation](#solvio-LookupLocation)
     - [Match](#solvio-Match)
     - [NamedVectors](#solvio-NamedVectors)
@@ -1038,6 +1039,7 @@ The JSON representation for `Value` is a JSON value.
 | is_empty | [IsEmptyCondition](#solvio-IsEmptyCondition) |  |  |
 | has_id | [HasIdCondition](#solvio-HasIdCondition) |  |  |
 | filter | [Filter](#solvio-Filter) |  |  |
+| is_null | [IsNullCondition](#solvio-IsNullCondition) |  |  |
 
 
 
@@ -1305,6 +1307,21 @@ The JSON representation for `Value` is a JSON value.
 <a name="solvio-IsEmptyCondition"></a>
 
 ### IsEmptyCondition
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="solvio-IsNullCondition"></a>
+
+### IsNullCondition
 
 
 

@@ -58,7 +58,7 @@ pub fn init(
         let solvio_service = SolvioService::default();
         let collections_service = CollectionsService::new(dispatcher.clone());
         let points_service = PointsService::new(dispatcher.toc().clone());
-        let snapshot_service = SnapshotsService::new(dispatcher.toc().clone());
+        let snapshot_service = SnapshotsService::new(dispatcher.clone());
 
         log::info!("Solvio gRPC listening on {}", grpc_port);
 

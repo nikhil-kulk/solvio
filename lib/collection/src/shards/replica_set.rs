@@ -519,6 +519,7 @@ impl ShardReplicaSet {
         }
     }
 
+    #[tracing::instrument(skip(self))]
     pub fn notify_peer_failure(&self, peer_id: PeerId) {
         log::debug!("Notify peer failure: {}", peer_id);
         self.notify_peer_failure_cb.deref()(peer_id, self.shard_id)
@@ -1099,6 +1100,7 @@ impl ShardReplicaSet {
     }
 
     /// Update local shard if any without forwarding to remote shards
+    #[tracing::instrument(skip(self, operation))]
     pub async fn update_local(
         &self,
         operation: CollectionUpdateOperations,
@@ -1155,6 +1157,7 @@ impl ShardReplicaSet {
         }
     }
 
+    #[tracing::instrument(skip(self))]
     fn handle_failed_replicas(
         &self,
         failures: &Vec<(PeerId, CollectionError)>,
@@ -1203,6 +1206,7 @@ impl ShardReplicaSet {
         Ok(())
     }
 
+    #[tracing::instrument(skip(self, operation))]
     pub async fn update_with_consistency(
         &self,
         operation: CollectionUpdateOperations,
@@ -1279,6 +1283,7 @@ impl ShardReplicaSet {
         }
     }
 
+    #[tracing::instrument(skip(self, operation))]
     pub async fn update(
         &self,
         operation: CollectionUpdateOperations,

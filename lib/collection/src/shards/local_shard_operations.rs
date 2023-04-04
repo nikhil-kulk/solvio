@@ -23,6 +23,7 @@ impl ShardOperation for LocalShard {
     /// Imply interior mutability.
     /// Performs update operation on this collection asynchronously.
     /// Explicitly waits for result to be updated.
+    #[tracing::instrument(skip(self, operation))]
     async fn update(
         &self,
         operation: CollectionUpdateOperations,
@@ -38,7 +39,9 @@ impl ShardOperation for LocalShard {
         let operation_id = {
             let update_sender = self.update_sender.load();
             let channel_permit = update_sender.reserve().await?;
+            let span = tracing::info_span!("lock WAL").entered();
             let mut wal_lock = self.wal.lock();
+            let _ = span.exit();
             let operation_id = wal_lock.write(&operation)?;
             channel_permit.send(UpdateSignal::Operation(OperationData {
                 op_num: operation_id,

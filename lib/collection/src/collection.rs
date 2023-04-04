@@ -701,6 +701,7 @@ impl Collection {
     /// Handle collection updates from peers.
     ///
     /// Shard transfer aware.
+    #[tracing::instrument(skip(self, operation))]
     pub async fn update_from_peer(
         &self,
         operation: CollectionUpdateOperations,
@@ -724,6 +725,7 @@ impl Collection {
         }
     }
 
+    #[tracing::instrument(skip(self, operation))]
     pub async fn update_from_client(
         &self,
         operation: CollectionUpdateOperations,
@@ -1294,6 +1296,7 @@ impl Collection {
         Ok(info)
     }
 
+    #[tracing::instrument(skip(self))]
     pub async fn before_drop(&mut self) {
         self.shards_holder.write().await.before_drop().await;
         self.before_drop_called = true

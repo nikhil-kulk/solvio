@@ -30,7 +30,7 @@ Expected response:
 ```json
 {
   "title": "solvio - vector search engine",
-  "version": "<vesion>"
+  "version": "<version>"
 }
 ```
 

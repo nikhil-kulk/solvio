@@ -123,6 +123,7 @@ Solvio offers the following client libraries to help you integrate it into your 
 - [Python client](https://github.com/solvio/solvio-client)
 - [Go client](https://github.com/solvio/go-client)
 - [Rust client](https://github.com/solvio/rust-client)
+- [JavaScript/TypeScript client](https://github.com/solvio/solvio-js)
 
 ## Features
 

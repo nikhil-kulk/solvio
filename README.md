@@ -70,6 +70,7 @@ Solvio offers the following client libraries to help you integrate it into your 
 - Community: [Elixir](https://hexdocs.pm/solvio/readme.html)
 - Community: [PHP](https://github.com/hkulekci/solvio-php)
 - Community: [Ruby](https://github.com/andreibondarev/solvio-ruby)
+- Community: [Java](https://github.com/metaloom/solvio-java-client)
 
 ### Where do I go from here?
 

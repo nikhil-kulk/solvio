@@ -57,7 +57,8 @@ RUN mkdir -p ${APP}
 
 COPY --from=builder /solvio/solvio ${APP}/solvio
 COPY --from=builder /solvio/config ${APP}/config
+COPY --from=builder /solvio/tools/entrypoint.sh ${APP}/entrypoint.sh
 
 WORKDIR ${APP}
 
-CMD ["./solvio"]
+CMD ["./entrypoint.sh"]

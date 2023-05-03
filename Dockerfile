@@ -1,7 +1,7 @@
 # Leveraging the pre-built Docker images with
 # cargo-chef and the Rust toolchain
 # https://www.lpalmieri.com/posts/fast-rust-docker-builds/
-FROM --platform=${BUILDPLATFORM:-linux/amd64} lukemathwalker/cargo-chef:latest-rust-1.68.2 AS chef
+FROM --platform=${BUILDPLATFORM:-linux/amd64} lukemathwalker/cargo-chef:latest-rust-1.69.0 AS chef
 WORKDIR /solvio
 
 FROM chef AS planner
@@ -57,7 +57,8 @@ RUN mkdir -p ${APP}
 
 COPY --from=builder /solvio/solvio ${APP}/solvio
 COPY --from=builder /solvio/config ${APP}/config
+COPY --from=builder /solvio/tools/entrypoint.sh ${APP}/entrypoint.sh
 
 WORKDIR ${APP}
 
-CMD ["./solvio"]
+CMD ["./entrypoint.sh"]

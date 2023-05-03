@@ -7,6 +7,8 @@
     - [AliasDescription](#solvio-AliasDescription)
     - [AliasOperations](#solvio-AliasOperations)
     - [ChangeAliases](#solvio-ChangeAliases)
+    - [CollectionClusterInfoRequest](#solvio-CollectionClusterInfoRequest)
+    - [CollectionClusterInfoResponse](#solvio-CollectionClusterInfoResponse)
     - [CollectionConfig](#solvio-CollectionConfig)
     - [CollectionDescription](#solvio-CollectionDescription)
     - [CollectionInfo](#solvio-CollectionInfo)
@@ -26,15 +28,22 @@
     - [ListCollectionAliasesRequest](#solvio-ListCollectionAliasesRequest)
     - [ListCollectionsRequest](#solvio-ListCollectionsRequest)
     - [ListCollectionsResponse](#solvio-ListCollectionsResponse)
+    - [LocalShardInfo](#solvio-LocalShardInfo)
+    - [MoveShard](#solvio-MoveShard)
     - [OptimizerStatus](#solvio-OptimizerStatus)
     - [OptimizersConfigDiff](#solvio-OptimizersConfigDiff)
     - [PayloadIndexParams](#solvio-PayloadIndexParams)
     - [PayloadSchemaInfo](#solvio-PayloadSchemaInfo)
     - [QuantizationConfig](#solvio-QuantizationConfig)
+    - [RemoteShardInfo](#solvio-RemoteShardInfo)
     - [RenameAlias](#solvio-RenameAlias)
+    - [Replica](#solvio-Replica)
     - [ScalarQuantization](#solvio-ScalarQuantization)
+    - [ShardTransferInfo](#solvio-ShardTransferInfo)
     - [TextIndexParams](#solvio-TextIndexParams)
     - [UpdateCollection](#solvio-UpdateCollection)
+    - [UpdateCollectionClusterSetupRequest](#solvio-UpdateCollectionClusterSetupRequest)
+    - [UpdateCollectionClusterSetupResponse](#solvio-UpdateCollectionClusterSetupResponse)
     - [VectorParams](#solvio-VectorParams)
     - [VectorParamsMap](#solvio-VectorParamsMap)
     - [VectorParamsMap.MapEntry](#solvio-VectorParamsMap-MapEntry)
@@ -45,6 +54,7 @@
     - [Distance](#solvio-Distance)
     - [PayloadSchemaType](#solvio-PayloadSchemaType)
     - [QuantizationType](#solvio-QuantizationType)
+    - [ReplicaState](#solvio-ReplicaState)
     - [TokenizerType](#solvio-TokenizerType)
   
 - [collections_service.proto](#collections_service-proto)
@@ -205,6 +215,40 @@
 | ----- | ---- | ----- | ----------- |
 | actions | [AliasOperations](#solvio-AliasOperations) | repeated | List of actions |
 | timeout | [uint64](#uint64) | optional | Wait timeout for operation commit in seconds, if not specified - default value will be supplied |
+
+
+
+
+
+
+<a name="solvio-CollectionClusterInfoRequest"></a>
+
+### CollectionClusterInfoRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+
+
+
+
+
+
+<a name="solvio-CollectionClusterInfoResponse"></a>
+
+### CollectionClusterInfoResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| peer_id | [uint64](#uint64) |  | ID of this peer |
+| shard_count | [uint64](#uint64) |  | Total number of shards |
+| local_shards | [LocalShardInfo](#solvio-LocalShardInfo) | repeated | Local shards |
+| remote_shards | [RemoteShardInfo](#solvio-RemoteShardInfo) | repeated | Remote shards |
+| shard_transfers | [ShardTransferInfo](#solvio-ShardTransferInfo) | repeated | Shard transfers |
 
 
 
@@ -525,6 +569,40 @@
 
 
 
+<a name="solvio-LocalShardInfo"></a>
+
+### LocalShardInfo
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| shard_id | [uint32](#uint32) |  | Local shard id |
+| points_count | [uint64](#uint64) |  | Number of points in the shard |
+| state | [ReplicaState](#solvio-ReplicaState) |  | Is replica active |
+
+
+
+
+
+
+<a name="solvio-MoveShard"></a>
+
+### MoveShard
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| shard_id | [uint32](#uint32) |  | Local shard id |
+| from_peer_id | [uint64](#uint64) |  |  |
+| to_peer_id | [uint64](#uint64) |  |  |
+
+
+
+
+
+
 <a name="solvio-OptimizerStatus"></a>
 
 ### OptimizerStatus
@@ -616,6 +694,23 @@ If indexation speed has more priority for you - make this parameter lower. If se
 
 
 
+<a name="solvio-RemoteShardInfo"></a>
+
+### RemoteShardInfo
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| shard_id | [uint32](#uint32) |  | Local shard id |
+| peer_id | [uint64](#uint64) |  | Remote peer id |
+| state | [ReplicaState](#solvio-ReplicaState) |  | Is replica active |
+
+
+
+
+
+
 <a name="solvio-RenameAlias"></a>
 
 ### RenameAlias
@@ -626,6 +721,22 @@ If indexation speed has more priority for you - make this parameter lower. If se
 | ----- | ---- | ----- | ----------- |
 | old_alias_name | [string](#string) |  | Name of the alias to rename |
 | new_alias_name | [string](#string) |  | Name of the alias |
+
+
+
+
+
+
+<a name="solvio-Replica"></a>
+
+### Replica
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| shard_id | [uint32](#uint32) |  |  |
+| peer_id | [uint64](#uint64) |  |  |
 
 
 
@@ -643,6 +754,24 @@ If indexation speed has more priority for you - make this parameter lower. If se
 | type | [QuantizationType](#solvio-QuantizationType) |  | Type of quantization |
 | quantile | [float](#float) | optional | Number of bits to use for quantization |
 | always_ram | [bool](#bool) | optional | If true - quantized vectors always will be stored in RAM, ignoring the config of main storage |
+
+
+
+
+
+
+<a name="solvio-ShardTransferInfo"></a>
+
+### ShardTransferInfo
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| shard_id | [uint32](#uint32) |  | Local shard id |
+| from | [uint64](#uint64) |  |  |
+| to | [uint64](#uint64) |  |  |
+| sync | [bool](#bool) |  | If `true` transfer is a synchronization of a replicas; If `false` transfer is a moving of a shard from one peer to another |
 
 
 
@@ -679,6 +808,41 @@ If indexation speed has more priority for you - make this parameter lower. If se
 | optimizers_config | [OptimizersConfigDiff](#solvio-OptimizersConfigDiff) | optional | New configuration parameters for the collection |
 | timeout | [uint64](#uint64) | optional | Wait timeout for operation commit in seconds, if not specified - default value will be supplied |
 | params | [CollectionParamsDiff](#solvio-CollectionParamsDiff) | optional | New configuration parameters for the collection |
+
+
+
+
+
+
+<a name="solvio-UpdateCollectionClusterSetupRequest"></a>
+
+### UpdateCollectionClusterSetupRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+| move_shard | [MoveShard](#solvio-MoveShard) |  |  |
+| replicate_shard | [MoveShard](#solvio-MoveShard) |  |  |
+| abort_transfer | [MoveShard](#solvio-MoveShard) |  |  |
+| drop_replica | [Replica](#solvio-Replica) |  |  |
+| timeout | [uint64](#uint64) | optional | Wait timeout for operation commit in seconds, if not specified - default value will be supplied |
+
+
+
+
+
+
+<a name="solvio-UpdateCollectionClusterSetupResponse"></a>
+
+### UpdateCollectionClusterSetupResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [bool](#bool) |  |  |
 
 
 
@@ -824,6 +988,21 @@ If indexation speed has more priority for you - make this parameter lower. If se
 
 
 
+<a name="solvio-ReplicaState"></a>
+
+### ReplicaState
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| Active | 0 | Active and sound |
+| Dead | 1 | Failed for some reason |
+| Partial | 2 | The shard is partially loaded and is currently receiving data from other shards |
+| Initializing | 3 | Collection is being created |
+| Listener | 4 | A shard which receives data, but is not used for search; Useful for backup shards |
+
+
+
 <a name="solvio-TokenizerType"></a>
 
 ### TokenizerType
@@ -873,6 +1052,8 @@ If indexation speed has more priority for you - make this parameter lower. If se
 | UpdateAliases | [ChangeAliases](#solvio-ChangeAliases) | [CollectionOperationResponse](#solvio-CollectionOperationResponse) | Update Aliases of the existing collection |
 | ListCollectionAliases | [ListCollectionAliasesRequest](#solvio-ListCollectionAliasesRequest) | [ListAliasesResponse](#solvio-ListAliasesResponse) | Get list of all aliases for a collection |
 | ListAliases | [ListAliasesRequest](#solvio-ListAliasesRequest) | [ListAliasesResponse](#solvio-ListAliasesResponse) | Get list of all aliases for all existing collections |
+| CollectionClusterInfo | [CollectionClusterInfoRequest](#solvio-CollectionClusterInfoRequest) | [CollectionClusterInfoResponse](#solvio-CollectionClusterInfoResponse) | Get cluster information for a collection |
+| UpdateCollectionClusterSetup | [UpdateCollectionClusterSetupRequest](#solvio-UpdateCollectionClusterSetupRequest) | [UpdateCollectionClusterSetupResponse](#solvio-UpdateCollectionClusterSetupResponse) | Update cluster setup for a collection |
 
  
 

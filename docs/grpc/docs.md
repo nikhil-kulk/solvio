@@ -78,6 +78,7 @@
     - [CreateFieldIndexCollection](#solvio-CreateFieldIndexCollection)
     - [DeleteFieldIndexCollection](#solvio-DeleteFieldIndexCollection)
     - [DeletePayloadPoints](#solvio-DeletePayloadPoints)
+    - [DeletePointVectors](#solvio-DeletePointVectors)
     - [DeletePoints](#solvio-DeletePoints)
     - [FieldCondition](#solvio-FieldCondition)
     - [Filter](#solvio-Filter)
@@ -98,6 +99,7 @@
     - [PointId](#solvio-PointId)
     - [PointStruct](#solvio-PointStruct)
     - [PointStruct.PayloadEntry](#solvio-PointStruct-PayloadEntry)
+    - [PointVectors](#solvio-PointVectors)
     - [PointsIdsList](#solvio-PointsIdsList)
     - [PointsOperationResponse](#solvio-PointsOperationResponse)
     - [PointsSelector](#solvio-PointsSelector)
@@ -123,6 +125,7 @@
     - [SearchResponse](#solvio-SearchResponse)
     - [SetPayloadPoints](#solvio-SetPayloadPoints)
     - [SetPayloadPoints.PayloadEntry](#solvio-SetPayloadPoints-PayloadEntry)
+    - [UpdatePointVectors](#solvio-UpdatePointVectors)
     - [UpdateResult](#solvio-UpdateResult)
     - [UpsertPoints](#solvio-UpsertPoints)
     - [ValuesCount](#solvio-ValuesCount)
@@ -1346,6 +1349,25 @@ The JSON representation for `Value` is a JSON value.
 
 
 
+<a name="solvio-DeletePointVectors"></a>
+
+### DeletePointVectors
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | name of the collection |
+| wait | [bool](#bool) | optional | Wait until the changes have been applied? |
+| points_selector | [PointsSelector](#solvio-PointsSelector) |  | Affected points |
+| vectors | [VectorsSelector](#solvio-VectorsSelector) |  | List of vector names to delete |
+| ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
+
+
+
+
+
+
 <a name="solvio-DeletePoints"></a>
 
 ### DeletePoints
@@ -1669,6 +1691,22 @@ The JSON representation for `Value` is a JSON value.
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
 | value | [Value](#solvio-Value) |  |  |
+
+
+
+
+
+
+<a name="solvio-PointVectors"></a>
+
+### PointVectors
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [PointId](#solvio-PointId) |  | ID to update vectors for |
+| vectors | [NamedVectors](#solvio-NamedVectors) |  | Named vectors to update, leave others intact |
 
 
 
@@ -2110,6 +2148,24 @@ The JSON representation for `Value` is a JSON value.
 
 
 
+<a name="solvio-UpdatePointVectors"></a>
+
+### UpdatePointVectors
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | name of the collection |
+| wait | [bool](#bool) | optional | Wait until the changes have been applied? |
+| points | [PointVectors](#solvio-PointVectors) | repeated | List of points and vectors to update |
+| ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
+
+
+
+
+
+
 <a name="solvio-UpdateResult"></a>
 
 ### UpdateResult
@@ -2342,6 +2398,8 @@ The JSON representation for `Value` is a JSON value.
 | Upsert | [UpsertPoints](#solvio-UpsertPoints) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Perform insert &#43; updates on points. If a point with a given ID already exists - it will be overwritten. |
 | Delete | [DeletePoints](#solvio-DeletePoints) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Delete points |
 | Get | [GetPoints](#solvio-GetPoints) | [GetResponse](#solvio-GetResponse) | Retrieve points |
+| UpdateVectors | [UpdatePointVectors](#solvio-UpdatePointVectors) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Update named vectors for point |
+| DeleteVectors | [DeletePointVectors](#solvio-DeletePointVectors) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Delete named vectors for points |
 | SetPayload | [SetPayloadPoints](#solvio-SetPayloadPoints) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Set payload for points |
 | OverwritePayload | [SetPayloadPoints](#solvio-SetPayloadPoints) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Overwrite payload for points |
 | DeletePayload | [DeletePayloadPoints](#solvio-DeletePayloadPoints) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Delete specified key payload for points |

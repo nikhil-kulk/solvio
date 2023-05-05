@@ -20,6 +20,8 @@ use crate::operations::types::{
 use crate::recommendations::recommend_by;
 use crate::shards::shard::ShardId;
 
+const MAX_GROUP_REQUESTS: usize = 5;
+
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum SourceRequest {
@@ -75,6 +77,7 @@ impl SourceRequest {
                 request.with_payload = only_group_by_key;
                 request.with_vector = None;
 
+                debug_assert!(collection_by_name.is_some());
                 let collection_by_name =
                     collection_by_name.ok_or(CollectionError::ServiceError {
                         error: "programmer: collection_by_name is required for recommend".into(),
@@ -186,8 +189,8 @@ where
     let mut groups = GroupsAggregator::new(request.groups, request.top, request.group_by.clone());
 
     // Try to complete amount of groups
-    for _ in 0..3 {
-        let enough_groups = (request.groups - groups.len()) == 0;
+    for _ in 0..MAX_GROUP_REQUESTS {
+        let enough_groups = request.groups.saturating_sub(groups.len()) == 0;
         if enough_groups {
             break;
         }
@@ -228,8 +231,9 @@ where
         groups.add_points(&points)
     }
 
+    // We have enough groups, ensure they are filled
     // Try to fill up groups
-    for _ in 0..3 {
+    for _ in 0..MAX_GROUP_REQUESTS {
         let unsatisfied_groups = groups.keys_of_unfilled_groups();
         if unsatisfied_groups.is_empty() {
             break;

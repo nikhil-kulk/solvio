@@ -11,7 +11,7 @@ function clear_after_tests()
 }
 
 # Prevent double building in docker-compose
-docker build ../../ --tag=solvio_consensus
+docker buildx build --load ../../ --tag=solvio_consensus
 docker compose down --volumes
 docker compose up -d --force-recreate
 trap clear_after_tests EXIT

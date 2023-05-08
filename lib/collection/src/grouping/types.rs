@@ -91,13 +91,14 @@ impl Hash for HashablePoint {
     }
 }
 
-impl From<&ScoredPoint> for HashablePoint {
-    fn from(point: &ScoredPoint) -> Self {
-        Self(point.clone())
+impl From<ScoredPoint> for HashablePoint {
+    fn from(point: ScoredPoint) -> Self {
+        Self(point)
     }
 }
-impl From<&HashablePoint> for ScoredPoint {
-    fn from(point: &HashablePoint) -> Self {
-        point.0.clone()
+
+impl From<HashablePoint> for ScoredPoint {
+    fn from(point: HashablePoint) -> Self {
+        point.0
     }
 }

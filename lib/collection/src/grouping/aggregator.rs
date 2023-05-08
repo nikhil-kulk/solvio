@@ -108,7 +108,7 @@ impl GroupsAggregator {
             .map(|(k, v)| {
                 (
                     k.clone(),
-                    v.iter().map(ScoredPoint::from).collect::<Vec<_>>(),
+                    v.iter().map(|point| point.clone().into()).collect::<Vec<_>>(),
                 )
             })
             .collect()
@@ -118,7 +118,7 @@ impl GroupsAggregator {
         self.groups
             .values()
             .flatten()
-            .map(ScoredPoint::from)
+            .map(|point| point.clone().into())
             .collect()
     }
 
@@ -127,7 +127,7 @@ impl GroupsAggregator {
         for point in points {
             self.groups.iter_mut().for_each(|(_, ps)| {
                 if ps.take(&HashablePoint::minimal_from(point)).is_some() {
-                    ps.insert(point.into());
+                    ps.insert(point.clone().into());
                 }
             });
         }

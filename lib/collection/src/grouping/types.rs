@@ -16,7 +16,7 @@ pub enum AggregatorError {
 
 /// Abstraction over serde_json::Value to be used as a key in a HashMap/HashSet
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub(super) struct GroupKey(pub serde_json::Value);
+pub struct GroupKey(pub serde_json::Value);
 
 impl TryFrom<serde_json::Value> for GroupKey {
     type Error = AggregatorError;

@@ -419,14 +419,14 @@ mod unit_tests {
         aggregator.groups.insert(
             GroupKey::from("a"),
             [
-                HashablePoint(ScoredPoint {
+                HashablePoint::minimal_from(&ScoredPoint {
                     id: 1.into(),
                     version: 0,
                     score: 1.0,
                     payload: None,
                     vector: None,
                 }),
-                HashablePoint(ScoredPoint {
+                HashablePoint::minimal_from(&ScoredPoint {
                     id: 2.into(),
                     version: 0,
                     score: 1.0,
@@ -440,14 +440,14 @@ mod unit_tests {
         aggregator.groups.insert(
             GroupKey::from("b"),
             [
-                HashablePoint(ScoredPoint {
+                HashablePoint::minimal_from(&ScoredPoint {
                     id: 3.into(),
                     version: 0,
                     score: 1.0,
                     payload: None,
                     vector: None,
                 }),
-                HashablePoint(ScoredPoint {
+                HashablePoint::minimal_from(&ScoredPoint {
                     id: 4.into(),
                     version: 0,
                     score: 1.0,

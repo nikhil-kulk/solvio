@@ -6,7 +6,7 @@ use serde_json::Value;
 use AggregatorError::BadKeyType;
 
 #[derive(PartialEq, Debug)]
-pub(super) enum AggregatorError {
+pub enum AggregatorError {
     AllGroupsFull,
     BadKeyType,
     KeyNotFound,

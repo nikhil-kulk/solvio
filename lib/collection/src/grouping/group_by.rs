@@ -161,7 +161,7 @@ impl From<GroupsAggregator> for Vec<Group> {
             .iter()
             .map(|(id, hits)| {
                 let mut group_id = Map::new();
-                group_id.insert(grouped_by.clone(), id.0.clone());
+                group_id.insert(grouped_by.clone(), id.clone().into());
                 Group {
                     hits: hits.iter().cloned().sorted().rev().collect(),
                     group_id,

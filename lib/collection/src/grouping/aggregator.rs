@@ -84,13 +84,13 @@ impl GroupsAggregator {
         self.groups
             .iter()
             .filter(|(_, hits)| hits.len() < self.max_group_size)
-            .map(|(key, _)| key.0.clone())
+            .map(|(key, _)| key.clone().into())
             .collect()
     }
 
     // gets the keys of the groups that have reached the max group size
     pub(super) fn keys_of_filled_groups(&self) -> Vec<Value> {
-        self.full_groups.iter().map(|k| k.0.clone()).collect()
+        self.full_groups.iter().map(|k| k.clone().into()).collect()
     }
 
     /// Gets the ids of the already present points across all the groups
@@ -145,13 +145,6 @@ mod unit_tests {
     use serde_json::json;
 
     use super::*;
-
-    /// Used for convenience
-    impl From<&str> for GroupKey {
-        fn from(s: &str) -> Self {
-            Self(serde_json::Value::String(s.to_string()))
-        }
-    }
 
     #[test]
     fn it_adds_single_points() {
@@ -330,7 +323,8 @@ mod unit_tests {
 
             assert_eq!(aggregator.len(), groups, "case {_case}");
 
-            let key = &GroupKey(key);
+            let key = &GroupKey::try_from(key).unwrap();
+
             if size > 0 {
                 assert_eq!(
                     aggregator.groups.get(key).unwrap().len(),
@@ -387,7 +381,7 @@ mod unit_tests {
                 ],
             ),
             (
-                GroupKey(json!(3)),
+                GroupKey::from(3),
                 [
                     ScoredPoint {
                         id: 5.into(),

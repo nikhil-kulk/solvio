@@ -16,7 +16,7 @@ pub enum AggregatorError {
 
 /// Abstraction over serde_json::Value to be used as a key in a HashMap/HashSet
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub struct GroupKey(pub serde_json::Value);
+pub struct GroupKey(serde_json::Value);
 
 impl TryFrom<serde_json::Value> for GroupKey {
     type Error = AggregatorError;
@@ -27,6 +27,26 @@ impl TryFrom<serde_json::Value> for GroupKey {
             serde_json::Value::String(_) | serde_json::Value::Number(_) => Ok(Self(value)),
             _ => Err(BadKeyType),
         }
+    }
+}
+
+#[cfg(test)] // TODO: Not sure how "idiomatic" this is... 🫤
+impl From<&str> for GroupKey {
+    fn from(str: &str) -> Self {
+        Self(serde_json::Value::String(str.into()))
+    }
+}
+
+#[cfg(test)] // TODO: Not sure how "idiomatic" this is... 🫤
+impl From<i64> for GroupKey {
+    fn from(num: i64) -> Self {
+        Self(serde_json::Value::Number(num.into()))
+    }
+}
+
+impl From<GroupKey> for serde_json::Value {
+    fn from(key: GroupKey) -> Self {
+        key.0
     }
 }
 

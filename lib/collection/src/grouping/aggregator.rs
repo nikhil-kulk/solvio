@@ -98,7 +98,7 @@ impl GroupsAggregator {
         self.groups
             .iter()
             .flat_map(|(_, hits)| hits.iter())
-            .map(|p| p.id)
+            .map(HashablePoint::id)
             .collect()
     }
 
@@ -507,7 +507,7 @@ mod unit_tests {
         let a = aggregator.groups.get(&GroupKey::from("a")).unwrap();
         let b = aggregator.groups.get(&GroupKey::from("b")).unwrap();
 
-        assert!(a.iter().all(|x| x.payload == Some(payload_a.clone())));
-        assert!(b.iter().all(|x| x.payload == Some(payload_b.clone())));
+        assert!(a.iter().all(|x| x.payload() == Some(&payload_a)));
+        assert!(b.iter().all(|x| x.payload() == Some(&payload_b)));
     }
 }

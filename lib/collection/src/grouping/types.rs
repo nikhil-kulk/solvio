@@ -1,7 +1,6 @@
 use std::hash::Hash;
-use std::ops::{Deref, DerefMut};
 
-use segment::types::ScoredPoint;
+use segment::types::{PointIdType, ScoredPoint};
 use serde_json::Value;
 use AggregatorError::BadKeyType;
 
@@ -74,26 +73,21 @@ impl HashablePoint {
             vector: None,
         })
     }
+
+    pub fn id(&self) -> PointIdType {
+        self.0.id
+    }
+
+    #[cfg(test)] // TODO: Not sure how "idiomatic" this is... 🫤
+    pub fn payload(&self) -> Option<&segment::types::Payload> {
+        self.0.payload.as_ref()
+    }
 }
 
 impl Hash for HashablePoint {
     fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
         self.0.id.hash(state);
         self.0.version.hash(state);
-    }
-}
-
-impl Deref for HashablePoint {
-    type Target = ScoredPoint;
-
-    fn deref(&self) -> &Self::Target {
-        &self.0
-    }
-}
-
-impl DerefMut for HashablePoint {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.0
     }
 }
 

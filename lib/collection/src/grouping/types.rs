@@ -1,8 +1,6 @@
-use std::hash::Hash;
+use std::hash;
 
 use segment::types::{PointIdType, ScoredPoint};
-use serde_json::Value;
-use AggregatorError::BadKeyType;
 
 #[derive(PartialEq, Debug)]
 pub enum AggregatorError {
@@ -24,7 +22,7 @@ impl TryFrom<serde_json::Value> for GroupKey {
     fn try_from(value: serde_json::Value) -> Result<Self, Self::Error> {
         match value {
             serde_json::Value::String(_) | serde_json::Value::Number(_) => Ok(Self(value)),
-            _ => Err(BadKeyType),
+            _ => Err(AggregatorError::BadKeyType),
         }
     }
 }
@@ -49,11 +47,11 @@ impl From<GroupKey> for serde_json::Value {
     }
 }
 
-impl Hash for GroupKey {
-    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+impl hash::Hash for GroupKey {
+    fn hash<H: hash::Hasher>(&self, state: &mut H) {
         match &self.0 {
-            Value::Number(n) => n.hash(state),
-            Value::String(s) => s.hash(state),
+            serde_json::Value::Number(n) => n.hash(state),
+            serde_json::Value::String(s) => s.hash(state),
             _ => unreachable!("GroupKey should only be a number or a string"),
         }
     }
@@ -84,8 +82,8 @@ impl HashablePoint {
     }
 }
 
-impl Hash for HashablePoint {
-    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+impl hash::Hash for HashablePoint {
+    fn hash<H: hash::Hasher>(&self, state: &mut H) {
         self.0.id.hash(state);
         self.0.version.hash(state);
     }

@@ -108,7 +108,9 @@ impl GroupsAggregator {
             .map(|(k, v)| {
                 (
                     k.clone(),
-                    v.iter().map(|point| point.clone().into()).collect::<Vec<_>>(),
+                    v.iter()
+                        .map(|point| point.clone().into())
+                        .collect::<Vec<_>>(),
                 )
             })
             .collect()

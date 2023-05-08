@@ -62,7 +62,7 @@ impl Hash for GroupKey {
 
 /// Abstraction over ScoredPoint to be used in a HashSet
 #[derive(Eq, Debug, PartialEq, Clone)]
-pub(super) struct HashablePoint(pub ScoredPoint);
+pub struct HashablePoint(pub ScoredPoint);
 
 impl HashablePoint {
     pub fn minimal_from(point: &ScoredPoint) -> Self {

@@ -35,7 +35,7 @@ function run_with_retry()
 }
 
 # Prevent double building in docker-compose
-docker buildx build --load ../../ --tag=solvio_tls
+docker buildx build --build-arg='RUST_BUILD_PROFILE=ci' --load ../../ --tag=solvio_tls
 docker compose down --volumes
 docker compose up -d --force-recreate
 trap clear_after_tests EXIT

@@ -86,6 +86,7 @@ impl Validate for crate::grpc::solvio::quantization_config::Quantization {
         use crate::grpc::solvio::quantization_config::Quantization;
         match self {
             Quantization::Scalar(scalar) => scalar.validate(),
+            Quantization::Product(product) => product.validate(),
         }
     }
 }

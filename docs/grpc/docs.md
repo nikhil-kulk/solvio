@@ -34,6 +34,7 @@
     - [OptimizersConfigDiff](#solvio-OptimizersConfigDiff)
     - [PayloadIndexParams](#solvio-PayloadIndexParams)
     - [PayloadSchemaInfo](#solvio-PayloadSchemaInfo)
+    - [ProductQuantization](#solvio-ProductQuantization)
     - [QuantizationConfig](#solvio-QuantizationConfig)
     - [RemoteShardInfo](#solvio-RemoteShardInfo)
     - [RenameAlias](#solvio-RenameAlias)
@@ -51,6 +52,7 @@
     - [WalConfigDiff](#solvio-WalConfigDiff)
   
     - [CollectionStatus](#solvio-CollectionStatus)
+    - [CompressionRatio](#solvio-CompressionRatio)
     - [Distance](#solvio-Distance)
     - [PayloadSchemaType](#solvio-PayloadSchemaType)
     - [QuantizationType](#solvio-QuantizationType)
@@ -695,6 +697,22 @@ Note: 1kB = 1 vector of size 256. |
 
 
 
+<a name="solvio-ProductQuantization"></a>
+
+### ProductQuantization
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| compression | [CompressionRatio](#solvio-CompressionRatio) |  | Compression ratio |
+| always_ram | [bool](#bool) | optional | If true - quantized vectors always will be stored in RAM, ignoring the config of main storage |
+
+
+
+
+
+
 <a name="solvio-QuantizationConfig"></a>
 
 ### QuantizationConfig
@@ -704,6 +722,7 @@ Note: 1kB = 1 vector of size 256. |
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | scalar | [ScalarQuantization](#solvio-ScalarQuantization) |  |  |
+| product | [ProductQuantization](#solvio-ProductQuantization) |  |  |
 
 
 
@@ -960,6 +979,21 @@ Note: 1kB = 1 vector of size 256. |
 | Green | 1 | All segments are ready |
 | Yellow | 2 | Optimization in process |
 | Red | 3 | Something went wrong |
+
+
+
+<a name="solvio-CompressionRatio"></a>
+
+### CompressionRatio
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| x4 | 0 |  |
+| x8 | 1 |  |
+| x16 | 2 |  |
+| x32 | 3 |  |
+| x64 | 4 |  |
 
 
 

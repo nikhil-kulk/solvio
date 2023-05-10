@@ -94,6 +94,7 @@
     - [Match](#solvio-Match)
     - [NamedVectors](#solvio-NamedVectors)
     - [NamedVectors.VectorsEntry](#solvio-NamedVectors-VectorsEntry)
+    - [NestedCondition](#solvio-NestedCondition)
     - [PayloadExcludeSelector](#solvio-PayloadExcludeSelector)
     - [PayloadIncludeSelector](#solvio-PayloadIncludeSelector)
     - [PointId](#solvio-PointId)
@@ -1239,6 +1240,7 @@ The JSON representation for `Value` is a JSON value.
 | has_id | [HasIdCondition](#solvio-HasIdCondition) |  |  |
 | filter | [Filter](#solvio-Filter) |  |  |
 | is_null | [IsNullCondition](#solvio-IsNullCondition) |  |  |
+| nested | [NestedCondition](#solvio-NestedCondition) |  |  |
 
 
 
@@ -1613,6 +1615,22 @@ The JSON representation for `Value` is a JSON value.
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
 | value | [Vector](#solvio-Vector) |  |  |
+
+
+
+
+
+
+<a name="solvio-NestedCondition"></a>
+
+### NestedCondition
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  | Path to nested object |
+| filter | [Filter](#solvio-Filter) |  | Filter condition |
 
 
 

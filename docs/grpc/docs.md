@@ -89,6 +89,8 @@
     - [GeoRadius](#solvio-GeoRadius)
     - [GetPoints](#solvio-GetPoints)
     - [GetResponse](#solvio-GetResponse)
+    - [GroupId](#solvio-GroupId)
+    - [GroupsResult](#solvio-GroupsResult)
     - [HasIdCondition](#solvio-HasIdCondition)
     - [IsEmptyCondition](#solvio-IsEmptyCondition)
     - [IsNullCondition](#solvio-IsNullCondition)
@@ -99,6 +101,7 @@
     - [NestedCondition](#solvio-NestedCondition)
     - [PayloadExcludeSelector](#solvio-PayloadExcludeSelector)
     - [PayloadIncludeSelector](#solvio-PayloadIncludeSelector)
+    - [PointGroup](#solvio-PointGroup)
     - [PointId](#solvio-PointId)
     - [PointStruct](#solvio-PointStruct)
     - [PointStruct.PayloadEntry](#solvio-PointStruct-PayloadEntry)
@@ -111,6 +114,8 @@
     - [ReadConsistency](#solvio-ReadConsistency)
     - [RecommendBatchPoints](#solvio-RecommendBatchPoints)
     - [RecommendBatchResponse](#solvio-RecommendBatchResponse)
+    - [RecommendGroupsResponse](#solvio-RecommendGroupsResponse)
+    - [RecommendPointGroups](#solvio-RecommendPointGroups)
     - [RecommendPoints](#solvio-RecommendPoints)
     - [RecommendResponse](#solvio-RecommendResponse)
     - [RepeatedIntegers](#solvio-RepeatedIntegers)
@@ -123,7 +128,9 @@
     - [ScrollResponse](#solvio-ScrollResponse)
     - [SearchBatchPoints](#solvio-SearchBatchPoints)
     - [SearchBatchResponse](#solvio-SearchBatchResponse)
+    - [SearchGroupsResponse](#solvio-SearchGroupsResponse)
     - [SearchParams](#solvio-SearchParams)
+    - [SearchPointGroups](#solvio-SearchPointGroups)
     - [SearchPoints](#solvio-SearchPoints)
     - [SearchResponse](#solvio-SearchResponse)
     - [SetPayloadPoints](#solvio-SetPayloadPoints)
@@ -1543,6 +1550,38 @@ The JSON representation for `Value` is a JSON value.
 
 
 
+<a name="solvio-GroupId"></a>
+
+### GroupId
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| unsigned_value | [uint64](#uint64) |  | Represents a double value. |
+| integer_value | [int64](#int64) |  | Represents an integer value |
+| string_value | [string](#string) |  | Represents a string value. |
+
+
+
+
+
+
+<a name="solvio-GroupsResult"></a>
+
+### GroupsResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| groups | [PointGroup](#solvio-PointGroup) | repeated | Groups |
+
+
+
+
+
+
 <a name="solvio-HasIdCondition"></a>
 
 ### HasIdCondition
@@ -1695,6 +1734,22 @@ The JSON representation for `Value` is a JSON value.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | fields | [string](#string) | repeated | List of payload keys to include into result |
+
+
+
+
+
+
+<a name="solvio-PointGroup"></a>
+
+### PointGroup
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [GroupId](#solvio-GroupId) |  | Group id |
+| hits | [ScoredPoint](#solvio-ScoredPoint) | repeated | Points in the group |
 
 
 
@@ -1890,6 +1945,50 @@ The JSON representation for `Value` is a JSON value.
 | ----- | ---- | ----- | ----------- |
 | result | [BatchResult](#solvio-BatchResult) | repeated |  |
 | time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
+<a name="solvio-RecommendGroupsResponse"></a>
+
+### RecommendGroupsResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [GroupsResult](#solvio-GroupsResult) |  |  |
+| time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
+<a name="solvio-RecommendPointGroups"></a>
+
+### RecommendPointGroups
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+| positive | [PointId](#solvio-PointId) | repeated | Look for vectors closest to those |
+| negative | [PointId](#solvio-PointId) | repeated | Try to avoid vectors like this |
+| filter | [Filter](#solvio-Filter) |  | Filter conditions - return only those points that satisfy the specified conditions |
+| limit | [uint32](#uint32) |  | Max number of groups in result |
+| with_payload | [WithPayloadSelector](#solvio-WithPayloadSelector) |  | Options for specifying which payload to include or not |
+| params | [SearchParams](#solvio-SearchParams) |  | Search config |
+| score_threshold | [float](#float) | optional | If provided - cut off results with worse scores |
+| using | [string](#string) | optional | Define which vector to use for recommendation, if not specified - default vector |
+| with_vectors | [WithVectorsSelector](#solvio-WithVectorsSelector) | optional | Options for specifying which vectors to include into response |
+| lookup_from | [LookupLocation](#solvio-LookupLocation) | optional | Name of the collection to use for points lookup, if not specified - use current collection |
+| group_by | [string](#string) |  | Payload field to group by, must be a string or number field. If there are multiple values for the field, all of them will be used. One point can be in multiple groups. |
+| group_size | [uint32](#uint32) |  | Maximum amount of points to return per group |
+| read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
 
 
 
@@ -2108,6 +2207,22 @@ The JSON representation for `Value` is a JSON value.
 
 
 
+<a name="solvio-SearchGroupsResponse"></a>
+
+### SearchGroupsResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [GroupsResult](#solvio-GroupsResult) |  |  |
+| time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
 <a name="solvio-SearchParams"></a>
 
 ### SearchParams
@@ -2119,6 +2234,32 @@ The JSON representation for `Value` is a JSON value.
 | hnsw_ef | [uint64](#uint64) | optional | Params relevant to HNSW index. Size of the beam in a beam-search. Larger the value - more accurate the result, more time required for search. |
 | exact | [bool](#bool) | optional | Search without approximation. If set to true, search may run long but with exact results. |
 | quantization | [QuantizationSearchParams](#solvio-QuantizationSearchParams) | optional | If set to true, search will ignore quantized vector data |
+
+
+
+
+
+
+<a name="solvio-SearchPointGroups"></a>
+
+### SearchPointGroups
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+| vector | [float](#float) | repeated | Vector to compare against |
+| filter | [Filter](#solvio-Filter) |  | Filter conditions - return only those points that satisfy the specified conditions |
+| limit | [uint32](#uint32) |  | Max number of result |
+| with_payload | [WithPayloadSelector](#solvio-WithPayloadSelector) |  | Options for specifying which payload to include or not |
+| params | [SearchParams](#solvio-SearchParams) |  | Search config |
+| score_threshold | [float](#float) | optional | If provided - cut off results with worse scores |
+| vector_name | [string](#string) | optional | Which vector to use for search, if not specified - use default vector |
+| with_vectors | [WithVectorsSelector](#solvio-WithVectorsSelector) | optional | Options for specifying which vectors to include into response |
+| group_by | [string](#string) |  | Payload field to group by, must be a string or number field. If there are multiple values for the field, all of them will be used. One point can be in multiple groups. |
+| group_size | [uint32](#uint32) |  | Maximum amount of points to return per group |
+| read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
 
 
 
@@ -2461,9 +2602,11 @@ The JSON representation for `Value` is a JSON value.
 | DeleteFieldIndex | [DeleteFieldIndexCollection](#solvio-DeleteFieldIndexCollection) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Delete field index for collection |
 | Search | [SearchPoints](#solvio-SearchPoints) | [SearchResponse](#solvio-SearchResponse) | Retrieve closest points based on vector similarity and given filtering conditions |
 | SearchBatch | [SearchBatchPoints](#solvio-SearchBatchPoints) | [SearchBatchResponse](#solvio-SearchBatchResponse) | Retrieve closest points based on vector similarity and given filtering conditions |
+| SearchGroups | [SearchPointGroups](#solvio-SearchPointGroups) | [SearchGroupsResponse](#solvio-SearchGroupsResponse) | Retrieve closest points based on vector similarity and given filtering conditions, grouped by a given field |
 | Scroll | [ScrollPoints](#solvio-ScrollPoints) | [ScrollResponse](#solvio-ScrollResponse) | Iterate over all or filtered points points |
 | Recommend | [RecommendPoints](#solvio-RecommendPoints) | [RecommendResponse](#solvio-RecommendResponse) | Look for the points which are closer to stored positive examples and at the same time further to negative examples. |
 | RecommendBatch | [RecommendBatchPoints](#solvio-RecommendBatchPoints) | [RecommendBatchResponse](#solvio-RecommendBatchResponse) | Look for the points which are closer to stored positive examples and at the same time further to negative examples. |
+| RecommendGroups | [RecommendPointGroups](#solvio-RecommendPointGroups) | [RecommendGroupsResponse](#solvio-RecommendGroupsResponse) | Look for the points which are closer to stored positive examples and at the same time further to negative examples, grouped by a given field |
 | Count | [CountPoints](#solvio-CountPoints) | [CountResponse](#solvio-CountResponse) | Count points in collection with given filtering conditions |
 
  

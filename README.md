@@ -36,7 +36,7 @@ With Solvio, embeddings or neural network encoders can be turned into full-fledg
 pip install solvio-client
 ```
 
-The python client offers a convenient way to start with Solvio locally: 
+The python client offers a convenient way to start with Solvio locally:
 
 ```python
 from solvio_client import SolvioClient
@@ -200,7 +200,7 @@ Examples and/or documentation of Solvio integrations:
 - [LangChain](https://python.langchain.com/en/latest/ecosystem/solvio.html) ([blogpost](https://solvio.tech/articles/langchain-integration/)) - Use Solvio as a memory backend for LangChain.
 - [LlamaIndex](https://gpt-index.readthedocs.io/en/latest/how_to/integrations/vector_stores.html) - Use Solvio as a Vector Store with LlamaIndex.
 - [OpenAI - ChatGPT retrieval plugin](https://github.com/openai/chatgpt-retrieval-plugin/blob/main/docs/providers/solvio/setup.md) - Use Solvio as a memory backend for ChatGPT
-- [Microsoft Semantic Kernel](https://devblogs.microsoft.com/semantic-kernel/the-power-of-persistent-memory-with-semantic-kernel-and-solvio-vector-database/) - Use Solvio as persistent memory with Semantic Kernel 
+- [Microsoft Semantic Kernel](https://devblogs.microsoft.com/semantic-kernel/the-power-of-persistent-memory-with-semantic-kernel-and-solvio-vector-database/) - Use Solvio as persistent memory with Semantic Kernel
 
 ## Contacts
 

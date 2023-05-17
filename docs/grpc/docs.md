@@ -1814,7 +1814,7 @@ The JSON representation for `Value` is a JSON value.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | id | [PointId](#solvio-PointId) |  | ID to update vectors for |
-| vectors | [NamedVectors](#solvio-NamedVectors) |  | Named vectors to update, leave others intact |
+| vectors | [Vectors](#solvio-Vectors) |  | Named vectors to update, leave others intact |
 
 
 

@@ -1657,6 +1657,8 @@ The JSON representation for `Value` is a JSON value.
 | text | [string](#string) |  | Match text |
 | keywords | [RepeatedStrings](#solvio-RepeatedStrings) |  | Match multiple keywords |
 | integers | [RepeatedIntegers](#solvio-RepeatedIntegers) |  | Match multiple integers |
+| except_integers | [RepeatedIntegers](#solvio-RepeatedIntegers) |  | Match any other value except those integers |
+| except_keywords | [RepeatedStrings](#solvio-RepeatedStrings) |  | Match any other value except those keywords |
 
 
 

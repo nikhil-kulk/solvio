@@ -48,15 +48,36 @@ pub enum Advice {
 
     /// See [`memmap2::Advice::Sequential`].
     Sequential,
+
+    /// See [`memmap2::Advice::PopulateRead`].
+    PopulateRead,
 }
 
-#[cfg(unix)]
-impl From<Advice> for memmap2::Advice {
-    fn from(advice: Advice) -> Self {
+impl TryFrom<Advice> for Option<memmap2::Advice> {
+    type Error = io::Error;
+
+    fn try_from(advice: Advice) -> Result<Self, Self::Error> {
         match advice {
-            Advice::Normal => memmap2::Advice::Normal,
-            Advice::Random => memmap2::Advice::Random,
-            Advice::Sequential => memmap2::Advice::Sequential,
+            #[cfg(unix)]
+            Advice::Normal => Ok(Some(memmap2::Advice::Normal)),
+
+            #[cfg(unix)]
+            Advice::Random => Ok(Some(memmap2::Advice::Random)),
+
+            #[cfg(unix)]
+            Advice::Sequential => Ok(Some(memmap2::Advice::Sequential)),
+
+            #[cfg(target_os = "linux")]
+            Advice::PopulateRead => Ok(Some(memmap2::Advice::PopulateRead)),
+
+            #[cfg(not(target_os = "linux"))]
+            Advice::PopulateRead => Err(io::Error::new(
+                io::ErrorKind::Unsupported,
+                "MADV_POPULATE_READ is only supported on Linux",
+            )),
+
+            #[cfg(not(unix))]
+            _ => Ok(None),
         }
     }
 }
@@ -75,20 +96,18 @@ pub trait Madviseable {
 
 impl Madviseable for memmap2::Mmap {
     fn madvise(&self, advice: Advice) -> io::Result<()> {
-        #[cfg(unix)]
-        self.advise(advice.into())?;
-        #[cfg(not(unix))]
-        log::debug!("Ignore {advice:?} on this platform");
-        Ok(())
+        match advice.try_into()? {
+            Some(advice) => self.advise(advice),
+            None => Ok(()),
+        }
     }
 }
 
 impl Madviseable for memmap2::MmapMut {
     fn madvise(&self, advice: Advice) -> io::Result<()> {
-        #[cfg(unix)]
-        self.advise(advice.into())?;
-        #[cfg(not(unix))]
-        log::debug!("Ignore {advice:?} on this platform");
-        Ok(())
+        match advice.try_into()? {
+            Some(advice) => self.advise(advice),
+            None => Ok(()),
+        }
     }
 }

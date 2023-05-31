@@ -8,7 +8,7 @@ use memmap2::{Mmap, MmapMut};
 
 use crate::entry::entry_point::OperationResult;
 use crate::madvise;
-use crate::madvise::Madviseable;
+use crate::madvise::{Advice, Madviseable};
 
 pub fn create_and_ensure_length(path: &Path, length: usize) -> OperationResult<()> {
     let file = OpenOptions::new()
@@ -74,18 +74,40 @@ where
     let separator = path.map_or("", |_| " "); // space if `path` is `Some` or nothing
     let path = path.unwrap_or(Path::new("")); // path if `path` is `Some` or nothing
 
-    log::debug!("Reading mmap{separator}{path:?} to populate cache...");
-
     let instant = time::Instant::now();
 
-    let mut dst = [0; 8096];
+    #[cfg(target_os = "linux")]
+    let fallback = {
+        log::debug!("Prefaulting memmap{separator}{path:?} with MADV_POPULATE_READ...");
 
-    for chunk in mmap.chunks(dst.len()) {
-        dst[..chunk.len()].copy_from_slice(chunk);
+        let res = mmap.madvise(Advice::PopulateRead);
+
+        if let Err(err) = &res {
+            log::error!(
+                "Failed to prefault memmap{separator}{path:?} with MADV_POPULATE_READ, \
+                 falling back to explicit read: \
+                 {err}"
+            );
+        }
+
+        res.is_err()
+    };
+
+    #[cfg(not(target_os = "linux"))]
+    let fallback = true;
+
+    if fallback {
+        log::debug!("Prefaulting memmap{separator}{path:?} by explicit read...");
+
+        let mut dst = [0; 8096];
+
+        for chunk in mmap.chunks(dst.len()) {
+            dst[..chunk.len()].copy_from_slice(chunk);
+        }
     }
 
     log::debug!(
-        "Reading mmap{separator}{path:?} to populate cache took {:?}",
+        "Prefaulted mmap{separator}{path:?} in {:?}",
         instant.elapsed()
     );
 }

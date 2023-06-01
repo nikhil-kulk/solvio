@@ -159,7 +159,7 @@ You can also download raw OpenAPI [definitions](https://github.com/solvio/solvio
 
 ### gRPC
 
-For faster production-tier searches, Solvio also provides a gRPC interface. You can find gRPC documentation [here](https://solvio.tech/documentation/quick_start/#grpc).
+For faster production-tier searches, Solvio also provides a gRPC interface. You can find gRPC documentation [here](https://solvio.tech/documentation/quick-start/#grpc).
 
 ## Features
 
@@ -197,7 +197,7 @@ Examples and/or documentation of Solvio integrations:
 
 - [Cohere](https://docs.cohere.com/docs/integrations#solvio) ([blogpost on building a QA app with Cohere and Solvio](https://solvio.tech/articles/qa-with-cohere-and-solvio/)) - Use Cohere embeddings with Solvio
 - [DocArray](https://docarray.jina.ai/advanced/document-store/solvio/) - Use Solvio as a document store in DocArray
-- [LangChain](https://python.langchain.com/en/latest/ecosystem/solvio.html) ([blogpost](https://solvio.tech/articles/langchain-integration/)) - Use Solvio as a memory backend for LangChain.
+- [LangChain](https://python.langchain.com/en/latest/modules/indexes/vectorstores/examples/solvio.html) ([blogpost](https://solvio.tech/articles/langchain-integration/)) - Use Solvio as a memory backend for LangChain.
 - [LlamaIndex](https://gpt-index.readthedocs.io/en/latest/how_to/integrations/vector_stores.html) - Use Solvio as a Vector Store with LlamaIndex.
 - [OpenAI - ChatGPT retrieval plugin](https://github.com/openai/chatgpt-retrieval-plugin/blob/main/docs/providers/solvio/setup.md) - Use Solvio as a memory backend for ChatGPT
 - [Microsoft Semantic Kernel](https://devblogs.microsoft.com/semantic-kernel/the-power-of-persistent-memory-with-semantic-kernel-and-solvio-vector-database/) - Use Solvio as persistent memory with Semantic Kernel

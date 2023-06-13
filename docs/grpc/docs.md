@@ -142,6 +142,7 @@
     - [Vector](#solvio-Vector)
     - [Vectors](#solvio-Vectors)
     - [VectorsSelector](#solvio-VectorsSelector)
+    - [WithLookup](#solvio-WithLookup)
     - [WithPayloadSelector](#solvio-WithPayloadSelector)
     - [WithVectorsSelector](#solvio-WithVectorsSelector)
     - [WriteOrdering](#solvio-WriteOrdering)
@@ -419,7 +420,7 @@
 | hnsw_config | [HnswConfigDiff](#solvio-HnswConfigDiff) | optional | Configuration of vector index |
 | wal_config | [WalConfigDiff](#solvio-WalConfigDiff) | optional | Configuration of the Write-Ahead-Log |
 | optimizers_config | [OptimizersConfigDiff](#solvio-OptimizersConfigDiff) | optional | Configuration of the optimizers |
-| shard_number | [uint32](#uint32) | optional | Number of shards in the collection, default = 1 |
+| shard_number | [uint32](#uint32) | optional | Number of shards in the collection, default is 1 for standalone, otherwise equal to the number of nodes. Minimum is 1 |
 | on_disk_payload | [bool](#bool) | optional | If true - point&#39;s payload will not be stored in memory |
 | timeout | [uint64](#uint64) | optional | Wait timeout for operation commit in seconds, if not specified - default value will be supplied |
 | vectors_config | [VectorsConfig](#solvio-VectorsConfig) | optional | Configuration for vectors |
@@ -1752,6 +1753,7 @@ The JSON representation for `Value` is a JSON value.
 | ----- | ---- | ----- | ----------- |
 | id | [GroupId](#solvio-GroupId) |  | Group id |
 | hits | [ScoredPoint](#solvio-ScoredPoint) | repeated | Points in the group |
+| lookup | [RetrievedPoint](#solvio-RetrievedPoint) |  | Point(s) from the lookup collection that matches the group id |
 
 
 
@@ -1991,6 +1993,7 @@ The JSON representation for `Value` is a JSON value.
 | group_by | [string](#string) |  | Payload field to group by, must be a string or number field. If there are multiple values for the field, all of them will be used. One point can be in multiple groups. |
 | group_size | [uint32](#uint32) |  | Maximum amount of points to return per group |
 | read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
+| with_lookup | [WithLookup](#solvio-WithLookup) | optional | Options for specifying how to use the group id to lookup points in another collection |
 
 
 
@@ -2262,6 +2265,7 @@ The JSON representation for `Value` is a JSON value.
 | group_by | [string](#string) |  | Payload field to group by, must be a string or number field. If there are multiple values for the field, all of them will be used. One point can be in multiple groups. |
 | group_size | [uint32](#uint32) |  | Maximum amount of points to return per group |
 | read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
+| with_lookup | [WithLookup](#solvio-WithLookup) | optional | Options for specifying how to use the group id to lookup points in another collection |
 
 
 
@@ -2454,6 +2458,23 @@ The JSON representation for `Value` is a JSON value.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | names | [string](#string) | repeated | List of vectors to include into result |
+
+
+
+
+
+
+<a name="solvio-WithLookup"></a>
+
+### WithLookup
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection | [string](#string) |  | Name of the collection to use for points lookup |
+| with_payload | [WithPayloadSelector](#solvio-WithPayloadSelector) | optional | Options for specifying which payload to include (or not) |
+| with_vectors | [WithVectorsSelector](#solvio-WithVectorsSelector) | optional | Options for specifying which vectors to include (or not) |
 
 
 

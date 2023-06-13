@@ -6,7 +6,23 @@
 #   - If it was killed after initialization, do nothing and restart container
 # - If recovery mode is not allowed, we just restart container
 
-./solvio $@
+_term () {
+  kill -TERM "$solvio_PID" 2>/dev/null
+}
+
+trap _term SIGTERM
+
+_interrupt () {
+  kill -INT "$solvio_PID" 2>/dev/null
+}
+
+trap _interrupt SIGINT
+
+./solvio $@ &
+
+# Get PID for the traps
+solvio_PID=$!
+wait $solvio_PID
 
 EXIT_CODE=$?
 
@@ -33,7 +49,10 @@ Please check memory consumption, increase memory limit or remove some collection
 if [ ! -f "$IS_INITIALIZED_FILE" ]; then
     # Run solvio in recovery mode.
     # No collection operations are allowed in recovery mode except for removing collections
-    solvio__STORAGE__RECOVERY_MODE="$RECOVERY_MESSAGE" ./solvio $@
+    solvio__STORAGE__RECOVERY_MODE="$RECOVERY_MESSAGE" ./solvio $@ &
+    # Get PID for the traps
+    solvio_PID=$!
+    wait $solvio_PID
     exit $?
 fi
 

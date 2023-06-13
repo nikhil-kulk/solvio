@@ -4,21 +4,21 @@ services:
   solvio_node_1:
     image: solvio_tls:latest
     hostname: node1.solvio
-    networks: 
+    networks:
       - solvio
-    command: ./solvio --uri 'https://node1.solvio:6335'
+    command: ./solvio --uri 'https://node1.solvio:6335' --config-path config/tls_config.yaml
     volumes:
     - ./cert:/solvio/tls
-    - ./tls_config.yaml:/solvio/config/production.yaml
+    - ./tls_config.yaml:/solvio/config/tls_config.yaml
   solvio_node_2:
     image: solvio_tls:latest
     hostname: node2.solvio
-    networks: 
+    networks:
       - solvio
-    command: bash -c "sleep 5 && ./solvio --bootstrap 'https://node1.solvio:6335' --uri 'https://node2.solvio:6335'"
+    command: bash -c "sleep 5 && ./solvio --bootstrap 'https://node1.solvio:6335' --uri 'https://node2.solvio:6335' --config-path config/tls_config.yaml"
     volumes:
     - ./cert:/solvio/tls
-    - ./tls_config.yaml:/solvio/config/production.yaml
+    - ./tls_config.yaml:/solvio/config/tls_config.yaml
 
 networks:
   solvio: {}

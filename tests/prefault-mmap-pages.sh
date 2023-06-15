@@ -23,10 +23,10 @@ function - {
 }
 
 cd $solvio_DIR
-cargo build --release --bin solvio
+- cargo build --release --bin solvio
 
 cd $BFB_DIR
-cargo build --release
+- cargo build --release
 
 cd $solvio_DIR
 

@@ -45,6 +45,10 @@
     - [UpdateCollection](#solvio-UpdateCollection)
     - [UpdateCollectionClusterSetupRequest](#solvio-UpdateCollectionClusterSetupRequest)
     - [UpdateCollectionClusterSetupResponse](#solvio-UpdateCollectionClusterSetupResponse)
+    - [UpdateVectorParams](#solvio-UpdateVectorParams)
+    - [UpdateVectorParamsMap](#solvio-UpdateVectorParamsMap)
+    - [UpdateVectorParamsMap.MapEntry](#solvio-UpdateVectorParamsMap-MapEntry)
+    - [UpdateVectorsConfig](#solvio-UpdateVectorsConfig)
     - [VectorParams](#solvio-VectorParams)
     - [VectorParamsMap](#solvio-VectorParamsMap)
     - [VectorParamsMap.MapEntry](#solvio-VectorParamsMap-MapEntry)
@@ -853,6 +857,7 @@ Note: 1kB = 1 vector of size 256. |
 | timeout | [uint64](#uint64) | optional | Wait timeout for operation commit in seconds if blocking, if not specified - default value will be supplied |
 | params | [CollectionParamsDiff](#solvio-CollectionParamsDiff) | optional | New configuration parameters for the collection |
 | hnsw_config | [HnswConfigDiff](#solvio-HnswConfigDiff) | optional | New HNSW parameters for the collection index |
+| vectors_config | [UpdateVectorsConfig](#solvio-UpdateVectorsConfig) | optional | Configuration for vectors |
 
 
 
@@ -888,6 +893,68 @@ Note: 1kB = 1 vector of size 256. |
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | result | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="solvio-UpdateVectorParams"></a>
+
+### UpdateVectorParams
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| hnsw_config | [HnswConfigDiff](#solvio-HnswConfigDiff) | optional | Update params for HNSW index. If empty object - it will be unset |
+
+
+
+
+
+
+<a name="solvio-UpdateVectorParamsMap"></a>
+
+### UpdateVectorParamsMap
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| map | [UpdateVectorParamsMap.MapEntry](#solvio-UpdateVectorParamsMap-MapEntry) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-UpdateVectorParamsMap-MapEntry"></a>
+
+### UpdateVectorParamsMap.MapEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [UpdateVectorParams](#solvio-UpdateVectorParams) |  |  |
+
+
+
+
+
+
+<a name="solvio-UpdateVectorsConfig"></a>
+
+### UpdateVectorsConfig
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| params | [UpdateVectorParams](#solvio-UpdateVectorParams) |  |  |
+| params_map | [UpdateVectorParamsMap](#solvio-UpdateVectorParamsMap) |  |  |
 
 
 

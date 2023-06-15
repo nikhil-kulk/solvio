@@ -18,32 +18,28 @@ then
 	exit 2
 fi
 
-function - {
-	echo $@
-}
-
 cd $solvio_DIR
-- cargo build --release --bin solvio
+cargo build --release --bin solvio
 
 cd $BFB_DIR
-- cargo build --release
+cargo build --release
 
 cd $solvio_DIR
 
 solvio__LOG_LEVEL=debug,raft=info,segment::common::mmap_ops=trace \
 solvio__STORAGE__OPTIMIZERS__MEMMAP_THRESHOLD_KB=1 \
-- ./target/release/solvio &
+./target/release/solvio &
 
-- $BFB_DIR/target/release/bfb -n 1000000 --indexing-threshold 1000000000
+$BFB_DIR/target/release/bfb -n 1000000 --indexing-threshold 1000000000
 
-- kill %%
+kill %%
 
 solvio__LOG_LEVEL=debug,raft=info,segment::common::mmap_ops=trace \
 solvio__STORAGE__OPTIMIZERS__MEMMAP_THRESHOLD_KB=1 \
-- ./target/release/solvio &
+./target/release/solvio &
 
 function search() {
-	- time \
+	time \
 		curl localhost:6333/collections/benchmark/points/search \
 		-X POST -H 'Content-Type: application/json' --data-raw '{
 			"vector": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],

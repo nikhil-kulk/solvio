@@ -1,18 +1,24 @@
 #!/bin/zsh
 
-set -euo pipefail -E
+trap 'exit $?' TERM INT ERR
 
 function main {
 	declare file; file=$(mktemp -u)
 
-	trap 'rm -f $file ; exit' EXIT ERR TERM INT
+	trap 'rm -f $file' EXIT
 
 	mkfifo $file
 	exec {pipe}<>$file
 	rm $file
 
-	trap 'kill-jobs ; exit' EXIT ERR TERM INT
-	{ trap 'kill-jobs ; exit' EXIT ERR TERM INT ; search-collections $pipe } &
+	trap kill-jobs EXIT
+
+	{
+		trap 'exit $?' TERM INT ERR
+		trap kill-jobs EXIT
+		search-collections $pipe
+	} &
+
 	create-collections $pipe
 }
 

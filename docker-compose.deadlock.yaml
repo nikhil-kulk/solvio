@@ -1,0 +1,24 @@
+version: "3.7"
+
+# docker run --rm -it --cap-add=SYS_PTRACE --name solvio solvio ./solvio
+
+services:
+  solvio:
+    image: solvio:latest
+    command: ./solvio
+    environment:
+      - RUST_LOG=info
+      - solvio__LOG_LEVEL=info
+      # - solvio__STORAGE__STORAGE_PATH=./data/storage
+      # - solvio__STORAGE__SNAPSHOTS_PATH=./data/snapshots
+      # - TOKIO_CONSOLE_BIND=0.0.0.0:6669
+    ports:
+      - 127.0.0.1:6333:6333
+      - 127.0.0.1:6334:6334
+      # - 6669:6669 # Tokio Console
+      # - 8086:8086 # Tracy
+    # volumes:
+    #   - /solvio-data:/solvio/data
+    #   - /solvio-coreL:/solvio/core
+    cap_add:
+      - SYS_PTRACE

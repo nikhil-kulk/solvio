@@ -118,6 +118,7 @@ fn main() -> anyhow::Result<()> {
 
     let reporting_id = TelemetryCollector::generate_id();
 
+    #[cfg(not(feature = "tracing-logger"))]
     setup_logger(&settings.log_level);
     setup_panic_hook(reporting_enabled, reporting_id.to_string());
 

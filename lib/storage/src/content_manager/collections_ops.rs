@@ -12,6 +12,7 @@ pub type Collections = HashMap<CollectionId, Collection>;
 pub trait Checker {
     fn is_collection_exists(&self, collection_name: &str) -> bool;
 
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip_all))]
     async fn validate_collection_not_exists(
         &self,
         collection_name: &str,

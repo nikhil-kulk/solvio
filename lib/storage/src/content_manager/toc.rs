@@ -240,6 +240,7 @@ impl TableOfContent {
         )
     }
 
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip_all))]
     pub async fn create_snapshots_path(
         &self,
         collection_name: &str,
@@ -256,6 +257,7 @@ impl TableOfContent {
         Ok(snapshots_path)
     }
 
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip_all))]
     async fn create_collection_path(&self, collection_name: &str) -> Result<PathBuf, StorageError> {
         let path = self.get_collection_path(collection_name);
 
@@ -294,6 +296,9 @@ impl TableOfContent {
         Ok(resolved_name)
     }
 
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip_all, fields(
+        collection_name = collection_name
+    )))]
     async fn create_collection(
         &self,
         collection_name: &str,
@@ -444,6 +449,7 @@ impl TableOfContent {
         Ok(true)
     }
 
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip(self, vectors)))]
     async fn check_collections_compatibility(
         &self,
         vectors: &VectorsConfig,
@@ -455,6 +461,7 @@ impl TableOfContent {
         Ok(())
     }
 
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip(self)))]
     pub async fn run_data_initialization(
         &self,
         from_collection: CollectionId,
@@ -492,6 +499,7 @@ impl TableOfContent {
         });
     }
 
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip(self, collection_name)))]
     async fn on_peer_created(
         &self,
         collection_name: String,
@@ -840,6 +848,7 @@ impl TableOfContent {
             .block_on(self.perform_collection_meta_op(operation))
     }
 
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip_all))]
     pub async fn perform_collection_meta_op(
         &self,
         operation: CollectionMetaOperations,

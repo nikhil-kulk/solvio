@@ -132,6 +132,7 @@ impl Collection {
     }
 
     #[allow(clippy::too_many_arguments)]
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip_all))]
     pub async fn new(
         name: CollectionId,
         this_peer_id: PeerId,
@@ -891,6 +892,7 @@ impl Collection {
         }
     }
 
+    // #[cfg_attr(feature = "tracing", tracing::instrument(skip_all))]
     pub async fn _search_batch(
         &self,
         request: SearchRequestBatch,

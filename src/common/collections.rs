@@ -30,6 +30,7 @@ pub async fn do_get_collection(
     Ok(collection.info(shard_selection).await?)
 }
 
+#[cfg_attr(feature = "tracing", tracing::instrument(skip_all))]
 pub async fn do_list_collections(toc: &TableOfContent) -> CollectionsResponse {
     let collections = toc
         .all_collections()

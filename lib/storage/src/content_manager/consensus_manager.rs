@@ -545,13 +545,14 @@ impl<C: CollectionContainer> ConsensusManager<C> {
         })?
     }
 
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip(self)))]
     pub fn await_for_multiple_operations(
         &self,
         operations: Vec<ConsensusOperations>,
         wait_timeout: Option<Duration>,
     ) -> impl Future<Output = Result<Result<(), StorageError>, Elapsed>> {
         let mut receivers = vec![];
-        for operation in operations {
+        for operation in operations.clone() {
             // one-shot broadcast channel
             let (sender, mut receiver) = broadcast::channel(1);
             let mut on_apply_lock = self.on_consensus_op_apply.lock();
@@ -597,6 +598,7 @@ impl<C: CollectionContainer> ConsensusManager<C> {
     ///   This is needed to ensure that the operation is committed and applied on majority of the nodes.
     ///   We can not wait for all nodes confirmation, because it is not guaranteed that all nodes will be online.
     ///
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip(self)))]
     pub async fn propose_consensus_op_with_await(
         &self,
         operation: ConsensusOperations,

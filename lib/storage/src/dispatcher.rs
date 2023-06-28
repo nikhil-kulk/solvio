@@ -39,6 +39,7 @@ impl Dispatcher {
 
     /// If `wait_timeout` is not supplied - then default duration will be used.
     /// This function needs to be called from a runtime with timers enabled.
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip_all))]
     pub async fn submit_collection_meta_op(
         &self,
         operation: CollectionMetaOperations,

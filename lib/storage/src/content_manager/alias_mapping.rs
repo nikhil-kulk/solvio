@@ -134,6 +134,7 @@ impl AliasPersistence {
         Ok(())
     }
 
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip_all))]
     pub fn check_alias_exists(&self, alias: &str) -> bool {
         self.alias_mapping.0.contains_key(alias)
     }

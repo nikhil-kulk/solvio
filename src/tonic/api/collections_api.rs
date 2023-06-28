@@ -1,3 +1,4 @@
+use std::fmt;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 
@@ -27,6 +28,7 @@ impl CollectionsService {
         Self { dispatcher }
     }
 
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip_all))]
     async fn perform_operation<O>(
         &self,
         request: Request<O>,
@@ -36,7 +38,7 @@ impl CollectionsService {
             + TryInto<
                 storage::content_manager::collection_meta_ops::CollectionMetaOperations,
                 Error = Status,
-            >,
+            > + fmt::Debug,
     {
         let timing = Instant::now();
         let operation = request.into_inner();
@@ -109,6 +111,7 @@ impl Collections for CollectionsService {
         get(self.dispatcher.as_ref(), request.into_inner(), None).await
     }
 
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip(self)))]
     async fn list(
         &self,
         request: Request<ListCollectionsRequest>,
@@ -121,6 +124,7 @@ impl Collections for CollectionsService {
         Ok(Response::new(response))
     }
 
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip_all))]
     async fn create(
         &self,
         request: Request<CreateCollection>,

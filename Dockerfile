@@ -95,7 +95,7 @@ RUN mkdir /static ; STATIC_DIR='/static' ./tools/sync-web-ui.sh
 FROM debian:12-slim AS solvio
 
 RUN apt-get update \
-    && apt-get install -y ca-certificates tzdata \
+    && apt-get install -y ca-certificates tzdata gdb \
     && rm -rf /var/lib/apt/lists/*
 
 ARG APP=/solvio

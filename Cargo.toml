@@ -122,6 +122,7 @@ lto = "fat"
 inherits = "release"
 lto = false
 opt-level = 0
+debug = true
 
 [profile.bench]
 lto = false

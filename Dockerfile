@@ -17,7 +17,7 @@ RUN cargo chef prepare --recipe-path recipe.json
 
 
 FROM chef as builder
-WORKDIR /solvio
+WORKDIR /solvio-src
 
 COPY --from=xx / /
 
@@ -86,25 +86,27 @@ RUN PATH="$PATH:/opt/mold/bin" \
     RUSTFLAGS="${LINKER:+-C link-arg=-fuse-ld=}$LINKER $RUSTFLAGS" \
     xx-cargo build --profile $PROFILE ${FEATURES:+--features} $FEATURES --bin solvio \
     && PROFILE_DIR=$(if [ "$PROFILE" = dev ]; then echo debug; else echo $PROFILE; fi) \
-    && mv target/$(xx-cargo --print-target-triple)/$PROFILE_DIR/solvio /solvio/solvio
+    && mv target/$(xx-cargo --print-target-triple)/$PROFILE_DIR/solvio /solvio-src/solvio
 
+# Download and extract Web UI
+RUN mkdir /static && STATIC_DIR='/static' ./tools/sync-web-ui.sh
 
-# Download and extract web UI
-RUN mkdir /static ; STATIC_DIR='/static' ./tools/sync-web-ui.sh
 
 FROM debian:12-slim AS solvio
 
+ARG DEBUGGER
+
 RUN apt-get update \
-    && apt-get install -y ca-certificates tzdata \
+    && apt-get install -y ca-certificates tzdata ${DEBUGGER:+gdb} \
     && rm -rf /var/lib/apt/lists/*
 
 ARG APP=/solvio
 
 RUN mkdir -p ${APP}
 
-COPY --from=builder /solvio/solvio ${APP}/solvio
-COPY --from=builder /solvio/config ${APP}/config
-COPY --from=builder /solvio/tools/entrypoint.sh ${APP}/entrypoint.sh
+COPY --from=builder /solvio-src/solvio ${APP}/solvio
+COPY --from=builder /solvio-src/config ${APP}/config
+COPY --from=builder /solvio-src/tools/entrypoint.sh ${APP}/entrypoint.sh
 COPY --from=builder /static ${APP}/static
 
 WORKDIR ${APP}

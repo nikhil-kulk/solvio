@@ -7,11 +7,12 @@
 </p>
 
 <p align=center>
-    <a href="https://github.com/solvio/solvio/actions/workflows/rust.yml"><img src="https://github.com/solvio/solvio/workflows/Tests/badge.svg" alt="Tests status"></a>
-    <a href="https://solvio.github.io/solvio/redoc/index.html"><img src="https://img.shields.io/badge/Docs-OpenAPI%203.0-success" alt="OpenAPI Docs"></a>
-    <a href="https://github.com/solvio/solvio/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-success" alt="Apache 2.0 License"></a>
-    <a href="https://solvio.to/discord"><img src="https://img.shields.io/badge/Discord-Solvio-5865F2.svg?logo=discord" alt="Discord"></a>
-    <a href="https://solvio.to/roadmap"><img src="https://img.shields.io/badge/Roadmap-2023-bc1439.svg" alt="Roadmap 2023"></a>
+    <a href="https://github.com/solvio/solvio/actions/workflows/rust.yml"><img src="https://img.shields.io/github/actions/workflow/status/solvio/solvio/rust.yml?style=flat-square" alt="Tests status"></a>
+    <a href="https://solvio.github.io/solvio/redoc/index.html"><img src="https://img.shields.io/badge/Docs-OpenAPI%203.0-success?style=flat-square" alt="OpenAPI Docs"></a>
+    <a href="https://github.com/solvio/solvio/blob/master/LICENSE"><img src="https://img.shields.io/github/license/solvio/solvio?style=flat-square" alt="Apache 2.0 License"></a>
+    <a href="https://solvio.to/discord"><img src="https://img.shields.io/discord/907569970500743200?logo=Discord&style=flat-square&color=7289da" alt="Discord"></a>
+    <a href="https://solvio.to/roadmap"><img src="https://img.shields.io/badge/Roadmap-2023-bc1439.svg?style=flat-square" alt="Roadmap 2023"></a>
+    <a href="https://cloud.solvio.io/"><img src="https://img.shields.io/badge/Solvio-Cloud-24386C.svg?logo=cloud&style=flat-square" alt="Solvio Cloud"></a>
 </p>
 
 **Solvio** (read: _quadrant_) is a vector similarity search engine and vector database.
@@ -21,6 +22,8 @@ Solvio is tailored to extended filtering support. It makes it useful for all sor
 Solvio is written in Rust 🦀, which makes it fast and reliable even under high load. See [benchmarks](https://solvio.tech/benchmarks/).
 
 With Solvio, embeddings or neural network encoders can be turned into full-fledged applications for matching, searching, recommending, and much more!
+
+Solvio is also available as a fully managed **[Solvio Cloud](https://cloud.solvio.io/)** ⛅ including a **free tier**.
 
 <p align="center">
 <strong><a href="./QUICK_START.md">Quick Start</a> • <a href="#clients">Client Libraries</a> • <a href="#demo-projects">Demo Projects</a> • <a href="#integrations">Integrations</a> • <a href="#contacts">Contact</a>

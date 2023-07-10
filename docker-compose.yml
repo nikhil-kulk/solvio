@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  solvio_bench:
+    image: solvio:latest
+    network_mode: host
+    environment:
+    - solvio__STORAGE__ASYNC_SCORER=true
+    volumes:
+    - /root/solvio/storage:/solvio/storage
+    - /root/solvio/snapshots:/solvio/snapshots
+    logging:
+      driver: "json-file"
+      options:
+        max-file: 1
+        max-size: 10m
+    deploy:
+      resources:
+        limits:
+          memory: 7Gb

@@ -86,6 +86,7 @@
     - [Filter](#solvio-Filter)
     - [GeoBoundingBox](#solvio-GeoBoundingBox)
     - [GeoPoint](#solvio-GeoPoint)
+    - [GeoPolygon](#solvio-GeoPolygon)
     - [GeoRadius](#solvio-GeoRadius)
     - [GetPoints](#solvio-GetPoints)
     - [GetResponse](#solvio-GetResponse)
@@ -1446,6 +1447,7 @@ The JSON representation for `Value` is a JSON value.
 | geo_bounding_box | [GeoBoundingBox](#solvio-GeoBoundingBox) |  | Check if points geolocation lies in a given area |
 | geo_radius | [GeoRadius](#solvio-GeoRadius) |  | Check if geo point is within a given radius |
 | values_count | [ValuesCount](#solvio-ValuesCount) |  | Check number of values for a specific field |
+| geo_polygon | [GeoPolygon](#solvio-GeoPolygon) |  | Check if geo point is within a given polygon |
 
 
 
@@ -1495,6 +1497,21 @@ The JSON representation for `Value` is a JSON value.
 | ----- | ---- | ----- | ----------- |
 | lon | [double](#double) |  |  |
 | lat | [double](#double) |  |  |
+
+
+
+
+
+
+<a name="solvio-GeoPolygon"></a>
+
+### GeoPolygon
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| points | [GeoPoint](#solvio-GeoPoint) | repeated | Ordered list of coordinates representing the vertices of a polygon. The minimum size is 4, and the first coordinate and the last coordinate should be the same to form a closed polygon. |
 
 
 

@@ -39,14 +39,14 @@ if [ $EXIT_CODE != 137 ]; then
     exit $EXIT_CODE
 fi
 
-IS_INITIALIZED_FILE='.solvio-initialized'
+solvio_INIT_FILE_PATH=${solvio_INIT_FILE_PATH:-'.solvio-initialized'}
 RECOVERY_MESSAGE="Solvio was killed during initialization. Most likely it's Out-of-Memory.
 Please check memory consumption, increase memory limit or remove some collections and restart"
 
 # Check that solvio was initialized
-# Solvio creates IS_INITIALIZED_FILE file after initialization
+# Solvio creates solvio_INIT_FILE_PATH file after initialization
 # So if it doesn't exist, solvio was killed during initialization
-if [ ! -f "$IS_INITIALIZED_FILE" ]; then
+if [ ! -f "$solvio_INIT_FILE_PATH" ]; then
     # Run solvio in recovery mode.
     # No collection operations are allowed in recovery mode except for removing collections
     solvio__STORAGE__RECOVERY_MODE="$RECOVERY_MESSAGE" ./solvio $@ &

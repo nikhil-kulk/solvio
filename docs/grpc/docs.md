@@ -85,6 +85,7 @@
     - [FieldCondition](#solvio-FieldCondition)
     - [Filter](#solvio-Filter)
     - [GeoBoundingBox](#solvio-GeoBoundingBox)
+    - [GeoLineString](#solvio-GeoLineString)
     - [GeoPoint](#solvio-GeoPoint)
     - [GeoPolygon](#solvio-GeoPolygon)
     - [GeoRadius](#solvio-GeoRadius)
@@ -1489,6 +1490,21 @@ The JSON representation for `Value` is a JSON value.
 
 
 
+<a name="solvio-GeoLineString"></a>
+
+### GeoLineString
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| points | [GeoPoint](#solvio-GeoPoint) | repeated | Ordered sequence of GeoPoints representing the line |
+
+
+
+
+
+
 <a name="solvio-GeoPoint"></a>
 
 ### GeoPoint
@@ -1513,7 +1529,7 @@ The JSON representation for `Value` is a JSON value.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| points | [GeoPoint](#solvio-GeoPoint) | repeated | Ordered list of coordinates representing the vertices of a polygon. The minimum size is 4, and the first coordinate and the last coordinate should be the same to form a closed polygon. |
+| rings | [GeoLineString](#solvio-GeoLineString) | repeated | An ordered list of lists of GeoPoint coordinates, arranged in order. For Polygons with more than one of these rings, the first MUST be the exterior ring, and any others MUST be interior rings. The exterior ring bounds the surface, and the interior rings (if present) bound holes within the surface. |
 
 
 

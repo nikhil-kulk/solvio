@@ -46,9 +46,13 @@
     - [UpdateCollectionClusterSetupRequest](#solvio-UpdateCollectionClusterSetupRequest)
     - [UpdateCollectionClusterSetupResponse](#solvio-UpdateCollectionClusterSetupResponse)
     - [VectorParams](#solvio-VectorParams)
+    - [VectorParamsDiff](#solvio-VectorParamsDiff)
+    - [VectorParamsDiffMap](#solvio-VectorParamsDiffMap)
+    - [VectorParamsDiffMap.MapEntry](#solvio-VectorParamsDiffMap-MapEntry)
     - [VectorParamsMap](#solvio-VectorParamsMap)
     - [VectorParamsMap.MapEntry](#solvio-VectorParamsMap-MapEntry)
     - [VectorsConfig](#solvio-VectorsConfig)
+    - [VectorsConfigDiff](#solvio-VectorsConfigDiff)
     - [WalConfigDiff](#solvio-WalConfigDiff)
   
     - [CollectionStatus](#solvio-CollectionStatus)
@@ -853,6 +857,7 @@ Note: 1kB = 1 vector of size 256. |
 | timeout | [uint64](#uint64) | optional | Wait timeout for operation commit in seconds if blocking, if not specified - default value will be supplied |
 | params | [CollectionParamsDiff](#solvio-CollectionParamsDiff) | optional | New configuration parameters for the collection |
 | hnsw_config | [HnswConfigDiff](#solvio-HnswConfigDiff) | optional | New HNSW parameters for the collection index |
+| vectors_config | [VectorsConfigDiff](#solvio-VectorsConfigDiff) | optional | New vector parameters |
 
 
 
@@ -913,6 +918,52 @@ Note: 1kB = 1 vector of size 256. |
 
 
 
+<a name="solvio-VectorParamsDiff"></a>
+
+### VectorParamsDiff
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| hnsw_config | [HnswConfigDiff](#solvio-HnswConfigDiff) | optional | Update params for HNSW index. If empty object - it will be unset |
+
+
+
+
+
+
+<a name="solvio-VectorParamsDiffMap"></a>
+
+### VectorParamsDiffMap
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| map | [VectorParamsDiffMap.MapEntry](#solvio-VectorParamsDiffMap-MapEntry) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-VectorParamsDiffMap-MapEntry"></a>
+
+### VectorParamsDiffMap.MapEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [VectorParamsDiff](#solvio-VectorParamsDiff) |  |  |
+
+
+
+
+
+
 <a name="solvio-VectorParamsMap"></a>
 
 ### VectorParamsMap
@@ -954,6 +1005,22 @@ Note: 1kB = 1 vector of size 256. |
 | ----- | ---- | ----- | ----------- |
 | params | [VectorParams](#solvio-VectorParams) |  |  |
 | params_map | [VectorParamsMap](#solvio-VectorParamsMap) |  |  |
+
+
+
+
+
+
+<a name="solvio-VectorsConfigDiff"></a>
+
+### VectorsConfigDiff
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| params | [VectorParamsDiff](#solvio-VectorParamsDiff) |  |  |
+| params_map | [VectorParamsDiffMap](#solvio-VectorParamsDiffMap) |  |  |
 
 
 

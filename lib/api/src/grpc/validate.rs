@@ -81,6 +81,16 @@ impl Validate for crate::grpc::solvio::vectors_config::Config {
     }
 }
 
+impl Validate for crate::grpc::solvio::vectors_config_diff::Config {
+    fn validate(&self) -> Result<(), ValidationErrors> {
+        use crate::grpc::solvio::vectors_config_diff::Config;
+        match self {
+            Config::Params(params) => params.validate(),
+            Config::ParamsMap(params_map) => params_map.validate(),
+        }
+    }
+}
+
 impl Validate for crate::grpc::solvio::quantization_config::Quantization {
     fn validate(&self) -> Result<(), ValidationErrors> {
         use crate::grpc::solvio::quantization_config::Quantization;

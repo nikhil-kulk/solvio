@@ -20,6 +20,7 @@
     - [CreateCollection](#solvio-CreateCollection)
     - [DeleteAlias](#solvio-DeleteAlias)
     - [DeleteCollection](#solvio-DeleteCollection)
+    - [Disabled](#solvio-Disabled)
     - [GetCollectionInfoRequest](#solvio-GetCollectionInfoRequest)
     - [GetCollectionInfoResponse](#solvio-GetCollectionInfoResponse)
     - [HnswConfigDiff](#solvio-HnswConfigDiff)
@@ -36,6 +37,7 @@
     - [PayloadSchemaInfo](#solvio-PayloadSchemaInfo)
     - [ProductQuantization](#solvio-ProductQuantization)
     - [QuantizationConfig](#solvio-QuantizationConfig)
+    - [QuantizationConfigDiff](#solvio-QuantizationConfigDiff)
     - [RemoteShardInfo](#solvio-RemoteShardInfo)
     - [RenameAlias](#solvio-RenameAlias)
     - [Replica](#solvio-Replica)
@@ -470,6 +472,16 @@
 
 
 
+<a name="solvio-Disabled"></a>
+
+### Disabled
+
+
+
+
+
+
+
 <a name="solvio-GetCollectionInfoRequest"></a>
 
 ### GetCollectionInfoRequest
@@ -742,6 +754,23 @@ Note: 1kB = 1 vector of size 256. |
 
 
 
+<a name="solvio-QuantizationConfigDiff"></a>
+
+### QuantizationConfigDiff
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| scalar | [ScalarQuantization](#solvio-ScalarQuantization) |  |  |
+| product | [ProductQuantization](#solvio-ProductQuantization) |  |  |
+| disabled | [Disabled](#solvio-Disabled) |  |  |
+
+
+
+
+
+
 <a name="solvio-RemoteShardInfo"></a>
 
 ### RemoteShardInfo
@@ -858,6 +887,7 @@ Note: 1kB = 1 vector of size 256. |
 | params | [CollectionParamsDiff](#solvio-CollectionParamsDiff) | optional | New configuration parameters for the collection |
 | hnsw_config | [HnswConfigDiff](#solvio-HnswConfigDiff) | optional | New HNSW parameters for the collection index |
 | vectors_config | [VectorsConfigDiff](#solvio-VectorsConfigDiff) | optional | New vector parameters |
+| quantization_config | [QuantizationConfigDiff](#solvio-QuantizationConfigDiff) | optional | Quantization configuration of vector |
 
 
 
@@ -927,6 +957,7 @@ Note: 1kB = 1 vector of size 256. |
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | hnsw_config | [HnswConfigDiff](#solvio-HnswConfigDiff) | optional | Update params for HNSW index. If empty object - it will be unset |
+| quantization_config | [QuantizationConfigDiff](#solvio-QuantizationConfigDiff) | optional | Update quantization params. If none - it is left unchanged. |
 
 
 

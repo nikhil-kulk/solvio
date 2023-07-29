@@ -1547,7 +1547,6 @@ The JSON representation for `Value` is a JSON value.
 | geo_bounding_box | [GeoBoundingBox](#solvio-GeoBoundingBox) |  | Check if points geolocation lies in a given area |
 | geo_radius | [GeoRadius](#solvio-GeoRadius) |  | Check if geo point is within a given radius |
 | values_count | [ValuesCount](#solvio-ValuesCount) |  | Check number of values for a specific field |
-| geo_polygon | [GeoPolygon](#solvio-GeoPolygon) |  | Check if geo point is within a given polygon |
 
 
 

@@ -86,6 +86,8 @@
     - [DeletePayloadPoints](#solvio-DeletePayloadPoints)
     - [DeletePointVectors](#solvio-DeletePointVectors)
     - [DeletePoints](#solvio-DeletePoints)
+    - [DissimilaritySearchBatchPoints](#solvio-DissimilaritySearchBatchPoints)
+    - [DissimilaritySearchPoints](#solvio-DissimilaritySearchPoints)
     - [FieldCondition](#solvio-FieldCondition)
     - [Filter](#solvio-Filter)
     - [GeoBoundingBox](#solvio-GeoBoundingBox)
@@ -1502,6 +1504,46 @@ The JSON representation for `Value` is a JSON value.
 
 
 
+<a name="solvio-DissimilaritySearchBatchPoints"></a>
+
+### DissimilaritySearchBatchPoints
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+| dissimilarity_search_points | [DissimilaritySearchPoints](#solvio-DissimilaritySearchPoints) | repeated |  |
+| read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
+
+
+
+
+
+
+<a name="solvio-DissimilaritySearchPoints"></a>
+
+### DissimilaritySearchPoints
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | name of the collection |
+| vector | [float](#float) | repeated | vector |
+| filter | [Filter](#solvio-Filter) |  | Filter conditions - return only those points that satisfy the specified conditions |
+| amount | [uint64](#uint64) |  | Max number of result |
+| with_payload | [WithPayloadSelector](#solvio-WithPayloadSelector) |  | Options for specifying which payload to include or not |
+| params | [SearchParams](#solvio-SearchParams) |  | Search config |
+| vector_name | [string](#string) | optional | Which vector to use for search, if not specified - use default vector |
+| with_vectors | [WithVectorsSelector](#solvio-WithVectorsSelector) | optional | Options for specifying which vectors to include into response |
+| read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
+
+
+
+
+
+
 <a name="solvio-FieldCondition"></a>
 
 ### FieldCondition
@@ -2718,6 +2760,8 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | DeleteFieldIndex | [DeleteFieldIndexCollection](#solvio-DeleteFieldIndexCollection) | [PointsOperationResponse](#solvio-PointsOperationResponse) | Delete field index for collection |
 | Search | [SearchPoints](#solvio-SearchPoints) | [SearchResponse](#solvio-SearchResponse) | Retrieve closest points based on vector similarity and given filtering conditions |
 | SearchBatch | [SearchBatchPoints](#solvio-SearchBatchPoints) | [SearchBatchResponse](#solvio-SearchBatchResponse) | Retrieve closest points based on vector similarity and given filtering conditions |
+| DissimilaritySearch | [DissimilaritySearchPoints](#solvio-DissimilaritySearchPoints) | [SearchResponse](#solvio-SearchResponse) |  |
+| DissimilaritySearchBatch | [DissimilaritySearchBatchPoints](#solvio-DissimilaritySearchBatchPoints) | [SearchBatchResponse](#solvio-SearchBatchResponse) |  |
 | SearchGroups | [SearchPointGroups](#solvio-SearchPointGroups) | [SearchGroupsResponse](#solvio-SearchGroupsResponse) | Retrieve closest points based on vector similarity and given filtering conditions, grouped by a given field |
 | Scroll | [ScrollPoints](#solvio-ScrollPoints) | [ScrollResponse](#solvio-ScrollResponse) | Iterate over all or filtered points points |
 | Recommend | [RecommendPoints](#solvio-RecommendPoints) | [RecommendResponse](#solvio-RecommendResponse) | Look for the points which are closer to stored positive examples and at the same time further to negative examples. |

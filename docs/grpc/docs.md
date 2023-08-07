@@ -116,6 +116,13 @@
     - [PointsIdsList](#solvio-PointsIdsList)
     - [PointsOperationResponse](#solvio-PointsOperationResponse)
     - [PointsSelector](#solvio-PointsSelector)
+    - [PointsUpdateOperation](#solvio-PointsUpdateOperation)
+    - [PointsUpdateOperation.DeletePayload](#solvio-PointsUpdateOperation-DeletePayload)
+    - [PointsUpdateOperation.DeleteVectors](#solvio-PointsUpdateOperation-DeleteVectors)
+    - [PointsUpdateOperation.PointStructList](#solvio-PointsUpdateOperation-PointStructList)
+    - [PointsUpdateOperation.SetPayload](#solvio-PointsUpdateOperation-SetPayload)
+    - [PointsUpdateOperation.SetPayload.PayloadEntry](#solvio-PointsUpdateOperation-SetPayload-PayloadEntry)
+    - [PointsUpdateOperation.UpdateVectors](#solvio-PointsUpdateOperation-UpdateVectors)
     - [QuantizationSearchParams](#solvio-QuantizationSearchParams)
     - [Range](#solvio-Range)
     - [ReadConsistency](#solvio-ReadConsistency)
@@ -142,6 +149,8 @@
     - [SearchResponse](#solvio-SearchResponse)
     - [SetPayloadPoints](#solvio-SetPayloadPoints)
     - [SetPayloadPoints.PayloadEntry](#solvio-SetPayloadPoints-PayloadEntry)
+    - [UpdateBatchPoints](#solvio-UpdateBatchPoints)
+    - [UpdateBatchResponse](#solvio-UpdateBatchResponse)
     - [UpdatePointVectors](#solvio-UpdatePointVectors)
     - [UpdateResult](#solvio-UpdateResult)
     - [UpsertPoints](#solvio-UpsertPoints)
@@ -1991,6 +2000,122 @@ The JSON representation for `Value` is a JSON value.
 
 
 
+<a name="solvio-PointsUpdateOperation"></a>
+
+### PointsUpdateOperation
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| upsert | [PointsUpdateOperation.PointStructList](#solvio-PointsUpdateOperation-PointStructList) |  |  |
+| delete | [PointsSelector](#solvio-PointsSelector) |  |  |
+| set_payload | [PointsUpdateOperation.SetPayload](#solvio-PointsUpdateOperation-SetPayload) |  |  |
+| overwrite_payload | [PointsUpdateOperation.SetPayload](#solvio-PointsUpdateOperation-SetPayload) |  |  |
+| delete_payload | [PointsUpdateOperation.DeletePayload](#solvio-PointsUpdateOperation-DeletePayload) |  |  |
+| clear_payload | [PointsSelector](#solvio-PointsSelector) |  |  |
+| update_vectors | [PointsUpdateOperation.UpdateVectors](#solvio-PointsUpdateOperation-UpdateVectors) |  |  |
+| delete_vectors | [PointsUpdateOperation.DeleteVectors](#solvio-PointsUpdateOperation-DeleteVectors) |  |  |
+
+
+
+
+
+
+<a name="solvio-PointsUpdateOperation-DeletePayload"></a>
+
+### PointsUpdateOperation.DeletePayload
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| keys | [string](#string) | repeated |  |
+| points_selector | [PointsSelector](#solvio-PointsSelector) | optional | Affected points |
+
+
+
+
+
+
+<a name="solvio-PointsUpdateOperation-DeleteVectors"></a>
+
+### PointsUpdateOperation.DeleteVectors
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| points_selector | [PointsSelector](#solvio-PointsSelector) |  | Affected points |
+| vectors | [VectorsSelector](#solvio-VectorsSelector) |  | List of vector names to delete |
+
+
+
+
+
+
+<a name="solvio-PointsUpdateOperation-PointStructList"></a>
+
+### PointsUpdateOperation.PointStructList
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| points | [PointStruct](#solvio-PointStruct) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-PointsUpdateOperation-SetPayload"></a>
+
+### PointsUpdateOperation.SetPayload
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| payload | [PointsUpdateOperation.SetPayload.PayloadEntry](#solvio-PointsUpdateOperation-SetPayload-PayloadEntry) | repeated |  |
+| points_selector | [PointsSelector](#solvio-PointsSelector) | optional | Affected points |
+
+
+
+
+
+
+<a name="solvio-PointsUpdateOperation-SetPayload-PayloadEntry"></a>
+
+### PointsUpdateOperation.SetPayload.PayloadEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [Value](#solvio-Value) |  |  |
+
+
+
+
+
+
+<a name="solvio-PointsUpdateOperation-UpdateVectors"></a>
+
+### PointsUpdateOperation.UpdateVectors
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| points | [PointVectors](#solvio-PointVectors) | repeated | List of points and vectors to update |
+
+
+
+
+
+
 <a name="solvio-QuantizationSearchParams"></a>
 
 ### QuantizationSearchParams
@@ -2472,6 +2597,40 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 
 
 
+<a name="solvio-UpdateBatchPoints"></a>
+
+### UpdateBatchPoints
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | name of the collection |
+| wait | [bool](#bool) | optional | Wait until the changes have been applied? |
+| operations | [PointsUpdateOperation](#solvio-PointsUpdateOperation) | repeated |  |
+| ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
+
+
+
+
+
+
+<a name="solvio-UpdateBatchResponse"></a>
+
+### UpdateBatchResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [UpdateResult](#solvio-UpdateResult) | repeated |  |
+| time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
 <a name="solvio-UpdatePointVectors"></a>
 
 ### UpdatePointVectors
@@ -2756,6 +2915,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | RecommendBatch | [RecommendBatchPoints](#solvio-RecommendBatchPoints) | [RecommendBatchResponse](#solvio-RecommendBatchResponse) | Look for the points which are closer to stored positive examples and at the same time further to negative examples. |
 | RecommendGroups | [RecommendPointGroups](#solvio-RecommendPointGroups) | [RecommendGroupsResponse](#solvio-RecommendGroupsResponse) | Look for the points which are closer to stored positive examples and at the same time further to negative examples, grouped by a given field |
 | Count | [CountPoints](#solvio-CountPoints) | [CountResponse](#solvio-CountResponse) | Count points in collection with given filtering conditions |
+| UpdateBatch | [UpdateBatchPoints](#solvio-UpdateBatchPoints) | [UpdateBatchResponse](#solvio-UpdateBatchResponse) | Perform multiple update operations in one request |
 
  
 

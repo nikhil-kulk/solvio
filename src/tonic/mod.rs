@@ -12,9 +12,12 @@ use ::api::grpc::solvio::collections_internal_server::CollectionsInternalServer;
 use ::api::grpc::solvio::collections_server::CollectionsServer;
 use ::api::grpc::solvio::points_internal_server::PointsInternalServer;
 use ::api::grpc::solvio::points_server::PointsServer;
+use ::api::grpc::solvio::solvio_internal_server::{SolvioInternal, SolvioInternalServer};
 use ::api::grpc::solvio::solvio_server::{Solvio, SolvioServer};
 use ::api::grpc::solvio::snapshots_server::SnapshotsServer;
-use ::api::grpc::solvio::{HealthCheckReply, HealthCheckRequest};
+use ::api::grpc::solvio::{
+    HealthCheckReply, HealthCheckRequest, HttpPortRequest, HttpPortResponse,
+};
 use storage::content_manager::consensus_manager::ConsensusStateRef;
 use storage::content_manager::toc::TableOfContent;
 use storage::dispatcher::Dispatcher;
@@ -43,6 +46,31 @@ impl Solvio for SolvioService {
         _request: Request<HealthCheckRequest>,
     ) -> Result<Response<HealthCheckReply>, Status> {
         Ok(Response::new(VersionInfo::default().into()))
+    }
+}
+
+pub struct SolvioInternalService {
+    /// HTTP port accessible from inside the cluster
+    http_port: u16,
+}
+
+impl SolvioInternalService {
+    fn new(internal_http_port: u16) -> Self {
+        Self {
+            http_port: internal_http_port,
+        }
+    }
+}
+
+#[tonic::async_trait]
+impl SolvioInternal for SolvioInternalService {
+    async fn get_http_port(
+        &self,
+        _request: Request<HttpPortRequest>,
+    ) -> Result<Response<HttpPortResponse>, Status> {
+        Ok(Response::new(HttpPortResponse {
+            port: self.http_port as i32,
+        }))
     }
 }
 
@@ -150,6 +178,7 @@ pub fn init_internal(
     toc: Arc<TableOfContent>,
     consensus_state: ConsensusStateRef,
     telemetry_collector: Arc<parking_lot::Mutex<TonicTelemetryCollector>>,
+    settings: Settings,
     host: String,
     internal_grpc_port: u16,
     tls_config: Option<ServerTlsConfig>,
@@ -165,6 +194,7 @@ pub fn init_internal(
             let socket = SocketAddr::from((host.parse::<IpAddr>().unwrap(), internal_grpc_port));
 
             let solvio_service = SolvioService::default();
+            let solvio_internal_service = SolvioInternalService::new(settings.service.http_port);
             let collections_internal_service = CollectionsInternalService::new(toc.clone());
             let points_internal_service = PointsInternalService::new(toc.clone());
             let raft_service = RaftService::new(to_consensus, consensus_state);
@@ -201,6 +231,12 @@ pub fn init_internal(
                 .layer(middleware_layer)
                 .add_service(
                     SolvioServer::new(solvio_service)
+                        .send_compressed(CompressionEncoding::Gzip)
+                        .accept_compressed(CompressionEncoding::Gzip)
+                        .max_decoding_message_size(usize::MAX),
+                )
+                .add_service(
+                    SolvioInternalServer::new(solvio_internal_service)
                         .send_compressed(CompressionEncoding::Gzip)
                         .accept_compressed(CompressionEncoding::Gzip)
                         .max_decoding_message_size(usize::MAX),

@@ -177,6 +177,12 @@
   
     - [Solvio](#solvio-Solvio)
   
+- [solvio_internal_service.proto](#solvio_internal_service-proto)
+    - [HttpPortRequest](#solvio-HttpPortRequest)
+    - [HttpPortResponse](#solvio-HttpPortResponse)
+  
+    - [SolvioInternal](#solvio-SolvioInternal)
+  
 - [snapshots_service.proto](#snapshots_service-proto)
     - [CreateFullSnapshotRequest](#solvio-CreateFullSnapshotRequest)
     - [CreateSnapshotRequest](#solvio-CreateSnapshotRequest)
@@ -2969,6 +2975,57 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | HealthCheck | [HealthCheckRequest](#solvio-HealthCheckRequest) | [HealthCheckReply](#solvio-HealthCheckReply) |  |
+
+ 
+
+
+
+<a name="solvio_internal_service-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## solvio_internal_service.proto
+
+
+
+<a name="solvio-HttpPortRequest"></a>
+
+### HttpPortRequest
+
+
+
+
+
+
+
+<a name="solvio-HttpPortResponse"></a>
+
+### HttpPortResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| port | [int32](#int32) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="solvio-SolvioInternal"></a>
+
+### SolvioInternal
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| GetHttpPort | [HttpPortRequest](#solvio-HttpPortRequest) | [HttpPortResponse](#solvio-HttpPortResponse) | Get HTTP port for remote host. |
 
  
 

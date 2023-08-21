@@ -97,6 +97,7 @@ impl Validate for crate::grpc::solvio::quantization_config::Quantization {
         match self {
             Quantization::Scalar(scalar) => scalar.validate(),
             Quantization::Product(product) => product.validate(),
+            Quantization::Binary(binary) => binary.validate(),
         }
     }
 }
@@ -107,6 +108,7 @@ impl Validate for crate::grpc::solvio::quantization_config_diff::Quantization {
         match self {
             Quantization::Scalar(scalar) => scalar.validate(),
             Quantization::Product(product) => product.validate(),
+            Quantization::Binary(binary) => binary.validate(),
             Quantization::Disabled(_) => Ok(()),
         }
     }

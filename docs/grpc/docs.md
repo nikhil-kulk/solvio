@@ -6,6 +6,7 @@
 - [collections.proto](#collections-proto)
     - [AliasDescription](#solvio-AliasDescription)
     - [AliasOperations](#solvio-AliasOperations)
+    - [BinaryQuantization](#solvio-BinaryQuantization)
     - [ChangeAliases](#solvio-ChangeAliases)
     - [CollectionClusterInfoRequest](#solvio-CollectionClusterInfoRequest)
     - [CollectionClusterInfoResponse](#solvio-CollectionClusterInfoResponse)
@@ -235,6 +236,21 @@
 | create_alias | [CreateAlias](#solvio-CreateAlias) |  |  |
 | rename_alias | [RenameAlias](#solvio-RenameAlias) |  |  |
 | delete_alias | [DeleteAlias](#solvio-DeleteAlias) |  |  |
+
+
+
+
+
+
+<a name="solvio-BinaryQuantization"></a>
+
+### BinaryQuantization
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| always_ram | [bool](#bool) | optional | If true - quantized vectors always will be stored in RAM, ignoring the config of main storage |
 
 
 
@@ -764,6 +780,7 @@ Note: 1kB = 1 vector of size 256. |
 | ----- | ---- | ----- | ----------- |
 | scalar | [ScalarQuantization](#solvio-ScalarQuantization) |  |  |
 | product | [ProductQuantization](#solvio-ProductQuantization) |  |  |
+| binary | [BinaryQuantization](#solvio-BinaryQuantization) |  |  |
 
 
 
@@ -781,6 +798,7 @@ Note: 1kB = 1 vector of size 256. |
 | scalar | [ScalarQuantization](#solvio-ScalarQuantization) |  |  |
 | product | [ProductQuantization](#solvio-ProductQuantization) |  |  |
 | disabled | [Disabled](#solvio-Disabled) |  |  |
+| binary | [BinaryQuantization](#solvio-BinaryQuantization) |  |  |
 
 
 

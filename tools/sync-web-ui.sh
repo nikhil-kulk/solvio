@@ -14,6 +14,7 @@ wget -O dist-solvio.zip $DOWNLOAD_LINK
 
 rm -rf "${STATIC_DIR}/"*
 unzip -o dist-solvio.zip -d "${STATIC_DIR}"
+rm dist-solvio.zip
 cp -r "${STATIC_DIR}/dist/"* "${STATIC_DIR}"
 rm -rf "${STATIC_DIR}/dist"
 

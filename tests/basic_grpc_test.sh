@@ -165,6 +165,18 @@ $docker_grpcurl -d '{
   "ids": [{ "num": 1 }]
 }' $solvio_HOST solvio.Points/Get
 
+# use the reflection service to inspect the full API
+$docker_grpcurl $solvio_HOST describe
+
+# use the reflection service to inspect each advertised service
+$docker_grpcurl $solvio_HOST describe solvio.Collections
+$docker_grpcurl $solvio_HOST describe solvio.Points
+$docker_grpcurl $solvio_HOST describe solvio.Snapshots
+$docker_grpcurl $solvio_HOST describe solvio.Solvio
+
+# use the reflection service to get the shape of a specific message
+$docker_grpcurl $solvio_HOST describe solvio.UpsertPoints
+
 #SAVED_VECTORS_COUNT=$(curl --fail -s "http://$solvio_HOST/collections/test_collection" | jq '.result.vectors_count')
 #[[ "$SAVED_VECTORS_COUNT" == "6" ]] || {
 #  echo 'check failed'

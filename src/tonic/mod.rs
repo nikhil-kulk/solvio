@@ -18,6 +18,7 @@ use ::api::grpc::solvio::snapshots_server::SnapshotsServer;
 use ::api::grpc::solvio::{
     HealthCheckReply, HealthCheckRequest, HttpPortRequest, HttpPortResponse,
 };
+use ::api::grpc::solvio_DESCRIPTOR_SET;
 use storage::content_manager::consensus_manager::ConsensusStateRef;
 use storage::content_manager::toc::TableOfContent;
 use storage::dispatcher::Dispatcher;
@@ -107,6 +108,17 @@ pub fn init(
         let points_service = PointsService::new(dispatcher.toc().clone());
         let snapshot_service = SnapshotsService::new(dispatcher.clone());
 
+        // Only advertise the public services. By default, all services in solvio_DESCRIPTOR_SET
+        // will be advertised, so explicitly list the services to be included.
+        let reflection_service = tonic_reflection::server::Builder::configure()
+            .register_encoded_file_descriptor_set(solvio_DESCRIPTOR_SET)
+            .with_service_name("solvio.Collections")
+            .with_service_name("solvio.Points")
+            .with_service_name("solvio.Snapshots")
+            .with_service_name("solvio.Solvio")
+            .build()
+            .unwrap();
+
         log::info!("Solvio gRPC listening on {}", grpc_port);
 
         let mut server = Server::builder();
@@ -139,6 +151,7 @@ pub fn init(
 
         server
             .layer(middleware_layer)
+            .add_service(reflection_service)
             .add_service(
                 SolvioServer::new(solvio_service)
                     .send_compressed(CompressionEncoding::Gzip)

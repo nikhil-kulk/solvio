@@ -11,3 +11,5 @@ pub mod validate;
 pub const fn api_crate_version() -> &'static str {
     env!("CARGO_PKG_VERSION")
 }
+
+pub const solvio_DESCRIPTOR_SET: &[u8] = tonic::include_file_descriptor_set!("solvio_descriptor");

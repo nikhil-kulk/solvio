@@ -125,4 +125,11 @@ ENV TZ=Etc/UTC \
 EXPOSE 6333
 EXPOSE 6334
 
+LABEL org.opencontainers.image.title="Solvio"
+LABEL org.opencontainers.image.description="Official Solvio image"
+LABEL org.opencontainers.image.url="https://solvio.com/"
+LABEL org.opencontainers.image.documentation="https://solvio.com/docs"
+LABEL org.opencontainers.image.source="https://github.com/solvio/solvio"
+LABEL org.opencontainers.image.vendor="Solvio"
+
 CMD ["./entrypoint.sh"]

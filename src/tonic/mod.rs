@@ -6,6 +6,7 @@ mod tonic_telemetry;
 use std::io;
 use std::net::{IpAddr, SocketAddr};
 use std::sync::Arc;
+use std::time::Duration;
 
 use ::api::grpc::models::VersionInfo;
 use ::api::grpc::solvio::collections_internal_server::CollectionsInternalServer;
@@ -17,6 +18,7 @@ use ::api::grpc::solvio::solvio_server::{Solvio, SolvioServer};
 use ::api::grpc::solvio::snapshots_server::SnapshotsServer;
 use ::api::grpc::solvio::{
     HealthCheckReply, HealthCheckRequest, HttpPortRequest, HttpPortResponse,
+    WaitOnConsensusCommitRequest, WaitOnConsensusCommitResponse,
 };
 use ::api::grpc::solvio_DESCRIPTOR_SET;
 use storage::content_manager::consensus_manager::ConsensusStateRef;
@@ -52,13 +54,16 @@ impl Solvio for SolvioService {
 
 pub struct SolvioInternalService {
     /// HTTP port accessible from inside the cluster
-    http_port: u16,
+    settings: Settings,
+    /// Consensus state
+    consensus_state: ConsensusStateRef,
 }
 
 impl SolvioInternalService {
-    fn new(internal_http_port: u16) -> Self {
+    fn new(settings: Settings, consensus_state: ConsensusStateRef) -> Self {
         Self {
-            http_port: internal_http_port,
+            settings,
+            consensus_state,
         }
     }
 }
@@ -70,8 +75,24 @@ impl SolvioInternal for SolvioInternalService {
         _request: Request<HttpPortRequest>,
     ) -> Result<Response<HttpPortResponse>, Status> {
         Ok(Response::new(HttpPortResponse {
-            port: self.http_port as i32,
+            port: self.settings.service.http_port as i32,
         }))
+    }
+
+    async fn wait_on_consensus_commit(
+        &self,
+        request: Request<WaitOnConsensusCommitRequest>,
+    ) -> Result<Response<WaitOnConsensusCommitResponse>, Status> {
+        let request = request.into_inner();
+        let commit = request.commit as u64;
+        let term = request.term as u64;
+        let timeout = Duration::from_secs(request.timeout as u64);
+        let consensus_tick = Duration::from_millis(self.settings.cluster.consensus.tick_period_ms);
+        let ok = self
+            .consensus_state
+            .wait_for_consensus_commit(commit, term, consensus_tick, timeout)
+            .await;
+        Ok(Response::new(WaitOnConsensusCommitResponse { ok }))
     }
 }
 
@@ -207,7 +228,8 @@ pub fn init_internal(
             let socket = SocketAddr::from((host.parse::<IpAddr>().unwrap(), internal_grpc_port));
 
             let solvio_service = SolvioService::default();
-            let solvio_internal_service = SolvioInternalService::new(settings.service.http_port);
+            let solvio_internal_service =
+                SolvioInternalService::new(settings, consensus_state.clone());
             let collections_internal_service = CollectionsInternalService::new(toc.clone());
             let points_internal_service = PointsInternalService::new(toc.clone());
             let raft_service = RaftService::new(to_consensus, consensus_state);

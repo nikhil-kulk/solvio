@@ -738,6 +738,17 @@ impl<'a> From<CollectionSearchRequest<'a>> for api::grpc::solvio::SearchPoints {
         }
     }
 }
+impl From<QueryEnum> for api::grpc::solvio::QueryEnum {
+    fn from(value: QueryEnum) -> Self {
+        match value {
+            QueryEnum::Nearest(vector) => api::grpc::solvio::QueryEnum {
+                query: Some(api::grpc::solvio::query_enum::Query::NearestNeighbors(
+                    vector.to_vector().into(),
+                )),
+            },
+        }
+    }
+}
 
 impl<'a> From<CollectionCoreSearchRequest<'a>> for api::grpc::solvio::CoreSearchPoints {
     fn from(value: CollectionCoreSearchRequest<'a>) -> Self {
@@ -745,7 +756,7 @@ impl<'a> From<CollectionCoreSearchRequest<'a>> for api::grpc::solvio::CoreSearch
 
         Self {
             collection_name: collection_id,
-            // query: Some(request.query.into()),
+            query: Some(request.query.clone().into()),
             filter: request.filter.clone().map(|f| f.into()),
             limit: request.limit as u64,
             with_vectors: request.with_vector.clone().map(|wv| wv.into()),
@@ -789,8 +800,25 @@ impl TryFrom<api::grpc::solvio::CoreSearchPoints> for CoreSearchRequest {
     type Error = Status;
 
     fn try_from(value: api::grpc::solvio::CoreSearchPoints) -> Result<Self, Self::Error> {
+        let query = value
+            .query
+            .and_then(|query| query.query)
+            .map(|query| match query {
+                api::grpc::solvio::query_enum::Query::NearestNeighbors(vector) => {
+                    QueryEnum::Nearest(match value.vector_name {
+                        Some(name) => NamedVector {
+                            name,
+                            vector: vector.data,
+                        }
+                        .into(),
+                        None => vector.data.into(),
+                    })
+                }
+            })
+            .ok_or(Status::invalid_argument("Query is not specified"))?;
+
         Ok(Self {
-            query: QueryEnum::Other, // TODO(luis): replace with other queries from CoreSearchPoints
+            query,
             filter: value.filter.map(|f| f.try_into()).transpose()?,
             params: value.params.map(|p| p.into()),
             limit: value.limit as usize,

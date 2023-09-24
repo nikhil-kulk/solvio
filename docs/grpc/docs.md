@@ -2258,8 +2258,8 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | collection_name | [string](#string) |  | Name of the collection |
-| positive | [PointId](#solvio-PointId) | repeated | Look for vectors closest to those |
-| negative | [PointId](#solvio-PointId) | repeated | Try to avoid vectors like this |
+| positive | [PointId](#solvio-PointId) | repeated | Look for vectors closest to the vectors from these points |
+| negative | [PointId](#solvio-PointId) | repeated | Try to avoid vectors like the vector from these points |
 | filter | [Filter](#solvio-Filter) |  | Filter conditions - return only those points that satisfy the specified conditions |
 | limit | [uint32](#uint32) |  | Max number of groups in result |
 | with_payload | [WithPayloadSelector](#solvio-WithPayloadSelector) |  | Options for specifying which payload to include or not |
@@ -2273,6 +2273,8 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
 | with_lookup | [WithLookup](#solvio-WithLookup) | optional | Options for specifying how to use the group id to lookup points in another collection |
 | strategy | [RecommendStrategy](#solvio-RecommendStrategy) | optional | How to use the example vectors to find the results |
+| positive_vectors | [Vector](#solvio-Vector) | repeated | Look for vectors closest to those |
+| negative_vectors | [Vector](#solvio-Vector) | repeated | Try to avoid vectors like this |
 
 
 
@@ -2288,8 +2290,8 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | collection_name | [string](#string) |  | name of the collection |
-| positive | [PointId](#solvio-PointId) | repeated | Look for vectors closest to those |
-| negative | [PointId](#solvio-PointId) | repeated | Try to avoid vectors like this |
+| positive | [PointId](#solvio-PointId) | repeated | Look for vectors closest to the vectors from these points |
+| negative | [PointId](#solvio-PointId) | repeated | Try to avoid vectors like the vector from these points |
 | filter | [Filter](#solvio-Filter) |  | Filter conditions - return only those points that satisfy the specified conditions |
 | limit | [uint64](#uint64) |  | Max number of result |
 | with_payload | [WithPayloadSelector](#solvio-WithPayloadSelector) |  | Options for specifying which payload to include or not |
@@ -2301,6 +2303,8 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | lookup_from | [LookupLocation](#solvio-LookupLocation) | optional | Name of the collection to use for points lookup, if not specified - use current collection |
 | read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
 | strategy | [RecommendStrategy](#solvio-RecommendStrategy) | optional | How to use the example vectors to find the results |
+| positive_vectors | [Vector](#solvio-Vector) | repeated | Look for vectors closest to those |
+| negative_vectors | [Vector](#solvio-Vector) | repeated | Try to avoid vectors like this |
 
 
 

@@ -98,9 +98,9 @@ RUN PKG_CONFIG="/usr/bin/$(xx-info)-pkg-config" \
     && PROFILE_DIR=$(if [ "$PROFILE" = dev ]; then echo debug; else echo $PROFILE; fi) \
     && mv target/$(xx-cargo --print-target-triple)/$PROFILE_DIR/solvio /solvio/solvio
 
-
 # Download and extract web UI
 RUN mkdir /static ; STATIC_DIR='/static' ./tools/sync-web-ui.sh
+
 
 FROM debian:12-slim AS solvio
 
@@ -110,28 +110,30 @@ RUN apt-get update \
 
 ARG APP=/solvio
 
-RUN mkdir -p ${APP}
+RUN mkdir -p "$APP"
 
-COPY --from=builder /solvio/solvio ${APP}/solvio
-COPY --from=builder /solvio/config ${APP}/config
-COPY --from=builder /solvio/tools/entrypoint.sh ${APP}/entrypoint.sh
-COPY --from=builder /static ${APP}/static
+COPY --from=builder /solvio/solvio "$APP"/solvio
+COPY --from=builder /solvio/config "$APP"/config
+COPY --from=builder /solvio/tools/entrypoint.sh "$APP"/entrypoint.sh
+COPY --from=builder /static "$APP"/static
 
-WORKDIR ${APP}
+WORKDIR "$APP"
 
 ARG USER_ID=0
 
-# Create the user
-RUN if [[ "$USER_ID" != "0" ]]; then (groupadd --gid $USER_ID solvio \
-    && useradd --uid $USER_ID --gid $USER_ID -m solvio \
-    && chown -R $USER_ID:$USER_ID ${APP}); fi
+RUN if [ "$USER_ID" != 0 ]; then \
+        groupadd --gid "$USER_ID" solvio; \
+        useradd --uid "$USER_ID" --gid "$USER_ID" -m solvio; \
+        chown -R "$USER_ID:$USER_ID" "$APP"; \
+    fi
+
+USER "$USER_ID:$USER_ID"
 
 ENV TZ=Etc/UTC \
     RUN_MODE=production
 
 EXPOSE 6333
 EXPOSE 6334
-USER $USER_ID:$USER_ID
 
 LABEL org.opencontainers.image.title="Solvio"
 LABEL org.opencontainers.image.description="Official Solvio image"

@@ -92,6 +92,7 @@
     - [FieldCondition](#solvio-FieldCondition)
     - [Filter](#solvio-Filter)
     - [GeoBoundingBox](#solvio-GeoBoundingBox)
+    - [GeoLineString](#solvio-GeoLineString)
     - [GeoPoint](#solvio-GeoPoint)
     - [GeoPolygon](#solvio-GeoPolygon)
     - [GeoRadius](#solvio-GeoRadius)
@@ -1587,6 +1588,7 @@ The JSON representation for `Value` is a JSON value.
 | geo_bounding_box | [GeoBoundingBox](#solvio-GeoBoundingBox) |  | Check if points geolocation lies in a given area |
 | geo_radius | [GeoRadius](#solvio-GeoRadius) |  | Check if geo point is within a given radius |
 | values_count | [ValuesCount](#solvio-ValuesCount) |  | Check number of values for a specific field |
+| geo_polygon | [GeoPolygon](#solvio-GeoPolygon) |  | Check if geo point is within a given polygon |
 
 
 
@@ -1626,6 +1628,21 @@ The JSON representation for `Value` is a JSON value.
 
 
 
+<a name="solvio-GeoLineString"></a>
+
+### GeoLineString
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| points | [GeoPoint](#solvio-GeoPoint) | repeated | Ordered sequence of GeoPoints representing the line |
+
+
+
+
+
+
 <a name="solvio-GeoPoint"></a>
 
 ### GeoPoint
@@ -1645,12 +1662,14 @@ The JSON representation for `Value` is a JSON value.
 <a name="solvio-GeoPolygon"></a>
 
 ### GeoPolygon
-
+For a valid GeoPolygon, both the exterior and interior GeoLineStrings must consist of a minimum of 4 points.
+Additionally, the first and last points of each GeoLineString must be the same.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| points | [GeoPoint](#solvio-GeoPoint) | repeated | Ordered list of coordinates representing the vertices of a polygon. The minimum size is 4, and the first coordinate and the last coordinate should be the same to form a closed polygon. |
+| exterior | [GeoLineString](#solvio-GeoLineString) |  | The exterior line bounds the surface |
+| interiors | [GeoLineString](#solvio-GeoLineString) | repeated | Interior lines (if present) bound holes within the surface |
 
 
 

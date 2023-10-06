@@ -173,9 +173,13 @@ $docker_grpcurl $solvio_HOST describe solvio.Collections
 $docker_grpcurl $solvio_HOST describe solvio.Points
 $docker_grpcurl $solvio_HOST describe solvio.Snapshots
 $docker_grpcurl $solvio_HOST describe solvio.Solvio
+$docker_grpcurl $solvio_HOST describe grpc.health.v1.Health
 
 # use the reflection service to get the shape of a specific message
 $docker_grpcurl $solvio_HOST describe solvio.UpsertPoints
+
+# grpc protocol compliant health check
+$docker_grpcurl $solvio_HOST grpc.health.v1.Health/Check
 
 #SAVED_VECTORS_COUNT=$(curl --fail -s "http://$solvio_HOST/collections/test_collection" | jq '.result.vectors_count')
 #[[ "$SAVED_VECTORS_COUNT" == "6" ]] || {

@@ -43,6 +43,7 @@
     - [RenameAlias](#solvio-RenameAlias)
     - [Replica](#solvio-Replica)
     - [ScalarQuantization](#solvio-ScalarQuantization)
+    - [ShardKey](#solvio-ShardKey)
     - [ShardTransferInfo](#solvio-ShardTransferInfo)
     - [TextIndexParams](#solvio-TextIndexParams)
     - [UpdateCollection](#solvio-UpdateCollection)
@@ -657,6 +658,7 @@
 | shard_id | [uint32](#uint32) |  | Local shard id |
 | points_count | [uint64](#uint64) |  | Number of points in the shard |
 | state | [ReplicaState](#solvio-ReplicaState) |  | Is replica active |
+| shard_key | [ShardKey](#solvio-ShardKey) | optional | User-defined shard key |
 
 
 
@@ -830,6 +832,7 @@ Note: 1kB = 1 vector of size 256. |
 | shard_id | [uint32](#uint32) |  | Local shard id |
 | peer_id | [uint64](#uint64) |  | Remote peer id |
 | state | [ReplicaState](#solvio-ReplicaState) |  | Is replica active |
+| shard_key | [ShardKey](#solvio-ShardKey) | optional | User-defined shard key |
 
 
 
@@ -879,6 +882,22 @@ Note: 1kB = 1 vector of size 256. |
 | type | [QuantizationType](#solvio-QuantizationType) |  | Type of quantization |
 | quantile | [float](#float) | optional | Number of bits to use for quantization |
 | always_ram | [bool](#bool) | optional | If true - quantized vectors always will be stored in RAM, ignoring the config of main storage |
+
+
+
+
+
+
+<a name="solvio-ShardKey"></a>
+
+### ShardKey
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| keyword | [string](#string) |  | String key |
+| number | [uint64](#uint64) |  | Number key |
 
 
 

@@ -21,24 +21,28 @@ pub enum SnapshotPriority {
     Snapshot,
     #[default]
     Replica,
+    // `ShardTransfer` is for internal use only, and should not be exposed/used in public API
+    #[serde(skip)]
+    ShardTransfer,
 }
 
 impl TryFrom<i32> for SnapshotPriority {
     type Error = tonic::Status;
 
     fn try_from(snapshot_priority: i32) -> Result<Self, Self::Error> {
-        api::grpc::solvio::SnapshotPriority::from_i32(snapshot_priority)
+        api::grpc::solvio::ShardSnapshotPriority::from_i32(snapshot_priority)
             .map(Into::into)
-            .ok_or_else(|| tonic::Status::invalid_argument("Malformed snapshot priority"))
+            .ok_or_else(|| tonic::Status::invalid_argument("Malformed shard snapshot priority"))
     }
 }
 
-impl From<api::grpc::solvio::SnapshotPriority> for SnapshotPriority {
-    fn from(snapshot_priority: api::grpc::solvio::SnapshotPriority) -> Self {
+impl From<api::grpc::solvio::ShardSnapshotPriority> for SnapshotPriority {
+    fn from(snapshot_priority: api::grpc::solvio::ShardSnapshotPriority) -> Self {
         match snapshot_priority {
-            api::grpc::solvio::SnapshotPriority::NoSync => Self::NoSync,
-            api::grpc::solvio::SnapshotPriority::Snapshot => Self::Snapshot,
-            api::grpc::solvio::SnapshotPriority::Replica => Self::Replica,
+            api::grpc::solvio::ShardSnapshotPriority::NoSync => Self::NoSync,
+            api::grpc::solvio::ShardSnapshotPriority::Snapshot => Self::Snapshot,
+            api::grpc::solvio::ShardSnapshotPriority::Replica => Self::Replica,
+            api::grpc::solvio::ShardSnapshotPriority::ShardTransfer => Self::ShardTransfer,
         }
     }
 }

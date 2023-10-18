@@ -3403,10 +3403,10 @@ How to use positive and negative vectors to find the results, default is `Averag
 | ----------- | ------------ | ------------- | ------------|
 | Create | [CreateSnapshotRequest](#solvio-CreateSnapshotRequest) | [CreateSnapshotResponse](#solvio-CreateSnapshotResponse) | Create collection snapshot |
 | List | [ListSnapshotsRequest](#solvio-ListSnapshotsRequest) | [ListSnapshotsResponse](#solvio-ListSnapshotsResponse) | List collection snapshots |
-| Delete | [DeleteSnapshotRequest](#solvio-DeleteSnapshotRequest) | [DeleteSnapshotResponse](#solvio-DeleteSnapshotResponse) | Delete collection snapshots |
+| Delete | [DeleteSnapshotRequest](#solvio-DeleteSnapshotRequest) | [DeleteSnapshotResponse](#solvio-DeleteSnapshotResponse) | Delete collection snapshot |
 | CreateFull | [CreateFullSnapshotRequest](#solvio-CreateFullSnapshotRequest) | [CreateSnapshotResponse](#solvio-CreateSnapshotResponse) | Create full storage snapshot |
 | ListFull | [ListFullSnapshotsRequest](#solvio-ListFullSnapshotsRequest) | [ListSnapshotsResponse](#solvio-ListSnapshotsResponse) | List full storage snapshots |
-| DeleteFull | [DeleteFullSnapshotRequest](#solvio-DeleteFullSnapshotRequest) | [DeleteSnapshotResponse](#solvio-DeleteSnapshotResponse) | List full storage snapshots |
+| DeleteFull | [DeleteFullSnapshotRequest](#solvio-DeleteFullSnapshotRequest) | [DeleteSnapshotResponse](#solvio-DeleteSnapshotResponse) | Delete full storage snapshot |
 
  
 

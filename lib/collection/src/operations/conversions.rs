@@ -883,8 +883,6 @@ impl From<QueryEnum> for api::grpc::solvio::QueryEnum {
                     },
                 )),
             },
-            QueryEnum::Discover(_) => todo!("luis in other PR"),
-            QueryEnum::Context(_) => todo!("luis in other PR"),
         }
     }
 }

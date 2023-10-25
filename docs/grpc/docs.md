@@ -92,6 +92,7 @@
     - [BatchResult](#solvio-BatchResult)
     - [ClearPayloadPoints](#solvio-ClearPayloadPoints)
     - [Condition](#solvio-Condition)
+    - [ContextExamplePair](#solvio-ContextExamplePair)
     - [CountPoints](#solvio-CountPoints)
     - [CountResponse](#solvio-CountResponse)
     - [CountResult](#solvio-CountResult)
@@ -100,6 +101,10 @@
     - [DeletePayloadPoints](#solvio-DeletePayloadPoints)
     - [DeletePointVectors](#solvio-DeletePointVectors)
     - [DeletePoints](#solvio-DeletePoints)
+    - [DiscoverBatchPoints](#solvio-DiscoverBatchPoints)
+    - [DiscoverBatchResponse](#solvio-DiscoverBatchResponse)
+    - [DiscoverPoints](#solvio-DiscoverPoints)
+    - [DiscoverResponse](#solvio-DiscoverResponse)
     - [FieldCondition](#solvio-FieldCondition)
     - [Filter](#solvio-Filter)
     - [GeoBoundingBox](#solvio-GeoBoundingBox)
@@ -169,6 +174,7 @@
     - [UpsertPoints](#solvio-UpsertPoints)
     - [ValuesCount](#solvio-ValuesCount)
     - [Vector](#solvio-Vector)
+    - [VectorExample](#solvio-VectorExample)
     - [Vectors](#solvio-Vectors)
     - [VectorsSelector](#solvio-VectorsSelector)
     - [WithLookup](#solvio-WithLookup)
@@ -1557,6 +1563,22 @@ The JSON representation for `Value` is a JSON value.
 
 
 
+<a name="solvio-ContextExamplePair"></a>
+
+### ContextExamplePair
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| positive | [VectorExample](#solvio-VectorExample) |  |  |
+| negative | [VectorExample](#solvio-VectorExample) |  |  |
+
+
+
+
+
+
 <a name="solvio-CountPoints"></a>
 
 ### CountPoints
@@ -1693,6 +1715,81 @@ The JSON representation for `Value` is a JSON value.
 | wait | [bool](#bool) | optional | Wait until the changes have been applied? |
 | points | [PointsSelector](#solvio-PointsSelector) |  | Affected points |
 | ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
+
+
+
+
+
+
+<a name="solvio-DiscoverBatchPoints"></a>
+
+### DiscoverBatchPoints
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+| discover_points | [DiscoverPoints](#solvio-DiscoverPoints) | repeated |  |
+| read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
+
+
+
+
+
+
+<a name="solvio-DiscoverBatchResponse"></a>
+
+### DiscoverBatchResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [BatchResult](#solvio-BatchResult) | repeated |  |
+| time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
+<a name="solvio-DiscoverPoints"></a>
+
+### DiscoverPoints
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | name of the collection |
+| target | [VectorExample](#solvio-VectorExample) |  | Use this as the primary search objective |
+| context_pairs | [ContextExamplePair](#solvio-ContextExamplePair) | repeated | Search will be constrained by these pairs of examples |
+| filter | [Filter](#solvio-Filter) |  | Filter conditions - return only those points that satisfy the specified conditions |
+| limit | [uint64](#uint64) |  | Max number of result |
+| with_payload | [WithPayloadSelector](#solvio-WithPayloadSelector) |  | Options for specifying which payload to include or not |
+| params | [SearchParams](#solvio-SearchParams) |  | Search config |
+| offset | [uint64](#uint64) | optional | Offset of the result |
+| using | [string](#string) | optional | Define which vector to use for recommendation, if not specified - default vector |
+| with_vectors | [WithVectorsSelector](#solvio-WithVectorsSelector) | optional | Options for specifying which vectors to include into response |
+| lookup_from | [LookupLocation](#solvio-LookupLocation) | optional | Name of the collection to use for points lookup, if not specified - use current collection |
+| read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
+
+
+
+
+
+
+<a name="solvio-DiscoverResponse"></a>
+
+### DiscoverResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ScoredPoint](#solvio-ScoredPoint) | repeated |  |
+| time | [double](#double) |  | Time spent to process |
 
 
 
@@ -2902,6 +2999,22 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 
 
 
+<a name="solvio-VectorExample"></a>
+
+### VectorExample
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [PointId](#solvio-PointId) |  |  |
+| vector | [Vector](#solvio-Vector) |  |  |
+
+
+
+
+
+
 <a name="solvio-Vectors"></a>
 
 ### Vectors
@@ -3112,6 +3225,14 @@ How to use positive and negative vectors to find the results, default is `Averag
 | Recommend | [RecommendPoints](#solvio-RecommendPoints) | [RecommendResponse](#solvio-RecommendResponse) | Look for the points which are closer to stored positive examples and at the same time further to negative examples. |
 | RecommendBatch | [RecommendBatchPoints](#solvio-RecommendBatchPoints) | [RecommendBatchResponse](#solvio-RecommendBatchResponse) | Look for the points which are closer to stored positive examples and at the same time further to negative examples. |
 | RecommendGroups | [RecommendPointGroups](#solvio-RecommendPointGroups) | [RecommendGroupsResponse](#solvio-RecommendGroupsResponse) | Look for the points which are closer to stored positive examples and at the same time further to negative examples, grouped by a given field |
+| Discover | [DiscoverPoints](#solvio-DiscoverPoints) | [DiscoverResponse](#solvio-DiscoverResponse) | Use context and a target to find the most similar points, constrained by the context.
+
+When using only the context, a special search is performed where pairs of points are used to generate a loss that guides the search towards the zone where most positive examples overlap. This means that the score minimizes the scenario of finding a point closer to a negative than to a positive part of a pair. Since the score of a context relates to loss, the maximum score a point can get is 0.0, and it becomes normal that many points can have 0.0 as score.
+
+Using only a target is equivalent to regular search, so the score is the distance to the target.
+
+When using both context and target, the score behaves a little different: The integer part of the score represents the &#34;rank&#34; with respect to the context, while the decimal part of the score relates to the distance to the target. |
+| DiscoverBatch | [DiscoverBatchPoints](#solvio-DiscoverBatchPoints) | [DiscoverBatchResponse](#solvio-DiscoverBatchResponse) | Batch request points based on [positive, negative] pairs of examples, and/or a target |
 | Count | [CountPoints](#solvio-CountPoints) | [CountResponse](#solvio-CountResponse) | Count points in collection with given filtering conditions |
 | UpdateBatch | [UpdateBatchPoints](#solvio-UpdateBatchPoints) | [UpdateBatchResponse](#solvio-UpdateBatchResponse) | Perform multiple update operations in one request |
 

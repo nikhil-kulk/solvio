@@ -24,8 +24,8 @@ use ::api::grpc::solvio::solvio_server::{Solvio, SolvioServer};
 use ::api::grpc::solvio::shard_snapshots_server::ShardSnapshotsServer;
 use ::api::grpc::solvio::snapshots_server::SnapshotsServer;
 use ::api::grpc::solvio::{
-    HealthCheckReply, HealthCheckRequest, HttpPortRequest, HttpPortResponse,
-    WaitOnConsensusCommitRequest, WaitOnConsensusCommitResponse,
+    HealthCheckReply, HealthCheckRequest, WaitOnConsensusCommitRequest,
+    WaitOnConsensusCommitResponse,
 };
 use ::api::grpc::solvio_DESCRIPTOR_SET;
 use storage::content_manager::consensus_manager::ConsensusStateRef;
@@ -78,7 +78,7 @@ impl Health for HealthService {
 }
 
 pub struct SolvioInternalService {
-    /// HTTP port accessible from inside the cluster
+    /// Solvio settings
     settings: Settings,
     /// Consensus state
     consensus_state: ConsensusStateRef,
@@ -95,15 +95,6 @@ impl SolvioInternalService {
 
 #[tonic::async_trait]
 impl SolvioInternal for SolvioInternalService {
-    async fn get_http_port(
-        &self,
-        _request: Request<HttpPortRequest>,
-    ) -> Result<Response<HttpPortResponse>, Status> {
-        Ok(Response::new(HttpPortResponse {
-            port: self.settings.service.http_port as i32,
-        }))
-    }
-
     async fn wait_on_consensus_commit(
         &self,
         request: Request<WaitOnConsensusCommitRequest>,

@@ -191,8 +191,6 @@
     - [Solvio](#solvio-Solvio)
   
 - [solvio_internal_service.proto](#solvio_internal_service-proto)
-    - [HttpPortRequest](#solvio-HttpPortRequest)
-    - [HttpPortResponse](#solvio-HttpPortResponse)
     - [WaitOnConsensusCommitRequest](#solvio-WaitOnConsensusCommitRequest)
     - [WaitOnConsensusCommitResponse](#solvio-WaitOnConsensusCommitResponse)
   
@@ -3160,31 +3158,6 @@ How to use positive and negative vectors to find the results, default is `Averag
 
 
 
-<a name="solvio-HttpPortRequest"></a>
-
-### HttpPortRequest
-
-
-
-
-
-
-
-<a name="solvio-HttpPortResponse"></a>
-
-### HttpPortResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| port | [int32](#int32) |  |  |
-
-
-
-
-
-
 <a name="solvio-WaitOnConsensusCommitRequest"></a>
 
 ### WaitOnConsensusCommitRequest
@@ -3230,7 +3203,6 @@ How to use positive and negative vectors to find the results, default is `Averag
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetHttpPort | [HttpPortRequest](#solvio-HttpPortRequest) | [HttpPortResponse](#solvio-HttpPortResponse) | Get HTTP port for remote host. |
 | WaitOnConsensusCommit | [WaitOnConsensusCommitRequest](#solvio-WaitOnConsensusCommitRequest) | [WaitOnConsensusCommitResponse](#solvio-WaitOnConsensusCommitResponse) | Wait until the target node reached the given commit ID. |
 
  

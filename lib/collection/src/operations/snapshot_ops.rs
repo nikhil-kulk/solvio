@@ -47,6 +47,17 @@ impl From<api::grpc::solvio::ShardSnapshotPriority> for SnapshotPriority {
     }
 }
 
+impl From<SnapshotPriority> for api::grpc::solvio::ShardSnapshotPriority {
+    fn from(snapshot_priority: SnapshotPriority) -> Self {
+        match snapshot_priority {
+            SnapshotPriority::NoSync => Self::NoSync,
+            SnapshotPriority::Snapshot => Self::Snapshot,
+            SnapshotPriority::Replica => Self::Replica,
+            SnapshotPriority::ShardTransfer => Self::ShardTransfer,
+        }
+    }
+}
+
 #[derive(Debug, Deserialize, Serialize, JsonSchema, Validate, Clone)]
 pub struct SnapshotRecover {
     /// Examples:

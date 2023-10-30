@@ -42,6 +42,7 @@ use crate::operations::types::{
 };
 use crate::optimizers_builder::OptimizersConfig;
 use crate::shards::remote_shard::{CollectionCoreSearchRequest, CollectionSearchRequest};
+use crate::shards::replica_set::ReplicaState;
 use crate::shards::shard::ShardKey;
 use crate::shards::transfer::shard_transfer::ShardTransferMethod;
 
@@ -994,6 +995,42 @@ impl From<api::grpc::solvio::RecommendStrategy> for RecommendStrategy {
         match value {
             api::grpc::solvio::RecommendStrategy::AverageVector => RecommendStrategy::AverageVector,
             api::grpc::solvio::RecommendStrategy::BestScore => RecommendStrategy::BestScore,
+        }
+    }
+}
+
+impl TryFrom<i32> for ReplicaState {
+    type Error = Status;
+
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        let replica_state = api::grpc::solvio::ReplicaState::from_i32(value)
+            .ok_or_else(|| Status::invalid_argument(format!("Unknown replica state: {}", value)))?;
+        Ok(replica_state.into())
+    }
+}
+
+impl From<api::grpc::solvio::ReplicaState> for ReplicaState {
+    fn from(value: api::grpc::solvio::ReplicaState) -> Self {
+        match value {
+            api::grpc::solvio::ReplicaState::Active => Self::Active,
+            api::grpc::solvio::ReplicaState::Dead => Self::Dead,
+            api::grpc::solvio::ReplicaState::Partial => Self::Partial,
+            api::grpc::solvio::ReplicaState::Initializing => Self::Initializing,
+            api::grpc::solvio::ReplicaState::Listener => Self::Listener,
+            api::grpc::solvio::ReplicaState::PartialSnapshot => Self::PartialSnapshot,
+        }
+    }
+}
+
+impl From<ReplicaState> for api::grpc::solvio::ReplicaState {
+    fn from(value: ReplicaState) -> Self {
+        match value {
+            ReplicaState::Active => Self::Active,
+            ReplicaState::Dead => Self::Dead,
+            ReplicaState::Partial => Self::Partial,
+            ReplicaState::Initializing => Self::Initializing,
+            ReplicaState::Listener => Self::Listener,
+            ReplicaState::PartialSnapshot => Self::PartialSnapshot,
         }
     }
 }

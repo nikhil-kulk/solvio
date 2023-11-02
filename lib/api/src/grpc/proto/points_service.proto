@@ -4,7 +4,6 @@ import "points.proto";
 
 package solvio;
 
-import "google/protobuf/struct.proto";
 
 service Points {
   /*

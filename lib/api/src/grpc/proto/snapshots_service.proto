@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package solvio;
 
-import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
 service Snapshots {

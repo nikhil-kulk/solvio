@@ -1732,6 +1732,7 @@ The JSON representation for `Value` is a JSON value.
 | collection_name | [string](#string) |  | Name of the collection |
 | discover_points | [DiscoverPoints](#solvio-DiscoverPoints) | repeated |  |
 | read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
+| timeout | [uint64](#uint64) | optional | If set, overrides global timeout setting for this request. Unit is seconds. |
 
 
 
@@ -1774,6 +1775,7 @@ The JSON representation for `Value` is a JSON value.
 | with_vectors | [WithVectorsSelector](#solvio-WithVectorsSelector) | optional | Options for specifying which vectors to include into response |
 | lookup_from | [LookupLocation](#solvio-LookupLocation) | optional | Name of the collection to use for points lookup, if not specified - use current collection |
 | read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
+| timeout | [uint64](#uint64) | optional | If set, overrides global timeout setting for this request. Unit is seconds. |
 
 
 

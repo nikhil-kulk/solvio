@@ -14,6 +14,7 @@ fn main() -> std::io::Result<()> {
         // configures all attributes.
         .configure_validation()
         .file_descriptor_set_path(build_out_dir.join("solvio_descriptor.bin"))
+        .emit_rerun_if_changed(true)
         .out_dir("src/grpc/") // saves generated structures at this location
         .compile(
             &["src/grpc/proto/solvio.proto"], // proto entry point

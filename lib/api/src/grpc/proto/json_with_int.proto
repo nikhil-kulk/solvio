@@ -3,6 +3,7 @@
 syntax = "proto3";
 
 package solvio;
+option csharp_namespace = "Solvio.Client.Grpc";
 
 // `Struct` represents a structured data value, consisting of fields
 // which map to dynamically typed values. In some languages, `Struct`

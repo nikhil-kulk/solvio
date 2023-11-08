@@ -11,6 +11,7 @@ import "shard_snapshots_service.proto";
 import "snapshots_service.proto";
 
 package solvio;
+option csharp_namespace = "Solvio.Client.Grpc";
 
 service Solvio {
   rpc HealthCheck (HealthCheckRequest) returns (HealthCheckReply) {}

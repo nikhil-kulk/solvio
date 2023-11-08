@@ -1,5 +1,6 @@
 syntax = "proto3";
 package solvio;
+option csharp_namespace = "Solvio.Client.Grpc";
 
 message VectorParams {
   uint64 size = 1; // Size of the vectors

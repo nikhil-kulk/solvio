@@ -3,6 +3,7 @@ syntax = "proto3";
 import "points.proto";
 
 package solvio;
+option csharp_namespace = "Solvio.Client.Grpc";
 
 
 service Points {

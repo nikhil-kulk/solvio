@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package solvio;
+option csharp_namespace = "Solvio.Client.Grpc";
 
 import "google/protobuf/timestamp.proto";
 

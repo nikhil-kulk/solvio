@@ -135,7 +135,9 @@
     - [PointsOperationResponse](#solvio-PointsOperationResponse)
     - [PointsSelector](#solvio-PointsSelector)
     - [PointsUpdateOperation](#solvio-PointsUpdateOperation)
+    - [PointsUpdateOperation.ClearPayload](#solvio-PointsUpdateOperation-ClearPayload)
     - [PointsUpdateOperation.DeletePayload](#solvio-PointsUpdateOperation-DeletePayload)
+    - [PointsUpdateOperation.DeletePoints](#solvio-PointsUpdateOperation-DeletePoints)
     - [PointsUpdateOperation.DeleteVectors](#solvio-PointsUpdateOperation-DeleteVectors)
     - [PointsUpdateOperation.PointStructList](#solvio-PointsUpdateOperation-PointStructList)
     - [PointsUpdateOperation.SetPayload](#solvio-PointsUpdateOperation-SetPayload)
@@ -167,6 +169,7 @@
     - [SearchResponse](#solvio-SearchResponse)
     - [SetPayloadPoints](#solvio-SetPayloadPoints)
     - [SetPayloadPoints.PayloadEntry](#solvio-SetPayloadPoints-PayloadEntry)
+    - [ShardKeySelector](#solvio-ShardKeySelector)
     - [UpdateBatchPoints](#solvio-UpdateBatchPoints)
     - [UpdateBatchResponse](#solvio-UpdateBatchResponse)
     - [UpdatePointVectors](#solvio-UpdatePointVectors)
@@ -1537,6 +1540,7 @@ The JSON representation for `Value` is a JSON value.
 | wait | [bool](#bool) | optional | Wait until the changes have been applied? |
 | points | [PointsSelector](#solvio-PointsSelector) |  | Affected points |
 | ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Option for custom sharding to specify used shard keys |
 
 
 
@@ -1678,6 +1682,7 @@ The JSON representation for `Value` is a JSON value.
 | keys | [string](#string) | repeated | List of keys to delete |
 | points_selector | [PointsSelector](#solvio-PointsSelector) | optional | Affected points |
 | ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Option for custom sharding to specify used shard keys |
 
 
 
@@ -1697,6 +1702,7 @@ The JSON representation for `Value` is a JSON value.
 | points_selector | [PointsSelector](#solvio-PointsSelector) |  | Affected points |
 | vectors | [VectorsSelector](#solvio-VectorsSelector) |  | List of vector names to delete |
 | ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Option for custom sharding to specify used shard keys |
 
 
 
@@ -1715,6 +1721,7 @@ The JSON representation for `Value` is a JSON value.
 | wait | [bool](#bool) | optional | Wait until the changes have been applied? |
 | points | [PointsSelector](#solvio-PointsSelector) |  | Affected points |
 | ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Option for custom sharding to specify used shard keys |
 
 
 
@@ -2281,13 +2288,31 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | upsert | [PointsUpdateOperation.PointStructList](#solvio-PointsUpdateOperation-PointStructList) |  |  |
-| delete | [PointsSelector](#solvio-PointsSelector) |  |  |
+| delete_deprecated | [PointsSelector](#solvio-PointsSelector) |  | **Deprecated.**  |
 | set_payload | [PointsUpdateOperation.SetPayload](#solvio-PointsUpdateOperation-SetPayload) |  |  |
 | overwrite_payload | [PointsUpdateOperation.SetPayload](#solvio-PointsUpdateOperation-SetPayload) |  |  |
 | delete_payload | [PointsUpdateOperation.DeletePayload](#solvio-PointsUpdateOperation-DeletePayload) |  |  |
-| clear_payload | [PointsSelector](#solvio-PointsSelector) |  |  |
+| clear_payload_deprecated | [PointsSelector](#solvio-PointsSelector) |  | **Deprecated.**  |
 | update_vectors | [PointsUpdateOperation.UpdateVectors](#solvio-PointsUpdateOperation-UpdateVectors) |  |  |
 | delete_vectors | [PointsUpdateOperation.DeleteVectors](#solvio-PointsUpdateOperation-DeleteVectors) |  |  |
+| delete_points | [PointsUpdateOperation.DeletePoints](#solvio-PointsUpdateOperation-DeletePoints) |  |  |
+| clear_payload | [PointsUpdateOperation.ClearPayload](#solvio-PointsUpdateOperation-ClearPayload) |  |  |
+
+
+
+
+
+
+<a name="solvio-PointsUpdateOperation-ClearPayload"></a>
+
+### PointsUpdateOperation.ClearPayload
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| points | [PointsSelector](#solvio-PointsSelector) |  | Affected points |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Option for custom sharding to specify used shard keys |
 
 
 
@@ -2304,6 +2329,23 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | ----- | ---- | ----- | ----------- |
 | keys | [string](#string) | repeated |  |
 | points_selector | [PointsSelector](#solvio-PointsSelector) | optional | Affected points |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Option for custom sharding to specify used shard keys |
+
+
+
+
+
+
+<a name="solvio-PointsUpdateOperation-DeletePoints"></a>
+
+### PointsUpdateOperation.DeletePoints
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| points | [PointsSelector](#solvio-PointsSelector) |  | Affected points |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Option for custom sharding to specify used shard keys |
 
 
 
@@ -2320,6 +2362,7 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | ----- | ---- | ----- | ----------- |
 | points_selector | [PointsSelector](#solvio-PointsSelector) |  | Affected points |
 | vectors | [VectorsSelector](#solvio-VectorsSelector) |  | List of vector names to delete |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Option for custom sharding to specify used shard keys |
 
 
 
@@ -2335,6 +2378,7 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | points | [PointStruct](#solvio-PointStruct) | repeated |  |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Option for custom sharding to specify used shard keys |
 
 
 
@@ -2351,6 +2395,7 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | ----- | ---- | ----- | ----------- |
 | payload | [PointsUpdateOperation.SetPayload.PayloadEntry](#solvio-PointsUpdateOperation-SetPayload-PayloadEntry) | repeated |  |
 | points_selector | [PointsSelector](#solvio-PointsSelector) | optional | Affected points |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Option for custom sharding to specify used shard keys |
 
 
 
@@ -2382,6 +2427,7 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | points | [PointVectors](#solvio-PointVectors) | repeated | List of points and vectors to update |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Option for custom sharding to specify used shard keys |
 
 
 
@@ -2614,6 +2660,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | id | [PointId](#solvio-PointId) |  |  |
 | payload | [RetrievedPoint.PayloadEntry](#solvio-RetrievedPoint-PayloadEntry) | repeated |  |
 | vectors | [Vectors](#solvio-Vectors) | optional |  |
+| shard_key | [ShardKey](#solvio-ShardKey) | optional | Shard key |
 
 
 
@@ -2649,6 +2696,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | score | [float](#float) |  | Similarity score |
 | version | [uint64](#uint64) |  | Last update operation applied to this point |
 | vectors | [Vectors](#solvio-Vectors) | optional | Vectors to search |
+| shard_key | [ShardKey](#solvio-ShardKey) | optional | Shard key |
 
 
 
@@ -2860,6 +2908,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | payload | [SetPayloadPoints.PayloadEntry](#solvio-SetPayloadPoints-PayloadEntry) | repeated | New payload values |
 | points_selector | [PointsSelector](#solvio-PointsSelector) | optional | Affected points |
 | ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Option for custom sharding to specify used shard keys |
 
 
 
@@ -2876,6 +2925,23 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
 | value | [Value](#solvio-Value) |  |  |
+
+
+
+
+
+
+<a name="solvio-ShardKeySelector"></a>
+
+### ShardKeySelector
+---------------------------------------------
+----------------- ShardKeySelector ----------
+---------------------------------------------
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| shard_keys | [ShardKey](#solvio-ShardKey) | repeated | List of shard keys which should be used in the request |
 
 
 
@@ -2928,6 +2994,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | wait | [bool](#bool) | optional | Wait until the changes have been applied? |
 | points | [PointVectors](#solvio-PointVectors) | repeated | List of points and vectors to update |
 | ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Option for custom sharding to specify used shard keys |
 
 
 
@@ -2962,6 +3029,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | wait | [bool](#bool) | optional | Wait until the changes have been applied? |
 | points | [PointStruct](#solvio-PointStruct) | repeated |  |
 | ordering | [WriteOrdering](#solvio-WriteOrdering) | optional | Write ordering guarantees |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Option for custom sharding to specify used shard keys |
 
 
 

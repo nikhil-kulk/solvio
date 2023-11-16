@@ -19,8 +19,14 @@
     - [CollectionParamsDiff](#solvio-CollectionParamsDiff)
     - [CreateAlias](#solvio-CreateAlias)
     - [CreateCollection](#solvio-CreateCollection)
+    - [CreateShardKey](#solvio-CreateShardKey)
+    - [CreateShardKeyRequest](#solvio-CreateShardKeyRequest)
+    - [CreateShardKeyResponse](#solvio-CreateShardKeyResponse)
     - [DeleteAlias](#solvio-DeleteAlias)
     - [DeleteCollection](#solvio-DeleteCollection)
+    - [DeleteShardKey](#solvio-DeleteShardKey)
+    - [DeleteShardKeyRequest](#solvio-DeleteShardKeyRequest)
+    - [DeleteShardKeyResponse](#solvio-DeleteShardKeyResponse)
     - [Disabled](#solvio-Disabled)
     - [GetCollectionInfoRequest](#solvio-GetCollectionInfoRequest)
     - [GetCollectionInfoResponse](#solvio-GetCollectionInfoResponse)
@@ -499,6 +505,56 @@
 
 
 
+<a name="solvio-CreateShardKey"></a>
+
+### CreateShardKey
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| shard_key | [ShardKey](#solvio-ShardKey) |  | User-defined shard key |
+| shards_number | [uint32](#uint32) | optional | Number of shards to create per shard key |
+| replication_factor | [uint32](#uint32) | optional | Number of replicas of each shard to create |
+| placement | [uint64](#uint64) | repeated | List of peer ids, allowed to create shards. If empty - all peers are allowed |
+
+
+
+
+
+
+<a name="solvio-CreateShardKeyRequest"></a>
+
+### CreateShardKeyRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+| request | [CreateShardKey](#solvio-CreateShardKey) |  | Request to create shard key |
+| timeout | [uint64](#uint64) | optional | Wait timeout for operation commit in seconds, if not specified - default value will be supplied |
+
+
+
+
+
+
+<a name="solvio-CreateShardKeyResponse"></a>
+
+### CreateShardKeyResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [bool](#bool) |  |  |
+
+
+
+
+
+
 <a name="solvio-DeleteAlias"></a>
 
 ### DeleteAlias
@@ -524,6 +580,53 @@
 | ----- | ---- | ----- | ----------- |
 | collection_name | [string](#string) |  | Name of the collection |
 | timeout | [uint64](#uint64) | optional | Wait timeout for operation commit in seconds, if not specified - default value will be supplied |
+
+
+
+
+
+
+<a name="solvio-DeleteShardKey"></a>
+
+### DeleteShardKey
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| shard_key | [ShardKey](#solvio-ShardKey) |  | Shard key to delete |
+
+
+
+
+
+
+<a name="solvio-DeleteShardKeyRequest"></a>
+
+### DeleteShardKeyRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+| request | [DeleteShardKey](#solvio-DeleteShardKey) |  | Request to delete shard key |
+| timeout | [uint64](#uint64) | optional | Wait timeout for operation commit in seconds, if not specified - default value will be supplied |
+
+
+
+
+
+
+<a name="solvio-DeleteShardKeyResponse"></a>
+
+### DeleteShardKeyResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [bool](#bool) |  |  |
 
 
 
@@ -986,6 +1089,8 @@ Note: 1kB = 1 vector of size 256. |
 | replicate_shard | [MoveShard](#solvio-MoveShard) |  |  |
 | abort_transfer | [MoveShard](#solvio-MoveShard) |  |  |
 | drop_replica | [Replica](#solvio-Replica) |  |  |
+| create_shard_key | [CreateShardKey](#solvio-CreateShardKey) |  |  |
+| delete_shard_key | [DeleteShardKey](#solvio-DeleteShardKey) |  |  |
 | timeout | [uint64](#uint64) | optional | Wait timeout for operation commit in seconds, if not specified - default value will be supplied |
 
 
@@ -1320,6 +1425,8 @@ Note: 1kB = 1 vector of size 256. |
 | ListAliases | [ListAliasesRequest](#solvio-ListAliasesRequest) | [ListAliasesResponse](#solvio-ListAliasesResponse) | Get list of all aliases for all existing collections |
 | CollectionClusterInfo | [CollectionClusterInfoRequest](#solvio-CollectionClusterInfoRequest) | [CollectionClusterInfoResponse](#solvio-CollectionClusterInfoResponse) | Get cluster information for a collection |
 | UpdateCollectionClusterSetup | [UpdateCollectionClusterSetupRequest](#solvio-UpdateCollectionClusterSetupRequest) | [UpdateCollectionClusterSetupResponse](#solvio-UpdateCollectionClusterSetupResponse) | Update cluster setup for a collection |
+| CreateShardKey | [CreateShardKeyRequest](#solvio-CreateShardKeyRequest) | [CreateShardKeyResponse](#solvio-CreateShardKeyResponse) | Create shard key |
+| DeleteShardKey | [DeleteShardKeyRequest](#solvio-DeleteShardKeyRequest) | [DeleteShardKeyResponse](#solvio-DeleteShardKeyResponse) | Delete shard key |
 
  
 

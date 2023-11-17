@@ -158,7 +158,7 @@ pub fn try_discover_request_from_grpc(
     let api::grpc::solvio::DiscoverPoints {
         collection_name,
         target,
-        context_pairs,
+        context,
         filter,
         limit,
         offset,
@@ -174,7 +174,7 @@ pub fn try_discover_request_from_grpc(
 
     let target = target.map(TryInto::try_into).transpose()?;
 
-    let context_pairs = context_pairs
+    let context = context
         .into_iter()
         .map(|pair| {
             match (
@@ -194,7 +194,7 @@ pub fn try_discover_request_from_grpc(
 
     let request = DiscoverRequestInternal {
         target,
-        context: Some(context_pairs),
+        context: Some(context),
         filter: filter.map(|f| f.try_into()).transpose()?,
         params: params.map(|p| p.into()),
         limit: limit as usize,
@@ -954,7 +954,7 @@ impl From<QueryEnum> for api::grpc::solvio::QueryEnum {
                         target: Some(api::grpc::solvio::Vector {
                             data: named.query.target.try_into().unwrap(),
                         }),
-                        context_pairs: named
+                        context: named
                             .query
                             .pairs
                             .into_iter()
@@ -975,7 +975,7 @@ impl From<QueryEnum> for api::grpc::solvio::QueryEnum {
             QueryEnum::Context(named) => api::grpc::solvio::QueryEnum {
                 query: Some(api::grpc::solvio::query_enum::Query::Context(
                     api::grpc::solvio::ContextQuery {
-                        context_pairs: named
+                        context: named
                             .query
                             .pairs
                             .into_iter()
@@ -1043,6 +1043,21 @@ impl TryFrom<api::grpc::solvio::WithLookup> for WithLookupInterface {
     }
 }
 
+impl TryFrom<api::grpc::solvio::TargetVector> for RecommendExample {
+    type Error = Status;
+
+    fn try_from(value: api::grpc::solvio::TargetVector) -> Result<Self, Self::Error> {
+        value
+            .target
+            .ok_or(Status::invalid_argument("Target vector is malformed"))
+            .and_then(|target| match target {
+                api::grpc::solvio::target_vector::Target::Single(vector_example) => {
+                    Ok(vector_example.try_into()?)
+                }
+            })
+    }
+}
+
 fn try_context_pair_from_grpc(
     pair: api::grpc::solvio::ContextPair,
 ) -> Result<ContextPair<Vector>, Status> {
@@ -1094,7 +1109,7 @@ impl TryFrom<api::grpc::solvio::CoreSearchPoints> for CoreSearchRequest {
                         };
 
                         let pairs = query
-                            .context_pairs
+                            .context
                             .into_iter()
                             .map(try_context_pair_from_grpc)
                             .try_collect()?;
@@ -1106,7 +1121,7 @@ impl TryFrom<api::grpc::solvio::CoreSearchPoints> for CoreSearchRequest {
                     }
                     api::grpc::solvio::query_enum::Query::Context(query) => {
                         let pairs = query
-                            .context_pairs
+                            .context
                             .into_iter()
                             .map(try_context_pair_from_grpc)
                             .try_collect()?;
@@ -1310,18 +1325,19 @@ impl TryFrom<api::grpc::solvio::VectorExample> for RecommendExample {
     type Error = Status;
 
     fn try_from(value: api::grpc::solvio::VectorExample) -> Result<Self, Self::Error> {
-        let example = match value.example {
-            Some(api::grpc::solvio::vector_example::Example::Id(id)) => {
-                Self::PointId(id.try_into()?)
-            }
-            Some(api::grpc::solvio::vector_example::Example::Vector(vector)) => {
-                Self::Vector(vector.data)
-            }
-            None => Err(Status::invalid_argument(
+        value
+            .example
+            .ok_or(Status::invalid_argument(
                 "Vector example, which can be id or bare vector, is malformed",
-            ))?,
-        };
-        Ok(example)
+            ))
+            .and_then(|example| match example {
+                api::grpc::solvio::vector_example::Example::Id(id) => {
+                    Ok(Self::PointId(id.try_into()?))
+                }
+                api::grpc::solvio::vector_example::Example::Vector(vector) => {
+                    Ok(Self::Vector(vector.data))
+                }
+            })
     }
 }
 

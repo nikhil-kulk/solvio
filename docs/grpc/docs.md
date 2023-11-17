@@ -176,6 +176,7 @@
     - [SetPayloadPoints](#solvio-SetPayloadPoints)
     - [SetPayloadPoints.PayloadEntry](#solvio-SetPayloadPoints-PayloadEntry)
     - [ShardKeySelector](#solvio-ShardKeySelector)
+    - [TargetVector](#solvio-TargetVector)
     - [UpdateBatchPoints](#solvio-UpdateBatchPoints)
     - [UpdateBatchResponse](#solvio-UpdateBatchResponse)
     - [UpdatePointVectors](#solvio-UpdatePointVectors)
@@ -1880,8 +1881,8 @@ The JSON representation for `Value` is a JSON value.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | collection_name | [string](#string) |  | name of the collection |
-| target | [VectorExample](#solvio-VectorExample) |  | Use this as the primary search objective |
-| context_pairs | [ContextExamplePair](#solvio-ContextExamplePair) | repeated | Search will be constrained by these pairs of examples |
+| target | [TargetVector](#solvio-TargetVector) |  | Use this as the primary search objective |
+| context | [ContextExamplePair](#solvio-ContextExamplePair) | repeated | Search will be constrained by these pairs of examples |
 | filter | [Filter](#solvio-Filter) |  | Filter conditions - return only those points that satisfy the specified conditions |
 | limit | [uint64](#uint64) |  | Max number of result |
 | with_payload | [WithPayloadSelector](#solvio-WithPayloadSelector) |  | Options for specifying which payload to include or not |
@@ -3059,6 +3060,21 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | shard_keys | [ShardKey](#solvio-ShardKey) | repeated | List of shard keys which should be used in the request |
+
+
+
+
+
+
+<a name="solvio-TargetVector"></a>
+
+### TargetVector
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| single | [VectorExample](#solvio-VectorExample) |  |  |
 
 
 

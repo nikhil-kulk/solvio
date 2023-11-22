@@ -70,6 +70,7 @@ Solvio offers the following client libraries to help you integrate it into your 
 - Official: [Rust client](https://github.com/solvio/rust-client)
 - Official: [JavaScript/TypeScript client](https://github.com/solvio/solvio-js)
 - Official: [Python client](https://github.com/solvio/solvio-client)
+- Official: [.NET/C# client](https://github.com/solvio/solvio-dotnet)
 - Community: [Elixir](https://hexdocs.pm/solvio/readme.html)
 - Community: [PHP](https://github.com/hkulekci/solvio-php)
 - Community: [Ruby](https://github.com/andreibondarev/solvio-ruby)
@@ -254,7 +255,7 @@ Thanks to the people who contributed to Solvio:
       <td align="center" valign="top" width="14.28%"><a href="http://hozan23.com"><img src="https://avatars.githubusercontent.com/u/119854621?v=4?s=50" width="50px;" alt="Hozan"/><br /><sub><b>Hozan</b></sub></a><br /><a href="https://github.com/solvio/solvio/commits?author=hozan23" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/joein"><img src="https://avatars.githubusercontent.com/u/22641570?v=4?s=50" width="50px;" alt="George"/><br /><sub><b>George</b></sub></a><br /><a href="https://github.com/solvio/solvio/commits?author=joein" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/csko"><img src="https://avatars.githubusercontent.com/u/749306?v=4?s=50" width="50px;" alt="Kornél Csernai"/><br /><sub><b>Kornél Csernai</b></sub></a><br /><a href="https://github.com/solvio/solvio/commits?author=csko" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="http://coszio.github.io"><img src="https://avatars.githubusercontent.com/u/62079184?v=4?s=50" width="50px;" alt="Luis Cossío"/><br /><sub><b>Luis Cossío</b></sub></a><br /><a href="https://github.com/solvio/solvio/commits?author=coszio" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://coszio.github.io"><img src="https://avatars.githubusercontent.com/u/62079184?v=4?s=50" width="50px;" alt="Luis Cossío"/><br /><sub><b>Luis Cossío</b></sub></a><br /><a href="https://github.com/solvio/solvio/commits?author=coszio" title="Code">💻</a></td>
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://timvisee.com/"><img src="https://avatars.githubusercontent.com/u/856222?v=4?s=50" width="50px;" alt="Tim Visée"/><br /><sub><b>Tim Visée</b></sub></a><br /><a href="https://github.com/solvio/solvio/commits?author=timvisee" title="Code">💻</a></td>

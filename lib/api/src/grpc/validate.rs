@@ -192,6 +192,36 @@ impl Validate for crate::grpc::solvio::FieldCondition {
     }
 }
 
+impl Validate for crate::grpc::solvio::Vector {
+    fn validate(&self) -> Result<(), ValidationErrors> {
+        if let Some(indices) = &self.indices {
+            sparse::common::sparse_vector::validate_sparse_vector_impl(&indices.data, &self.data)
+        } else {
+            Ok(())
+        }
+    }
+}
+
+impl Validate for super::solvio::vectors::VectorsOptions {
+    fn validate(&self) -> Result<(), ValidationErrors> {
+        match self {
+            super::solvio::vectors::VectorsOptions::Vector(v) => v.validate(),
+            super::solvio::vectors::VectorsOptions::Vectors(v) => v.validate(),
+        }
+    }
+}
+
+impl Validate for super::solvio::query_enum::Query {
+    fn validate(&self) -> Result<(), ValidationErrors> {
+        match self {
+            super::solvio::query_enum::Query::NearestNeighbors(q) => q.validate(),
+            super::solvio::query_enum::Query::RecommendBestScore(q) => q.validate(),
+            super::solvio::query_enum::Query::Discover(q) => q.validate(),
+            super::solvio::query_enum::Query::Context(q) => q.validate(),
+        }
+    }
+}
+
 /// Validate the value is in `[1, ]` or `None`.
 pub fn validate_u64_range_min_1(value: &Option<u64>) -> Result<(), ValidationError> {
     value.map_or(Ok(()), |v| validate_range_generic(v, Some(1), None))

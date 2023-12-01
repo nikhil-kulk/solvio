@@ -51,6 +51,10 @@
     - [ScalarQuantization](#solvio-ScalarQuantization)
     - [ShardKey](#solvio-ShardKey)
     - [ShardTransferInfo](#solvio-ShardTransferInfo)
+    - [SparseIndexConfig](#solvio-SparseIndexConfig)
+    - [SparseVectorConfig](#solvio-SparseVectorConfig)
+    - [SparseVectorConfig.MapEntry](#solvio-SparseVectorConfig-MapEntry)
+    - [SparseVectorParams](#solvio-SparseVectorParams)
     - [TextIndexParams](#solvio-TextIndexParams)
     - [UpdateCollection](#solvio-UpdateCollection)
     - [UpdateCollectionClusterSetupRequest](#solvio-UpdateCollectionClusterSetupRequest)
@@ -440,6 +444,7 @@
 | write_consistency_factor | [uint32](#uint32) | optional | How many replicas should apply the operation for us to consider it successful |
 | read_fan_out_factor | [uint32](#uint32) | optional | Fan-out every read request to these many additional remote nodes (and return first available response) |
 | sharding_method | [ShardingMethod](#solvio-ShardingMethod) | optional | Sharding method |
+| sparse_vectors_config | [SparseVectorConfig](#solvio-SparseVectorConfig) | optional | Configuration for sparse vectors |
 
 
 
@@ -501,6 +506,7 @@
 | init_from_collection | [string](#string) | optional | Specify name of the other collection to copy data from |
 | quantization_config | [QuantizationConfig](#solvio-QuantizationConfig) | optional | Quantization configuration of vector |
 | sharding_method | [ShardingMethod](#solvio-ShardingMethod) | optional | Sharding method |
+| sparse_vectors_config | [SparseVectorConfig](#solvio-SparseVectorConfig) | optional | Configuration for sparse vectors |
 
 
 
@@ -1039,6 +1045,68 @@ Note: 1kB = 1 vector of size 256. |
 
 
 
+<a name="solvio-SparseIndexConfig"></a>
+
+### SparseIndexConfig
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| full_scan_threshold | [uint64](#uint64) | optional | Prefer a full scan search upto (excluding) this number of vectors. Note: this is number of vectors, not KiloBytes. |
+| on_disk | [bool](#bool) | optional | Store inverted index on disk. If set to false, the index will be stored in RAM. |
+
+
+
+
+
+
+<a name="solvio-SparseVectorConfig"></a>
+
+### SparseVectorConfig
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| map | [SparseVectorConfig.MapEntry](#solvio-SparseVectorConfig-MapEntry) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-SparseVectorConfig-MapEntry"></a>
+
+### SparseVectorConfig.MapEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [SparseVectorParams](#solvio-SparseVectorParams) |  |  |
+
+
+
+
+
+
+<a name="solvio-SparseVectorParams"></a>
+
+### SparseVectorParams
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| index | [SparseIndexConfig](#solvio-SparseIndexConfig) | optional | Configuration of sparse index |
+
+
+
+
+
+
 <a name="solvio-TextIndexParams"></a>
 
 ### TextIndexParams
@@ -1072,6 +1140,7 @@ Note: 1kB = 1 vector of size 256. |
 | hnsw_config | [HnswConfigDiff](#solvio-HnswConfigDiff) | optional | New HNSW parameters for the collection index |
 | vectors_config | [VectorsConfigDiff](#solvio-VectorsConfigDiff) | optional | New vector parameters |
 | quantization_config | [QuantizationConfigDiff](#solvio-QuantizationConfigDiff) | optional | Quantization configuration of vector |
+| sparse_vectors_config | [SparseVectorConfig](#solvio-SparseVectorConfig) | optional | New sparse vector parameters |
 
 
 

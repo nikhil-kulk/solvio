@@ -1474,6 +1474,7 @@ impl From<VectorParams> for api::grpc::solvio::VectorParams {
                 Distance::Cosine => api::grpc::solvio::Distance::Cosine,
                 Distance::Euclid => api::grpc::solvio::Distance::Euclid,
                 Distance::Dot => api::grpc::solvio::Distance::Dot,
+                Distance::Manhattan => api::grpc::solvio::Distance::Manhattan,
             }
             .into(),
             hnsw_config: value.hnsw_config.map(Into::into),

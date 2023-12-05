@@ -24,8 +24,8 @@ use ::api::grpc::solvio::solvio_server::{Solvio, SolvioServer};
 use ::api::grpc::solvio::shard_snapshots_server::ShardSnapshotsServer;
 use ::api::grpc::solvio::snapshots_server::SnapshotsServer;
 use ::api::grpc::solvio::{
-    HealthCheckReply, HealthCheckRequest, WaitOnConsensusCommitRequest,
-    WaitOnConsensusCommitResponse,
+    GetConsensusCommitRequest, GetConsensusCommitResponse, HealthCheckReply, HealthCheckRequest,
+    WaitOnConsensusCommitRequest, WaitOnConsensusCommitResponse,
 };
 use ::api::grpc::solvio_DESCRIPTOR_SET;
 use storage::content_manager::consensus_manager::ConsensusStateRef;
@@ -97,6 +97,16 @@ impl SolvioInternalService {
 
 #[tonic::async_trait]
 impl SolvioInternal for SolvioInternalService {
+    async fn get_consensus_commit(
+        &self,
+        _: tonic::Request<GetConsensusCommitRequest>,
+    ) -> Result<Response<GetConsensusCommitResponse>, Status> {
+        let persistent = self.consensus_state.persistent.read();
+        let commit = persistent.state.hard_state.commit as _;
+        let term = persistent.state.hard_state.term as _;
+        Ok(Response::new(GetConsensusCommitResponse { commit, term }))
+    }
+
     async fn wait_on_consensus_commit(
         &self,
         request: Request<WaitOnConsensusCommitRequest>,

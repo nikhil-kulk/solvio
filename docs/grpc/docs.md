@@ -213,6 +213,8 @@
     - [Solvio](#solvio-Solvio)
   
 - [solvio_internal_service.proto](#solvio_internal_service-proto)
+    - [GetConsensusCommitRequest](#solvio-GetConsensusCommitRequest)
+    - [GetConsensusCommitResponse](#solvio-GetConsensusCommitResponse)
     - [WaitOnConsensusCommitRequest](#solvio-WaitOnConsensusCommitRequest)
     - [WaitOnConsensusCommitResponse](#solvio-WaitOnConsensusCommitResponse)
   
@@ -3591,6 +3593,32 @@ When using target (with or without context), the score behaves a little differen
 
 
 
+<a name="solvio-GetConsensusCommitRequest"></a>
+
+### GetConsensusCommitRequest
+
+
+
+
+
+
+
+<a name="solvio-GetConsensusCommitResponse"></a>
+
+### GetConsensusCommitResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| commit | [int64](#int64) |  | Raft commit as u64 |
+| term | [int64](#int64) |  | Raft term as u64 |
+
+
+
+
+
+
 <a name="solvio-WaitOnConsensusCommitRequest"></a>
 
 ### WaitOnConsensusCommitRequest
@@ -3636,6 +3664,7 @@ When using target (with or without context), the score behaves a little differen
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
+| GetConsensusCommit | [GetConsensusCommitRequest](#solvio-GetConsensusCommitRequest) | [GetConsensusCommitResponse](#solvio-GetConsensusCommitResponse) | Get current commit and term on the target node. |
 | WaitOnConsensusCommit | [WaitOnConsensusCommitRequest](#solvio-WaitOnConsensusCommitRequest) | [WaitOnConsensusCommitResponse](#solvio-WaitOnConsensusCommitResponse) | Wait until the target node reached the given commit ID. |
 
  

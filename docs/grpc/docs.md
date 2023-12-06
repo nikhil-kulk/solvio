@@ -387,12 +387,12 @@
 | ----- | ---- | ----- | ----------- |
 | status | [CollectionStatus](#solvio-CollectionStatus) |  | operating condition of the collection |
 | optimizer_status | [OptimizerStatus](#solvio-OptimizerStatus) |  | status of collection optimizers |
-| vectors_count | [uint64](#uint64) |  | number of vectors in the collection |
+| vectors_count | [uint64](#uint64) | optional | Approximate number of vectors in the collection |
 | segments_count | [uint64](#uint64) |  | Number of independent segments |
 | config | [CollectionConfig](#solvio-CollectionConfig) |  | Configuration |
 | payload_schema | [CollectionInfo.PayloadSchemaEntry](#solvio-CollectionInfo-PayloadSchemaEntry) | repeated | Collection data types |
-| points_count | [uint64](#uint64) |  | number of points in the collection |
-| indexed_vectors_count | [uint64](#uint64) | optional | number of indexed vectors in the collection. |
+| points_count | [uint64](#uint64) | optional | Approximate number of points in the collection |
+| indexed_vectors_count | [uint64](#uint64) | optional | Approximate number of indexed vectors in the collection. |
 
 
 

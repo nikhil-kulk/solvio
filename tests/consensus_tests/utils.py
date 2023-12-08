@@ -54,7 +54,7 @@ def assert_project_root():
 
 def get_solvio_exec() -> str:
     directory_path = os.getcwd()
-    solvio_exec = directory_path + "/target/debug/solvio"
+    solvio_exec = directory_path + "/target/release/solvio"
     return solvio_exec
 
 

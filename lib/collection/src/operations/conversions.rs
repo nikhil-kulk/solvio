@@ -1331,7 +1331,7 @@ impl From<api::grpc::solvio::Vector> for RecommendExample {
     fn from(value: api::grpc::solvio::Vector) -> Self {
         let vector: Vector = value.into();
         match vector {
-            Vector::Dense(vector) => Self::Vector(vector),
+            Vector::Dense(vector) => Self::Dense(vector),
             Vector::Sparse(vector) => Self::Sparse(vector),
         }
     }
@@ -1351,7 +1351,7 @@ impl TryFrom<api::grpc::solvio::VectorExample> for RecommendExample {
                     Ok(Self::PointId(id.try_into()?))
                 }
                 api::grpc::solvio::vector_example::Example::Vector(vector) => {
-                    Ok(Self::Vector(vector.data))
+                    Ok(Self::Dense(vector.data))
                 }
             })
     }

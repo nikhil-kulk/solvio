@@ -66,15 +66,18 @@ solvio = SolvioClient("http://localhost:6333") # Connect to existing Solvio inst
 
 Solvio offers the following client libraries to help you integrate it into your application stack with ease:
 
-- Official: [Go client](https://github.com/solvio/go-client)
-- Official: [Rust client](https://github.com/solvio/rust-client)
-- Official: [JavaScript/TypeScript client](https://github.com/solvio/solvio-js)
-- Official: [Python client](https://github.com/solvio/solvio-client)
-- Official: [.NET/C# client](https://github.com/solvio/solvio-dotnet)
-- Community: [Elixir](https://hexdocs.pm/solvio/readme.html)
-- Community: [PHP](https://github.com/hkulekci/solvio-php)
-- Community: [Ruby](https://github.com/andreibondarev/solvio-ruby)
-- Community: [Java](https://github.com/metaloom/solvio-java-client)
+- Official:
+  - [Go client](https://github.com/solvio/go-client)
+  - [Rust client](https://github.com/solvio/rust-client)
+  - [JavaScript/TypeScript client](https://github.com/solvio/solvio-js)
+  - [Python client](https://github.com/solvio/solvio-client)
+  - [.NET/C# client](https://github.com/solvio/solvio-dotnet)
+  - [Java client](https://github.com/solvio/java-client)
+- Community:
+  - [Elixir](https://hexdocs.pm/solvio/readme.html)
+  - [PHP](https://github.com/hkulekci/solvio-php)
+  - [Ruby](https://github.com/andreibondarev/solvio-ruby)
+  - [Java](https://github.com/metaloom/solvio-java-client)
 
 ### Where do I go from here?
 
@@ -169,31 +172,40 @@ For faster production-tier searches, Solvio also provides a gRPC interface. You 
 
 ### Filtering and Payload
 
-Solvio enables JSON payloads to be associated with vectors, providing both storage and filtering based on payload values. It supports various combinations of `should`, `must`, and `must_not` conditions, ensuring retrieval of all relevant vectors unlike `ElasticSearch` post-filtering.
+Solvio can attach any JSON payloads to vectors, allowing for both the storage and filtering of data based on the values in these payloads.
+Payload supports a wide range of data types and query conditions, including keyword matching, full-text filtering, numerical ranges, geo-locations, and more.
 
-### Rich Data Types
+Filtering conditions can be combined in various ways, including `should`, `must`, and `must_not` clauses,
+ensuring that you can implement any desired business logic on top of similarity matching.
 
-The vector payload accommodates diverse data types and query conditions, including string matching, numerical ranges, geo-locations, and more. These filtering conditions empower you to create custom business logic on top of similarity matching.
 
-### Query Planning and Payload Indexes
+### Hybrid Search with Sparse Vectors
 
-The _query planner_ leverages stored payload information to optimize query execution. For instance, smaller search spaces limited by filters might benefit from full brute force over an index.
+To address the limitations of vector embeddings when searching for specific keywords, Solvio introduces support for sparse vectors in addition to the regular dense ones.
 
-### SIMD Hardware Acceleration
+Sparse vectors can be viewed as an generalisation of BM25 or TF-IDF ranking. They enable you to harness the capabilities of transformer-based neural networks to weigh individual tokens effectively.
 
-Utilizing modern CPU x86-x64 architectures, Solvio delivers faster search performance on modern hardware.
 
-### Write-Ahead Logging
+### Vector Quantization and On-Disk Storage
 
-Solvio ensures data persistence with update confirmation, even during power outages. The update journal stores all operations, enabling effortless reconstruction of the latest database state.
+Solvio provides multiple options to make vector search cheaper and more resource-efficient.
+Built-in vector quantization reduces RAM usage by up to 97% and dynamically manages the trade-off between search speed and precision.
+
 
 ### Distributed Deployment
 
-As of [v0.8.0](https://github.com/solvio/solvio/releases/tag/v0.8.0), Solvio supports distributed deployment. Multiple Solvio machines form a cluster for horizontal scaling, coordinated through the [Raft](https://raft.github.io/) protocol.
+Solvio offers comprehensive horizontal scaling support through two key mechanisms:
+1. Size expansion via sharding and throughput enhancement via replication
+2. Zero-downtime rolling updates and seamless dynamic scaling of the collections
 
-### Stand-alone
 
-Solvio operates independently, without reliance on external databases or orchestration controllers, simplifying configuration.
+### Highlighted Features
+
+* **Query Planning and Payload Indexes** - leverages stored payload information to optimize query execution strategy.
+* **SIMD Hardware Acceleration** - utilizes modern CPU x86-x64 and Neon architectures to deliver better performance.
+* **Async I/O** - uses `io_uring` to maximize disk throughput utilization even on a network-attached storage.
+* **Write-Ahead Logging** - ensures data persistence with update confirmation, even during power outages. 
+
 
 # Integrations
 

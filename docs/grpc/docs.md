@@ -31,6 +31,7 @@
     - [GetCollectionInfoRequest](#solvio-GetCollectionInfoRequest)
     - [GetCollectionInfoResponse](#solvio-GetCollectionInfoResponse)
     - [HnswConfigDiff](#solvio-HnswConfigDiff)
+    - [IntegerParams](#solvio-IntegerParams)
     - [ListAliasesRequest](#solvio-ListAliasesRequest)
     - [ListAliasesResponse](#solvio-ListAliasesResponse)
     - [ListCollectionAliasesRequest](#solvio-ListCollectionAliasesRequest)
@@ -704,6 +705,22 @@
 
 
 
+<a name="solvio-IntegerParams"></a>
+
+### IntegerParams
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| lookup | [bool](#bool) |  | If true - support direct lookups. |
+| range | [bool](#bool) |  | If true - support ranges filters. |
+
+
+
+
+
+
 <a name="solvio-ListAliasesRequest"></a>
 
 ### ListAliasesRequest
@@ -872,6 +889,7 @@ Note: 1kB = 1 vector of size 256. |
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | text_index_params | [TextIndexParams](#solvio-TextIndexParams) |  | Parameters for text index |
+| integer_params | [IntegerParams](#solvio-IntegerParams) |  | Parameters for integer index |
 
 
 

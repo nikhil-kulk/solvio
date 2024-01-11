@@ -86,7 +86,7 @@ Solvio offers the following client libraries to help you integrate it into your 
 - Detailed [Documentation](https://solvio.tech/documentation/) are great starting points
 - [Step-by-Step Tutorial](https://solvio.to/solvio-tutorial) to create your first neural network project with Solvio
 
-## Demo Projects
+## Demo Projects  <a href="https://replit.com/@solvio"><img align="right" src="https://replit.com/badge/github/solvio/solvio" alt="Run on Repl.it"></a>
 
 ### Discover Semantic Text Search 🔍
 

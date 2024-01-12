@@ -31,7 +31,7 @@
     - [GetCollectionInfoRequest](#solvio-GetCollectionInfoRequest)
     - [GetCollectionInfoResponse](#solvio-GetCollectionInfoResponse)
     - [HnswConfigDiff](#solvio-HnswConfigDiff)
-    - [IntegerParams](#solvio-IntegerParams)
+    - [IntegerIndexParams](#solvio-IntegerIndexParams)
     - [ListAliasesRequest](#solvio-ListAliasesRequest)
     - [ListAliasesResponse](#solvio-ListAliasesResponse)
     - [ListCollectionAliasesRequest](#solvio-ListCollectionAliasesRequest)
@@ -705,9 +705,9 @@
 
 
 
-<a name="solvio-IntegerParams"></a>
+<a name="solvio-IntegerIndexParams"></a>
 
-### IntegerParams
+### IntegerIndexParams
 
 
 
@@ -889,7 +889,7 @@ Note: 1kB = 1 vector of size 256. |
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | text_index_params | [TextIndexParams](#solvio-TextIndexParams) |  | Parameters for text index |
-| integer_params | [IntegerParams](#solvio-IntegerParams) |  | Parameters for integer index |
+| integer_index_params | [IntegerIndexParams](#solvio-IntegerIndexParams) |  | Parameters for integer index |
 
 
 

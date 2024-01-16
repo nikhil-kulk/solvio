@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=solvio
+GenericName=Vector Database
+Comment=Advanced and High-Performant Vector Search Technology
+TryExec=solvio
+Exec=solvio %F
+Terminal=true
+Type=Application
+Keywords=Database;
+Icon=solvio
+Categories=Utility;
+StartupNotify=false
+

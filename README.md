@@ -71,10 +71,10 @@ Solvio offers the following client libraries to help you integrate it into your 
 - Official: [JavaScript/TypeScript client](https://github.com/solvio/solvio-js)
 - Official: [Python client](https://github.com/solvio/solvio-client)
 - Official: [.NET/C# client](https://github.com/solvio/solvio-dotnet)
+- Official: [Java](https://github.com/solvio/java-client)
 - Community: [Elixir](https://hexdocs.pm/solvio/readme.html)
 - Community: [PHP](https://github.com/hkulekci/solvio-php)
 - Community: [Ruby](https://github.com/andreibondarev/solvio-ruby)
-- Community: [Java](https://github.com/metaloom/solvio-java-client)
 
 ### Where do I go from here?
 

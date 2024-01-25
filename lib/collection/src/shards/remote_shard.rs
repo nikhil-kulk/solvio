@@ -484,6 +484,7 @@ impl RemoteShard {
                             snapshot_priority: api::grpc::solvio::ShardSnapshotPriority::from(
                                 snapshot_priority,
                             ) as i32,
+                            checksum: None,
                         })
                         .await
                 },

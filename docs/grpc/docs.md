@@ -12,6 +12,9 @@
     - [CollectionClusterInfoResponse](#solvio-CollectionClusterInfoResponse)
     - [CollectionConfig](#solvio-CollectionConfig)
     - [CollectionDescription](#solvio-CollectionDescription)
+    - [CollectionExists](#solvio-CollectionExists)
+    - [CollectionExistsRequest](#solvio-CollectionExistsRequest)
+    - [CollectionExistsResponse](#solvio-CollectionExistsResponse)
     - [CollectionInfo](#solvio-CollectionInfo)
     - [CollectionInfo.PayloadSchemaEntry](#solvio-CollectionInfo-PayloadSchemaEntry)
     - [CollectionOperationResponse](#solvio-CollectionOperationResponse)
@@ -372,6 +375,52 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | Name of the collection |
+
+
+
+
+
+
+<a name="solvio-CollectionExists"></a>
+
+### CollectionExists
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| exists | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="solvio-CollectionExistsRequest"></a>
+
+### CollectionExistsRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="solvio-CollectionExistsResponse"></a>
+
+### CollectionExistsResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [CollectionExists](#solvio-CollectionExists) |  |  |
+| time | [double](#double) |  | Time spent to process |
 
 
 
@@ -1516,6 +1565,7 @@ Note: 1kB = 1 vector of size 256. |
 | ListCollectionAliases | [ListCollectionAliasesRequest](#solvio-ListCollectionAliasesRequest) | [ListAliasesResponse](#solvio-ListAliasesResponse) | Get list of all aliases for a collection |
 | ListAliases | [ListAliasesRequest](#solvio-ListAliasesRequest) | [ListAliasesResponse](#solvio-ListAliasesResponse) | Get list of all aliases for all existing collections |
 | CollectionClusterInfo | [CollectionClusterInfoRequest](#solvio-CollectionClusterInfoRequest) | [CollectionClusterInfoResponse](#solvio-CollectionClusterInfoResponse) | Get cluster information for a collection |
+| CollectionExists | [CollectionExistsRequest](#solvio-CollectionExistsRequest) | [CollectionExistsResponse](#solvio-CollectionExistsResponse) | Check the existence of a collection |
 | UpdateCollectionClusterSetup | [UpdateCollectionClusterSetupRequest](#solvio-UpdateCollectionClusterSetupRequest) | [UpdateCollectionClusterSetupResponse](#solvio-UpdateCollectionClusterSetupResponse) | Update cluster setup for a collection |
 | CreateShardKey | [CreateShardKeyRequest](#solvio-CreateShardKeyRequest) | [CreateShardKeyResponse](#solvio-CreateShardKeyResponse) | Create shard key |
 | DeleteShardKey | [DeleteShardKeyRequest](#solvio-DeleteShardKeyRequest) | [DeleteShardKeyResponse](#solvio-DeleteShardKeyResponse) | Delete shard key |

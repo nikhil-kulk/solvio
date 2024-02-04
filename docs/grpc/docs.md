@@ -139,6 +139,7 @@
     - [NamedVectors](#solvio-NamedVectors)
     - [NamedVectors.VectorsEntry](#solvio-NamedVectors-VectorsEntry)
     - [NestedCondition](#solvio-NestedCondition)
+    - [OrderBy](#solvio-OrderBy)
     - [PayloadExcludeSelector](#solvio-PayloadExcludeSelector)
     - [PayloadIncludeSelector](#solvio-PayloadIncludeSelector)
     - [PointGroup](#solvio-PointGroup)
@@ -186,6 +187,7 @@
     - [SetPayloadPoints.PayloadEntry](#solvio-SetPayloadPoints-PayloadEntry)
     - [ShardKeySelector](#solvio-ShardKeySelector)
     - [SparseIndices](#solvio-SparseIndices)
+    - [StartFrom](#solvio-StartFrom)
     - [TargetVector](#solvio-TargetVector)
     - [UpdateBatchPoints](#solvio-UpdateBatchPoints)
     - [UpdateBatchResponse](#solvio-UpdateBatchResponse)
@@ -202,6 +204,7 @@
     - [WithVectorsSelector](#solvio-WithVectorsSelector)
     - [WriteOrdering](#solvio-WriteOrdering)
   
+    - [Direction](#solvio-Direction)
     - [FieldType](#solvio-FieldType)
     - [ReadConsistencyType](#solvio-ReadConsistencyType)
     - [RecommendStrategy](#solvio-RecommendStrategy)
@@ -2395,6 +2398,23 @@ Additionally, the first and last points of each GeoLineString must be the same.
 
 
 
+<a name="solvio-OrderBy"></a>
+
+### OrderBy
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  | Payload key to order by |
+| direction | [Direction](#solvio-Direction) | optional | Ascending or descending order |
+| start_from | [StartFrom](#solvio-StartFrom) | optional | Start from this value |
+
+
+
+
+
+
 <a name="solvio-PayloadExcludeSelector"></a>
 
 ### PayloadExcludeSelector
@@ -3012,6 +3032,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | with_vectors | [WithVectorsSelector](#solvio-WithVectorsSelector) | optional | Options for specifying which vectors to include into response |
 | read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
 | shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Specify in which shards to look for the points, if not specified - look in all shards |
+| order_by | [OrderBy](#solvio-OrderBy) | optional | Order of the results by a payload key |
 
 
 
@@ -3239,6 +3260,22 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | data | [uint32](#uint32) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-StartFrom"></a>
+
+### StartFrom
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| float | [double](#double) |  |  |
+| integer | [int64](#int64) |  |  |
 
 
 
@@ -3494,6 +3531,18 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 
 
  
+
+
+<a name="solvio-Direction"></a>
+
+### Direction
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| Asc | 0 |  |
+| Desc | 1 |  |
+
 
 
 <a name="solvio-FieldType"></a>

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This test checks that Solvio answers to all API mentioned in README.md as expected
 
 set -ex

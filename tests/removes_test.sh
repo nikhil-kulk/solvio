@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This test checks that Solvio answers to all API mentioned in README.md as expected
 
 
@@ -26,7 +26,6 @@ curl -X PUT "http://$solvio_HOST/collections/test_collection" \
     }' | jq
 
 
-#!/bin/bash
 for i in {1..100}
 do
   IDX=$i
@@ -70,7 +69,6 @@ curl -L -X POST "http://$solvio_HOST/collections/test_collection/points/delete?w
   --data-raw "$PAYLOAD" | jq
 
 
-#!/bin/bash
 for i in {1..10}
 do
   IDX=$i

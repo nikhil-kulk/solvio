@@ -132,6 +132,7 @@
     - [GroupId](#solvio-GroupId)
     - [GroupsResult](#solvio-GroupsResult)
     - [HasIdCondition](#solvio-HasIdCondition)
+    - [IntegerRange](#solvio-IntegerRange)
     - [IsEmptyCondition](#solvio-IsEmptyCondition)
     - [IsNullCondition](#solvio-IsNullCondition)
     - [LookupLocation](#solvio-LookupLocation)
@@ -2097,6 +2098,7 @@ The JSON representation for `Value` is a JSON value.
 | values_count | [ValuesCount](#solvio-ValuesCount) |  | Check number of values for a specific field |
 | geo_polygon | [GeoPolygon](#solvio-GeoPolygon) |  | Check if geo point is within a given polygon |
 | datetime_range | [DatetimeRange](#solvio-DatetimeRange) |  | Check if datetime is within a given range |
+| integer_range | [IntegerRange](#solvio-IntegerRange) |  | Check if integer is within a given range |
 
 
 
@@ -2278,6 +2280,24 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | has_id | [PointId](#solvio-PointId) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-IntegerRange"></a>
+
+### IntegerRange
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| lt | [int64](#int64) | optional |  |
+| gt | [int64](#int64) | optional |  |
+| gte | [int64](#int64) | optional |  |
+| lte | [int64](#int64) | optional |  |
 
 
 

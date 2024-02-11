@@ -136,6 +136,7 @@
     - [IsNullCondition](#solvio-IsNullCondition)
     - [LookupLocation](#solvio-LookupLocation)
     - [Match](#solvio-Match)
+    - [MinShould](#solvio-MinShould)
     - [NamedVectors](#solvio-NamedVectors)
     - [NamedVectors.VectorsEntry](#solvio-NamedVectors-VectorsEntry)
     - [NestedCondition](#solvio-NestedCondition)
@@ -2113,6 +2114,7 @@ The JSON representation for `Value` is a JSON value.
 | should | [Condition](#solvio-Condition) | repeated | At least one of those conditions should match |
 | must | [Condition](#solvio-Condition) | repeated | All conditions must match |
 | must_not | [Condition](#solvio-Condition) | repeated | All conditions must NOT match |
+| min_should | [MinShould](#solvio-MinShould) | optional | At least minimum amount of given conditions should match |
 
 
 
@@ -2345,6 +2347,22 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | integers | [RepeatedIntegers](#solvio-RepeatedIntegers) |  | Match multiple integers |
 | except_integers | [RepeatedIntegers](#solvio-RepeatedIntegers) |  | Match any other value except those integers |
 | except_keywords | [RepeatedStrings](#solvio-RepeatedStrings) |  | Match any other value except those keywords |
+
+
+
+
+
+
+<a name="solvio-MinShould"></a>
+
+### MinShould
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| conditions | [Condition](#solvio-Condition) | repeated |  |
+| min_count | [uint64](#uint64) |  |  |
 
 
 

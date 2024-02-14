@@ -12,3 +12,4 @@
 *.log
 .solvio-initialized
 /.hypothesis
+**/__pycache__

@@ -2601,11 +2601,9 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | upsert | [PointsUpdateOperation.PointStructList](#solvio-PointsUpdateOperation-PointStructList) |  |  |
-| delete_deprecated | [PointsSelector](#solvio-PointsSelector) |  | **Deprecated.**  |
 | set_payload | [PointsUpdateOperation.SetPayload](#solvio-PointsUpdateOperation-SetPayload) |  |  |
 | overwrite_payload | [PointsUpdateOperation.SetPayload](#solvio-PointsUpdateOperation-SetPayload) |  |  |
 | delete_payload | [PointsUpdateOperation.DeletePayload](#solvio-PointsUpdateOperation-DeletePayload) |  |  |
-| clear_payload_deprecated | [PointsSelector](#solvio-PointsSelector) |  | **Deprecated.**  |
 | update_vectors | [PointsUpdateOperation.UpdateVectors](#solvio-PointsUpdateOperation-UpdateVectors) |  |  |
 | delete_vectors | [PointsUpdateOperation.DeleteVectors](#solvio-PointsUpdateOperation-DeleteVectors) |  |  |
 | delete_points | [PointsUpdateOperation.DeletePoints](#solvio-PointsUpdateOperation-DeletePoints) |  |  |

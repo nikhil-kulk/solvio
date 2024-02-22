@@ -1362,6 +1362,7 @@ impl From<api::grpc::solvio::ReplicaState> for ReplicaState {
             api::grpc::solvio::ReplicaState::Initializing => Self::Initializing,
             api::grpc::solvio::ReplicaState::Listener => Self::Listener,
             api::grpc::solvio::ReplicaState::PartialSnapshot => Self::PartialSnapshot,
+            api::grpc::solvio::ReplicaState::Recovery => Self::Recovery,
         }
     }
 }
@@ -1375,6 +1376,7 @@ impl From<ReplicaState> for api::grpc::solvio::ReplicaState {
             ReplicaState::Initializing => Self::Initializing,
             ReplicaState::Listener => Self::Listener,
             ReplicaState::PartialSnapshot => Self::PartialSnapshot,
+            ReplicaState::Recovery => Self::Recovery,
         }
     }
 }

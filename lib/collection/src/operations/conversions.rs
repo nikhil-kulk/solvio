@@ -1671,6 +1671,7 @@ impl From<api::grpc::solvio::ShardTransferMethod> for ShardTransferMethod {
                 ShardTransferMethod::StreamRecords
             }
             api::grpc::solvio::ShardTransferMethod::Snapshot => ShardTransferMethod::Snapshot,
+            api::grpc::solvio::ShardTransferMethod::WalDelta => ShardTransferMethod::WalDelta,
         }
     }
 }

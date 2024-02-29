@@ -1236,6 +1236,7 @@ Note: 1kB = 1 vector of size 256. |
 | drop_replica | [Replica](#solvio-Replica) |  |  |
 | create_shard_key | [CreateShardKey](#solvio-CreateShardKey) |  |  |
 | delete_shard_key | [DeleteShardKey](#solvio-DeleteShardKey) |  |  |
+| restart_transfer | [MoveShard](#solvio-MoveShard) |  |  |
 | timeout | [uint64](#uint64) | optional | Wait timeout for operation commit in seconds, if not specified - default value will be supplied |
 
 

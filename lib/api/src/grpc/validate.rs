@@ -160,6 +160,12 @@ impl Validate for crate::grpc::solvio::DeleteShardKey {
     }
 }
 
+impl Validate for crate::grpc::solvio::RestartTransfer {
+    fn validate(&self) -> Result<(), ValidationErrors> {
+        Ok(())
+    }
+}
+
 impl Validate for crate::grpc::solvio::condition::ConditionOneOf {
     fn validate(&self) -> Result<(), ValidationErrors> {
         use crate::grpc::solvio::condition::ConditionOneOf;

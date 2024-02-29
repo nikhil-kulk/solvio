@@ -52,6 +52,7 @@
     - [RemoteShardInfo](#solvio-RemoteShardInfo)
     - [RenameAlias](#solvio-RenameAlias)
     - [Replica](#solvio-Replica)
+    - [RestartTransfer](#solvio-RestartTransfer)
     - [ScalarQuantization](#solvio-ScalarQuantization)
     - [ShardKey](#solvio-ShardKey)
     - [ShardTransferInfo](#solvio-ShardTransferInfo)
@@ -1068,6 +1069,24 @@ Note: 1kB = 1 vector of size 256. |
 
 
 
+<a name="solvio-RestartTransfer"></a>
+
+### RestartTransfer
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| shard_id | [uint32](#uint32) |  | Local shard id |
+| from_peer_id | [uint64](#uint64) |  |  |
+| to_peer_id | [uint64](#uint64) |  |  |
+| method | [ShardTransferMethod](#solvio-ShardTransferMethod) |  |  |
+
+
+
+
+
+
 <a name="solvio-ScalarQuantization"></a>
 
 ### ScalarQuantization
@@ -1236,7 +1255,7 @@ Note: 1kB = 1 vector of size 256. |
 | drop_replica | [Replica](#solvio-Replica) |  |  |
 | create_shard_key | [CreateShardKey](#solvio-CreateShardKey) |  |  |
 | delete_shard_key | [DeleteShardKey](#solvio-DeleteShardKey) |  |  |
-| restart_transfer | [MoveShard](#solvio-MoveShard) |  |  |
+| restart_transfer | [RestartTransfer](#solvio-RestartTransfer) |  |  |
 | timeout | [uint64](#uint64) | optional | Wait timeout for operation commit in seconds, if not specified - default value will be supplied |
 
 

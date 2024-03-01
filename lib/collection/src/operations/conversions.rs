@@ -898,6 +898,7 @@ impl From<UpdateStatus> for i32 {
         match status {
             UpdateStatus::Acknowledged => api::grpc::solvio::UpdateStatus::Acknowledged as i32,
             UpdateStatus::Completed => api::grpc::solvio::UpdateStatus::Completed as i32,
+            UpdateStatus::ClockRejected => api::grpc::solvio::UpdateStatus::ClockRejected as i32,
         }
     }
 }
@@ -912,6 +913,7 @@ impl TryFrom<i32> for UpdateStatus {
         let status = match status {
             api::grpc::solvio::UpdateStatus::Acknowledged => Self::Acknowledged,
             api::grpc::solvio::UpdateStatus::Completed => Self::Completed,
+            api::grpc::solvio::UpdateStatus::ClockRejected => Self::ClockRejected,
 
             api::grpc::solvio::UpdateStatus::UnknownUpdateStatus => {
                 return Err(Status::invalid_argument(

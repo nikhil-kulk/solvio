@@ -19,7 +19,7 @@ cargo build
 function teardown()
 {
   echo "server is going down"
-  kill -9 $PID
+  kill -9 $PID || true
   echo "END"
 }
 
@@ -58,7 +58,23 @@ SNAPSHOT_NAME=$(
 curl -X GET "http://$solvio_HOST/snapshots/$SNAPSHOT_NAME" \
     --fail -s --output "${SCRIPT_DIR}/full-snapshot.snapshot"
 
+teardown
+
+rm "${SCRIPT_DIR}/full-snapshot.snapshot.gz" || true
+
 gzip "${SCRIPT_DIR}/full-snapshot.snapshot"
+
+rm "${SCRIPT_DIR}/storage.tar.bz2" || true
 
 # Save current storage folder
 tar -cjvf "${SCRIPT_DIR}/storage.tar.bz2" ./storage
+
+# Ask for version
+read -p "Enter the version of solvio that was used to generate this compatibility data (example - v1.7.4): " version
+
+cd "${SCRIPT_DIR}"
+tar -cvf "./compatibility-${version}.tar" "storage.tar.bz2" "full-snapshot.snapshot.gz"
+cd -
+
+echo "Compatibility data saved to ${SCRIPT_DIR}/compatibility-${version}.tar"
+echo "Upload it to "solvio-backward-compatibility" gcs bucket (requires access rights)"

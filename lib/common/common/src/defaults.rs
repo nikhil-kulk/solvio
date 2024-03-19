@@ -8,6 +8,9 @@ use crate::cpu;
 /// Current Solvio version
 pub const solvio_VERSION: Version = Version::new(1, 8, 4);
 
+/// Number of retries for confirming a consensus operation.
+pub const CONSENSUS_CONFIRM_RETRIES: usize = 3;
+
 /// Default timeout for consensus meta operations.
 pub const CONSENSUS_META_OP_WAIT: Duration = Duration::from_secs(10);
 

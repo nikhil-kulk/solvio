@@ -1809,12 +1809,12 @@ pub struct PeerMetadata {
 impl PeerMetadata {
     pub fn current() -> Self {
         Self {
-            version: defaults::solvio_VERSION,
+            version: defaults::solvio_VERSION.clone(),
         }
     }
 
     /// Whether this metadata has a different version than our current Solvio instance.
     pub fn is_different_version(&self) -> bool {
-        self.version != defaults::solvio_VERSION
+        self.version != *defaults::solvio_VERSION
     }
 }

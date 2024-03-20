@@ -5,8 +5,13 @@ use semver::Version;
 
 use crate::cpu;
 
-/// Current Solvio version
-pub const solvio_VERSION: Version = Version::new(1, 8, 4);
+/// Current Solvio version string
+pub const solvio_VERSION_STRING: &str = "1.8.4";
+
+lazy_static! {
+    /// Current Solvio semver version
+    pub static ref solvio_VERSION: Version = Version::parse(solvio_VERSION_STRING).expect("malformed version string");
+}
 
 /// Number of retries for confirming a consensus operation.
 pub const CONSENSUS_CONFIRM_RETRIES: usize = 3;

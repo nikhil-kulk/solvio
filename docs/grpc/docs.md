@@ -4,6 +4,7 @@
 ## Table of Contents
 
 - [collections.proto](#collections-proto)
+    - [AbortShardTransfer](#solvio-AbortShardTransfer)
     - [AliasDescription](#solvio-AliasDescription)
     - [AliasOperations](#solvio-AliasOperations)
     - [BinaryQuantization](#solvio-BinaryQuantization)
@@ -252,6 +253,23 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## collections.proto
+
+
+
+<a name="solvio-AbortShardTransfer"></a>
+
+### AbortShardTransfer
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| shard_id | [uint32](#uint32) |  | Local shard id |
+| from_peer_id | [uint64](#uint64) |  |  |
+| to_peer_id | [uint64](#uint64) |  |  |
+
+
+
 
 
 
@@ -1251,7 +1269,7 @@ Note: 1kB = 1 vector of size 256. |
 | collection_name | [string](#string) |  | Name of the collection |
 | move_shard | [MoveShard](#solvio-MoveShard) |  |  |
 | replicate_shard | [MoveShard](#solvio-MoveShard) |  |  |
-| abort_transfer | [MoveShard](#solvio-MoveShard) |  |  |
+| abort_transfer | [AbortShardTransfer](#solvio-AbortShardTransfer) |  |  |
 | drop_replica | [Replica](#solvio-Replica) |  |  |
 | create_shard_key | [CreateShardKey](#solvio-CreateShardKey) |  |  |
 | delete_shard_key | [DeleteShardKey](#solvio-DeleteShardKey) |  |  |

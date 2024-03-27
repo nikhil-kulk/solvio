@@ -26,7 +26,10 @@ def check_readyz(uri: str) -> bool:
 
 
 def start_api_key_instance(tmp_path: pathlib.Path, port_seed=10000) -> Tuple[str, str]:
-    extra_env = {"solvio__SERVICE__API_KEY": SECRET}
+    extra_env = {
+        "solvio__SERVICE__API_KEY": SECRET,
+        "solvio__SERVICE__JWT_RBAC": "true",
+    }
 
     peer_dir = make_peer_folder(tmp_path, 0)
 

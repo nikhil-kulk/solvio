@@ -340,6 +340,7 @@ impl From<CollectionInfo> for api::grpc::solvio::CollectionInfo {
                 CollectionStatus::Green => api::grpc::solvio::CollectionStatus::Green,
                 CollectionStatus::Yellow => api::grpc::solvio::CollectionStatus::Yellow,
                 CollectionStatus::Red => api::grpc::solvio::CollectionStatus::Red,
+                CollectionStatus::Grey => api::grpc::solvio::CollectionStatus::Grey,
             }
             .into(),
             optimizer_status: Some(match optimizer_status {

@@ -14,10 +14,14 @@ use crate::common::strings::ct_eq;
 type Request = tonic::codegen::http::Request<tonic::transport::Body>;
 type Response = tonic::codegen::http::Response<BoxBody>;
 
-const READ_ONLY_RPC_PATHS: [&str; 14] = [
+const READ_ONLY_RPC_PATHS: [&str; 22] = [
+    "/grpc.reflection.v1alpha.ServerReflection/ServerReflectionInfo",
     "/solvio.Collections/CollectionExists",
     "/solvio.Collections/List",
     "/solvio.Collections/Get",
+    "/solvio.Collections/ListCollectionAliases",
+    "/solvio.Collections/ListAliases",
+    "/solvio.Collections/CollectionClusterInfo",
     "/solvio.Points/Scroll",
     "/solvio.Points/Get",
     "/solvio.Points/Count",
@@ -29,6 +33,10 @@ const READ_ONLY_RPC_PATHS: [&str; 14] = [
     "/solvio.Points/RecommendBatch",
     "/solvio.Points/Discover",
     "/solvio.Points/DiscoverBatch",
+    "/solvio.Snapshots/List",
+    "/solvio.Snapshots/ListFull",
+    "/solvio.Solvio/HealthCheck",
+    "/grpc.health.v1.Health/Check",
 ];
 
 #[derive(Clone)]

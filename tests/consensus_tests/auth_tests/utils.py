@@ -10,13 +10,17 @@ GRPC_URI = f"127.0.0.1:{PORT_SEED + 1}"
 
 SECRET = "my_top_secret_key"
 
+READ_ONLY_API_KEY = "boo-hoo, this can only read!"
+
 API_KEY_HEADERS = {"Api-Key": SECRET}
 API_KEY_METADATA = [("api-key", SECRET)]
+READ_ONLY_API_KEY_METADATA = [("api-key", READ_ONLY_API_KEY)]
 
 
 def start_jwt_protected_cluster(tmp_path, num_peers=1):
     extra_env = {
         "solvio__SERVICE__API_KEY": SECRET,
+        "solvio__SERVICE__READ_ONLY_API_KEY": READ_ONLY_API_KEY,
         "solvio__SERVICE__JWT_RBAC": "true",
         "solvio__STORAGE__WAL__WAL_CAPACITY_MB": "1",  # to speed up snapshot tests
     }

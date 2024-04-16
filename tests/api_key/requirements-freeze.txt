@@ -1,3 +1,0 @@
-pytest==7.4.0
-solvio_client==1.3.1
-requests==2.31.0

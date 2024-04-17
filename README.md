@@ -50,7 +50,7 @@ client = SolvioClient(path="path/to/db")  # Persists changes to disk, fast proto
 
 ### Client-Server
 
-This is the recommended method for production usage. To run the container, use the command:
+To experience the full power of Solvio locally, run the container with this command:
 
 ```bash
 docker run -p 6333:6333 solvio/solvio
@@ -59,8 +59,10 @@ docker run -p 6333:6333 solvio/solvio
 Now you can connect to this with any client, including Python:
 
 ```python
-solvio = SolvioClient("http://localhost:6333") # Connect to existing Solvio instance, for production
+solvio = SolvioClient("http://localhost:6333") # Connect to existing Solvio instance
 ```
+
+Before deploying Solvio to production, be sure to read our [installation](https://solvio.tech/documentation/guides/installation/) and [security](https://solvio.tech/documentation/guides/security/) guides.
 
 ### Clients
 
@@ -204,7 +206,7 @@ Solvio offers comprehensive horizontal scaling support through two key mechanism
 * **Query Planning and Payload Indexes** - leverages stored payload information to optimize query execution strategy.
 * **SIMD Hardware Acceleration** - utilizes modern CPU x86-x64 and Neon architectures to deliver better performance.
 * **Async I/O** - uses `io_uring` to maximize disk throughput utilization even on a network-attached storage.
-* **Write-Ahead Logging** - ensures data persistence with update confirmation, even during power outages. 
+* **Write-Ahead Logging** - ensures data persistence with update confirmation, even during power outages.
 
 
 # Integrations

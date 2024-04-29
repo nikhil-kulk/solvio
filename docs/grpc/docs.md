@@ -79,6 +79,7 @@
     - [CompressionRatio](#solvio-CompressionRatio)
     - [Datatype](#solvio-Datatype)
     - [Distance](#solvio-Distance)
+    - [Modifier](#solvio-Modifier)
     - [PayloadSchemaType](#solvio-PayloadSchemaType)
     - [QuantizationType](#solvio-QuantizationType)
     - [ReplicaState](#solvio-ReplicaState)
@@ -1213,6 +1214,7 @@ Note: 1kB = 1 vector of size 256. |
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | index | [SparseIndexConfig](#solvio-SparseIndexConfig) | optional | Configuration of sparse index |
+| modifier | [Modifier](#solvio-Modifier) | optional | If set - apply modifier to the vector values |
 
 
 
@@ -1501,6 +1503,18 @@ Note: 1kB = 1 vector of size 256. |
 | Euclid | 2 |  |
 | Dot | 3 |  |
 | Manhattan | 4 |  |
+
+
+
+<a name="solvio-Modifier"></a>
+
+### Modifier
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| None | 0 |  |
+| Idf | 1 | Apply Inverse Document Frequency |
 
 
 

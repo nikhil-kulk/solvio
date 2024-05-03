@@ -10,7 +10,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 #declare DOCKER_IMAGE_NAME=solvio-recovery
 declare DOCKER_IMAGE_NAME=solvio/solvio
 
-#docker buildx build --build-arg=PROFILE=ci --load ../../ --tag=$DOCKER_IMAGE_NAME
+docker buildx build --build-arg=PROFILE=ci --load ../../ --tag=$DOCKER_IMAGE_NAME
 
 declare OOD_CONTAINER_NAME=solvio-ood
 

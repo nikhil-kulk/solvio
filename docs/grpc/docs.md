@@ -43,6 +43,7 @@
     - [ListCollectionsResponse](#solvio-ListCollectionsResponse)
     - [LocalShardInfo](#solvio-LocalShardInfo)
     - [MoveShard](#solvio-MoveShard)
+    - [MultiVectorConfig](#solvio-MultiVectorConfig)
     - [OptimizerStatus](#solvio-OptimizerStatus)
     - [OptimizersConfigDiff](#solvio-OptimizersConfigDiff)
     - [PayloadIndexParams](#solvio-PayloadIndexParams)
@@ -80,6 +81,7 @@
     - [Datatype](#solvio-Datatype)
     - [Distance](#solvio-Distance)
     - [Modifier](#solvio-Modifier)
+    - [MultiVectorComparator](#solvio-MultiVectorComparator)
     - [PayloadSchemaType](#solvio-PayloadSchemaType)
     - [QuantizationType](#solvio-QuantizationType)
     - [ReplicaState](#solvio-ReplicaState)
@@ -899,6 +901,21 @@
 
 
 
+<a name="solvio-MultiVectorConfig"></a>
+
+### MultiVectorConfig
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| comparator | [MultiVectorComparator](#solvio-MultiVectorComparator) |  | Comparator for multi-vector search |
+
+
+
+
+
+
 <a name="solvio-OptimizerStatus"></a>
 
 ### OptimizerStatus
@@ -1313,6 +1330,7 @@ Note: 1kB = 1 vector of size 256. |
 | quantization_config | [QuantizationConfig](#solvio-QuantizationConfig) | optional | Configuration of vector quantization config. If omitted - the collection configuration will be used |
 | on_disk | [bool](#bool) | optional | If true - serve vectors from disk. If set to false, the vectors will be loaded in RAM. |
 | datatype | [Datatype](#solvio-Datatype) | optional | Data type of the vectors |
+| multivector_config | [MultiVectorConfig](#solvio-MultiVectorConfig) | optional | Configuration for multi-vector search |
 
 
 
@@ -1515,6 +1533,17 @@ Note: 1kB = 1 vector of size 256. |
 | ---- | ------ | ----------- |
 | None | 0 |  |
 | Idf | 1 | Apply Inverse Document Frequency |
+
+
+
+<a name="solvio-MultiVectorComparator"></a>
+
+### MultiVectorComparator
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| MaxSim | 0 |  |
 
 
 
@@ -3503,8 +3532,9 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| data | [float](#float) | repeated |  |
-| indices | [SparseIndices](#solvio-SparseIndices) | optional |  |
+| data | [float](#float) | repeated | Vector data (flatten for multi vectors) |
+| indices | [SparseIndices](#solvio-SparseIndices) | optional | Sparse indices for sparse vectors |
+| vectors_count | [uint32](#uint32) | optional | Number of vectors per multi vector |
 
 
 

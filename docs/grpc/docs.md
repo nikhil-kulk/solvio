@@ -54,6 +54,7 @@
     - [RemoteShardInfo](#solvio-RemoteShardInfo)
     - [RenameAlias](#solvio-RenameAlias)
     - [Replica](#solvio-Replica)
+    - [ReplicateShard](#solvio-ReplicateShard)
     - [RestartTransfer](#solvio-RestartTransfer)
     - [ScalarQuantization](#solvio-ScalarQuantization)
     - [ShardKey](#solvio-ShardKey)
@@ -162,6 +163,8 @@
     - [PointsUpdateOperation.DeletePayload](#solvio-PointsUpdateOperation-DeletePayload)
     - [PointsUpdateOperation.DeletePoints](#solvio-PointsUpdateOperation-DeletePoints)
     - [PointsUpdateOperation.DeleteVectors](#solvio-PointsUpdateOperation-DeleteVectors)
+    - [PointsUpdateOperation.OverwritePayload](#solvio-PointsUpdateOperation-OverwritePayload)
+    - [PointsUpdateOperation.OverwritePayload.PayloadEntry](#solvio-PointsUpdateOperation-OverwritePayload-PayloadEntry)
     - [PointsUpdateOperation.PointStructList](#solvio-PointsUpdateOperation-PointStructList)
     - [PointsUpdateOperation.SetPayload](#solvio-PointsUpdateOperation-SetPayload)
     - [PointsUpdateOperation.SetPayload.PayloadEntry](#solvio-PointsUpdateOperation-SetPayload-PayloadEntry)
@@ -1106,6 +1109,24 @@ Note: 1kB = 1 vector of size 256. |
 
 
 
+<a name="solvio-ReplicateShard"></a>
+
+### ReplicateShard
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| shard_id | [uint32](#uint32) |  | Local shard id |
+| from_peer_id | [uint64](#uint64) |  |  |
+| to_peer_id | [uint64](#uint64) |  |  |
+| method | [ShardTransferMethod](#solvio-ShardTransferMethod) | optional |  |
+
+
+
+
+
+
 <a name="solvio-RestartTransfer"></a>
 
 ### RestartTransfer
@@ -1288,7 +1309,7 @@ Note: 1kB = 1 vector of size 256. |
 | ----- | ---- | ----- | ----------- |
 | collection_name | [string](#string) |  | Name of the collection |
 | move_shard | [MoveShard](#solvio-MoveShard) |  |  |
-| replicate_shard | [MoveShard](#solvio-MoveShard) |  |  |
+| replicate_shard | [ReplicateShard](#solvio-ReplicateShard) |  |  |
 | abort_transfer | [AbortShardTransfer](#solvio-AbortShardTransfer) |  |  |
 | drop_replica | [Replica](#solvio-Replica) |  |  |
 | create_shard_key | [CreateShardKey](#solvio-CreateShardKey) |  |  |
@@ -2702,7 +2723,7 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | upsert | [PointsUpdateOperation.PointStructList](#solvio-PointsUpdateOperation-PointStructList) |  |  |
 | delete_deprecated | [PointsSelector](#solvio-PointsSelector) |  | **Deprecated.**  |
 | set_payload | [PointsUpdateOperation.SetPayload](#solvio-PointsUpdateOperation-SetPayload) |  |  |
-| overwrite_payload | [PointsUpdateOperation.SetPayload](#solvio-PointsUpdateOperation-SetPayload) |  |  |
+| overwrite_payload | [PointsUpdateOperation.OverwritePayload](#solvio-PointsUpdateOperation-OverwritePayload) |  |  |
 | delete_payload | [PointsUpdateOperation.DeletePayload](#solvio-PointsUpdateOperation-DeletePayload) |  |  |
 | clear_payload_deprecated | [PointsSelector](#solvio-PointsSelector) |  | **Deprecated.**  |
 | update_vectors | [PointsUpdateOperation.UpdateVectors](#solvio-PointsUpdateOperation-UpdateVectors) |  |  |
@@ -2775,6 +2796,40 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | points_selector | [PointsSelector](#solvio-PointsSelector) |  | Affected points |
 | vectors | [VectorsSelector](#solvio-VectorsSelector) |  | List of vector names to delete |
 | shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Option for custom sharding to specify used shard keys |
+
+
+
+
+
+
+<a name="solvio-PointsUpdateOperation-OverwritePayload"></a>
+
+### PointsUpdateOperation.OverwritePayload
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| payload | [PointsUpdateOperation.OverwritePayload.PayloadEntry](#solvio-PointsUpdateOperation-OverwritePayload-PayloadEntry) | repeated |  |
+| points_selector | [PointsSelector](#solvio-PointsSelector) | optional | Affected points |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Option for custom sharding to specify used shard keys |
+| key | [string](#string) | optional | Option for indicate property of payload |
+
+
+
+
+
+
+<a name="solvio-PointsUpdateOperation-OverwritePayload-PayloadEntry"></a>
+
+### PointsUpdateOperation.OverwritePayload.PayloadEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [Value](#solvio-Value) |  |  |
 
 
 

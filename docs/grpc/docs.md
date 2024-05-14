@@ -123,6 +123,7 @@
     - [DeletePayloadPoints](#solvio-DeletePayloadPoints)
     - [DeletePointVectors](#solvio-DeletePointVectors)
     - [DeletePoints](#solvio-DeletePoints)
+    - [DenseVector](#solvio-DenseVector)
     - [DiscoverBatchPoints](#solvio-DiscoverBatchPoints)
     - [DiscoverBatchResponse](#solvio-DiscoverBatchResponse)
     - [DiscoverPoints](#solvio-DiscoverPoints)
@@ -144,6 +145,7 @@
     - [LookupLocation](#solvio-LookupLocation)
     - [Match](#solvio-Match)
     - [MinShould](#solvio-MinShould)
+    - [MultiDenseVector](#solvio-MultiDenseVector)
     - [NamedVectors](#solvio-NamedVectors)
     - [NamedVectors.VectorsEntry](#solvio-NamedVectors-VectorsEntry)
     - [NestedCondition](#solvio-NestedCondition)
@@ -197,6 +199,7 @@
     - [SetPayloadPoints.PayloadEntry](#solvio-SetPayloadPoints-PayloadEntry)
     - [ShardKeySelector](#solvio-ShardKeySelector)
     - [SparseIndices](#solvio-SparseIndices)
+    - [SparseVector](#solvio-SparseVector)
     - [StartFrom](#solvio-StartFrom)
     - [TargetVector](#solvio-TargetVector)
     - [UpdateBatchPoints](#solvio-UpdateBatchPoints)
@@ -207,6 +210,7 @@
     - [ValuesCount](#solvio-ValuesCount)
     - [Vector](#solvio-Vector)
     - [VectorExample](#solvio-VectorExample)
+    - [VectorInput](#solvio-VectorInput)
     - [Vectors](#solvio-Vectors)
     - [VectorsSelector](#solvio-VectorsSelector)
     - [WithLookup](#solvio-WithLookup)
@@ -2124,6 +2128,21 @@ The JSON representation for `Value` is a JSON value.
 
 
 
+<a name="solvio-DenseVector"></a>
+
+### DenseVector
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| data | [float](#float) | repeated |  |
+
+
+
+
+
+
 <a name="solvio-DiscoverBatchPoints"></a>
 
 ### DiscoverBatchPoints
@@ -2484,6 +2503,21 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | ----- | ---- | ----- | ----------- |
 | conditions | [Condition](#solvio-Condition) | repeated |  |
 | min_count | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="solvio-MultiDenseVector"></a>
+
+### MultiDenseVector
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| vectors | [DenseVector](#solvio-DenseVector) | repeated |  |
 
 
 
@@ -3441,6 +3475,22 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 
 
 
+<a name="solvio-SparseVector"></a>
+
+### SparseVector
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| data | [float](#float) | repeated |  |
+| indices | [SparseIndices](#solvio-SparseIndices) |  |  |
+
+
+
+
+
+
 <a name="solvio-StartFrom"></a>
 
 ### StartFrom
@@ -3583,7 +3633,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 <a name="solvio-Vector"></a>
 
 ### Vector
-
+Legacy vector format, which determines the vector type by the configuration of its fields.
 
 
 | Field | Type | Label | Description |
@@ -3607,6 +3657,24 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | id | [PointId](#solvio-PointId) |  |  |
 | vector | [Vector](#solvio-Vector) |  |  |
+
+
+
+
+
+
+<a name="solvio-VectorInput"></a>
+
+### VectorInput
+Vector type to be used in queries. Ids will be substituted with their corresponding vectors from the collection.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [PointId](#solvio-PointId) |  |  |
+| dense | [DenseVector](#solvio-DenseVector) |  |  |
+| sparse | [SparseVector](#solvio-SparseVector) |  |  |
+| multi | [MultiDenseVector](#solvio-MultiDenseVector) |  |  |
 
 
 

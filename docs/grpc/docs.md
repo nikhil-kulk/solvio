@@ -3484,8 +3484,8 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| data | [float](#float) | repeated |  |
-| indices | [SparseIndices](#solvio-SparseIndices) |  |  |
+| values | [float](#float) | repeated |  |
+| indices | [uint32](#uint32) | repeated |  |
 
 
 
@@ -3675,7 +3675,7 @@ Vector type to be used in queries. Ids will be substituted with their correspond
 | id | [PointId](#solvio-PointId) |  |  |
 | dense | [DenseVector](#solvio-DenseVector) |  |  |
 | sparse | [SparseVector](#solvio-SparseVector) |  |  |
-| multi | [MultiDenseVector](#solvio-MultiDenseVector) |  |  |
+| multi_dense | [MultiDenseVector](#solvio-MultiDenseVector) |  |  |
 
 
 

@@ -172,6 +172,8 @@
     - [PointsUpdateOperation.SetPayload.PayloadEntry](#solvio-PointsUpdateOperation-SetPayload-PayloadEntry)
     - [PointsUpdateOperation.UpdateVectors](#solvio-PointsUpdateOperation-UpdateVectors)
     - [QuantizationSearchParams](#solvio-QuantizationSearchParams)
+    - [QueriedPoint](#solvio-QueriedPoint)
+    - [QueriedPoint.PayloadEntry](#solvio-QueriedPoint-PayloadEntry)
     - [Range](#solvio-Range)
     - [ReadConsistency](#solvio-ReadConsistency)
     - [RecommendBatchPoints](#solvio-RecommendBatchPoints)
@@ -184,6 +186,7 @@
     - [RepeatedStrings](#solvio-RepeatedStrings)
     - [RetrievedPoint](#solvio-RetrievedPoint)
     - [RetrievedPoint.PayloadEntry](#solvio-RetrievedPoint-PayloadEntry)
+    - [Score](#solvio-Score)
     - [ScoredPoint](#solvio-ScoredPoint)
     - [ScoredPoint.PayloadEntry](#solvio-ScoredPoint-PayloadEntry)
     - [ScrollPoints](#solvio-ScrollPoints)
@@ -2959,6 +2962,42 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 
 
 
+<a name="solvio-QueriedPoint"></a>
+
+### QueriedPoint
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [PointId](#solvio-PointId) |  | Point id |
+| payload | [QueriedPoint.PayloadEntry](#solvio-QueriedPoint-PayloadEntry) | repeated | Payload |
+| score | [Score](#solvio-Score) |  | Score to order against other points |
+| version | [uint64](#uint64) |  | Last update operation applied to this point |
+| vectors | [Vectors](#solvio-Vectors) | optional | Vectors to search |
+| shard_key | [ShardKey](#solvio-ShardKey) | optional | Shard key |
+
+
+
+
+
+
+<a name="solvio-QueriedPoint-PayloadEntry"></a>
+
+### QueriedPoint.PayloadEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [Value](#solvio-Value) |  |  |
+
+
+
+
+
+
 <a name="solvio-Range"></a>
 
 ### Range
@@ -3183,6 +3222,24 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
 | value | [Value](#solvio-Value) |  |  |
+
+
+
+
+
+
+<a name="solvio-Score"></a>
+
+### Score
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [PointId](#solvio-PointId) |  |  |
+| similarity | [float](#float) |  |  |
+| int_value | [int64](#int64) |  |  |
+| float_value | [double](#double) |  |  |
 
 
 

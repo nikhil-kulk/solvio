@@ -184,6 +184,7 @@
     - [RepeatedStrings](#solvio-RepeatedStrings)
     - [RetrievedPoint](#solvio-RetrievedPoint)
     - [RetrievedPoint.PayloadEntry](#solvio-RetrievedPoint-PayloadEntry)
+    - [Score](#solvio-Score)
     - [ScoredPoint](#solvio-ScoredPoint)
     - [ScoredPoint.PayloadEntry](#solvio-ScoredPoint-PayloadEntry)
     - [ScrollPoints](#solvio-ScrollPoints)
@@ -3189,6 +3190,22 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 
 
 
+<a name="solvio-Score"></a>
+
+### Score
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| int | [int64](#int64) |  |  |
+| float | [double](#double) |  |  |
+
+
+
+
+
+
 <a name="solvio-ScoredPoint"></a>
 
 ### ScoredPoint
@@ -3199,10 +3216,11 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | id | [PointId](#solvio-PointId) |  | Point id |
 | payload | [ScoredPoint.PayloadEntry](#solvio-ScoredPoint-PayloadEntry) | repeated | Payload |
-| score | [float](#float) |  | Similarity score |
+| float_score | [float](#float) |  | Similarity score. To be deprecated in favor of &#34;score&#34; field |
 | version | [uint64](#uint64) |  | Last update operation applied to this point |
 | vectors | [Vectors](#solvio-Vectors) | optional | Vectors to search |
 | shard_key | [ShardKey](#solvio-ShardKey) | optional | Shard key |
+| score | [Score](#solvio-Score) | optional | Score to compare against other scored points. If not provided, sorts by id. |
 
 
 

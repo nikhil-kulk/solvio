@@ -150,6 +150,7 @@
     - [NamedVectors.VectorsEntry](#solvio-NamedVectors-VectorsEntry)
     - [NestedCondition](#solvio-NestedCondition)
     - [OrderBy](#solvio-OrderBy)
+    - [OrderValue](#solvio-OrderValue)
     - [PayloadExcludeSelector](#solvio-PayloadExcludeSelector)
     - [PayloadIncludeSelector](#solvio-PayloadIncludeSelector)
     - [PointGroup](#solvio-PointGroup)
@@ -2589,6 +2590,22 @@ Additionally, the first and last points of each GeoLineString must be the same.
 
 
 
+<a name="solvio-OrderValue"></a>
+
+### OrderValue
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| int | [int64](#int64) |  |  |
+| float | [double](#double) |  |  |
+
+
+
+
+
+
 <a name="solvio-PayloadExcludeSelector"></a>
 
 ### PayloadExcludeSelector
@@ -3203,6 +3220,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | version | [uint64](#uint64) |  | Last update operation applied to this point |
 | vectors | [Vectors](#solvio-Vectors) | optional | Vectors to search |
 | shard_key | [ShardKey](#solvio-ShardKey) | optional | Shard key |
+| order_value | [OrderValue](#solvio-OrderValue) | optional | Order by value |
 
 
 

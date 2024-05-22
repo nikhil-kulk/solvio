@@ -7,8 +7,8 @@ echo $PWD
 cd "$(dirname "$0")/../../"
 
 solvio_HOST='localhost:6333'
-PREV_PATCH_solvio_VERSION='v1.8.1'
-PREV_MINOR_solvio_VERSION='v1.7.4'
+PREV_PATCH_solvio_VERSION='v1.9.2'
+PREV_MINOR_solvio_VERSION='v1.8.4'
 
 RETRY_LIMIT=30
 

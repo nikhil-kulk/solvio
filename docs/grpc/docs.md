@@ -114,6 +114,8 @@
     - [ClearPayloadPoints](#solvio-ClearPayloadPoints)
     - [Condition](#solvio-Condition)
     - [ContextExamplePair](#solvio-ContextExamplePair)
+    - [ContextInput](#solvio-ContextInput)
+    - [ContextPairInput](#solvio-ContextPairInput)
     - [CountPoints](#solvio-CountPoints)
     - [CountResponse](#solvio-CountResponse)
     - [CountResult](#solvio-CountResult)
@@ -126,6 +128,7 @@
     - [DenseVector](#solvio-DenseVector)
     - [DiscoverBatchPoints](#solvio-DiscoverBatchPoints)
     - [DiscoverBatchResponse](#solvio-DiscoverBatchResponse)
+    - [DiscoverInput](#solvio-DiscoverInput)
     - [DiscoverPoints](#solvio-DiscoverPoints)
     - [DiscoverResponse](#solvio-DiscoverResponse)
     - [FieldCondition](#solvio-FieldCondition)
@@ -172,12 +175,16 @@
     - [PointsUpdateOperation.SetPayload](#solvio-PointsUpdateOperation-SetPayload)
     - [PointsUpdateOperation.SetPayload.PayloadEntry](#solvio-PointsUpdateOperation-SetPayload-PayloadEntry)
     - [PointsUpdateOperation.UpdateVectors](#solvio-PointsUpdateOperation-UpdateVectors)
+    - [PrefetchQuery](#solvio-PrefetchQuery)
     - [QuantizationSearchParams](#solvio-QuantizationSearchParams)
+    - [Query](#solvio-Query)
+    - [QueryPoints](#solvio-QueryPoints)
     - [Range](#solvio-Range)
     - [ReadConsistency](#solvio-ReadConsistency)
     - [RecommendBatchPoints](#solvio-RecommendBatchPoints)
     - [RecommendBatchResponse](#solvio-RecommendBatchResponse)
     - [RecommendGroupsResponse](#solvio-RecommendGroupsResponse)
+    - [RecommendInput](#solvio-RecommendInput)
     - [RecommendPointGroups](#solvio-RecommendPointGroups)
     - [RecommendPoints](#solvio-RecommendPoints)
     - [RecommendResponse](#solvio-RecommendResponse)
@@ -221,6 +228,7 @@
   
     - [Direction](#solvio-Direction)
     - [FieldType](#solvio-FieldType)
+    - [Fusion](#solvio-Fusion)
     - [ReadConsistencyType](#solvio-ReadConsistencyType)
     - [RecommendStrategy](#solvio-RecommendStrategy)
     - [UpdateStatus](#solvio-UpdateStatus)
@@ -1965,6 +1973,37 @@ The JSON representation for `Value` is a JSON value.
 
 
 
+<a name="solvio-ContextInput"></a>
+
+### ContextInput
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| context_pairs | [ContextPairInput](#solvio-ContextPairInput) | repeated | Search space will be constrained by these pairs of vectors |
+
+
+
+
+
+
+<a name="solvio-ContextPairInput"></a>
+
+### ContextPairInput
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| positive | [VectorInput](#solvio-VectorInput) |  | A positive vector |
+| negative | [VectorInput](#solvio-VectorInput) |  | Repel from this vector |
+
+
+
+
+
+
 <a name="solvio-CountPoints"></a>
 
 ### CountPoints
@@ -1973,7 +2012,7 @@ The JSON representation for `Value` is a JSON value.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| collection_name | [string](#string) |  | name of the collection |
+| collection_name | [string](#string) |  | Name of the collection |
 | filter | [Filter](#solvio-Filter) |  | Filter conditions - return only those points that satisfy the specified conditions |
 | exact | [bool](#bool) | optional | If `true` - return exact count, if `false` - return approximate count |
 | read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
@@ -2173,6 +2212,22 @@ The JSON representation for `Value` is a JSON value.
 | ----- | ---- | ----- | ----------- |
 | result | [BatchResult](#solvio-BatchResult) | repeated |  |
 | time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
+<a name="solvio-DiscoverInput"></a>
+
+### DiscoverInput
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| target | [VectorInput](#solvio-VectorInput) |  | Use this as the primary search objective |
+| context_pairs | [ContextPairInput](#solvio-ContextPairInput) | repeated | Search space will be constrained by these pairs of vectors |
 
 
 
@@ -2955,6 +3010,27 @@ Additionally, the first and last points of each GeoLineString must be the same.
 
 
 
+<a name="solvio-PrefetchQuery"></a>
+
+### PrefetchQuery
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| prefetch | [PrefetchQuery](#solvio-PrefetchQuery) | repeated | Sub-requests to perform first. If present, the query will be performed on the results of the prefetches. |
+| query | [Query](#solvio-Query) | optional | Query to perform. If missing, returns points ordered by their IDs. |
+| using | [string](#string) | optional | Define which vector to use for querying. If missing, the default vector is is used. |
+| filter | [Filter](#solvio-Filter) | optional | Filter conditions - return only those points that satisfy the specified conditions. |
+| search_params | [SearchParams](#solvio-SearchParams) | optional | Search params for when there is no prefetch. |
+| score_threshold | [float](#float) | optional | Return points with scores better than this threshold. |
+| limit | [uint64](#uint64) | optional | Max number of points. Default is 10 |
+
+
+
+
+
+
 <a name="solvio-QuantizationSearchParams"></a>
 
 ### QuantizationSearchParams
@@ -2970,6 +3046,53 @@ Additionally, the first and last points of each GeoLineString must be the same.
 Defines how many extra vectors should be pre-selected using quantized index, and then re-scored using original vectors.
 
 For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will be pre-selected using quantized index, and then top-100 will be returned after re-scoring. |
+
+
+
+
+
+
+<a name="solvio-Query"></a>
+
+### Query
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| nearest | [VectorInput](#solvio-VectorInput) |  | Find the nearest neighbors to this vector. |
+| recommend | [RecommendInput](#solvio-RecommendInput) |  | Use multiple positive and negative vectors to find the results. |
+| discover | [DiscoverInput](#solvio-DiscoverInput) |  | Search for nearest points, but constrain the search space with context |
+| context | [ContextInput](#solvio-ContextInput) |  | Return points that live in positive areas. |
+| order_by | [OrderBy](#solvio-OrderBy) |  | Order the points by a payload field. |
+| fusion | [Fusion](#solvio-Fusion) |  | Fuse the results of multiple prefetches. |
+
+
+
+
+
+
+<a name="solvio-QueryPoints"></a>
+
+### QueryPoints
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+| prefetch | [PrefetchQuery](#solvio-PrefetchQuery) | repeated | Sub-requests to perform first. If present, the query will be performed on the results of the prefetches. |
+| query | [Query](#solvio-Query) | optional | Query to perform. If missing, returns points ordered by their IDs. |
+| using | [string](#string) | optional | Define which vector to use for querying. If missing, the default vector is used. |
+| filter | [Filter](#solvio-Filter) | optional | Filter conditions - return only those points that satisfy the specified conditions. |
+| search_params | [SearchParams](#solvio-SearchParams) | optional | Search params for when there is no prefetch. |
+| score_threshold | [float](#float) | optional | Return points with scores better than this threshold. |
+| limit | [uint64](#uint64) | optional | Max number of points. Default is 10. |
+| offset | [uint64](#uint64) | optional | Offset of the result. Skip this many points. Default is 0. |
+| with_vectors | [WithVectorsSelector](#solvio-WithVectorsSelector) | optional | Options for specifying which vectors to include into the response. |
+| with_payload | [WithPayloadSelector](#solvio-WithPayloadSelector) | optional | Options for specifying which payload to include or not. |
+| read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees. |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Specify in which shards to look for the points, if not specified - look in all shards. |
 
 
 
@@ -3054,6 +3177,23 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | result | [GroupsResult](#solvio-GroupsResult) |  |  |
 | time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
+<a name="solvio-RecommendInput"></a>
+
+### RecommendInput
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| positive | [VectorInput](#solvio-VectorInput) | repeated | Look for vectors closest to the vectors from these points |
+| negative | [VectorInput](#solvio-VectorInput) | repeated | Try to avoid vectors like the vector from these points |
+| strategy | [RecommendStrategy](#solvio-RecommendStrategy) | optional | How to use the provided vectors to find the results |
 
 
 
@@ -3824,6 +3964,17 @@ Vector type to be used in queries. Ids will be substituted with their correspond
 | FieldTypeText | 4 |  |
 | FieldTypeBool | 5 |  |
 | FieldTypeDatetime | 6 |  |
+
+
+
+<a name="solvio-Fusion"></a>
+
+### Fusion
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| RRF | 0 | Reciprocal Rank Fusion |
 
 
 

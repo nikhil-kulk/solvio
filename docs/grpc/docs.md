@@ -115,7 +115,7 @@
     - [Condition](#solvio-Condition)
     - [ContextExamplePair](#solvio-ContextExamplePair)
     - [ContextInput](#solvio-ContextInput)
-    - [ContextPairInput](#solvio-ContextPairInput)
+    - [ContextInputPair](#solvio-ContextInputPair)
     - [CountPoints](#solvio-CountPoints)
     - [CountResponse](#solvio-CountResponse)
     - [CountResult](#solvio-CountResult)
@@ -1981,16 +1981,16 @@ The JSON representation for `Value` is a JSON value.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| context_pairs | [ContextPairInput](#solvio-ContextPairInput) | repeated | Search space will be constrained by these pairs of vectors |
+| pairs | [ContextInputPair](#solvio-ContextInputPair) | repeated | Search space will be constrained by these pairs of vectors |
 
 
 
 
 
 
-<a name="solvio-ContextPairInput"></a>
+<a name="solvio-ContextInputPair"></a>
 
-### ContextPairInput
+### ContextInputPair
 
 
 
@@ -2227,7 +2227,7 @@ The JSON representation for `Value` is a JSON value.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | target | [VectorInput](#solvio-VectorInput) |  | Use this as the primary search objective |
-| context_pairs | [ContextPairInput](#solvio-ContextPairInput) | repeated | Search space will be constrained by these pairs of vectors |
+| context | [ContextInput](#solvio-ContextInput) |  | Search space will be constrained by these pairs of vectors |
 
 
 
@@ -3191,8 +3191,8 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| positives | [VectorInput](#solvio-VectorInput) | repeated | Look for vectors closest to the vectors from these points |
-| negatives | [VectorInput](#solvio-VectorInput) | repeated | Try to avoid vectors like the vector from these points |
+| positive | [VectorInput](#solvio-VectorInput) | repeated | Look for vectors closest to the vectors from these points |
+| negative | [VectorInput](#solvio-VectorInput) | repeated | Try to avoid vectors like the vector from these points |
 | strategy | [RecommendStrategy](#solvio-RecommendStrategy) | optional | How to use the provided vectors to find the results |
 
 

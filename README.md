@@ -8,7 +8,7 @@
 
 <p align=center>
     <a href="https://github.com/solvio/solvio/actions/workflows/rust.yml"><img src="https://img.shields.io/github/actions/workflow/status/solvio/solvio/rust.yml?style=flat-square" alt="Tests status"></a>
-    <a href="https://solvio.github.io/solvio/redoc/index.html"><img src="https://img.shields.io/badge/Docs-OpenAPI%203.0-success?style=flat-square" alt="OpenAPI Docs"></a>
+    <a href="https://api.solvio.tech/"><img src="https://img.shields.io/badge/Docs-OpenAPI%203.0-success?style=flat-square" alt="OpenAPI Docs"></a>
     <a href="https://github.com/solvio/solvio/blob/master/LICENSE"><img src="https://img.shields.io/github/license/solvio/solvio?style=flat-square" alt="Apache 2.0 License"></a>
     <a href="https://solvio.to/discord"><img src="https://img.shields.io/discord/907569970500743200?logo=Discord&style=flat-square&color=7289da" alt="Discord"></a>
     <a href="https://solvio.to/roadmap"><img src="https://img.shields.io/badge/Roadmap-2024-bc1439.svg?style=flat-square" alt="Roadmap 2024"></a>
@@ -161,7 +161,7 @@ Enter the cutting-edge realm of extreme classification, an emerging machine lear
 
 ### REST
 
-Online OpenAPI 3.0 documentation is available [here](https://solvio.github.io/solvio/redoc/index.html).
+Online OpenAPI 3.0 documentation is available [here](https://api.solvio.tech/).
 OpenAPI makes it easy to generate a client for virtually any framework or programming language.
 
 You can also download raw OpenAPI [definitions](https://github.com/solvio/solvio/blob/master/docs/redoc/master/openapi.json).

@@ -1,9 +1,7 @@
 # Quick Start
 
 This example covers the most basic use-case - collection creation and basic vector search.
-For additional information please refer to the [API documentation](https://solvio.github.io/solvio/redoc/index.html).
-
-You can also try all Solvio REST API in our [Swagger UI](https://ui.solvio.tech/).
+For additional information please refer to the [API documentation](https://api.solvio.tech/).
 
 ## Docker 🐳
 

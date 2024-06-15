@@ -1,5 +1,5 @@
 export solvio__GPU__indexing=1
-export solvio__GPU__max_warps=64
+export solvio__GPU__max_memory_mb=6000
 export solvio__GPU__force_half_precision=0
 
 # export solvio__storage__optimizers__max_optimization_threads=1

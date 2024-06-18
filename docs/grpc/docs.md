@@ -179,6 +179,7 @@
     - [QuantizationSearchParams](#solvio-QuantizationSearchParams)
     - [Query](#solvio-Query)
     - [QueryPoints](#solvio-QueryPoints)
+    - [QueryResponse](#solvio-QueryResponse)
     - [Range](#solvio-Range)
     - [ReadConsistency](#solvio-ReadConsistency)
     - [RecommendBatchPoints](#solvio-RecommendBatchPoints)
@@ -3102,6 +3103,23 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees. |
 | shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Specify in which shards to look for the points, if not specified - look in all shards. |
 | lookup_from | [LookupLocation](#solvio-LookupLocation) | optional | The location to use for IDs lookup, if not specified - use the current collection and the &#39;using&#39; vector |
+| timeout | [uint64](#uint64) | optional | If set, overrides global timeout setting for this request. Unit is seconds. |
+
+
+
+
+
+
+<a name="solvio-QueryResponse"></a>
+
+### QueryResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ScoredPoint](#solvio-ScoredPoint) | repeated |  |
+| time | [double](#double) |  | Time spent to process |
 
 
 
@@ -4094,6 +4112,7 @@ When using target (with or without context), the score behaves a little differen
 | DiscoverBatch | [DiscoverBatchPoints](#solvio-DiscoverBatchPoints) | [DiscoverBatchResponse](#solvio-DiscoverBatchResponse) | Batch request points based on { positive, negative } pairs of examples, and/or a target |
 | Count | [CountPoints](#solvio-CountPoints) | [CountResponse](#solvio-CountResponse) | Count points in collection with given filtering conditions |
 | UpdateBatch | [UpdateBatchPoints](#solvio-UpdateBatchPoints) | [UpdateBatchResponse](#solvio-UpdateBatchResponse) | Perform multiple update operations in one request |
+| Query | [QueryPoints](#solvio-QueryPoints) | [QueryResponse](#solvio-QueryResponse) | Universally query points. This endpoint covers all capabilities of search, recommend, discover, filters. But also enables hybrid and multi-stage queries. |
 
  
 

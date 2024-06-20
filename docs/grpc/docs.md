@@ -178,6 +178,8 @@
     - [PrefetchQuery](#solvio-PrefetchQuery)
     - [QuantizationSearchParams](#solvio-QuantizationSearchParams)
     - [Query](#solvio-Query)
+    - [QueryBatchPoints](#solvio-QueryBatchPoints)
+    - [QueryBatchResponse](#solvio-QueryBatchResponse)
     - [QueryPoints](#solvio-QueryPoints)
     - [QueryResponse](#solvio-QueryResponse)
     - [Range](#solvio-Range)
@@ -3081,6 +3083,40 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 
 
 
+<a name="solvio-QueryBatchPoints"></a>
+
+### QueryBatchPoints
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  |  |
+| query_points | [QueryPoints](#solvio-QueryPoints) | repeated |  |
+| read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
+| timeout | [uint64](#uint64) | optional | If set, overrides global timeout setting for this request. Unit is seconds. |
+
+
+
+
+
+
+<a name="solvio-QueryBatchResponse"></a>
+
+### QueryBatchResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [BatchResult](#solvio-BatchResult) | repeated |  |
+| time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
 <a name="solvio-QueryPoints"></a>
 
 ### QueryPoints
@@ -4113,6 +4149,7 @@ When using target (with or without context), the score behaves a little differen
 | Count | [CountPoints](#solvio-CountPoints) | [CountResponse](#solvio-CountResponse) | Count points in collection with given filtering conditions |
 | UpdateBatch | [UpdateBatchPoints](#solvio-UpdateBatchPoints) | [UpdateBatchResponse](#solvio-UpdateBatchResponse) | Perform multiple update operations in one request |
 | Query | [QueryPoints](#solvio-QueryPoints) | [QueryResponse](#solvio-QueryResponse) | Universally query points. This endpoint covers all capabilities of search, recommend, discover, filters. But also enables hybrid and multi-stage queries. |
+| QueryBatch | [QueryBatchPoints](#solvio-QueryBatchPoints) | [QueryBatchResponse](#solvio-QueryBatchResponse) | Universally query points in a batch fashion. This endpoint covers all capabilities of search, recommend, discover, filters. But also enables hybrid and multi-stage queries. |
 
  
 

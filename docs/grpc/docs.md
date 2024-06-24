@@ -3075,6 +3075,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | recommend | [RecommendInput](#solvio-RecommendInput) |  | Use multiple positive and negative vectors to find the results. |
 | discover | [DiscoverInput](#solvio-DiscoverInput) |  | Search for nearest points, but constrain the search space with context |
 | context | [ContextInput](#solvio-ContextInput) |  | Return points that live in positive areas. |
+| farthest | [VectorInput](#solvio-VectorInput) |  | Return points that are the farthest apart from this vector. Shorthand for recommend best_score with only one negative input |
 | order_by | [OrderBy](#solvio-OrderBy) |  | Order the points by a payload field. |
 | fusion | [Fusion](#solvio-Fusion) |  | Fuse the results of multiple prefetches. |
 

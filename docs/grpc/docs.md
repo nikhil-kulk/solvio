@@ -3387,6 +3387,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | payload | [RetrievedPoint.PayloadEntry](#solvio-RetrievedPoint-PayloadEntry) | repeated |  |
 | vectors | [Vectors](#solvio-Vectors) | optional |  |
 | shard_key | [ShardKey](#solvio-ShardKey) | optional | Shard key |
+| order_value | [OrderValue](#solvio-OrderValue) | optional | Order-by value |
 
 
 

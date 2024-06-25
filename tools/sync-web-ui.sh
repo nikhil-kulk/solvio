@@ -10,7 +10,12 @@ OPENAPI_FILE=${OPENAPI_DIR:-"./docs/redoc/master/openapi.json"}
 # Get latest dist.zip, assume jq is installed
 DOWNLOAD_LINK=$(curl --silent "https://api.github.com/repos/solvio/solvio-web-ui/releases/latest" | jq -r '.assets[] | select(.name=="dist-solvio.zip") | .browser_download_url')
 
-wget -O dist-solvio.zip $DOWNLOAD_LINK
+if command -v wget &> /dev/null
+then
+    wget -O dist-solvio.zip $DOWNLOAD_LINK
+else
+    curl -L -o dist-solvio.zip $DOWNLOAD_LINK
+fi
 
 rm -rf "${STATIC_DIR}/"*
 unzip -o dist-solvio.zip -d "${STATIC_DIR}"

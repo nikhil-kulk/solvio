@@ -55,6 +55,7 @@
     - [RenameAlias](#solvio-RenameAlias)
     - [Replica](#solvio-Replica)
     - [ReplicateShard](#solvio-ReplicateShard)
+    - [ReshardingInfo](#solvio-ReshardingInfo)
     - [RestartTransfer](#solvio-RestartTransfer)
     - [ScalarQuantization](#solvio-ScalarQuantization)
     - [ShardKey](#solvio-ShardKey)
@@ -1140,6 +1141,23 @@ Note: 1kB = 1 vector of size 256. |
 | from_peer_id | [uint64](#uint64) |  |  |
 | to_peer_id | [uint64](#uint64) |  |  |
 | method | [ShardTransferMethod](#solvio-ShardTransferMethod) | optional |  |
+
+
+
+
+
+
+<a name="solvio-ReshardingInfo"></a>
+
+### ReshardingInfo
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| shard_id | [uint32](#uint32) |  |  |
+| peer_id | [uint64](#uint64) |  |  |
+| shard_key | [ShardKey](#solvio-ShardKey) | optional |  |
 
 
 

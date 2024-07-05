@@ -8,6 +8,7 @@
     - [AliasDescription](#solvio-AliasDescription)
     - [AliasOperations](#solvio-AliasOperations)
     - [BinaryQuantization](#solvio-BinaryQuantization)
+    - [BoolIndexParams](#solvio-BoolIndexParams)
     - [ChangeAliases](#solvio-ChangeAliases)
     - [CollectionClusterInfoRequest](#solvio-CollectionClusterInfoRequest)
     - [CollectionClusterInfoResponse](#solvio-CollectionClusterInfoResponse)
@@ -26,16 +27,20 @@
     - [CreateShardKey](#solvio-CreateShardKey)
     - [CreateShardKeyRequest](#solvio-CreateShardKeyRequest)
     - [CreateShardKeyResponse](#solvio-CreateShardKeyResponse)
+    - [DatetimeIndexParams](#solvio-DatetimeIndexParams)
     - [DeleteAlias](#solvio-DeleteAlias)
     - [DeleteCollection](#solvio-DeleteCollection)
     - [DeleteShardKey](#solvio-DeleteShardKey)
     - [DeleteShardKeyRequest](#solvio-DeleteShardKeyRequest)
     - [DeleteShardKeyResponse](#solvio-DeleteShardKeyResponse)
     - [Disabled](#solvio-Disabled)
+    - [FloatIndexParams](#solvio-FloatIndexParams)
+    - [GeoIndexParams](#solvio-GeoIndexParams)
     - [GetCollectionInfoRequest](#solvio-GetCollectionInfoRequest)
     - [GetCollectionInfoResponse](#solvio-GetCollectionInfoResponse)
     - [HnswConfigDiff](#solvio-HnswConfigDiff)
     - [IntegerIndexParams](#solvio-IntegerIndexParams)
+    - [KeywordIndexParams](#solvio-KeywordIndexParams)
     - [ListAliasesRequest](#solvio-ListAliasesRequest)
     - [ListAliasesResponse](#solvio-ListAliasesResponse)
     - [ListCollectionAliasesRequest](#solvio-ListCollectionAliasesRequest)
@@ -340,6 +345,16 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | always_ram | [bool](#bool) | optional | If true - quantized vectors always will be stored in RAM, ignoring the config of main storage |
+
+
+
+
+
+
+<a name="solvio-BoolIndexParams"></a>
+
+### BoolIndexParams
+
 
 
 
@@ -664,6 +679,16 @@
 
 
 
+<a name="solvio-DatetimeIndexParams"></a>
+
+### DatetimeIndexParams
+
+
+
+
+
+
+
 <a name="solvio-DeleteAlias"></a>
 
 ### DeleteAlias
@@ -752,6 +777,26 @@
 
 
 
+<a name="solvio-FloatIndexParams"></a>
+
+### FloatIndexParams
+
+
+
+
+
+
+
+<a name="solvio-GeoIndexParams"></a>
+
+### GeoIndexParams
+
+
+
+
+
+
+
 <a name="solvio-GetCollectionInfoRequest"></a>
 
 ### GetCollectionInfoRequest
@@ -813,6 +858,16 @@
 | ----- | ---- | ----- | ----------- |
 | lookup | [bool](#bool) |  | If true - support direct lookups. |
 | range | [bool](#bool) |  | If true - support ranges filters. |
+
+
+
+
+
+
+<a name="solvio-KeywordIndexParams"></a>
+
+### KeywordIndexParams
+
 
 
 
@@ -1002,8 +1057,13 @@ Note: 1kB = 1 vector of size 256. |
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| text_index_params | [TextIndexParams](#solvio-TextIndexParams) |  | Parameters for text index |
+| keyword_index_params | [KeywordIndexParams](#solvio-KeywordIndexParams) |  | Parameters for keyword index |
 | integer_index_params | [IntegerIndexParams](#solvio-IntegerIndexParams) |  | Parameters for integer index |
+| float_index_params | [FloatIndexParams](#solvio-FloatIndexParams) |  | Parameters for float index |
+| geo_index_params | [GeoIndexParams](#solvio-GeoIndexParams) |  | Parameters for geo index |
+| text_index_params | [TextIndexParams](#solvio-TextIndexParams) |  | Parameters for text index |
+| bool_index_params | [BoolIndexParams](#solvio-BoolIndexParams) |  | Parameters for bool index |
+| datetime_index_params | [DatetimeIndexParams](#solvio-DatetimeIndexParams) |  | Parameters for datetime index |
 
 
 

@@ -186,6 +186,8 @@
     - [Query](#solvio-Query)
     - [QueryBatchPoints](#solvio-QueryBatchPoints)
     - [QueryBatchResponse](#solvio-QueryBatchResponse)
+    - [QueryGroupsResponse](#solvio-QueryGroupsResponse)
+    - [QueryPointGroups](#solvio-QueryPointGroups)
     - [QueryPoints](#solvio-QueryPoints)
     - [QueryResponse](#solvio-QueryResponse)
     - [Range](#solvio-Range)
@@ -3195,6 +3197,52 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 
 
 
+<a name="solvio-QueryGroupsResponse"></a>
+
+### QueryGroupsResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [GroupsResult](#solvio-GroupsResult) |  |  |
+| time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
+<a name="solvio-QueryPointGroups"></a>
+
+### QueryPointGroups
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+| prefetch | [PrefetchQuery](#solvio-PrefetchQuery) | repeated | Sub-requests to perform first. If present, the query will be performed on the results of the prefetches. |
+| query | [Query](#solvio-Query) | optional | Query to perform. If missing, returns points ordered by their IDs. |
+| using | [string](#string) | optional | Define which vector to use for querying. If missing, the default vector is used. |
+| filter | [Filter](#solvio-Filter) | optional | Filter conditions - return only those points that satisfy the specified conditions. |
+| params | [SearchParams](#solvio-SearchParams) | optional | Search params for when there is no prefetch. |
+| score_threshold | [float](#float) | optional | Return points with scores better than this threshold. |
+| with_payload | [WithPayloadSelector](#solvio-WithPayloadSelector) |  | Options for specifying which payload to include or not |
+| with_vectors | [WithVectorsSelector](#solvio-WithVectorsSelector) | optional | Options for specifying which vectors to include into response |
+| limit | [uint64](#uint64) | optional | Max number of points. Default is 3. |
+| group_size | [uint64](#uint64) | optional | Maximum amount of points to return per group. Default to 10. |
+| group_by | [string](#string) |  | Payload field to group by, must be a string or number field. If there are multiple values for the field, all of them will be used. One point can be in multiple groups. |
+| read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
+| with_lookup | [WithLookup](#solvio-WithLookup) | optional | Options for specifying how to use the group id to lookup points in another collection |
+| timeout | [uint64](#uint64) | optional | If set, overrides global timeout setting for this request. Unit is seconds. |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Specify in which shards to look for the points, if not specified - look in all shards |
+
+
+
+
+
+
 <a name="solvio-QueryPoints"></a>
 
 ### QueryPoints
@@ -4227,6 +4275,7 @@ When using target (with or without context), the score behaves a little differen
 | UpdateBatch | [UpdateBatchPoints](#solvio-UpdateBatchPoints) | [UpdateBatchResponse](#solvio-UpdateBatchResponse) | Perform multiple update operations in one request |
 | Query | [QueryPoints](#solvio-QueryPoints) | [QueryResponse](#solvio-QueryResponse) | Universally query points. This endpoint covers all capabilities of search, recommend, discover, filters. But also enables hybrid and multi-stage queries. |
 | QueryBatch | [QueryBatchPoints](#solvio-QueryBatchPoints) | [QueryBatchResponse](#solvio-QueryBatchResponse) | Universally query points in a batch fashion. This endpoint covers all capabilities of search, recommend, discover, filters. But also enables hybrid and multi-stage queries. |
+| QueryGroups | [QueryPointGroups](#solvio-QueryPointGroups) | [QueryGroupsResponse](#solvio-QueryGroupsResponse) | Universally query points in a group fashion. This endpoint covers all capabilities of search, recommend, discover, filters. But also enables hybrid and multi-stage queries. |
 
  
 

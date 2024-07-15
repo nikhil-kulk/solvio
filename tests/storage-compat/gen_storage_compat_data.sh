@@ -9,17 +9,37 @@ SCRIPT_DIR=$(realpath "$(dirname "$0")")
 # Ensure current path is project root
 cd "$(dirname "$0")/../../"
 
-# Delete previous storage
-rm -rf ./storage
+USE_DOCKER=${USE_DOCKER:-"1"}
 
-# Run solvio
-cargo build
-./target/debug/solvio & PID=$!
+solvio_VERSION=${solvio_VERSION:-""}
+
+# Ask for version if not provided
+
+if [ -z "$solvio_VERSION" ]; then
+  read -p "Enter the version of solvio that was used to generate this compatibility data (example - v1.7.4): " solvio_VERSION
+fi
+
+if [ $USE_DOCKER -eq 0 ]; then
+  # Delete previous storage
+  rm -rf ./storage
+
+  # Run solvio
+  cargo build
+  ./target/debug/solvio & PID=$!
+else
+  docker run --rm -it -v $(pwd)/storage:/solvio/storage debian:12-slim bash -c "rm -rf /solvio/storage/*"
+  docker run -d --rm --network=host -v $(pwd)/storage:/solvio/storage --name=gen-storage-compatibility  solvio/solvio:$solvio_VERSION
+fi
 
 function teardown()
 {
   echo "server is going down"
-  kill -9 $PID || true
+
+  if [ $USE_DOCKER -eq 0 ]; then
+    kill $PID || true
+  else
+    docker kill gen-storage-compatibility || true
+  fi
   echo "END"
 }
 
@@ -64,12 +84,9 @@ rm "${SCRIPT_DIR}/storage.tar.bz2" || true
 # Save current storage folder
 tar -cjvf "${SCRIPT_DIR}/storage.tar.bz2" ./storage
 
-# Ask for version
-read -p "Enter the version of solvio that was used to generate this compatibility data (example - v1.7.4): " version
-
 cd "${SCRIPT_DIR}"
-tar -cvf "./compatibility-${version}.tar" "storage.tar.bz2" "full-snapshot.snapshot.gz"
+tar -cvf "./compatibility-${solvio_VERSION}.tar" "storage.tar.bz2" "full-snapshot.snapshot.gz"
 cd -
 
-echo "Compatibility data saved to ${SCRIPT_DIR}/compatibility-${version}.tar"
+echo "Compatibility data saved to ${SCRIPT_DIR}/compatibility-${solvio_VERSION}.tar"
 echo "Upload it to "solvio-backward-compatibility" gcs bucket (requires access rights)"

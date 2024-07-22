@@ -242,6 +242,7 @@
     - [Fusion](#solvio-Fusion)
     - [ReadConsistencyType](#solvio-ReadConsistencyType)
     - [RecommendStrategy](#solvio-RecommendStrategy)
+    - [Sample](#solvio-Sample)
     - [UpdateStatus](#solvio-UpdateStatus)
     - [WriteOrderingType](#solvio-WriteOrderingType)
   
@@ -3163,6 +3164,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | context | [ContextInput](#solvio-ContextInput) |  | Return points that live in positive areas. |
 | order_by | [OrderBy](#solvio-OrderBy) |  | Order the points by a payload field. |
 | fusion | [Fusion](#solvio-Fusion) |  | Fuse the results of multiple prefetches. |
+| sample | [Sample](#solvio-Sample) |  | Sample points from the collection. |
 
 
 
@@ -4196,6 +4198,21 @@ How to use positive and negative vectors to find the results, default is `Averag
 | ---- | ------ | ----------- |
 | AverageVector | 0 | Average positive and negative vectors and create a single query with the formula `query = avg_pos &#43; avg_pos - avg_neg`. Then performs normal search. |
 | BestScore | 1 | Uses custom search objective. Each candidate is compared against all examples, its score is then chosen from the `max(max_pos_score, max_neg_score)`. If the `max_neg_score` is chosen then it is squared and negated. |
+
+
+
+<a name="solvio-Sample"></a>
+
+### Sample
+Sample points from the collection
+/
+/ Available sampling methods:
+/
+/ * `random` - Random sampling
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| RANDOM | 0 |  |
 
 
 

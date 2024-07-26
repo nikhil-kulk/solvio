@@ -73,6 +73,7 @@
     - [UpdateCollection](#solvio-UpdateCollection)
     - [UpdateCollectionClusterSetupRequest](#solvio-UpdateCollectionClusterSetupRequest)
     - [UpdateCollectionClusterSetupResponse](#solvio-UpdateCollectionClusterSetupResponse)
+    - [UuidIndexParams](#solvio-UuidIndexParams)
     - [VectorParams](#solvio-VectorParams)
     - [VectorParamsDiff](#solvio-VectorParamsDiff)
     - [VectorParamsDiffMap](#solvio-VectorParamsDiffMap)
@@ -1085,6 +1086,7 @@ Note: 1kB = 1 vector of size 256. |
 | text_index_params | [TextIndexParams](#solvio-TextIndexParams) |  | Parameters for text index |
 | bool_index_params | [BoolIndexParams](#solvio-BoolIndexParams) |  | Parameters for bool index |
 | datetime_index_params | [DatetimeIndexParams](#solvio-DatetimeIndexParams) |  | Parameters for datetime index |
+| uuid_index_params | [UuidIndexParams](#solvio-UuidIndexParams) |  | Parameters for uuid index |
 
 
 
@@ -1458,6 +1460,21 @@ Note: 1kB = 1 vector of size 256. |
 
 
 
+<a name="solvio-UuidIndexParams"></a>
+
+### UuidIndexParams
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| is_tenant | [bool](#bool) | optional | If true - used for tenant optimization. |
+
+
+
+
+
+
 <a name="solvio-VectorParams"></a>
 
 ### VectorParams
@@ -1705,6 +1722,7 @@ Note: 1kB = 1 vector of size 256. |
 | Text | 5 |  |
 | Bool | 6 |  |
 | Datetime | 7 |  |
+| Uuid | 8 |  |
 
 
 
@@ -4173,6 +4191,7 @@ Vector type to be used in queries. Ids will be substituted with their correspond
 | FieldTypeText | 4 |  |
 | FieldTypeBool | 5 |  |
 | FieldTypeDatetime | 6 |  |
+| FieldTypeUuid | 7 |  |
 
 
 

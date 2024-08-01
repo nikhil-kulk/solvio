@@ -150,6 +150,8 @@
     - [GroupId](#solvio-GroupId)
     - [GroupsResult](#solvio-GroupsResult)
     - [HasIdCondition](#solvio-HasIdCondition)
+    - [HashRing](#solvio-HashRing)
+    - [HashRingCondition](#solvio-HashRingCondition)
     - [IsEmptyCondition](#solvio-IsEmptyCondition)
     - [IsNullCondition](#solvio-IsNullCondition)
     - [LookupLocation](#solvio-LookupLocation)
@@ -2080,6 +2082,7 @@ The JSON representation for `Value` is a JSON value.
 | filter | [Filter](#solvio-Filter) |  |  |
 | is_null | [IsNullCondition](#solvio-IsNullCondition) |  |  |
 | nested | [NestedCondition](#solvio-NestedCondition) |  |  |
+| hash_ring | [HashRingCondition](#solvio-HashRingCondition) |  |  |
 
 
 
@@ -2604,6 +2607,38 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | has_id | [PointId](#solvio-PointId) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-HashRing"></a>
+
+### HashRing
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| scale | [uint32](#uint32) |  |  |
+| nodes | [uint32](#uint32) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-HashRingCondition"></a>
+
+### HashRingCondition
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ring | [HashRing](#solvio-HashRing) |  |  |
+| match_shard_ids | [uint32](#uint32) | repeated |  |
 
 
 

@@ -138,6 +138,8 @@
     - [DiscoverInput](#solvio-DiscoverInput)
     - [DiscoverPoints](#solvio-DiscoverPoints)
     - [DiscoverResponse](#solvio-DiscoverResponse)
+    - [FacetValue](#solvio-FacetValue)
+    - [FacetValueHit](#solvio-FacetValueHit)
     - [FieldCondition](#solvio-FieldCondition)
     - [Filter](#solvio-Filter)
     - [GeoBoundingBox](#solvio-GeoBoundingBox)
@@ -2401,6 +2403,37 @@ The JSON representation for `Value` is a JSON value.
 | ----- | ---- | ----- | ----------- |
 | result | [ScoredPoint](#solvio-ScoredPoint) | repeated |  |
 | time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
+<a name="solvio-FacetValue"></a>
+
+### FacetValue
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| string_value | [string](#string) |  | String value from the facet |
+
+
+
+
+
+
+<a name="solvio-FacetValueHit"></a>
+
+### FacetValueHit
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| value | [FacetValue](#solvio-FacetValue) |  | Value from the facet |
+| count | [uint64](#uint64) |  | Number of points with this value |
 
 
 

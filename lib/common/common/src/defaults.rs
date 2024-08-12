@@ -6,7 +6,7 @@ use semver::Version;
 use crate::cpu;
 
 /// Current Solvio version string
-pub const solvio_VERSION_STRING: &str = "1.10.1";
+pub const solvio_VERSION_STRING: &str = "1.11.0";
 
 lazy_static! {
     /// Current Solvio semver version

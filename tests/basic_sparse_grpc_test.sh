@@ -193,7 +193,7 @@ response=$(
     ]
   }' $solvio_HOST solvio.Points/Upsert 2>&1
 )
-if [[ $response != *"Validation error in body: [points.[].vectors.vectors_options.vectors.[].values: Validation error: must be the same length as indices [{}]]"* ]]; then
+if [[ $response != *"Validation error in body: [points[0].vectors.vectors_options.vectors.[].values: Validation error: must be the same length as indices [{}]]"* ]]; then
     echo Unexpected response, expected validation error: $response
     exit 1
 fi

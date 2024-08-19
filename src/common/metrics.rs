@@ -25,6 +25,7 @@ const REST_ENDPOINT_WHITELIST: &[&str] = &[
     "/collections/{name}/points/delete",
     "/collections/{name}/points/discover",
     "/collections/{name}/points/discover/batch",
+    "/collections/{name}/points/facet",
     "/collections/{name}/points/payload",
     "/collections/{name}/points/payload/clear",
     "/collections/{name}/points/payload/delete",
@@ -56,6 +57,7 @@ const GRPC_ENDPOINT_WHITELIST: &[&str] = &[
     "/solvio.Points/DeletePayload",
     "/solvio.Points/Discover",
     "/solvio.Points/DiscoverBatch",
+    // TODO(facet): add GRPC endpoint for facets here
     "/solvio.Points/Get",
     "/solvio.Points/OverwritePayload",
     "/solvio.Points/Query",

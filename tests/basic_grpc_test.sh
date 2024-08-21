@@ -155,6 +155,13 @@ $docker_grpcurl -d '{
   ]
 }' $solvio_HOST solvio.Collections/UpdateAliases
 
+# create bool index
+$docker_grpcurl -d '{
+  "collection_name": "test_collection",
+  "field_name": "bool_field",
+  "field_type": 5,
+  "field_index_params": { "bool_index_params": {} }
+}' $solvio_HOST solvio.Points/CreateFieldIndex
 
 $docker_grpcurl -d '{
   "collection_name": "test_collection",

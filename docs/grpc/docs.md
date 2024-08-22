@@ -138,8 +138,10 @@
     - [DiscoverInput](#solvio-DiscoverInput)
     - [DiscoverPoints](#solvio-DiscoverPoints)
     - [DiscoverResponse](#solvio-DiscoverResponse)
+    - [FacetCounts](#solvio-FacetCounts)
+    - [FacetHit](#solvio-FacetHit)
+    - [FacetResponse](#solvio-FacetResponse)
     - [FacetValue](#solvio-FacetValue)
-    - [FacetValueHit](#solvio-FacetValueHit)
     - [FieldCondition](#solvio-FieldCondition)
     - [Filter](#solvio-Filter)
     - [GeoBoundingBox](#solvio-GeoBoundingBox)
@@ -2411,6 +2413,60 @@ The JSON representation for `Value` is a JSON value.
 
 
 
+<a name="solvio-FacetCounts"></a>
+
+### FacetCounts
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+| key | [string](#string) |  | Payload key of the facet |
+| filter | [Filter](#solvio-Filter) | optional | Filter conditions - return only those points that satisfy the specified conditions. |
+| limit | [uint64](#uint64) | optional | Max number of facets. Default is 10. |
+| exact | [bool](#bool) | optional | If true, return exact counts, slower but useful for debugging purposes. Default is false. |
+| timeout | [uint64](#uint64) | optional | If set, overrides global timeout setting for this request. Unit is seconds. |
+| read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Specify in which shards to look for the points, if not specified - look in all shards |
+
+
+
+
+
+
+<a name="solvio-FacetHit"></a>
+
+### FacetHit
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| value | [FacetValue](#solvio-FacetValue) |  | Value from the facet |
+| count | [uint64](#uint64) |  | Number of points with this value |
+
+
+
+
+
+
+<a name="solvio-FacetResponse"></a>
+
+### FacetResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| hits | [FacetHit](#solvio-FacetHit) | repeated |  |
+| time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
 <a name="solvio-FacetValue"></a>
 
 ### FacetValue
@@ -2420,22 +2476,6 @@ The JSON representation for `Value` is a JSON value.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | string_value | [string](#string) |  | String value from the facet |
-
-
-
-
-
-
-<a name="solvio-FacetValueHit"></a>
-
-### FacetValueHit
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| value | [FacetValue](#solvio-FacetValue) |  | Value from the facet |
-| count | [uint64](#uint64) |  | Number of points with this value |
 
 
 
@@ -4371,6 +4411,7 @@ When using target (with or without context), the score behaves a little differen
 | Query | [QueryPoints](#solvio-QueryPoints) | [QueryResponse](#solvio-QueryResponse) | Universally query points. This endpoint covers all capabilities of search, recommend, discover, filters. But also enables hybrid and multi-stage queries. |
 | QueryBatch | [QueryBatchPoints](#solvio-QueryBatchPoints) | [QueryBatchResponse](#solvio-QueryBatchResponse) | Universally query points in a batch fashion. This endpoint covers all capabilities of search, recommend, discover, filters. But also enables hybrid and multi-stage queries. |
 | QueryGroups | [QueryPointGroups](#solvio-QueryPointGroups) | [QueryGroupsResponse](#solvio-QueryGroupsResponse) | Universally query points in a group fashion. This endpoint covers all capabilities of search, recommend, discover, filters. But also enables hybrid and multi-stage queries. |
+| Facet | [FacetCounts](#solvio-FacetCounts) | [FacetResponse](#solvio-FacetResponse) | Perform facet counts. For each value in the field, count the number of points that have this value and match the conditions. |
 
  
 

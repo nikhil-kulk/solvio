@@ -57,7 +57,7 @@ const GRPC_ENDPOINT_WHITELIST: &[&str] = &[
     "/solvio.Points/DeletePayload",
     "/solvio.Points/Discover",
     "/solvio.Points/DiscoverBatch",
-    // TODO(facet): add GRPC endpoint for facets here
+    "/solvio.Points/Facet",
     "/solvio.Points/Get",
     "/solvio.Points/OverwritePayload",
     "/solvio.Points/Query",

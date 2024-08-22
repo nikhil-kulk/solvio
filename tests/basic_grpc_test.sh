@@ -50,6 +50,15 @@ $docker_grpcurl -d '{
   ]
 }' $solvio_HOST solvio.Points/Upsert
 
+# Create payload index
+$docker_grpcurl -d '{
+  "collection_name": "test_collection",
+  "field_name": "city",
+  "field_type": 0,
+  "field_index_params": { "keyword_index_params": {} },
+  "wait": true
+}' $solvio_HOST solvio.Points/CreateFieldIndex
+
 $docker_grpcurl -d '{ "collection_name": "test_collection" }' $solvio_HOST solvio.Collections/Get
 
 $docker_grpcurl -d '{
@@ -105,6 +114,12 @@ $docker_grpcurl -d '{
   "positive": [{ "num": 1 }],
   "negative": [{ "num": 2 }]
 }' $solvio_HOST solvio.Points/Recommend
+
+# city facet
+$docker_grpcurl -d '{
+  "collection_name": "test_collection",
+  "key": "city"
+}' $solvio_HOST solvio.Points/Facet
 
 # create alias
 $docker_grpcurl -d '{

@@ -69,6 +69,7 @@
     - [SparseVectorConfig](#solvio-SparseVectorConfig)
     - [SparseVectorConfig.MapEntry](#solvio-SparseVectorConfig-MapEntry)
     - [SparseVectorParams](#solvio-SparseVectorParams)
+    - [StrictModeConfig](#solvio-StrictModeConfig)
     - [TextIndexParams](#solvio-TextIndexParams)
     - [UpdateCollection](#solvio-UpdateCollection)
     - [UpdateCollectionClusterSetupRequest](#solvio-UpdateCollectionClusterSetupRequest)
@@ -432,6 +433,7 @@
 | optimizer_config | [OptimizersConfigDiff](#solvio-OptimizersConfigDiff) |  | Configuration of the optimizers |
 | wal_config | [WalConfigDiff](#solvio-WalConfigDiff) |  | Configuration of the Write-Ahead-Log |
 | quantization_config | [QuantizationConfig](#solvio-QuantizationConfig) | optional | Configuration of the vector quantization |
+| strict_mode_config | [StrictModeConfig](#solvio-StrictModeConfig) | optional | Configuration of strict mode. |
 
 
 
@@ -631,6 +633,7 @@
 | quantization_config | [QuantizationConfig](#solvio-QuantizationConfig) | optional | Quantization configuration of vector |
 | sharding_method | [ShardingMethod](#solvio-ShardingMethod) | optional | Sharding method |
 | sparse_vectors_config | [SparseVectorConfig](#solvio-SparseVectorConfig) | optional | Configuration for sparse vectors |
+| strict_mode_config | [StrictModeConfig](#solvio-StrictModeConfig) | optional | Configuration for strict mode |
 
 
 
@@ -1382,6 +1385,28 @@ Note: 1kB = 1 vector of size 256. |
 | ----- | ---- | ----- | ----------- |
 | index | [SparseIndexConfig](#solvio-SparseIndexConfig) | optional | Configuration of sparse index |
 | modifier | [Modifier](#solvio-Modifier) | optional | If set - apply modifier to the vector values |
+
+
+
+
+
+
+<a name="solvio-StrictModeConfig"></a>
+
+### StrictModeConfig
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) | optional |  |
+| max_query_limit | [uint32](#uint32) | optional |  |
+| max_timeout | [uint32](#uint32) | optional |  |
+| unindexed_filtering_retrieve | [bool](#bool) | optional |  |
+| unindexed_filtering_update | [bool](#bool) | optional |  |
+| search_max_hnsw_ef | [uint32](#uint32) | optional |  |
+| search_allow_exact | [bool](#bool) | optional |  |
+| search_max_oversampling | [float](#float) | optional |  |
 
 
 

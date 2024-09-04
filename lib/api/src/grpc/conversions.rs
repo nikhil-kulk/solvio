@@ -22,8 +22,8 @@ use super::solvio::{
     DatetimeIndexParams, DatetimeRange, Direction, FacetHit, FacetHitInternal, FacetValue,
     FacetValueInternal, FieldType, FloatIndexParams, GeoIndexParams, GeoLineString, GroupId,
     KeywordIndexParams, LookupLocation, MultiVectorComparator, MultiVectorConfig, OrderBy,
-    OrderValue, Range, RawVector, RecommendStrategy, SearchPointGroups, SearchPoints,
-    ShardKeySelector, SparseIndices, StartFrom, UuidIndexParams, WithLookup,
+    OrderValue, Range, RawVector, RecommendStrategy, SearchMatrixPair, SearchPointGroups,
+    SearchPoints, ShardKeySelector, SparseIndices, StartFrom, UuidIndexParams, WithLookup,
 };
 use crate::grpc::models::{CollectionsResponse, VersionInfo};
 use crate::grpc::solvio::condition::ConditionOneOf;
@@ -2321,6 +2321,16 @@ impl From<segment_facets::FacetValue> for FacetValue {
                     Variant::StringValue(Uuid::from_u128(value).to_string())
                 }
             }),
+        }
+    }
+}
+
+impl From<rest::SearchMatrixPair> for SearchMatrixPair {
+    fn from(pair: rest::SearchMatrixPair) -> Self {
+        Self {
+            a: Some(pair.a.into()),
+            b: Some(pair.b.into()),
+            score: pair.score,
         }
     }
 }

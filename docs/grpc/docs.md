@@ -216,6 +216,12 @@
     - [SearchBatchPoints](#solvio-SearchBatchPoints)
     - [SearchBatchResponse](#solvio-SearchBatchResponse)
     - [SearchGroupsResponse](#solvio-SearchGroupsResponse)
+    - [SearchMatrixOffsets](#solvio-SearchMatrixOffsets)
+    - [SearchMatrixOffsetsResponse](#solvio-SearchMatrixOffsetsResponse)
+    - [SearchMatrixPair](#solvio-SearchMatrixPair)
+    - [SearchMatrixPairs](#solvio-SearchMatrixPairs)
+    - [SearchMatrixPairsResponse](#solvio-SearchMatrixPairsResponse)
+    - [SearchMatrixPoints](#solvio-SearchMatrixPoints)
     - [SearchParams](#solvio-SearchParams)
     - [SearchPointGroups](#solvio-SearchPointGroups)
     - [SearchPoints](#solvio-SearchPoints)
@@ -3807,6 +3813,110 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 
 
 
+<a name="solvio-SearchMatrixOffsets"></a>
+
+### SearchMatrixOffsets
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| offsets_row | [uint64](#uint64) | repeated | Row indices of the matrix |
+| offsets_col | [uint64](#uint64) | repeated | Column indices of the matrix |
+| scores | [float](#float) | repeated | Scores associate with coordinates |
+| ids | [PointId](#solvio-PointId) | repeated | Ids of the points in order |
+
+
+
+
+
+
+<a name="solvio-SearchMatrixOffsetsResponse"></a>
+
+### SearchMatrixOffsetsResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [SearchMatrixOffsets](#solvio-SearchMatrixOffsets) |  |  |
+| time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
+<a name="solvio-SearchMatrixPair"></a>
+
+### SearchMatrixPair
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| a | [PointId](#solvio-PointId) |  | first id of the pair |
+| b | [PointId](#solvio-PointId) |  | second id of the pair |
+| score | [float](#float) |  | score of the pair |
+
+
+
+
+
+
+<a name="solvio-SearchMatrixPairs"></a>
+
+### SearchMatrixPairs
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| pairs | [SearchMatrixPair](#solvio-SearchMatrixPair) | repeated | List of pairs of points with scores |
+
+
+
+
+
+
+<a name="solvio-SearchMatrixPairsResponse"></a>
+
+### SearchMatrixPairsResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [SearchMatrixPairs](#solvio-SearchMatrixPairs) |  |  |
+| time | [double](#double) |  | Time spent to process |
+
+
+
+
+
+
+<a name="solvio-SearchMatrixPoints"></a>
+
+### SearchMatrixPoints
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| collection_name | [string](#string) |  | Name of the collection |
+| filter | [Filter](#solvio-Filter) | optional | Filter conditions - return only those points that satisfy the specified conditions. |
+| sample | [uint64](#uint64) | optional | How many points to select and search within. Default is 10. |
+| limit | [uint64](#uint64) | optional | How many neighbours per sample to find. Default is 3. |
+| using | [string](#string) | optional | Define which vector to use for querying. If missing, the default vector is is used. |
+| timeout | [uint64](#uint64) | optional | If set, overrides global timeout setting for this request. Unit is seconds. |
+| read_consistency | [ReadConsistency](#solvio-ReadConsistency) | optional | Options for specifying read consistency guarantees |
+| shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Specify in which shards to look for the points, if not specified - look in all shards |
+
+
+
+
+
+
 <a name="solvio-SearchParams"></a>
 
 ### SearchParams
@@ -4438,6 +4548,8 @@ When using target (with or without context), the score behaves a little differen
 | QueryBatch | [QueryBatchPoints](#solvio-QueryBatchPoints) | [QueryBatchResponse](#solvio-QueryBatchResponse) | Universally query points in a batch fashion. This endpoint covers all capabilities of search, recommend, discover, filters. But also enables hybrid and multi-stage queries. |
 | QueryGroups | [QueryPointGroups](#solvio-QueryPointGroups) | [QueryGroupsResponse](#solvio-QueryGroupsResponse) | Universally query points in a group fashion. This endpoint covers all capabilities of search, recommend, discover, filters. But also enables hybrid and multi-stage queries. |
 | Facet | [FacetCounts](#solvio-FacetCounts) | [FacetResponse](#solvio-FacetResponse) | Perform facet counts. For each value in the field, count the number of points that have this value and match the conditions. |
+| SearchMatrixPairs | [SearchMatrixPoints](#solvio-SearchMatrixPoints) | [SearchMatrixPairsResponse](#solvio-SearchMatrixPairsResponse) | Compute distance matrix with a pair based output format |
+| SearchMatrixOffsets | [SearchMatrixPoints](#solvio-SearchMatrixPoints) | [SearchMatrixOffsetsResponse](#solvio-SearchMatrixOffsetsResponse) | Compute distance matrix with an offset based output format |
 
  
 

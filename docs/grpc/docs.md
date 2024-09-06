@@ -3823,7 +3823,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | offsets_row | [uint64](#uint64) | repeated | Row indices of the matrix |
 | offsets_col | [uint64](#uint64) | repeated | Column indices of the matrix |
-| scores | [float](#float) | repeated | Scores associate with coordinates |
+| scores | [float](#float) | repeated | Scores associated with matrix coordinates |
 | ids | [PointId](#solvio-PointId) | repeated | Ids of the points in order |
 
 
@@ -4548,8 +4548,8 @@ When using target (with or without context), the score behaves a little differen
 | QueryBatch | [QueryBatchPoints](#solvio-QueryBatchPoints) | [QueryBatchResponse](#solvio-QueryBatchResponse) | Universally query points in a batch fashion. This endpoint covers all capabilities of search, recommend, discover, filters. But also enables hybrid and multi-stage queries. |
 | QueryGroups | [QueryPointGroups](#solvio-QueryPointGroups) | [QueryGroupsResponse](#solvio-QueryGroupsResponse) | Universally query points in a group fashion. This endpoint covers all capabilities of search, recommend, discover, filters. But also enables hybrid and multi-stage queries. |
 | Facet | [FacetCounts](#solvio-FacetCounts) | [FacetResponse](#solvio-FacetResponse) | Perform facet counts. For each value in the field, count the number of points that have this value and match the conditions. |
-| SearchMatrixPairs | [SearchMatrixPoints](#solvio-SearchMatrixPoints) | [SearchMatrixPairsResponse](#solvio-SearchMatrixPairsResponse) | Compute distance matrix with a pair based output format |
-| SearchMatrixOffsets | [SearchMatrixPoints](#solvio-SearchMatrixPoints) | [SearchMatrixOffsetsResponse](#solvio-SearchMatrixOffsetsResponse) | Compute distance matrix with an offset based output format |
+| SearchMatrixPairs | [SearchMatrixPoints](#solvio-SearchMatrixPoints) | [SearchMatrixPairsResponse](#solvio-SearchMatrixPairsResponse) | Compute distance matrix for sampled points with a pair based output format |
+| SearchMatrixOffsets | [SearchMatrixPoints](#solvio-SearchMatrixPoints) | [SearchMatrixOffsetsResponse](#solvio-SearchMatrixOffsetsResponse) | Compute distance matrix for sampled points with an offset based output format |
 
  
 

@@ -69,7 +69,7 @@
     - [SparseVectorConfig](#solvio-SparseVectorConfig)
     - [SparseVectorConfig.MapEntry](#solvio-SparseVectorConfig-MapEntry)
     - [SparseVectorParams](#solvio-SparseVectorParams)
-    - [StrictModeConfig](#solvio-StrictModeConfig)
+    - [StrictModeConfigDiff](#solvio-StrictModeConfigDiff)
     - [TextIndexParams](#solvio-TextIndexParams)
     - [UpdateCollection](#solvio-UpdateCollection)
     - [UpdateCollectionClusterSetupRequest](#solvio-UpdateCollectionClusterSetupRequest)
@@ -439,7 +439,7 @@
 | optimizer_config | [OptimizersConfigDiff](#solvio-OptimizersConfigDiff) |  | Configuration of the optimizers |
 | wal_config | [WalConfigDiff](#solvio-WalConfigDiff) |  | Configuration of the Write-Ahead-Log |
 | quantization_config | [QuantizationConfig](#solvio-QuantizationConfig) | optional | Configuration of the vector quantization |
-| strict_mode_config | [StrictModeConfig](#solvio-StrictModeConfig) | optional | Configuration of strict mode. |
+| strict_mode_config | [StrictModeConfigDiff](#solvio-StrictModeConfigDiff) | optional | Configuration of strict mode. |
 
 
 
@@ -639,7 +639,7 @@
 | quantization_config | [QuantizationConfig](#solvio-QuantizationConfig) | optional | Quantization configuration of vector |
 | sharding_method | [ShardingMethod](#solvio-ShardingMethod) | optional | Sharding method |
 | sparse_vectors_config | [SparseVectorConfig](#solvio-SparseVectorConfig) | optional | Configuration for sparse vectors |
-| strict_mode_config | [StrictModeConfig](#solvio-StrictModeConfig) | optional | Configuration for strict mode |
+| strict_mode_config | [StrictModeConfigDiff](#solvio-StrictModeConfigDiff) | optional | Configuration for strict mode |
 
 
 
@@ -1397,9 +1397,9 @@ Note: 1kB = 1 vector of size 256. |
 
 
 
-<a name="solvio-StrictModeConfig"></a>
+<a name="solvio-StrictModeConfigDiff"></a>
 
-### StrictModeConfig
+### StrictModeConfigDiff
 
 
 

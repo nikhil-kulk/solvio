@@ -139,6 +139,8 @@
     - [DiscoverInput](#solvio-DiscoverInput)
     - [DiscoverPoints](#solvio-DiscoverPoints)
     - [DiscoverResponse](#solvio-DiscoverResponse)
+    - [Document](#solvio-Document)
+    - [Document.OptionsEntry](#solvio-Document-OptionsEntry)
     - [FacetCounts](#solvio-FacetCounts)
     - [FacetHit](#solvio-FacetHit)
     - [FacetResponse](#solvio-FacetResponse)
@@ -155,6 +157,10 @@
     - [GroupId](#solvio-GroupId)
     - [GroupsResult](#solvio-GroupsResult)
     - [HasIdCondition](#solvio-HasIdCondition)
+    - [Image](#solvio-Image)
+    - [Image.OptionsEntry](#solvio-Image-OptionsEntry)
+    - [InferenceObject](#solvio-InferenceObject)
+    - [InferenceObject.OptionsEntry](#solvio-InferenceObject-OptionsEntry)
     - [IsEmptyCondition](#solvio-IsEmptyCondition)
     - [IsNullCondition](#solvio-IsNullCondition)
     - [LookupLocation](#solvio-LookupLocation)
@@ -163,6 +169,8 @@
     - [MultiDenseVector](#solvio-MultiDenseVector)
     - [NamedVectors](#solvio-NamedVectors)
     - [NamedVectors.VectorsEntry](#solvio-NamedVectors-VectorsEntry)
+    - [NamedVectorsOutput](#solvio-NamedVectorsOutput)
+    - [NamedVectorsOutput.VectorsEntry](#solvio-NamedVectorsOutput-VectorsEntry)
     - [NestedCondition](#solvio-NestedCondition)
     - [OrderBy](#solvio-OrderBy)
     - [OrderValue](#solvio-OrderValue)
@@ -242,7 +250,9 @@
     - [Vector](#solvio-Vector)
     - [VectorExample](#solvio-VectorExample)
     - [VectorInput](#solvio-VectorInput)
+    - [VectorOutput](#solvio-VectorOutput)
     - [Vectors](#solvio-Vectors)
+    - [VectorsOutput](#solvio-VectorsOutput)
     - [VectorsSelector](#solvio-VectorsSelector)
     - [WithLookup](#solvio-WithLookup)
     - [WithPayloadSelector](#solvio-WithPayloadSelector)
@@ -2450,6 +2460,39 @@ The JSON representation for `Value` is a JSON value.
 
 
 
+<a name="solvio-Document"></a>
+
+### Document
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| text | [string](#string) |  | Text of the document |
+| model | [string](#string) | optional | Model name |
+| options | [Document.OptionsEntry](#solvio-Document-OptionsEntry) | repeated | Model options |
+
+
+
+
+
+
+<a name="solvio-Document-OptionsEntry"></a>
+
+### Document.OptionsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [Value](#solvio-Value) |  |  |
+
+
+
+
+
+
 <a name="solvio-FacetCounts"></a>
 
 ### FacetCounts
@@ -2725,6 +2768,72 @@ Additionally, the first and last points of each GeoLineString must be the same.
 
 
 
+<a name="solvio-Image"></a>
+
+### Image
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| image | [string](#string) |  | Image data, either base64 encoded or URL |
+| model | [string](#string) | optional | Model name |
+| options | [Image.OptionsEntry](#solvio-Image-OptionsEntry) | repeated | Model options |
+
+
+
+
+
+
+<a name="solvio-Image-OptionsEntry"></a>
+
+### Image.OptionsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [Value](#solvio-Value) |  |  |
+
+
+
+
+
+
+<a name="solvio-InferenceObject"></a>
+
+### InferenceObject
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| object | [Value](#solvio-Value) |  | Object to infer |
+| model | [string](#string) | optional | Model name |
+| options | [InferenceObject.OptionsEntry](#solvio-InferenceObject-OptionsEntry) | repeated | Model options |
+
+
+
+
+
+
+<a name="solvio-InferenceObject-OptionsEntry"></a>
+
+### InferenceObject.OptionsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [Value](#solvio-Value) |  |  |
+
+
+
+
+
+
 <a name="solvio-IsEmptyCondition"></a>
 
 ### IsEmptyCondition
@@ -2850,6 +2959,37 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
 | value | [Vector](#solvio-Vector) |  |  |
+
+
+
+
+
+
+<a name="solvio-NamedVectorsOutput"></a>
+
+### NamedVectorsOutput
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| vectors | [NamedVectorsOutput.VectorsEntry](#solvio-NamedVectorsOutput-VectorsEntry) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-NamedVectorsOutput-VectorsEntry"></a>
+
+### NamedVectorsOutput.VectorsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [VectorOutput](#solvio-VectorOutput) |  |  |
 
 
 
@@ -3667,7 +3807,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | id | [PointId](#solvio-PointId) |  |  |
 | payload | [RetrievedPoint.PayloadEntry](#solvio-RetrievedPoint-PayloadEntry) | repeated |  |
-| vectors | [Vectors](#solvio-Vectors) | optional |  |
+| vectors | [VectorsOutput](#solvio-VectorsOutput) | optional |  |
 | shard_key | [ShardKey](#solvio-ShardKey) | optional | Shard key |
 | order_value | [OrderValue](#solvio-OrderValue) | optional | Order-by value |
 
@@ -3704,7 +3844,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | payload | [ScoredPoint.PayloadEntry](#solvio-ScoredPoint-PayloadEntry) | repeated | Payload |
 | score | [float](#float) |  | Similarity score |
 | version | [uint64](#uint64) |  | Last update operation applied to this point |
-| vectors | [Vectors](#solvio-Vectors) | optional | Vectors to search |
+| vectors | [VectorsOutput](#solvio-VectorsOutput) | optional | Vectors to search |
 | shard_key | [ShardKey](#solvio-ShardKey) | optional | Shard key |
 | order_value | [OrderValue](#solvio-OrderValue) | optional | Order by value |
 
@@ -4246,9 +4386,15 @@ Legacy vector format, which determines the vector type by the configuration of i
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| data | [float](#float) | repeated | Vector data (flatten for multi vectors) |
-| indices | [SparseIndices](#solvio-SparseIndices) | optional | Sparse indices for sparse vectors |
-| vectors_count | [uint32](#uint32) | optional | Number of vectors per multi vector |
+| data | [float](#float) | repeated | Vector data (flatten for multi vectors), deprecated |
+| indices | [SparseIndices](#solvio-SparseIndices) | optional | Sparse indices for sparse vectors, deprecated |
+| vectors_count | [uint32](#uint32) | optional | Number of vectors per multi vector, deprecated |
+| dense | [DenseVector](#solvio-DenseVector) |  | Dense vector |
+| sparse | [SparseVector](#solvio-SparseVector) |  | Sparse vector |
+| multi_dense | [MultiDenseVector](#solvio-MultiDenseVector) |  | Multi dense vector |
+| document | [Document](#solvio-Document) |  |  |
+| image | [Image](#solvio-Image) |  |  |
+| object | [InferenceObject](#solvio-InferenceObject) |  |  |
 
 
 
@@ -4283,6 +4429,29 @@ Vector type to be used in queries. Ids will be substituted with their correspond
 | dense | [DenseVector](#solvio-DenseVector) |  |  |
 | sparse | [SparseVector](#solvio-SparseVector) |  |  |
 | multi_dense | [MultiDenseVector](#solvio-MultiDenseVector) |  |  |
+| document | [Document](#solvio-Document) |  |  |
+| image | [Image](#solvio-Image) |  |  |
+| object | [InferenceObject](#solvio-InferenceObject) |  |  |
+
+
+
+
+
+
+<a name="solvio-VectorOutput"></a>
+
+### VectorOutput
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| data | [float](#float) | repeated | Vector data (flatten for multi vectors), deprecated |
+| indices | [SparseIndices](#solvio-SparseIndices) | optional | Sparse indices for sparse vectors, deprecated |
+| vectors_count | [uint32](#uint32) | optional | Number of vectors per multi vector, deprecated |
+| dense | [DenseVector](#solvio-DenseVector) |  | Dense vector |
+| sparse | [SparseVector](#solvio-SparseVector) |  | Sparse vector |
+| multi_dense | [MultiDenseVector](#solvio-MultiDenseVector) |  | Multi dense vector |
 
 
 
@@ -4299,6 +4468,22 @@ Vector type to be used in queries. Ids will be substituted with their correspond
 | ----- | ---- | ----- | ----------- |
 | vector | [Vector](#solvio-Vector) |  |  |
 | vectors | [NamedVectors](#solvio-NamedVectors) |  |  |
+
+
+
+
+
+
+<a name="solvio-VectorsOutput"></a>
+
+### VectorsOutput
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| vector | [VectorOutput](#solvio-VectorOutput) |  |  |
+| vectors | [NamedVectorsOutput](#solvio-NamedVectorsOutput) |  |  |
 
 
 

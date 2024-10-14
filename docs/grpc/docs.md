@@ -1469,6 +1469,7 @@ Note: 1kB = 1 vector of size 256. |
 | vectors_config | [VectorsConfigDiff](#solvio-VectorsConfigDiff) | optional | New vector parameters |
 | quantization_config | [QuantizationConfigDiff](#solvio-QuantizationConfigDiff) | optional | Quantization configuration of vector |
 | sparse_vectors_config | [SparseVectorConfig](#solvio-SparseVectorConfig) | optional | New sparse vector parameters |
+| strict_mode_config | [StrictModeConfig](#solvio-StrictModeConfig) | optional | New strict mode configuration |
 
 
 

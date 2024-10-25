@@ -157,6 +157,7 @@
     - [GroupId](#solvio-GroupId)
     - [GroupsResult](#solvio-GroupsResult)
     - [HasIdCondition](#solvio-HasIdCondition)
+    - [HasVectorCondition](#solvio-HasVectorCondition)
     - [Image](#solvio-Image)
     - [Image.OptionsEntry](#solvio-Image-OptionsEntry)
     - [InferenceObject](#solvio-InferenceObject)
@@ -2133,6 +2134,7 @@ The JSON representation for `Value` is a JSON value.
 | filter | [Filter](#solvio-Filter) |  |  |
 | is_null | [IsNullCondition](#solvio-IsNullCondition) |  |  |
 | nested | [NestedCondition](#solvio-NestedCondition) |  |  |
+| has_vector | [HasVectorCondition](#solvio-HasVectorCondition) |  |  |
 
 
 
@@ -2763,6 +2765,21 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | has_id | [PointId](#solvio-PointId) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-HasVectorCondition"></a>
+
+### HasVectorCondition
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| has_vector | [string](#string) |  |  |
 
 
 

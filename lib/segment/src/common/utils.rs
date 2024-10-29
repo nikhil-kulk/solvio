@@ -31,7 +31,7 @@ pub fn check_is_null<'a>(values: impl IntoIterator<Item = &'a Value>) -> bool {
 }
 
 pub fn rev_range(a: usize, b: usize) -> impl Iterator<Item = usize> {
-    (b + 1..=a).rev()
+    (b..=a).rev()
 }
 
 // Merge source map into destination map

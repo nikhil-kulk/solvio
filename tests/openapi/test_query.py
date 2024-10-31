@@ -4,9 +4,10 @@ import requests
 import os
 
 from .helpers.collection_setup import basic_collection_setup, drop_collection
-from .helpers.helpers import distribution_based_score_fusion, reciprocal_rank_fusion, request_with_validation
+from .helpers.helpers import distribution_based_score_fusion, reciprocal_rank_fusion, request_with_validation, \
+    solvio_host_headers
+from .helpers.settings import solvio_HOST
 
-solvio_HOST = os.environ.get("solvio_HOST", "localhost:6333")
 collection_name = "test_query"
 
 
@@ -74,7 +75,8 @@ def test_query_validation():
 
 
     # raw query to bypass local validation
-    response = requests.post(f"http://{solvio_HOST}/collections/{collection_name}/points/query",
+    response = requests.post(f"{solvio_HOST}/collections/{collection_name}/points/query",
+        headers=solvio_host_headers(),
         json={
             "query": {
                 "recommend": {

@@ -4,7 +4,6 @@ import os
 from .helpers.collection_setup import drop_collection
 from .helpers.helpers import request_with_validation
 
-solvio_HOST = os.environ.get("solvio_HOST", "localhost:6333")
 
 collection_name = 'test_multi_vector_persistence'
 

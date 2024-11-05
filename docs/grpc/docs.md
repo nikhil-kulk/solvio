@@ -156,6 +156,7 @@
     - [GetResponse](#solvio-GetResponse)
     - [GroupId](#solvio-GroupId)
     - [GroupsResult](#solvio-GroupsResult)
+    - [HardwareUsage](#solvio-HardwareUsage)
     - [HasIdCondition](#solvio-HasIdCondition)
     - [HasVectorCondition](#solvio-HasVectorCondition)
     - [Image](#solvio-Image)
@@ -2218,6 +2219,7 @@ The JSON representation for `Value` is a JSON value.
 | ----- | ---- | ----- | ----------- |
 | result | [CountResult](#solvio-CountResult) |  |  |
 | time | [double](#double) |  | Time spent to process |
+| usage | [HardwareUsage](#solvio-HardwareUsage) | optional |  |
 
 
 
@@ -2397,6 +2399,7 @@ The JSON representation for `Value` is a JSON value.
 | ----- | ---- | ----- | ----------- |
 | result | [BatchResult](#solvio-BatchResult) | repeated |  |
 | time | [double](#double) |  | Time spent to process |
+| usage | [HardwareUsage](#solvio-HardwareUsage) | optional |  |
 
 
 
@@ -2457,6 +2460,7 @@ The JSON representation for `Value` is a JSON value.
 | ----- | ---- | ----- | ----------- |
 | result | [ScoredPoint](#solvio-ScoredPoint) | repeated |  |
 | time | [double](#double) |  | Time spent to process |
+| usage | [HardwareUsage](#solvio-HardwareUsage) | optional |  |
 
 
 
@@ -2750,6 +2754,21 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | groups | [PointGroup](#solvio-PointGroup) | repeated | Groups |
+
+
+
+
+
+
+<a name="solvio-HardwareUsage"></a>
+
+### HardwareUsage
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| cpu | [uint64](#uint64) |  |  |
 
 
 
@@ -3504,6 +3523,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | result | [BatchResult](#solvio-BatchResult) | repeated |  |
 | time | [double](#double) |  | Time spent to process |
+| usage | [HardwareUsage](#solvio-HardwareUsage) | optional |  |
 
 
 
@@ -3520,6 +3540,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | result | [GroupsResult](#solvio-GroupsResult) |  |  |
 | time | [double](#double) |  | Time spent to process |
+| usage | [HardwareUsage](#solvio-HardwareUsage) | optional |  |
 
 
 
@@ -3596,6 +3617,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | result | [ScoredPoint](#solvio-ScoredPoint) | repeated |  |
 | time | [double](#double) |  | Time spent to process |
+| usage | [HardwareUsage](#solvio-HardwareUsage) | optional |  |
 
 
 
@@ -3664,6 +3686,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | result | [BatchResult](#solvio-BatchResult) | repeated |  |
 | time | [double](#double) |  | Time spent to process |
+| usage | [HardwareUsage](#solvio-HardwareUsage) | optional |  |
 
 
 
@@ -3680,6 +3703,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | result | [GroupsResult](#solvio-GroupsResult) |  |  |
 | time | [double](#double) |  | Time spent to process |
+| usage | [HardwareUsage](#solvio-HardwareUsage) | optional |  |
 
 
 
@@ -3779,6 +3803,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | result | [ScoredPoint](#solvio-ScoredPoint) | repeated |  |
 | time | [double](#double) |  | Time spent to process |
+| usage | [HardwareUsage](#solvio-HardwareUsage) | optional |  |
 
 
 
@@ -3956,6 +3981,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | result | [BatchResult](#solvio-BatchResult) | repeated |  |
 | time | [double](#double) |  | Time spent to process |
+| usage | [HardwareUsage](#solvio-HardwareUsage) | optional |  |
 
 
 
@@ -3972,6 +3998,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | result | [GroupsResult](#solvio-GroupsResult) |  |  |
 | time | [double](#double) |  | Time spent to process |
+| usage | [HardwareUsage](#solvio-HardwareUsage) | optional |  |
 
 
 
@@ -4006,6 +4033,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | result | [SearchMatrixOffsets](#solvio-SearchMatrixOffsets) |  |  |
 | time | [double](#double) |  | Time spent to process |
+| usage | [HardwareUsage](#solvio-HardwareUsage) | optional |  |
 
 
 
@@ -4054,6 +4082,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | result | [SearchMatrixPairs](#solvio-SearchMatrixPairs) |  |  |
 | time | [double](#double) |  | Time spent to process |
+| usage | [HardwareUsage](#solvio-HardwareUsage) | optional |  |
 
 
 
@@ -4168,6 +4197,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | result | [ScoredPoint](#solvio-ScoredPoint) | repeated |  |
 | time | [double](#double) |  | Time spent to process |
+| usage | [HardwareUsage](#solvio-HardwareUsage) | optional |  |
 
 
 

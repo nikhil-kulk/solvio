@@ -1177,7 +1177,7 @@ impl TryFrom<api::grpc::solvio::CoreSearchPoints> for CoreSearchRequest {
                         QueryEnum::Nearest(api::grpc::conversions::into_named_vector_struct(
                             value.vector_name,
                             vector.data,
-                            vector.indices.clone(),
+                            vector.indices,
                         )?)
                     }
                     api::grpc::solvio::query_enum::Query::RecommendBestScore(query) => {

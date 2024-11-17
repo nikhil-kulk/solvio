@@ -29,7 +29,6 @@ use super::solvio::{
     UuidIndexParams, VectorsOutput, WithLookup,
 };
 use crate::conversions::json;
-use crate::grpc::models::{CollectionsResponse, VersionInfo};
 use crate::grpc::solvio::condition::ConditionOneOf;
 use crate::grpc::solvio::payload_index_params::IndexParams;
 use crate::grpc::solvio::point_id::PointIdOptions;
@@ -48,6 +47,7 @@ use crate::grpc::solvio::{
     TokenizerType, UpdateResult, UpdateResultInternal, ValuesCount, VectorsSelector,
     WithPayloadSelector, WithVectorsSelector,
 };
+use crate::rest::models::{CollectionsResponse, VersionInfo};
 use crate::rest::schema as rest;
 
 pub fn convert_shard_key_to_grpc(value: segment::types::ShardKey) -> ShardKey {

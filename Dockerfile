@@ -172,4 +172,4 @@ LABEL org.opencontainers.image.documentation="https://solvio.com/docs"
 LABEL org.opencontainers.image.source="https://github.com/solvio/solvio"
 LABEL org.opencontainers.image.vendor="Solvio"
 
-CMD ["./entrypoint.sh"]
+CMD ["sleep 30; ./entrypoint.sh"]

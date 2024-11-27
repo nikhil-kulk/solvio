@@ -91,4 +91,4 @@ tar -cvf "./compatibility-${solvio_VERSION}.tar" "storage.tar.bz2" "full-snapsho
 cd -
 
 echo "Compatibility data saved to ${SCRIPT_DIR}/compatibility-${solvio_VERSION}.tar"
-echo "Upload it to "solvio-backward-compatibility" gcs bucket (requires access rights)"
+echo "Upload it to 'solvio-backward-compatibility' gcs bucket (requires access rights)"

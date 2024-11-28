@@ -1718,6 +1718,12 @@ impl TryFrom<ClusterOperationsPb> for ClusterOperations {
     }
 }
 
+impl From<Option<api::grpc::solvio::ShardKeySelector>> for ShardSelectorInternal {
+    fn from(value: Option<api::grpc::solvio::ShardKeySelector>) -> Self {
+        value.map_or(Self::Empty, Self::from)
+    }
+}
+
 impl From<api::grpc::solvio::ShardKeySelector> for ShardSelectorInternal {
     fn from(value: api::grpc::solvio::ShardKeySelector) -> Self {
         let shard_keys: Vec<_> = value

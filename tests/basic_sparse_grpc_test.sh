@@ -175,7 +175,7 @@ response=$(
     "limit": 3
   }' $solvio_HOST solvio.Points/Search 2>&1
 )
-if [[ $response != *"Sparse indices does not match sparse vector conditions"* ]]; then
+if [[ $response != *"Sparse indices does not match sparse vector conditions: values: Validation error: must be the same length as indices [{}]"* ]]; then
     echo Unexpected response, expected validation error: $response
     exit 1
 fi

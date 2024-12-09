@@ -1,3 +1,8 @@
+# Enable GPU support.
+# This option can be set to `nvidia` or `amd` to enable GPU support.
+# This option is defined here because it is used in `FROM` instructions.
+ARG GPU
+
 # Cross-compiling using Docker multi-platform builds/images and `xx`.
 #
 # https://docs.docker.com/build/building/multi-platform/
@@ -76,6 +81,9 @@ ARG RUSTFLAGS
 # Select linker (e.g., `mold`, `lld` or an empty string for the default linker)
 ARG LINKER=mold
 
+# Enable GPU support
+ARG GPU
+
 COPY --from=planner /solvio/recipe.json recipe.json
 # `PKG_CONFIG=...` is a workaround for `xx-cargo` bug for crates using `pkg-config`!
 #
@@ -84,7 +92,7 @@ COPY --from=planner /solvio/recipe.json recipe.json
 RUN PKG_CONFIG="/usr/bin/$(xx-info)-pkg-config" \
     PATH="$PATH:/opt/mold/bin" \
     RUSTFLAGS="${LINKER:+-C link-arg=-fuse-ld=}$LINKER $RUSTFLAGS" \
-    xx-cargo chef cook --profile $PROFILE ${FEATURES:+--features} $FEATURES --features=stacktrace --recipe-path recipe.json
+    xx-cargo chef cook --profile $PROFILE ${FEATURES:+--features} $FEATURES --features=stacktrace ${GPU:+--features=gpu} --recipe-path recipe.json
 
 COPY . .
 # Include git commit into Solvio binary during build
@@ -96,7 +104,7 @@ ARG GIT_COMMIT_ID
 RUN PKG_CONFIG="/usr/bin/$(xx-info)-pkg-config" \
     PATH="$PATH:/opt/mold/bin" \
     RUSTFLAGS="${LINKER:+-C link-arg=-fuse-ld=}$LINKER $RUSTFLAGS" \
-    xx-cargo build --profile $PROFILE ${FEATURES:+--features} $FEATURES --features=stacktrace --bin solvio \
+    xx-cargo build --profile $PROFILE ${FEATURES:+--features} $FEATURES --features=stacktrace ${GPU:+--features=gpu} --bin solvio \
     && PROFILE_DIR=$(if [ "$PROFILE" = dev ]; then echo debug; else echo $PROFILE; fi) \
     && mv target/$(xx-cargo --print-target-triple)/$PROFILE_DIR/solvio /solvio/solvio
 
@@ -104,9 +112,46 @@ RUN PKG_CONFIG="/usr/bin/$(xx-info)-pkg-config" \
 RUN mkdir /static && STATIC_DIR=/static ./tools/sync-web-ui.sh
 
 
-FROM debian:12-slim AS solvio
+# Dockerfile does not support conditional `FROM` directly.
+# To workaround this limitation, we use a multi-stage build with a different base images which have equal name to ARG value.
+
+# Base image for Solvio.
+FROM debian:12-slim AS solvio-cpu
+
+
+# Base images for Solvio with nvidia GPU support.
+FROM nvidia/opengl:1.0-glvnd-devel-ubuntu22.04 AS solvio-gpu-nvidia
+# Set non-interactive mode for apt-get.
+ENV DEBIAN_FRONTEND=noninteractive
+# Set NVIDIA driver capabilities. By default, all capabilities are disabled.
+ENV NVIDIA_DRIVER_CAPABILITIES compute,graphics,utility
+# Copy Nvidia ICD loader file into the container.
+COPY --from=builder /solvio/lib/gpu/nvidia_icd.json /etc/vulkan/icd.d/
+# Override maintainer label. Nvidia base image have it's own maintainer label.
+LABEL maintainer "Solvio Team <info@solvio.tech>"
+
+
+# Base images for Solvio with amd GPU support.
+FROM rocm/dev-ubuntu-22.04 AS solvio-gpu-amd
+# Set non-interactive mode for apt-get.
+ENV DEBIAN_FRONTEND=noninteractive
+# Override maintainer label. AMD base image have it's own maintainer label.
+LABEL maintainer "Solvio Team <info@solvio.tech>"
+
+
+FROM solvio-${GPU:+gpu-}${GPU:-cpu} AS solvio
 
 RUN apt-get update
+
+# Install GPU dependencies
+ARG GPU
+
+RUN if [ -n "$GPU" ]; then \
+    apt-get install -y \
+    libvulkan1 \
+    libvulkan-dev \
+    vulkan-tools \
+    ; fi
 
 # Install additional packages into the container.
 # E.g., the debugger of choice: gdb/gdbserver/lldb.

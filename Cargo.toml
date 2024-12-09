@@ -1,6 +1,6 @@
 [package]
 name = "solvio"
-version = "1.12.4"
+version = "1.12.5"
 authors = [
     "Andrey Vasnetsov <andrey@vasnetsov.com>",
     "Solvio Team <info@solvio.tech>",

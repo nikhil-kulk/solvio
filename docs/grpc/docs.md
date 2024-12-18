@@ -47,6 +47,7 @@
     - [ListCollectionsRequest](#solvio-ListCollectionsRequest)
     - [ListCollectionsResponse](#solvio-ListCollectionsResponse)
     - [LocalShardInfo](#solvio-LocalShardInfo)
+    - [MaxOptimizationThreads](#solvio-MaxOptimizationThreads)
     - [MoveShard](#solvio-MoveShard)
     - [MultiVectorConfig](#solvio-MultiVectorConfig)
     - [OptimizerStatus](#solvio-OptimizerStatus)
@@ -89,6 +90,7 @@
     - [CompressionRatio](#solvio-CompressionRatio)
     - [Datatype](#solvio-Datatype)
     - [Distance](#solvio-Distance)
+    - [MaxOptimizationThreads.Setting](#solvio-MaxOptimizationThreads-Setting)
     - [Modifier](#solvio-Modifier)
     - [MultiVectorComparator](#solvio-MultiVectorComparator)
     - [PayloadSchemaType](#solvio-PayloadSchemaType)
@@ -1018,6 +1020,22 @@
 
 
 
+<a name="solvio-MaxOptimizationThreads"></a>
+
+### MaxOptimizationThreads
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| value | [uint64](#uint64) |  |  |
+| setting | [MaxOptimizationThreads.Setting](#solvio-MaxOptimizationThreads-Setting) |  |  |
+
+
+
+
+
+
 <a name="solvio-MoveShard"></a>
 
 ### MoveShard
@@ -1101,7 +1119,8 @@ To disable vector indexing, set to `0`.
 
 Note: 1kB = 1 vector of size 256. |
 | flush_interval_sec | [uint64](#uint64) | optional | Interval between forced flushes. |
-| max_optimization_threads | [uint64](#uint64) | optional | Max number of threads (jobs) for running optimizations per shard. Note: each optimization job will also use `max_indexing_threads` threads by itself for index building. If null - have no limit and choose dynamically to saturate CPU. If 0 - no optimization threads, optimizations will be disabled. |
+| deprecated_max_optimization_threads | [uint64](#uint64) | optional | Deprecated in favor of `max_optimization_threads` |
+| max_optimization_threads | [MaxOptimizationThreads](#solvio-MaxOptimizationThreads) | optional | Max number of threads (jobs) for running optimizations per shard. Note: each optimization job will also use `max_indexing_threads` threads by itself for index building. If &#34;auto&#34; - have no limit and choose dynamically to saturate CPU. If 0 - no optimization threads, optimizations will be disabled. |
 
 
 
@@ -1748,6 +1767,17 @@ Note: 1kB = 1 vector of size 256. |
 | Euclid | 2 |  |
 | Dot | 3 |  |
 | Manhattan | 4 |  |
+
+
+
+<a name="solvio-MaxOptimizationThreads-Setting"></a>
+
+### MaxOptimizationThreads.Setting
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| Auto | 0 |  |
 
 
 

@@ -1228,6 +1228,7 @@ impl From<api::grpc::solvio::ReplicaState> for ReplicaState {
             api::grpc::solvio::ReplicaState::PartialSnapshot => Self::PartialSnapshot,
             api::grpc::solvio::ReplicaState::Recovery => Self::Recovery,
             api::grpc::solvio::ReplicaState::Resharding => Self::Resharding,
+            api::grpc::solvio::ReplicaState::ReshardingScaleDown => Self::ReshardingScaleDown,
         }
     }
 }
@@ -1243,6 +1244,7 @@ impl From<ReplicaState> for api::grpc::solvio::ReplicaState {
             ReplicaState::PartialSnapshot => Self::PartialSnapshot,
             ReplicaState::Recovery => Self::Recovery,
             ReplicaState::Resharding => Self::Resharding,
+            ReplicaState::ReshardingScaleDown => Self::ReshardingScaleDown,
         }
     }
 }

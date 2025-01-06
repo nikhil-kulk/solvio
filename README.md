@@ -224,7 +224,7 @@ Examples and/or documentation of Solvio integrations:
 ## Contacts
 
 - Have questions? Join our [Discord channel](https://solvio.to/discord) or mention [@solvio_engine on Twitter](https://solvio.to/twitter)
-- Want to stay in touch with latest releases? Subscribe to our [Newsletters](https://solvio.to/newsletter)
+- Want to stay in touch with latest releases? Subscribe to our [Newsletters](https://solvio.tech/subscribe/)
 - Looking for a managed cloud? Check [pricing](https://solvio.tech/pricing/), need something personalised? We're at [info@solvio.tech](mailto:info@solvio.tech)
 
 ## License

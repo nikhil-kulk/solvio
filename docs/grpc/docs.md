@@ -439,6 +439,7 @@
 | local_shards | [LocalShardInfo](#solvio-LocalShardInfo) | repeated | Local shards |
 | remote_shards | [RemoteShardInfo](#solvio-RemoteShardInfo) | repeated | Remote shards |
 | shard_transfers | [ShardTransferInfo](#solvio-ShardTransferInfo) | repeated | Shard transfers |
+| resharding_operations | [ReshardingInfo](#solvio-ReshardingInfo) | repeated | Resharding operations |
 
 
 

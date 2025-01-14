@@ -27,6 +27,7 @@ use segment::vector_storage::query::{ContextPair, ContextQuery, DiscoveryQuery, 
 use sparse::common::sparse_vector::{validate_sparse_vector_impl, SparseVector};
 use tonic::Status;
 
+use super::cluster_ops::ReshardingDirection;
 use super::consistency_params::ReadConsistency;
 use super::types::{
     CollectionConfig, ContextExamplePair, CoreSearchRequest, Datatype, DiscoverRequestInternal,
@@ -1507,6 +1508,16 @@ impl From<ReshardingInfo> for api::grpc::solvio::ReshardingInfo {
             shard_id: value.shard_id,
             peer_id: value.peer_id,
             shard_key: value.shard_key.map(convert_shard_key_to_grpc),
+            direction: api::grpc::solvio::ReshardingDirection::from(value.direction) as i32,
+        }
+    }
+}
+
+impl From<ReshardingDirection> for api::grpc::solvio::ReshardingDirection {
+    fn from(value: ReshardingDirection) -> Self {
+        match value {
+            ReshardingDirection::Up => api::grpc::solvio::ReshardingDirection::Up,
+            ReshardingDirection::Down => api::grpc::solvio::ReshardingDirection::Down,
         }
     }
 }

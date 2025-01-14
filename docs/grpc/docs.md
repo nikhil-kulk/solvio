@@ -96,6 +96,7 @@
     - [PayloadSchemaType](#solvio-PayloadSchemaType)
     - [QuantizationType](#solvio-QuantizationType)
     - [ReplicaState](#solvio-ReplicaState)
+    - [ReshardingDirection](#solvio-ReshardingDirection)
     - [ShardTransferMethod](#solvio-ShardTransferMethod)
     - [ShardingMethod](#solvio-ShardingMethod)
     - [TokenizerType](#solvio-TokenizerType)
@@ -1298,6 +1299,7 @@ Note: 1kB = 1 vector of size 256. |
 | shard_id | [uint32](#uint32) |  |  |
 | peer_id | [uint64](#uint64) |  |  |
 | shard_key | [ShardKey](#solvio-ShardKey) | optional |  |
+| direction | [ReshardingDirection](#solvio-ReshardingDirection) |  |  |
 
 
 
@@ -1854,6 +1856,18 @@ Note: 1kB = 1 vector of size 256. |
 | Recovery | 6 | Shard is undergoing recovered by an external node; Normally rejects updates, accepts updates if force is true |
 | Resharding | 7 | Points are being migrated to this shard as part of scale-up resharding |
 | ReshardingScaleDown | 8 | Points are being migrated to this shard as part of scale-down resharding |
+
+
+
+<a name="solvio-ReshardingDirection"></a>
+
+### ReshardingDirection
+Resharding direction, scale up or down in number of shards
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| Up | 0 | Scale up, add a new shard |
+| Down | 1 | Scale down, remove a shard |
 
 
 

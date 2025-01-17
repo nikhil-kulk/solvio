@@ -977,8 +977,9 @@ pub struct CountResult {
     pub count: usize,
 }
 
-#[derive(Error, Debug, Clone, PartialEq)]
+#[derive(Clone, Debug, Error, PartialEq, Deserialize, Serialize)]
 #[error("{0}")]
+#[serde(rename_all = "snake_case")]
 pub enum CollectionError {
     #[error("Wrong input: {description}")]
     BadInput { description: String },
@@ -989,6 +990,7 @@ pub enum CollectionError {
     #[error("Service internal error: {error}")]
     ServiceError {
         error: String,
+        #[serde(skip)]
         backtrace: Option<String>,
     },
     #[error("Bad request: {description}")]
@@ -1304,32 +1306,41 @@ impl From<InvalidUri> for CollectionError {
 }
 
 impl From<tonic::Status> for CollectionError {
-    fn from(err: tonic::Status) -> Self {
-        match err.code() {
+    fn from(status: tonic::Status) -> Self {
+        if !status.details().is_empty() {
+            match serde_json::from_slice(status.details()) {
+                Ok(error) => return error,
+                Err(err) => {
+                    log::warn!("Failed to deserialize CollectionError from gRPC status \"{status}\": {err}");
+                }
+            }
+        }
+
+        match status.code() {
             tonic::Code::InvalidArgument => CollectionError::BadInput {
-                description: format!("InvalidArgument: {err}"),
+                description: format!("InvalidArgument: {status}"),
             },
             tonic::Code::AlreadyExists => CollectionError::BadInput {
-                description: format!("AlreadyExists: {err}"),
+                description: format!("AlreadyExists: {status}"),
             },
             tonic::Code::NotFound => CollectionError::NotFound {
-                what: format!("{err}"),
+                what: format!("{status}"),
             },
             tonic::Code::Internal => CollectionError::ServiceError {
-                error: format!("Internal error: {err}"),
+                error: format!("Internal error: {status}"),
                 backtrace: Some(Backtrace::force_capture().to_string()),
             },
             tonic::Code::DeadlineExceeded => CollectionError::Timeout {
-                description: format!("Deadline Exceeded: {err}"),
+                description: format!("Deadline Exceeded: {status}"),
             },
             tonic::Code::Cancelled => CollectionError::Cancelled {
-                description: format!("{err}"),
+                description: format!("{status}"),
             },
             tonic::Code::FailedPrecondition => CollectionError::PreConditionFailed {
-                description: format!("{err}"),
+                description: format!("{status}"),
             },
             tonic::Code::ResourceExhausted => CollectionError::RateLimitExceeded {
-                description: format!("{err}"),
+                description: format!("{status}"),
             },
             tonic::Code::Ok
             | tonic::Code::Unknown
@@ -1340,7 +1351,7 @@ impl From<tonic::Status> for CollectionError {
             | tonic::Code::Unavailable
             | tonic::Code::DataLoss
             | tonic::Code::Unauthenticated => CollectionError::ServiceError {
-                error: format!("Tonic status error: {err}"),
+                error: format!("Tonic status error: {status}"),
                 backtrace: Some(Backtrace::force_capture().to_string()),
             },
         }

@@ -19,6 +19,7 @@ impl From<StorageError> for tonic::Status {
         let error_code = match &error {
             StorageError::BadInput { .. } => tonic::Code::InvalidArgument,
             StorageError::NotFound { .. } => tonic::Code::NotFound,
+            StorageError::PointNotFound { .. } => tonic::Code::NotFound,
             StorageError::ServiceError { .. } => tonic::Code::Internal,
             StorageError::BadRequest { .. } => tonic::Code::InvalidArgument,
             StorageError::Locked { .. } => tonic::Code::FailedPrecondition,
@@ -30,7 +31,16 @@ impl From<StorageError> for tonic::Status {
             StorageError::InferenceError { .. } => tonic::Code::InvalidArgument,
             StorageError::RateLimitExceeded { .. } => tonic::Code::ResourceExhausted,
         };
-        Status::new(error_code, format!("{error}"))
+
+        let error_data = match serde_json::to_vec(&error) {
+            Ok(error_data) => error_data,
+            Err(err) => {
+                log::warn!("Failed to serialize storage error \"{error}\" to JSON: {err}");
+                Vec::new()
+            }
+        };
+
+        Status::with_details(error_code, error.to_string(), error_data.into())
     }
 }
 

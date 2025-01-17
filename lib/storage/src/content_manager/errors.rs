@@ -3,13 +3,16 @@ use std::io::Error as IoError;
 
 use collection::operations::types::CollectionError;
 use io::file_operations::FileStorageError;
+use segment::types::ExtendedPointId;
+use serde::{Deserialize, Serialize};
 use tempfile::PersistError;
 use thiserror::Error;
 
 pub type StorageResult<T> = Result<T, StorageError>;
 
-#[derive(Error, Debug, Clone)]
+#[derive(Clone, Debug, Error, Deserialize, Serialize)]
 #[error("{0}")]
+#[serde(rename_all = "snake_case")]
 pub enum StorageError {
     #[error("Wrong input: {description}")]
     BadInput { description: String },
@@ -17,9 +20,12 @@ pub enum StorageError {
     AlreadyExists { description: String },
     #[error("Not found: {description}")]
     NotFound { description: String },
+    #[error("No point with id {missed_point_id} found")]
+    PointNotFound { missed_point_id: ExtendedPointId },
     #[error("Service internal error: {description}")]
     ServiceError {
         description: String,
+        #[serde(skip)]
         backtrace: Option<String>,
     },
     #[error("Bad request: {description}")]
@@ -103,9 +109,9 @@ impl StorageError {
             CollectionError::NotFound { .. } => StorageError::NotFound {
                 description: overriding_description,
             },
-            CollectionError::PointNotFound { .. } => StorageError::NotFound {
-                description: overriding_description,
-            },
+            CollectionError::PointNotFound { missed_point_id } => {
+                StorageError::PointNotFound { missed_point_id }
+            }
             CollectionError::ServiceError { backtrace, .. } => StorageError::ServiceError {
                 description: overriding_description,
                 backtrace,

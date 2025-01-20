@@ -286,6 +286,28 @@ impl GraphLinksConverter {
         m: usize,
         m0: usize,
     ) -> Self {
+        // validate edges
+        for (from_idx, levels) in edges.iter().enumerate() {
+            for (level, links) in levels.iter().enumerate() {
+                for to_idx in links.iter().copied() {
+                    assert!(
+                        to_idx < edges.len() as PointOffsetType,
+                        "Invalid graph link: {from_idx} -> {to_idx} at level {level} (to_idx too big, expected less than {}); links: {links:?}",
+                        edges.len()
+                    );
+                    assert!(
+                        edges[to_idx as usize].len() > level,
+                        "Invalid graph link: {from_idx} -> {to_idx} at level {level} (to_idx level ({}) too small); links: {links:?}",
+                        edges[to_idx as usize].len()
+                    );
+                    assert!(
+                        !edges[to_idx as usize][level].is_empty(),
+                        "Invalid graph link: {from_idx} -> {to_idx} at level {level} (to_idx is empty); links: {links:?}"
+                    );
+                }
+            }
+        }
+
         // create map from index in `offsets` to point_id
         let mut back_index: Vec<usize> = (0..edges.len()).collect();
         // sort by max layer and use this map to build `Self.reindex`

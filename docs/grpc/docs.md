@@ -71,6 +71,9 @@
     - [SparseVectorConfig.MapEntry](#solvio-SparseVectorConfig-MapEntry)
     - [SparseVectorParams](#solvio-SparseVectorParams)
     - [StrictModeConfig](#solvio-StrictModeConfig)
+    - [StrictModeMultivector](#solvio-StrictModeMultivector)
+    - [StrictModeMultivectorConfig](#solvio-StrictModeMultivectorConfig)
+    - [StrictModeMultivectorConfig.MultivectorConfigEntry](#solvio-StrictModeMultivectorConfig-MultivectorConfigEntry)
     - [TextIndexParams](#solvio-TextIndexParams)
     - [UpdateCollection](#solvio-UpdateCollection)
     - [UpdateCollectionClusterSetupRequest](#solvio-UpdateCollectionClusterSetupRequest)
@@ -1464,6 +1467,53 @@ Note: 1kB = 1 vector of size 256. |
 | max_collection_payload_size_bytes | [uint64](#uint64) | optional |  |
 | filter_max_conditions | [uint64](#uint64) | optional |  |
 | condition_max_size | [uint64](#uint64) | optional |  |
+| multivector_config | [StrictModeMultivectorConfig](#solvio-StrictModeMultivectorConfig) | optional |  |
+
+
+
+
+
+
+<a name="solvio-StrictModeMultivector"></a>
+
+### StrictModeMultivector
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| max_vectors | [uint64](#uint64) | optional |  |
+
+
+
+
+
+
+<a name="solvio-StrictModeMultivectorConfig"></a>
+
+### StrictModeMultivectorConfig
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| multivector_config | [StrictModeMultivectorConfig.MultivectorConfigEntry](#solvio-StrictModeMultivectorConfig-MultivectorConfigEntry) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-StrictModeMultivectorConfig-MultivectorConfigEntry"></a>
+
+### StrictModeMultivectorConfig.MultivectorConfigEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [StrictModeMultivector](#solvio-StrictModeMultivector) |  |  |
 
 
 

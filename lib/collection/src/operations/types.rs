@@ -1309,7 +1309,15 @@ impl From<tonic::Status> for CollectionError {
     fn from(status: tonic::Status) -> Self {
         if !status.details().is_empty() {
             match serde_json::from_slice(status.details()) {
-                Ok(error) => return error,
+                Ok(error) => {
+                    // TODO!
+                    log::debug!(
+                        "Deserialized structured CollectionError from gRPC status 🤯: {error}"
+                    );
+
+                    return error;
+                }
+
                 Err(err) => {
                     log::warn!("Failed to deserialize CollectionError from gRPC status \"{status}\": {err}");
                 }

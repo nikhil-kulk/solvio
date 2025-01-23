@@ -74,6 +74,9 @@
     - [StrictModeMultivector](#solvio-StrictModeMultivector)
     - [StrictModeMultivectorConfig](#solvio-StrictModeMultivectorConfig)
     - [StrictModeMultivectorConfig.MultivectorConfigEntry](#solvio-StrictModeMultivectorConfig-MultivectorConfigEntry)
+    - [StrictModeSparse](#solvio-StrictModeSparse)
+    - [StrictModeSparseConfig](#solvio-StrictModeSparseConfig)
+    - [StrictModeSparseConfig.SparseConfigEntry](#solvio-StrictModeSparseConfig-SparseConfigEntry)
     - [TextIndexParams](#solvio-TextIndexParams)
     - [UpdateCollection](#solvio-UpdateCollection)
     - [UpdateCollectionClusterSetupRequest](#solvio-UpdateCollectionClusterSetupRequest)
@@ -1468,6 +1471,7 @@ Note: 1kB = 1 vector of size 256. |
 | filter_max_conditions | [uint64](#uint64) | optional |  |
 | condition_max_size | [uint64](#uint64) | optional |  |
 | multivector_config | [StrictModeMultivectorConfig](#solvio-StrictModeMultivectorConfig) | optional |  |
+| sparse_config | [StrictModeSparseConfig](#solvio-StrictModeSparseConfig) | optional |  |
 
 
 
@@ -1514,6 +1518,52 @@ Note: 1kB = 1 vector of size 256. |
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
 | value | [StrictModeMultivector](#solvio-StrictModeMultivector) |  |  |
+
+
+
+
+
+
+<a name="solvio-StrictModeSparse"></a>
+
+### StrictModeSparse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| max_length | [uint64](#uint64) | optional |  |
+
+
+
+
+
+
+<a name="solvio-StrictModeSparseConfig"></a>
+
+### StrictModeSparseConfig
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sparse_config | [StrictModeSparseConfig.SparseConfigEntry](#solvio-StrictModeSparseConfig-SparseConfigEntry) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-StrictModeSparseConfig-SparseConfigEntry"></a>
+
+### StrictModeSparseConfig.SparseConfigEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [StrictModeSparse](#solvio-StrictModeSparse) |  |  |
 
 
 

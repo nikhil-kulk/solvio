@@ -124,7 +124,7 @@ test_version $PREV_PATCH_solvio_VERSION
 # Test previous minor version
 test_version $PREV_MINOR_solvio_VERSION
 
-# Test blob_store storage generated manually with
+# Test gridstore storage generated manually with
 # export solvio__STORAGE__ON_DISK_PAYLOAD_USES_MMAP=true
 # export solvio__STORAGE__ON_DISK_SPARSE_VECTORS_USES_MMAP=true
 # in the gen_storage_compat_data.sh script

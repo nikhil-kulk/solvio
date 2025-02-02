@@ -687,6 +687,7 @@ impl From<Modifier> for api::grpc::solvio::Modifier {
         match value {
             Modifier::None => api::grpc::solvio::Modifier::None,
             Modifier::Idf => api::grpc::solvio::Modifier::Idf,
+            Modifier::IdfParams(_) => api::grpc::solvio::Modifier::Idf,
         }
     }
 }

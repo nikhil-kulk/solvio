@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   solvio_node_1:
-    image: solvio_tls:latest
+    image: solvio/solvio:v1.13.4
     hostname: node1.solvio
     networks:
       - solvio
@@ -11,7 +11,7 @@ services:
     - ./cert:/solvio/tls
     - ./tls_config.yaml:/solvio/config/tls_config.yaml
   solvio_node_2:
-    image: solvio_tls:latest
+    image: solvio/solvio:v1.13.4
     hostname: node2.solvio
     networks:
       - solvio

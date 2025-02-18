@@ -465,7 +465,7 @@ impl From<CollectionInfo> for api::grpc::solvio::CollectionInfo {
 
 impl From<RecordInternal> for api::grpc::solvio::RetrievedPoint {
     fn from(record: RecordInternal) -> Self {
-        let vectors = record.vector.map(VectorStructInternal::from);
+        let vectors = record.vector;
 
         Self {
             id: Some(record.id.into()),

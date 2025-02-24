@@ -148,15 +148,20 @@
     - [DiscoverInput](#solvio-DiscoverInput)
     - [DiscoverPoints](#solvio-DiscoverPoints)
     - [DiscoverResponse](#solvio-DiscoverResponse)
+    - [DivExpression](#solvio-DivExpression)
     - [Document](#solvio-Document)
     - [Document.OptionsEntry](#solvio-Document-OptionsEntry)
+    - [Expression](#solvio-Expression)
     - [FacetCounts](#solvio-FacetCounts)
     - [FacetHit](#solvio-FacetHit)
     - [FacetResponse](#solvio-FacetResponse)
     - [FacetValue](#solvio-FacetValue)
     - [FieldCondition](#solvio-FieldCondition)
     - [Filter](#solvio-Filter)
+    - [Formula](#solvio-Formula)
+    - [Formula.DefaultsEntry](#solvio-Formula-DefaultsEntry)
     - [GeoBoundingBox](#solvio-GeoBoundingBox)
+    - [GeoDistance](#solvio-GeoDistance)
     - [GeoLineString](#solvio-GeoLineString)
     - [GeoPoint](#solvio-GeoPoint)
     - [GeoPolygon](#solvio-GeoPolygon)
@@ -177,6 +182,7 @@
     - [LookupLocation](#solvio-LookupLocation)
     - [Match](#solvio-Match)
     - [MinShould](#solvio-MinShould)
+    - [MultExpression](#solvio-MultExpression)
     - [MultiDenseVector](#solvio-MultiDenseVector)
     - [NamedVectors](#solvio-NamedVectors)
     - [NamedVectors.VectorsEntry](#solvio-NamedVectors-VectorsEntry)
@@ -251,6 +257,7 @@
     - [SparseIndices](#solvio-SparseIndices)
     - [SparseVector](#solvio-SparseVector)
     - [StartFrom](#solvio-StartFrom)
+    - [SumExpression](#solvio-SumExpression)
     - [TargetVector](#solvio-TargetVector)
     - [UpdateBatchPoints](#solvio-UpdateBatchPoints)
     - [UpdateBatchResponse](#solvio-UpdateBatchResponse)
@@ -2626,6 +2633,23 @@ The JSON representation for `Value` is a JSON value.
 
 
 
+<a name="solvio-DivExpression"></a>
+
+### DivExpression
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| left | [Expression](#solvio-Expression) |  |  |
+| right | [Expression](#solvio-Expression) |  |  |
+| by_zero_default | [float](#float) | optional |  |
+
+
+
+
+
+
 <a name="solvio-Document"></a>
 
 ### Document
@@ -2653,6 +2677,28 @@ The JSON representation for `Value` is a JSON value.
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
 | value | [Value](#solvio-Value) |  |  |
+
+
+
+
+
+
+<a name="solvio-Expression"></a>
+
+### Expression
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| constant | [float](#float) |  |  |
+| variable | [string](#string) |  | Payload key or reference to score. |
+| condition | [Condition](#solvio-Condition) |  | Payload condition. If true, becomes 1.0; otherwise 0.0 |
+| geo_distance | [GeoDistance](#solvio-GeoDistance) |  | Geographic distance in meters |
+| mult | [MultExpression](#solvio-MultExpression) |  | Multiply |
+| sum | [SumExpression](#solvio-SumExpression) |  | Sum |
+| div | [DivExpression](#solvio-DivExpression) |  | Divide |
+| neg | [Expression](#solvio-Expression) |  | Negate |
 
 
 
@@ -2770,6 +2816,38 @@ The JSON representation for `Value` is a JSON value.
 
 
 
+<a name="solvio-Formula"></a>
+
+### Formula
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| expression | [Expression](#solvio-Expression) |  |  |
+| defaults | [Formula.DefaultsEntry](#solvio-Formula-DefaultsEntry) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-Formula-DefaultsEntry"></a>
+
+### Formula.DefaultsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [Value](#solvio-Value) |  |  |
+
+
+
+
+
+
 <a name="solvio-GeoBoundingBox"></a>
 
 ### GeoBoundingBox
@@ -2780,6 +2858,22 @@ The JSON representation for `Value` is a JSON value.
 | ----- | ---- | ----- | ----------- |
 | top_left | [GeoPoint](#solvio-GeoPoint) |  | north-west corner |
 | bottom_right | [GeoPoint](#solvio-GeoPoint) |  | south-east corner |
+
+
+
+
+
+
+<a name="solvio-GeoDistance"></a>
+
+### GeoDistance
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| origin | [GeoPoint](#solvio-GeoPoint) |  |  |
+| to | [string](#string) |  |  |
 
 
 
@@ -3114,6 +3208,21 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | ----- | ---- | ----- | ----------- |
 | conditions | [Condition](#solvio-Condition) | repeated |  |
 | min_count | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="solvio-MultExpression"></a>
+
+### MultExpression
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| mult | [Expression](#solvio-Expression) | repeated |  |
 
 
 
@@ -3653,6 +3762,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | order_by | [OrderBy](#solvio-OrderBy) |  | Order the points by a payload field. |
 | fusion | [Fusion](#solvio-Fusion) |  | Fuse the results of multiple prefetches. |
 | sample | [Sample](#solvio-Sample) |  | Sample points from the collection. |
+| formula | [Formula](#solvio-Formula) |  | Score boosting via an arbitrary formula |
 
 
 
@@ -4464,6 +4574,21 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | integer | [int64](#int64) |  |  |
 | timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
 | datetime | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="solvio-SumExpression"></a>
+
+### SumExpression
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sum | [Expression](#solvio-Expression) | repeated |  |
 
 
 

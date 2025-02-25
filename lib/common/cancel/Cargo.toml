@@ -6,7 +6,7 @@ authors = [
     "Solvio Team <info@solvio.tech>",
 ]
 license = "Apache-2.0"
-edition = "2021"
+edition = "2024"
 publish = false
 
 [lints]

@@ -2,8 +2,8 @@ use std::collections::HashSet;
 
 use api::grpc::solvio::vector_input::Variant;
 use api::grpc::solvio::{
-    query, ContextInput, ContextInputPair, DiscoverInput, PrefetchQuery, Query, RecommendInput,
-    VectorInput,
+    ContextInput, ContextInputPair, DiscoverInput, PrefetchQuery, Query, RecommendInput,
+    VectorInput, query,
 };
 use api::rest::schema as rest;
 use tonic::Status;

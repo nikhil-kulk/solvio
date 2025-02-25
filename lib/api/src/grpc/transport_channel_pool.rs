@@ -3,7 +3,7 @@ use std::future::Future;
 use std::num::NonZeroUsize;
 use std::time::Duration;
 
-use rand::{rng, Rng};
+use rand::{Rng, rng};
 use tokio::select;
 use tonic::codegen::InterceptedService;
 use tonic::service::Interceptor;
@@ -12,8 +12,8 @@ use tonic::{Code, Request, Status};
 
 use crate::grpc::dynamic_channel_pool::DynamicChannelPool;
 use crate::grpc::dynamic_pool::CountedItem;
-use crate::grpc::solvio::solvio_client::SolvioClient;
 use crate::grpc::solvio::HealthCheckRequest;
+use crate::grpc::solvio::solvio_client::SolvioClient;
 
 /// Maximum lifetime of a gRPC channel.
 ///

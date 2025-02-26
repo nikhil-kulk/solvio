@@ -194,7 +194,9 @@ impl TryFrom<api::grpc::solvio::ShardSnapshotLocation> for ShardSnapshotLocation
     fn try_from(location: api::grpc::solvio::ShardSnapshotLocation) -> Result<Self, Self::Error> {
         use api::grpc::solvio::shard_snapshot_location;
 
-        let Some(location) = location.location else {
+        let api::grpc::solvio::ShardSnapshotLocation { location } = location;
+
+        let Some(location) = location else {
             return Err(tonic::Status::invalid_argument(
                 "Malformed shard snapshot location",
             ));

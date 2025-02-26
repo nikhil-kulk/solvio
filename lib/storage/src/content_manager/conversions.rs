@@ -225,7 +225,8 @@ impl TryFrom<api::grpc::solvio::AliasOperations> for AliasOperations {
     type Error = Status;
 
     fn try_from(value: api::grpc::solvio::AliasOperations) -> Result<Self, Self::Error> {
-        match value.action {
+        let api::grpc::solvio::AliasOperations { action } = value;
+        match action {
             Some(api::grpc::solvio::alias_operations::Action::CreateAlias(create)) => {
                 Ok(create.into())
             }

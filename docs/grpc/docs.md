@@ -212,6 +212,7 @@
     - [PointsUpdateOperation.SetPayload](#solvio-PointsUpdateOperation-SetPayload)
     - [PointsUpdateOperation.SetPayload.PayloadEntry](#solvio-PointsUpdateOperation-SetPayload-PayloadEntry)
     - [PointsUpdateOperation.UpdateVectors](#solvio-PointsUpdateOperation-UpdateVectors)
+    - [PowExpression](#solvio-PowExpression)
     - [PrefetchQuery](#solvio-PrefetchQuery)
     - [QuantizationSearchParams](#solvio-QuantizationSearchParams)
     - [Query](#solvio-Query)
@@ -2699,6 +2700,12 @@ The JSON representation for `Value` is a JSON value.
 | sum | [SumExpression](#solvio-SumExpression) |  | Sum |
 | div | [DivExpression](#solvio-DivExpression) |  | Divide |
 | neg | [Expression](#solvio-Expression) |  | Negate |
+| abs | [Expression](#solvio-Expression) |  | Absolute value |
+| sqrt | [Expression](#solvio-Expression) |  | Square root |
+| pow | [PowExpression](#solvio-PowExpression) |  | Power |
+| exp | [Expression](#solvio-Expression) |  | Exponential |
+| log10 | [Expression](#solvio-Expression) |  | Logarithm |
+| ln | [Expression](#solvio-Expression) |  | Natural logarithm |
 
 
 
@@ -3698,6 +3705,22 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | ----- | ---- | ----- | ----------- |
 | points | [PointVectors](#solvio-PointVectors) | repeated | List of points and vectors to update |
 | shard_key_selector | [ShardKeySelector](#solvio-ShardKeySelector) | optional | Option for custom sharding to specify used shard keys |
+
+
+
+
+
+
+<a name="solvio-PowExpression"></a>
+
+### PowExpression
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| base | [Expression](#solvio-Expression) |  |  |
+| exponent | [Expression](#solvio-Expression) |  |  |
 
 
 

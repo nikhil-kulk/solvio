@@ -368,8 +368,8 @@ impl TryFrom<api::grpc::solvio::RecoveryPoint> for RecoveryPoint {
     type Error = Status;
 
     fn try_from(rp: api::grpc::solvio::RecoveryPoint) -> Result<Self, Self::Error> {
-        let clocks = rp
-            .clocks
+        let api::grpc::solvio::RecoveryPoint { clocks } = rp;
+        let clocks = clocks
             .into_iter()
             .map(|tag| {
                 (

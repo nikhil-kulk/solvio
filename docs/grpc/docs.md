@@ -2799,6 +2799,8 @@ The JSON representation for `Value` is a JSON value.
 | values_count | [ValuesCount](#solvio-ValuesCount) |  | Check number of values for a specific field |
 | geo_polygon | [GeoPolygon](#solvio-GeoPolygon) |  | Check if geo point is within a given polygon |
 | datetime_range | [DatetimeRange](#solvio-DatetimeRange) |  | Check if datetime is within a given range |
+| is_empty | [bool](#bool) | optional | Check if field is empty |
+| is_null | [bool](#bool) | optional | Check if field is null |
 
 
 

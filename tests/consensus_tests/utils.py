@@ -79,6 +79,7 @@ def get_env(p2p_port: int, grpc_port: int, http_port: int) -> Dict[str, str]:
     env["solvio__SERVICE__HTTP_PORT"] = str(http_port)
     env["solvio__SERVICE__GRPC_PORT"] = str(grpc_port)
     env["solvio__LOG_LEVEL"] = "DEBUG,raft::raft=info"
+    env["solvio__SERVICE__HARDWARE_REPORTING"] = "true"
     return env
 
 

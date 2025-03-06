@@ -3501,6 +3501,7 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | ----- | ---- | ----- | ----------- |
 | result | [UpdateResult](#solvio-UpdateResult) |  |  |
 | time | [double](#double) |  | Time spent to process |
+| usage | [HardwareUsage](#solvio-HardwareUsage) | optional |  |
 
 
 

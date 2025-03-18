@@ -138,6 +138,7 @@
     - [CountResult](#solvio-CountResult)
     - [CreateFieldIndexCollection](#solvio-CreateFieldIndexCollection)
     - [DatetimeRange](#solvio-DatetimeRange)
+    - [DecayParamsExpression](#solvio-DecayParamsExpression)
     - [DeleteFieldIndexCollection](#solvio-DeleteFieldIndexCollection)
     - [DeletePayloadPoints](#solvio-DeletePayloadPoints)
     - [DeletePointVectors](#solvio-DeletePointVectors)
@@ -2446,6 +2447,24 @@ The JSON representation for `Value` is a JSON value.
 
 
 
+<a name="solvio-DecayParamsExpression"></a>
+
+### DecayParamsExpression
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| x | [Expression](#solvio-Expression) |  | The variable to decay |
+| target | [Expression](#solvio-Expression) | optional | The target value to start decaying from. Defaults to 0. |
+| scale | [float](#float) | optional | The scale factor of the decay, in terms of `x`. Defaults to 1.0. Must be a non-zero positive number. |
+| midpoint | [float](#float) | optional | The midpoint of the decay. Defaults to 0.5. Output will be this value when `|x - target| == scale`. |
+
+
+
+
+
+
 <a name="solvio-DeleteFieldIndexCollection"></a>
 
 ### DeleteFieldIndexCollection
@@ -2706,6 +2725,9 @@ The JSON representation for `Value` is a JSON value.
 | exp | [Expression](#solvio-Expression) |  | Exponential |
 | log10 | [Expression](#solvio-Expression) |  | Logarithm |
 | ln | [Expression](#solvio-Expression) |  | Natural logarithm |
+| exp_decay | [DecayParamsExpression](#solvio-DecayParamsExpression) |  | Exponential decay |
+| gauss_decay | [DecayParamsExpression](#solvio-DecayParamsExpression) |  | Gaussian decay |
+| lin_decay | [DecayParamsExpression](#solvio-DecayParamsExpression) |  | Linear decay |
 
 
 

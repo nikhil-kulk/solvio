@@ -197,7 +197,7 @@ pub fn init(
             server.bind(bind_addr)?
         };
 
-        log::info!("Solvio HTTP listening on {}", port);
+        log::info!("Solvio HTTP listening on {port}");
         server.run().await
     })
 }

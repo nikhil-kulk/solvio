@@ -2715,6 +2715,8 @@ The JSON representation for `Value` is a JSON value.
 | variable | [string](#string) |  | Payload key or reference to score. |
 | condition | [Condition](#solvio-Condition) |  | Payload condition. If true, becomes 1.0; otherwise 0.0 |
 | geo_distance | [GeoDistance](#solvio-GeoDistance) |  | Geographic distance in meters |
+| datetime | [string](#string) |  | Date-time constant |
+| datetime_key | [string](#string) |  | Payload key with date-time values |
 | mult | [MultExpression](#solvio-MultExpression) |  | Multiply |
 | sum | [SumExpression](#solvio-SumExpression) |  | Sum |
 | div | [DivExpression](#solvio-DivExpression) |  | Divide |

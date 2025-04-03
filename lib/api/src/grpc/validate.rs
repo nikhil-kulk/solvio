@@ -308,6 +308,7 @@ impl Validate for super::solvio::query_enum::Query {
         match self {
             super::solvio::query_enum::Query::NearestNeighbors(q) => q.validate(),
             super::solvio::query_enum::Query::RecommendBestScore(q) => q.validate(),
+            super::solvio::query_enum::Query::RecommendSumScores(q) => q.validate(),
             super::solvio::query_enum::Query::Discover(q) => q.validate(),
             super::solvio::query_enum::Query::Context(q) => q.validate(),
         }

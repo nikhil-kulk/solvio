@@ -1123,10 +1123,12 @@ impl From<QueryEnum> for api::grpc::solvio::QueryEnum {
             },
             QueryEnum::RecommendBestScore(named) => api::grpc::solvio::QueryEnum {
                 query: Some(api::grpc::solvio::query_enum::Query::RecommendBestScore(
-                    api::grpc::solvio::RecoQuery {
-                        positives: named.query.positives.into_iter().map_into().collect(),
-                        negatives: named.query.negatives.into_iter().map_into().collect(),
-                    },
+                    named.query.into(),
+                )),
+            },
+            QueryEnum::RecommendSumScores(named) => api::grpc::solvio::QueryEnum {
+                query: Some(api::grpc::solvio::query_enum::Query::RecommendSumScores(
+                    named.query.into(),
                 )),
             },
             QueryEnum::Discover(named) => api::grpc::solvio::QueryEnum {
@@ -1270,18 +1272,13 @@ impl TryFrom<api::grpc::solvio::CoreSearchPoints> for CoreSearchRequest {
                     }
                     api::grpc::solvio::query_enum::Query::RecommendBestScore(query) => {
                         QueryEnum::RecommendBestScore(NamedQuery {
-                            query: RecoQuery::new(
-                                query
-                                    .positives
-                                    .into_iter()
-                                    .map(TryInto::try_into)
-                                    .collect::<Result<_, _>>()?,
-                                query
-                                    .negatives
-                                    .into_iter()
-                                    .map(TryInto::try_into)
-                                    .collect::<Result<_, _>>()?,
-                            ),
+                            query: RecoQuery::try_from(query)?,
+                            using: value.vector_name,
+                        })
+                    }
+                    api::grpc::solvio::query_enum::Query::RecommendSumScores(query) => {
+                        QueryEnum::RecommendSumScores(NamedQuery {
+                            query: RecoQuery::try_from(query)?,
                             using: value.vector_name,
                         })
                     }

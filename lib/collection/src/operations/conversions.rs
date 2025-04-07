@@ -1099,7 +1099,7 @@ impl TryFrom<api::grpc::solvio::SearchPoints> for CoreSearchRequest {
             api::grpc::conversions::into_named_vector_struct(vector_name, vector, sparse_indices)?;
 
         Ok(Self {
-            query: QueryEnum::Nearest(vector_struct),
+            query: QueryEnum::Nearest(vector_struct.into()),
             filter: filter.map(Filter::try_from).transpose()?,
             params: params.map(SearchParams::from),
             limit: limit as usize,
@@ -1118,7 +1118,7 @@ impl From<QueryEnum> for api::grpc::solvio::QueryEnum {
         match value {
             QueryEnum::Nearest(vector) => api::grpc::solvio::QueryEnum {
                 query: Some(api::grpc::solvio::query_enum::Query::NearestNeighbors(
-                    vector.to_vector().into(),
+                    vector.query.into(),
                 )),
             },
             QueryEnum::RecommendBestScore(named) => api::grpc::solvio::QueryEnum {
@@ -1264,11 +1264,14 @@ impl TryFrom<api::grpc::solvio::CoreSearchPoints> for CoreSearchRequest {
             .map(|query| {
                 Ok(match query {
                     api::grpc::solvio::query_enum::Query::NearestNeighbors(vector) => {
-                        QueryEnum::Nearest(api::grpc::conversions::into_named_vector_struct(
-                            value.vector_name,
-                            vector.data,
-                            vector.indices,
-                        )?)
+                        QueryEnum::Nearest(
+                            api::grpc::conversions::into_named_vector_struct(
+                                value.vector_name,
+                                vector.data,
+                                vector.indices,
+                            )?
+                            .into(),
+                        )
                     }
                     api::grpc::solvio::query_enum::Query::RecommendBestScore(query) => {
                         QueryEnum::RecommendBestScore(NamedQuery {

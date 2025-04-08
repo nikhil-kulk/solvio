@@ -220,3 +220,6 @@ def test_new_fail():
 
 def test_new_pass():
     pass
+
+def test_new_pass2():
+    pass

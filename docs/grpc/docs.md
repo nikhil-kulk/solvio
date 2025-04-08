@@ -1482,6 +1482,7 @@ Note: 1kB = 1 vector of size 256. |
 | multivector_config | [StrictModeMultivectorConfig](#solvio-StrictModeMultivectorConfig) | optional |  |
 | sparse_config | [StrictModeSparseConfig](#solvio-StrictModeSparseConfig) | optional |  |
 | max_points_count | [uint64](#uint64) | optional |  |
+| max_query_vectors | [uint32](#uint32) | optional |  |
 
 
 

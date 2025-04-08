@@ -223,3 +223,6 @@ def test_new_pass():
 
 def test_new_pass2():
     pass
+
+def test_new_fail2():
+    assert False

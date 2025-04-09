@@ -1,6 +1,7 @@
 tests/
 target/
 storage/
+solvio-storage/
 snapshots/
 lib/segment/target
 lib/api/target

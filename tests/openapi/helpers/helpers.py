@@ -110,6 +110,7 @@ def request_with_validation(
             f"Method: {method}\n"
             f"URL: {get_api_string(solvio_HOST, api, path_params)}\n"
             f"Query params: {query_params}\n"
+            f"Headers: {solvio_host_headers()}\n"
             f"Body: {body}\n"
         )
         warnings.warn(msg)

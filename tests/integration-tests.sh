@@ -6,18 +6,25 @@ set -ex
 # Ensure current path is project root
 cd "$(dirname "$0")/../"
 
+MODE=$1
 solvio_HOST='localhost:6333'
 export solvio__SERVICE__GRPC_PORT="6334"
+export LLVM_PROFILE_FILE="./target/llvm-cov-target/solvio-openapi-$MODE-%m.profraw"
 
-MODE=$1
+if [ "$COVERAGE" == "1" ]; then
+  solvio_EXECUTABLE="./target/llvm-cov-target/debug/solvio"
+else
+  solvio_EXECUTABLE="./target/debug/solvio"
+fi
+
 # Enable distributed mode on demand
 if [ "$MODE" == "distributed" ]; then
   export solvio__CLUSTER__ENABLED="true"
   # Run in background
-  ./target/debug/solvio --uri "http://127.0.0.1:6335" &
+  $solvio_EXECUTABLE --uri "http://127.0.0.1:6335" &
 else
   # Run in background
-  ./target/debug/solvio &
+  $solvio_EXECUTABLE &
 fi
 
 ## Capture PID of the run
@@ -27,7 +34,14 @@ echo $PID
 function clear_after_tests()
 {
   echo "server is going down"
-  kill -9 $PID
+
+  if [ "$COVERAGE" == "1" ]; then
+    kill -2 $PID # interrupt instead of kill to allow graceful shutdown so we can get the coverage
+    wait $PID
+  else
+    kill -9 $PID
+  fi
+
   echo "END"
 }
 

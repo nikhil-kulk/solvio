@@ -11,7 +11,7 @@ homepage = "https://solvio.tech/"
 repository = "https://github.com/solvio/solvio"
 license = "Apache-2.0"
 edition = "2024"
-rust-version = "1.85"
+rust-version = "1.87"
 default-run = "solvio"
 
 [lints]

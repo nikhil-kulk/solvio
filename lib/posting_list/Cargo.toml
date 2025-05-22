@@ -1,0 +1,18 @@
+[package]
+name = "posting_list"
+version = "0.0.0"
+authors = ["Solvio Team <info@solvio.tech>"]
+license = "Apache-2.0"
+edition = "2024"
+publish = false
+
+[lints]
+workspace = true
+
+[dependencies]
+common = { path = "../common/common" }
+bitpacking = { workspace = true }
+
+[dev-dependencies]
+rand = { workspace = true }
+tempfile = { workspace = true }

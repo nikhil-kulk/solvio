@@ -32,7 +32,7 @@ pub fn build_simple_segment(
                 VectorDataConfig {
                     size: dim,
                     distance,
-                    storage_type: VectorStorageType::Memory,
+                    storage_type: VectorStorageType::InRamChunkedMmap,
                     index: Indexes::Plain {},
                     quantization_config: None,
                     multivector_config: None,

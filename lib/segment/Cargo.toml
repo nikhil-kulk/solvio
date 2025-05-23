@@ -43,6 +43,8 @@ rstest = { workspace = true }
 segment = { path = ".", features = ["testing"] }
 proptest = { workspace = true }
 anyhow = "1.0.98"
+ndarray-npy = { version = "0.9.1", default-features = false }
+ndarray = "0.16.1"
 
 [target.'cfg(not(target_os = "windows"))'.dev-dependencies]
 pprof = { workspace = true }
@@ -103,6 +105,7 @@ byteorder = { workspace = true }
 tap = { workspace = true }
 zerocopy = { workspace = true }
 lazy_static = "1.5.0"
+clap = { version = "4.5.38", features = ["derive", "env"] }
 
 sysinfo = "0.33"
 charabia = { version = "0.9.3", default-features = false, features = [
@@ -218,4 +221,8 @@ harness = false
 
 [[bench]]
 name = "segment_info"
+harness = false
+
+[[bench]]
+name = "hnsw_incremental_build"
 harness = false

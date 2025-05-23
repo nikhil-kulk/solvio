@@ -1,6 +1,6 @@
 [package]
 name = "solvio"
-version = "1.14.0"
+version = "1.14.1"
 description = "Solvio - Vector Search engine"
 authors = [
     "Andrey Vasnetsov <andrey@vasnetsov.com>",

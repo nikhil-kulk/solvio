@@ -178,11 +178,14 @@
     - [Image.OptionsEntry](#solvio-Image-OptionsEntry)
     - [InferenceObject](#solvio-InferenceObject)
     - [InferenceObject.OptionsEntry](#solvio-InferenceObject-OptionsEntry)
+    - [InferenceUsage](#solvio-InferenceUsage)
+    - [InferenceUsage.ModelEntry](#solvio-InferenceUsage-ModelEntry)
     - [IsEmptyCondition](#solvio-IsEmptyCondition)
     - [IsNullCondition](#solvio-IsNullCondition)
     - [LookupLocation](#solvio-LookupLocation)
     - [Match](#solvio-Match)
     - [MinShould](#solvio-MinShould)
+    - [ModelUsage](#solvio-ModelUsage)
     - [MultExpression](#solvio-MultExpression)
     - [MultiDenseVector](#solvio-MultiDenseVector)
     - [NamedVectors](#solvio-NamedVectors)
@@ -3165,6 +3168,37 @@ Additionally, the first and last points of each GeoLineString must be the same.
 
 
 
+<a name="solvio-InferenceUsage"></a>
+
+### InferenceUsage
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| model | [InferenceUsage.ModelEntry](#solvio-InferenceUsage-ModelEntry) | repeated |  |
+
+
+
+
+
+
+<a name="solvio-InferenceUsage-ModelEntry"></a>
+
+### InferenceUsage.ModelEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [ModelUsage](#solvio-ModelUsage) |  |  |
+
+
+
+
+
+
 <a name="solvio-IsEmptyCondition"></a>
 
 ### IsEmptyCondition
@@ -3244,6 +3278,21 @@ Additionally, the first and last points of each GeoLineString must be the same.
 | ----- | ---- | ----- | ----------- |
 | conditions | [Condition](#solvio-Condition) | repeated |  |
 | min_count | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="solvio-ModelUsage"></a>
+
+### ModelUsage
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tokens | [uint64](#uint64) |  |  |
 
 
 
@@ -4762,6 +4811,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | hardware | [HardwareUsage](#solvio-HardwareUsage) | optional |  |
+| inference | [InferenceUsage](#solvio-InferenceUsage) | optional |  |
 
 
 

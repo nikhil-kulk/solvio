@@ -1,5 +1,7 @@
+#![expect(dead_code)] // we don't handle phrase matching yet
+
 use itertools::Itertools;
-use posting_list::UnsizedValue;
+use posting_list::{PostingValue, UnsizedHandler, UnsizedValue};
 
 /// Stores a sorted list of positions, internally stored as delta-encoded integers.
 #[derive(Default, Clone, PartialEq, Debug)]
@@ -56,6 +58,10 @@ impl PositionDeltas {
             32
         }
     }
+}
+
+impl PostingValue for PositionDeltas {
+    type Handler = UnsizedHandler<Self>;
 }
 
 impl UnsizedValue for PositionDeltas {

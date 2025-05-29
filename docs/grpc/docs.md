@@ -179,7 +179,7 @@
     - [InferenceObject](#solvio-InferenceObject)
     - [InferenceObject.OptionsEntry](#solvio-InferenceObject-OptionsEntry)
     - [InferenceUsage](#solvio-InferenceUsage)
-    - [InferenceUsage.ModelEntry](#solvio-InferenceUsage-ModelEntry)
+    - [InferenceUsage.ModelsEntry](#solvio-InferenceUsage-ModelsEntry)
     - [IsEmptyCondition](#solvio-IsEmptyCondition)
     - [IsNullCondition](#solvio-IsNullCondition)
     - [LookupLocation](#solvio-LookupLocation)
@@ -3176,16 +3176,16 @@ Additionally, the first and last points of each GeoLineString must be the same.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| model | [InferenceUsage.ModelEntry](#solvio-InferenceUsage-ModelEntry) | repeated |  |
+| models | [InferenceUsage.ModelsEntry](#solvio-InferenceUsage-ModelsEntry) | repeated |  |
 
 
 
 
 
 
-<a name="solvio-InferenceUsage-ModelEntry"></a>
+<a name="solvio-InferenceUsage-ModelsEntry"></a>
 
-### InferenceUsage.ModelEntry
+### InferenceUsage.ModelsEntry
 
 
 
@@ -4740,6 +4740,7 @@ For example, if `oversampling` is 2.4 and `limit` is 100, then 240 vectors will 
 | ----- | ---- | ----- | ----------- |
 | result | [UpdateResult](#solvio-UpdateResult) | repeated |  |
 | time | [double](#double) |  | Time spent to process |
+| usage | [Usage](#solvio-Usage) | optional |  |
 
 
 

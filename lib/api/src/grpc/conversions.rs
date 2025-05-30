@@ -211,8 +211,8 @@ impl From<segment::data_types::index::TextIndexParams> for PayloadIndexParams {
             min_token_len,
             max_token_len,
             lowercase,
+            phrase_matching,
             on_disk,
-            phrase_matching: _, // todo(phrase_matching): populate this
         } = params;
         let tokenizer = TokenizerType::from(tokenizer);
         PayloadIndexParams {
@@ -221,6 +221,7 @@ impl From<segment::data_types::index::TextIndexParams> for PayloadIndexParams {
                 lowercase,
                 min_token_len: min_token_len.map(|x| x as u64),
                 max_token_len: max_token_len.map(|x| x as u64),
+                phrase_matching,
                 on_disk,
             })),
         }
@@ -408,6 +409,7 @@ impl TryFrom<TextIndexParams> for segment::data_types::index::TextIndexParams {
             lowercase,
             min_token_len,
             max_token_len,
+            phrase_matching,
             on_disk,
         } = params;
         Ok(segment::data_types::index::TextIndexParams {
@@ -418,8 +420,8 @@ impl TryFrom<TextIndexParams> for segment::data_types::index::TextIndexParams {
             lowercase,
             min_token_len: min_token_len.map(|x| x as usize),
             max_token_len: max_token_len.map(|x| x as usize),
+            phrase_matching,
             on_disk,
-            phrase_matching: None, // todo(phrase_matching): populate this
         })
     }
 }

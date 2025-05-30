@@ -59,12 +59,24 @@ impl FromIterator<TokenId> for TokenSet {
 
 /// Contains the token ids that make up a document, in the same order that appear in the document.
 #[derive(Clone)]
-#[expect(dead_code)]
 pub struct Document(Vec<TokenId>);
 
 impl Document {
     pub fn new(tokens: Vec<TokenId>) -> Self {
         Self(tokens)
+    }
+
+    pub fn len(&self) -> usize {
+        self.0.len()
+    }
+}
+
+impl IntoIterator for Document {
+    type Item = TokenId;
+    type IntoIter = std::vec::IntoIter<TokenId>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.0.into_iter()
     }
 }
 
@@ -76,7 +88,6 @@ pub enum ParsedQuery {
     Tokens(TokenSet),
     // Phrase(Vec<TokenId>),
 }
-
 impl ParsedQuery {
     pub fn check_match(&self, document: &TokenSet) -> bool {
         match self {
@@ -327,6 +338,7 @@ mod tests {
     fn test_mutable_to_immutable() {
         let mutable = mutable_inverted_index(2000, 400);
 
+        // todo: test with phrase-enabled
         let immutable = ImmutableInvertedIndex::from(mutable.clone());
 
         assert!(immutable.vocab.len() < mutable.vocab.len());
@@ -336,27 +348,20 @@ mod tests {
         // Check that new vocabulary token ids leads to the same posting lists
         assert!({
             immutable.vocab.iter().all(|(key, new_token)| {
-                let new_posting = immutable
-                    .postings
-                    .get(*new_token as usize)
-                    .cloned()
-                    .unwrap();
+                let mut new_posting_iter = immutable.postings.iter_ids(*new_token).unwrap();
 
                 let orig_token = mutable.vocab.get(key).unwrap();
 
                 let orig_posting = mutable.postings.get(*orig_token as usize).cloned().unwrap();
 
-                let mut posting_visitor = new_posting.visitor();
-                let new_contains_orig = orig_posting
+                let all_equal = orig_posting
                     .iter()
-                    .all(|point_id| posting_visitor.contains(point_id));
+                    .zip(&mut new_posting_iter)
+                    .all(|(orig, new)| orig == new);
 
-                let orig_contains_new = new_posting
-                    .iter()
-                    .map(|elem| elem.id)
-                    .all(|point_id| orig_posting.contains(point_id));
+                let same_length = new_posting_iter.next().is_none();
 
-                new_contains_orig && orig_contains_new
+                all_equal && same_length
             })
         });
     }
@@ -373,6 +378,7 @@ mod tests {
         use std::collections::HashSet;
 
         let mutable = mutable_inverted_index(indexed_count, deleted_count);
+        // todo: test with phrase-enabled
         let immutable = ImmutableInvertedIndex::from(mutable);
 
         let mmap_dir = tempfile::tempdir().unwrap();
@@ -380,7 +386,7 @@ mod tests {
         let hw_counter = HardwareCounterCell::new();
 
         MmapInvertedIndex::create(mmap_dir.path().into(), immutable.clone()).unwrap();
-        let mmap = MmapInvertedIndex::open(mmap_dir.path().into(), false).unwrap();
+        let mmap = MmapInvertedIndex::open(mmap_dir.path().into(), false, false).unwrap();
 
         let imm_mmap = ImmutableInvertedIndex::from(&mmap);
 
@@ -391,21 +397,28 @@ mod tests {
         }
 
         // Check same postings
-        for (token_id, posting) in immutable.postings.iter().enumerate() {
-            let mutable_elems = posting.iter().collect::<HashSet<_>>();
+        for token_id in 0..immutable.postings.len() as TokenId {
+            let mutable_ids = immutable
+                .postings
+                .iter_ids(token_id)
+                .unwrap()
+                .collect::<HashSet<_>>();
 
             // Check mutable vs mmap
-            let mmap_elems = mmap
+            let mmap_ids = mmap
                 .postings
-                .get(token_id as u32, &hw_counter)
+                .iter_ids(token_id, &hw_counter)
                 .unwrap()
-                .into_iter()
                 .collect();
-            assert_eq!(mutable_elems, mmap_elems);
+            assert_eq!(mutable_ids, mmap_ids);
 
             // Check mutable vs immutable mmap
-            let imm_mmap_elems = imm_mmap.postings[token_id].iter().collect();
-            assert_eq!(mutable_elems, imm_mmap_elems);
+            let imm_mmap_ids = imm_mmap
+                .postings
+                .iter_ids(token_id)
+                .unwrap()
+                .collect::<HashSet<_>>();
+            assert_eq!(mutable_ids, imm_mmap_ids);
         }
 
         for (point_id, count) in immutable.point_to_tokens_count.iter().enumerate() {
@@ -439,9 +452,10 @@ mod tests {
 
         let mut mut_index = mutable_inverted_index(indexed_count, deleted_count);
 
+        // todo: test with phrase-enabled
         let immutable = ImmutableInvertedIndex::from(mut_index.clone());
         MmapInvertedIndex::create(mmap_dir.path().into(), immutable).unwrap();
-        let mut mmap_index = MmapInvertedIndex::open(mmap_dir.path().into(), false).unwrap();
+        let mut mmap_index = MmapInvertedIndex::open(mmap_dir.path().into(), false, false).unwrap();
 
         let mut imm_mmap_index = ImmutableInvertedIndex::from(&mmap_index);
 

@@ -1,232 +1,101 @@
 <p align="center">
-  <img height="100" src="https://github.com/solvio/solvio/raw/master/docs/logo.svg" alt="Solvio">
+  <img src="https://github.com/user-attachments/assets/b2f63e69-1c3c-4fb5-b236-1bb2529b1252" alt="Solvio">
 </p>
 
 <p align="center">
-    <b>Vector Search Engine for the next generation of AI applications</b>
+    <b>Vector Search Engine Powering Tomorrow’s AI Innovations</b>
 </p>
 
-<p align=center>
-    <a href="https://github.com/solvio/solvio/actions/workflows/rust.yml"><img src="https://img.shields.io/github/actions/workflow/status/solvio/solvio/rust.yml?style=flat-square" alt="Tests status"></a>
-    <a href="https://api.solvio.tech/"><img src="https://img.shields.io/badge/Docs-OpenAPI%203.0-success?style=flat-square" alt="OpenAPI Docs"></a>
-    <a href="https://github.com/solvio/solvio/blob/master/LICENSE"><img src="https://img.shields.io/github/license/solvio/solvio?style=flat-square" alt="Apache 2.0 License"></a>
-    <a href="https://solvio.to/discord"><img src="https://img.shields.io/discord/907569970500743200?logo=Discord&style=flat-square&color=7289da" alt="Discord"></a>
-    <a href="https://solvio.to/roadmap"><img src="https://img.shields.io/badge/Roadmap-2025-bc1439.svg?style=flat-square" alt="Roadmap 2025"></a>
-    <a href="https://cloud.solvio.io/"><img src="https://img.shields.io/badge/Solvio-Cloud-24386C.svg?logo=cloud&style=flat-square" alt="Solvio Cloud"></a>
-</p>
-
-**Solvio** (read: _quadrant_) is a vector similarity search engine and vector database.
-It provides a production-ready service with a convenient API to store, search, and manage points—vectors with an additional payload
-Solvio is tailored to extended filtering support. It makes it useful for all sorts of neural-network or semantic-based matching, faceted search, and other applications.
-
-Solvio is written in Rust 🦀, which makes it fast and reliable even under high load. See [benchmarks](https://solvio.tech/benchmarks/).
-
-With Solvio, embeddings or neural network encoders can be turned into full-fledged applications for matching, searching, recommending, and much more!
-
-Solvio is also available as a fully managed **[Solvio Cloud](https://cloud.solvio.io/)** ⛅ including a **free tier**.
-
-<p align="center">
-<strong><a href="docs/QUICK_START.md">Quick Start</a> • <a href="#clients">Client Libraries</a> • <a href="#demo-projects">Demo Projects</a> • <a href="#integrations">Integrations</a> • <a href="#contacts">Contact</a>
-
-</strong>
-</p>
+**Solvio** functions as both a vector similarity search engine and a vector database, delivering a ready-to-use platform with an accessible API. This allows users to store, retrieve, and organize points—vectors paired with supplementary payload information. Solvio is engineered with robust filtering features, making it a versatile tool for applications like neural network-driven or semantic matching, faceted searches, and a variety of other uses. Through Solvio, embeddings or neural network encoders can be transformed into fully operational systems for tasks such as matching, exploring, suggesting, and far more.
 
 ## Getting Started
 
 ### Python
 
+Kick off your Solvio journey in Python by installing the client library with:
+
 ```
 pip install solvio-client
 ```
 
-The python client offers a convenient way to start with Solvio locally:
+The Python client simplifies local setup with Solvio. For example, you can instantiate an in-memory version for testing or CI/CD workflows:
 
 ```python
 from solvio_client import SolvioClient
-solvio = SolvioClient(":memory:") # Create in-memory Solvio instance, for testing, CI/CD
-# OR
-client = SolvioClient(path="path/to/db")  # Persists changes to disk, fast prototyping
+solvio = SolvioClient(":memory:")
+```
+
+Or, opt for a disk-persisted version to support quick prototyping:
+
+```python
+client = SolvioClient(path="path/to/db")
 ```
 
 ### Client-Server
 
-To experience the full power of Solvio locally, run the container with this command:
+To unlock Solvio’s full potential on your local machine, start the container with this command:
 
 ```bash
 docker run -p 6333:6333 solvio/solvio
 ```
 
-Now you can connect to this with any client, including Python:
+Then, link up with any client, including the Python one, like so:
 
 ```python
-solvio = SolvioClient("http://localhost:6333") # Connect to existing Solvio instance
+solvio = SolvioClient("http://localhost:6333")
 ```
 
-Before deploying Solvio to production, be sure to read our [installation](https://solvio.tech/documentation/guides/installation/) and [security](https://solvio.tech/documentation/guides/security/) guides.
+Before moving Solvio into a production environment, make sure to consult our [installation](https://trysolvio.com/documentation/guides/installation/index.html) and [security](https://trysolvio.com/documentation/guides/security/) guides.
 
 ### Clients
 
-Solvio offers the following client libraries to help you integrate it into your application stack with ease:
-
-- Official:
-  - [Go client](https://github.com/solvio/go-client)
-  - [Rust client](https://github.com/solvio/rust-client)
-  - [JavaScript/TypeScript client](https://github.com/solvio/solvio-js)
-  - [Python client](https://github.com/solvio/solvio-client)
-  - [.NET/C# client](https://github.com/solvio/solvio-dotnet)
-  - [Java client](https://github.com/solvio/java-client)
-- Community:
-  - [Elixir](https://hexdocs.pm/solvio/readme.html)
-  - [PHP](https://github.com/hkulekci/solvio-php)
-  - [Ruby](https://github.com/andreibondarev/solvio-ruby)
-  - [Java](https://github.com/metaloom/solvio-java-client)
+Solvio provides a range of client libraries to seamlessly weave it into your tech ecosystem:
 
 ### Where do I go from here?
 
 - [Quick Start Guide](docs/QUICK_START.md)
-- End to End [Colab Notebook](https://colab.research.google.com/drive/1Bz8RSVHwnNDaNtDwotfPj0w7AYzsdXZ-?usp=sharing) demo with SentenceBERT and Solvio
-- Detailed [Documentation](https://solvio.tech/documentation/) are great starting points
-- [Step-by-Step Tutorial](https://solvio.to/solvio-tutorial) to create your first neural network project with Solvio
+- Comprehensive [Documentation](https://trysolvio.com/documentation/) serve as excellent launchpads
 
-## Demo Projects  <a href="https://replit.com/@solvio"><img align="right" src="https://replit.com/badge/github/solvio/solvio" alt="Run on Repl.it"></a>
+### Tap into Semantic Text Exploration 🔍
 
-### Discover Semantic Text Search 🔍
+With Solvio, harness the strength of semantic embeddings to move past simple keyword lookups, revealing richer links within brief texts. Set up a neural-powered search in mere minutes using an existing neural model, and step into the next generation of text discovery.
 
-Unlock the power of semantic embeddings with Solvio, transcending keyword-based search to find meaningful connections in short texts. Deploy a neural search in minutes using a pre-trained neural network, and experience the future of text search. [Try it online!](https://solvio.to/semantic-search-demo)
+### Dive into Visual Similarity Searches - Culinary Adventures 🍕
 
-### Explore Similar Image Search - Food Discovery 🍕
+Exploration isn’t limited to words, especially in realms like food where visuals often outweigh descriptions. With Solvio, empower users to uncover their next tasty dish via image-based searches, no dish name required.
 
-There's more to discovery than text search, especially when it comes to food. People often choose meals based on appearance rather than descriptions and ingredients. Let Solvio help your users find their next delicious meal using visual search, even if they don't know the dish's name. [Check it out!](https://solvio.to/food-discovery)
+### Tackle Advanced Classification - E-commerce Product Sorting 📺
 
-### Master Extreme Classification - E-commerce Product Categorization 📺
-
-Enter the cutting-edge realm of extreme classification, an emerging machine learning field tackling multi-class and multi-label problems with millions of labels. Harness the potential of similarity learning models, and see how a pre-trained transformer model and Solvio can revolutionize e-commerce product categorization. [Play with it online!](https://solvio.to/extreme-classification-demo)
-
-<details>
-<summary> More solutions </summary>
-
-<table>
-    <tr>
-        <td width="30%">
-            <img src="https://solvio.tech/content/images/text_search.png">
-        </td>
-        <td width="30%">
-            <img src="https://solvio.tech/content/images/image_search.png">
-        </td>
-        <td width="30%">
-            <img src="https://solvio.tech/content/images/recommendations.png">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Semantic Text Search
-        </td>
-        <td>
-            Similar Image Search
-        </td>
-        <td>
-            Recommendations
-        </td>
-    </tr>
-</table>
-
-<table>
-    <tr>
-        <td>
-            <img width="300px" src="https://solvio.tech/content/images/chat_bots.png">
-        </td>
-        <td>
-            <img width="300px" src="https://solvio.tech/content/images/matching_engines.png">
-        </td>
-        <td>
-            <img width="300px" src="https://solvio.tech/content/images/anomalies_detection.png">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Chat Bots
-        </td>
-        <td>
-            Matching Engines
-        </td>
-        <td>
-            Anomaly Detection
-        </td>
-    </tr>
-</table>
-
-</details>
-
-## API
-
-### REST
-
-Online OpenAPI 3.0 documentation is available [here](https://api.solvio.tech/).
-OpenAPI makes it easy to generate a client for virtually any framework or programming language.
-
-You can also download raw OpenAPI [definitions](https://github.com/solvio/solvio/blob/master/docs/redoc/master/openapi.json).
-
-### gRPC
-
-For faster production-tier searches, Solvio also provides a gRPC interface. You can find gRPC documentation [here](https://solvio.tech/documentation/interfaces/#grpc-interface).
+Step into the innovative world of extreme classification, a growing machine learning discipline dealing with multi-class and multi-label tasks across millions of categories. Leverage similarity learning techniques and see how a pre-trained transformer paired with Solvio can redefine product organization in online retail.
 
 ## Features
 
-### Filtering and Payload
+### Dynamic Filtering and Payload Handling
 
-Solvio can attach any JSON payloads to vectors, allowing for both the storage and filtering of data based on the values in these payloads.
-Payload supports a wide range of data types and query conditions, including keyword matching, full-text filtering, numerical ranges, geo-locations, and more.
+Solvio enables attaching any JSON payloads to vectors, facilitating both data retention and advanced filtering driven by payload contents. This system supports an array of data types and query options, from keyword searches and full-text analysis to numerical spans, geographic points, and beyond. Combine these filters flexibly with `should`, `must`, and `must_not` conditions to craft intricate business rules over similarity operations.
 
-Filtering conditions can be combined in various ways, including `should`, `must`, and `must_not` clauses,
-ensuring that you can implement any desired business logic on top of similarity matching.
+### Boosted Search with Sparse Vector Support
 
+To tackle the shortcomings of dense vector embeddings for pinpoint keyword queries, Solvio integrates sparse vector capabilities alongside traditional dense ones. Think of sparse vectors as an evolved take on BM25 or TF-IDF scoring, enabling transformer-driven neural networks to prioritize tokens efficiently.
 
-### Hybrid Search with Sparse Vectors
+### Cost-Effective Vector Compression and Disk Storage
 
-To address the limitations of vector embeddings when searching for specific keywords, Solvio introduces support for sparse vectors in addition to the regular dense ones.
+Solvio introduces multiple ways to streamline vector searches for better affordability and resource use. Its built-in quantization slashes RAM needs by up to 97%, while offering adjustable control over speed versus precision trade-offs.
 
-Sparse vectors can be viewed as an generalization of BM25 or TF-IDF ranking. They enable you to harness the capabilities of transformer-based neural networks to weigh individual tokens effectively.
+### Robust Distributed Setup
 
+Solvio supports extensive horizontal expansion through two core strategies:
 
-### Vector Quantization and On-Disk Storage
+1. Capacity growth through sharding and performance boosts via replication
+2. Smooth, zero-interruption rolling updates and dynamic collection scaling
 
-Solvio provides multiple options to make vector search cheaper and more resource-efficient.
-Built-in vector quantization reduces RAM usage by up to 97% and dynamically manages the trade-off between search speed and precision.
+### Standout Capabilities
 
-
-### Distributed Deployment
-
-Solvio offers comprehensive horizontal scaling support through two key mechanisms:
-1. Size expansion via sharding and throughput enhancement via replication
-2. Zero-downtime rolling updates and seamless dynamic scaling of the collections
-
-
-### Highlighted Features
-
-* **Query Planning and Payload Indexes** - leverages stored payload information to optimize query execution strategy.
-* **SIMD Hardware Acceleration** - utilizes modern CPU x86-x64 and Neon architectures to deliver better performance.
-* **Async I/O** - uses `io_uring` to maximize disk throughput utilization even on a network-attached storage.
-* **Write-Ahead Logging** - ensures data persistence with update confirmation, even during power outages.
-
-
-# Integrations
-
-Examples and/or documentation of Solvio integrations:
-
-- [Cohere](https://docs.cohere.com/docs/solvio-and-cohere) ([blogpost on building a QA app with Cohere and Solvio](https://solvio.tech/articles/qa-with-cohere-and-solvio/)) - Use Cohere embeddings with Solvio
-- [DocArray](https://docs.docarray.org/user_guide/storing/index_solvio/) - Use Solvio as a document store in DocArray
-- [Haystack](https://haystack.deepset.ai/integrations/solvio-document-store) - Use Solvio as a document store with Haystack ([blogpost](https://haystack.deepset.ai/blog/solvio-integration)).
-- [LangChain](https://python.langchain.com/docs/integrations/providers/solvio/) ([blogpost](https://solvio.tech/articles/langchain-integration/)) - Use Solvio as a memory backend for LangChain.
-- [LlamaIndex](https://gpt-index.readthedocs.io/en/latest/examples/vector_stores/SolvioIndexDemo.html) - Use Solvio as a Vector Store with LlamaIndex.
-- [OpenAI - ChatGPT retrieval plugin](https://github.com/openai/chatgpt-retrieval-plugin/blob/main/docs/providers/solvio/setup.md) - Use Solvio as a memory backend for ChatGPT
-- [Microsoft Semantic Kernel](https://devblogs.microsoft.com/semantic-kernel/the-power-of-persistent-memory-with-semantic-kernel-and-solvio-vector-database/) - Use Solvio as persistent memory with Semantic Kernel
-
-## Contacts
-
-- Have questions? Join our [Discord channel](https://solvio.to/discord) or mention [@solvio_engine on Twitter](https://solvio.to/twitter)
-- Want to stay in touch with latest releases? Subscribe to our [Newsletters](https://solvio.tech/subscribe/)
-- Looking for a managed cloud? Check [pricing](https://solvio.tech/pricing/), need something personalised? We're at [info@solvio.tech](mailto:info@solvio.tech)
+- **Smart Query Optimization and Payload Indexing** - Uses stored payload data to refine query performance.
+- **SIMD-Enhanced Hardware Speed** - Taps into modern CPU designs (x86-x64 and Neon) for superior efficiency.
+- **Asynchronous I/O Efficiency** - Leverages `io_uring` for peak disk throughput, even on networked storage.
+- **Reliable Write-Ahead Logging** - Secures data consistency and update validation, even amidst power disruptions.
 
 ## License
 
-Solvio is licensed under the Apache License, Version 2.0. View a copy of the [License file](https://github.com/solvio/solvio/blob/master/LICENSE).
+Solvio operates under the Apache License, Version 2.0. Check out the [License file](https://github.com/solvio/solvio/blob/master/LICENSE) for details.
